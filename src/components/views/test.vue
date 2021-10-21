@@ -13,13 +13,18 @@ export default {
 </script>
 
 <style scoped lang="less">
+.pages{
+  height:100%;
+  width:100%;
+  background:url(../../assets/img/mainbg.jpg);
+  background-size: cover;
+}
 .content{
   background:url("../../assets/logo.png") no-repeat;
   height: 300px;
   width: 200px;
-  margin-top: 20px;
+  margin-top: 0px;
   .pt1{
-
   }
 }
 </style>
