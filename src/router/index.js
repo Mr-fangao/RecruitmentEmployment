@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import login from "../components/views/login";
+import test from "../components/views/test";
 
 Vue.use(Router)
 
@@ -9,7 +10,15 @@ export default new Router({
     {
       path: '/',
       name: 'login',
-      component: login
+      component: login,
+      meta: {
+        showNav: true
+      }
+    },
+    {
+      path:'/test',
+      name:'test',
+      component:test
     }
   ]
 })
