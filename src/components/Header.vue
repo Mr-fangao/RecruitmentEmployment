@@ -4,17 +4,28 @@
       :default-active="navBarIndex"
       class="el-menu-demo"
       mode="horizontal"
-      border-bottom="0px solid #000"
+      @select="handleSelect"
+      background-color="transparent"
+      active-text-color="#4edeff"
+    >
+      <el-menu-item index="1">数据面板</el-menu-item>
+      <el-menu-item index="1">职位搜索</el-menu-item>
+      <el-menu-item index="1">空间查询</el-menu-item>
+      <el-menu-item index="1">技能需求</el-menu-item>
+    </el-menu>
+    <h1>行业招聘大数据分析与就业服务系统</h1>
+    <el-menu
+      :default-active="navBarIndex"
+      class="el-menu-demo"
+      mode="horizontal"
       @select="handleSelect"
       background-color="transparent"
       text-color="#fff"
-      active-text-color="#ffd04b"
+      active-text-color="#4edeff"
     >
-      <el-menu-item index="1">首页</el-menu-item>
-      <el-menu-item index="1">商品</el-menu-item>
-      <el-menu-item index="1">订单</el-menu-item>
-      <el-menu-item index="1">会员</el-menu-item>
-      <el-menu-item index="1">设置</el-menu-item>
+      <el-menu-item index="1">专题地图</el-menu-item>
+      <el-menu-item index="1">时空分析</el-menu-item>
+      <el-menu-item index="1">就业推荐</el-menu-item>
       <el-submenu index="100">
         <template slot="title">
           <!-- 头像 -->
@@ -49,6 +60,15 @@ export default {
 </script>
 
 <style lang="less" scoped>
+
+.el-header {
+  display: flex;
+  flex-direction: row;
+  .el-menu-item {
+    font-size: 20px;
+  }
+}
+
 .el-menu.el-menu--horizontal {
   border-bottom: none;
 }
