@@ -27,7 +27,18 @@
         text-color="#fff"
         active-text-color="#4edeff"
       >
-        <el-menu-item index="1">专题地图</el-menu-item>
+        <el-submenu
+          background-color="transparent"
+          text-color="#fff"
+          active-text-color="#4edeff"
+          index="2"
+        >
+          <template slot="title">专题地图</template>
+          <el-menu-item index="2-1">选项1</el-menu-item>
+          <el-menu-item index="2-2">选项2</el-menu-item>
+          <el-menu-item index="2-3">选项3</el-menu-item>
+          <el-menu-item index="2-4">4</el-menu-item>
+        </el-submenu>
         <el-menu-item index="1">时空分析</el-menu-item>
         <el-menu-item index="1">就业推荐</el-menu-item>
       </el-menu>
@@ -56,13 +67,16 @@ export default {
 .header {
   height: 60px;
   width: 100%;
+
   background: url(../assets/img/headerbg.png);
   background-size: 100% 100%;
   .el-header {
     display: flex;
     flex-direction: row;
+    padding: 0px 0px;
     .el-menu-item {
       font-size: 20px;
+      padding: 0px 10px;
     }
   }
   h1 {
@@ -70,6 +84,7 @@ export default {
     color: #ffffff;
     font-family: Microsoft YaHei;
     font-weight: bold;
+    padding: 10px 170px;
   }
 }
 
@@ -78,5 +93,6 @@ export default {
 }
 .el-menu--horizontal > .el-menu-item.is-active {
   border-bottom: none;
+  background-color: transparent !important;
 }
 </style>
