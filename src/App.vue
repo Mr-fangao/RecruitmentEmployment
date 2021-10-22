@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="app">
     <Header v-show="$route.name!=='login'"></Header>
 <!--    <img src="./assets/logo.png">-->
     <router-view/>
@@ -16,6 +16,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="less" scoped>
+.app{
+  background:url(../src/assets/img/mainbg.jpg);
+}
 </style>
