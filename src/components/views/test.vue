@@ -20,7 +20,6 @@ export default {
   background-size: cover;
 }
 .content{
-  background:url("../../assets/logo.png") no-repeat;
   height: 300px;
   width: 200px;
   margin-top: 0px;
