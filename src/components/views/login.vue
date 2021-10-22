@@ -41,7 +41,7 @@
                 class="button"
                 type="primary"
                 round
-                @click="handleLogin('loginFrom')"
+                @click="handleLogin"
                 >立即登录</el-button
               >
             </el-form-item>
@@ -52,7 +52,10 @@
 </template>
 
 <script>
+import request from "../../utils/request";
+
 export default {
+
 
   data() {
     return {
