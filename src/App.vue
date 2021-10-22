@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="app">
-    <Header v-show="$route.name!=='login'"></Header>
+    <Header v-show="$route.name!=='Home'"></Header>
 <!--    <img src="./assets/logo.png">-->
     <router-view/>
   </div>

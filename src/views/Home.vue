@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="header">
-      <img src="../../assets/login/logo.png" />
+      <img src="../assets/login/logo.png" />
       <h1>行业招聘大数据分析与就业服务系统</h1>
     </div>
     <div class="main">
@@ -14,7 +14,7 @@
           auto-complete="on"
         >
           <el-form-item>
-            <img src="../../assets/login/user.png" />
+            <img src="../assets/login/user.png" />
             <el-input
               class="username"
               placeholder="请输入用户账号"
@@ -24,7 +24,7 @@
             ></el-input>
           </el-form-item>
           <el-form-item>
-            <img src="../../assets/login/password.png" />
+            <img src="../assets/login/password.png" />
             <el-input
               placeholder="请输入用户密码"
               class="password"
@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import request from "../../utils/request";
+import request from "../utils/request";
 
 export default {
   data() {
@@ -60,22 +60,30 @@ export default {
     };
   },
   methods: {
-    async handleLogin() {
-      request.post("/api/user/login", this.form).then((res) => {
-        if (res.code === "0") {
-          this.$message({
-            type: "success",
-            message: "登录成功",
-          });
-          this.$router.push("/test");
-        } else {
-          this.$message({
-            type: "error",
-            message: "用户或密码错误",
-          });
-        }
-      });
+    handleLogin() {
+        request.post("/api/user/saveuser", this.loginFrom)
+        // .then((res)=>{
+          //  if (res.code === "0"){
+
+          //  }
+        // })
     },
+    // async handleLogin() {
+    //   request.post("/api/user/login", this.form).then((res) => {
+    //     if (res.code === "0") {
+    //       this.$message({
+    //         type: "success",
+    //         message: "登录成功",
+    //       });
+    //       this.$router.push("/test");
+    //     } else {
+    //       this.$message({
+    //         type: "error",
+    //         message: "用户或密码错误",
+    //       });
+    //     }
+    //   });
+    // },
   },
 };
 </script>
@@ -86,7 +94,7 @@ export default {
   flex-direction: column;
   width: 100%;
   height: 100%;
-  background: url(../../assets/login/login_background.jpg);
+  background: url(../assets/login/login_background.jpg);
   background-size: 100% 100%;
   .header {
     display: flex;
