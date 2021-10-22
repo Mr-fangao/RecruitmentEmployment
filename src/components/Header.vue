@@ -58,10 +58,10 @@ export default {
   height: 60px;
   width: 100%;
   background: url(../assets/img/headerbg.png);
-//   background: url(../assets/img/headerbg.png);
+  //   background: url(../assets/img/headerbg.png);
   background-size: 100% 100%;
-      display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 
   .el-header {
     display: flex;

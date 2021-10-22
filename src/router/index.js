@@ -9,14 +9,14 @@ const routes = [
     name: "Home",
     component: Home,
     meta: {
-      showNav: true
-    }
+      showNav: true,
+    },
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: () => import("@/views/Login")
-},
+    path: "/login",
+    name: "Login",
+    component: () => import("@/views/Login"),
+  },
   {
     path: "/about",
     name: "About",
