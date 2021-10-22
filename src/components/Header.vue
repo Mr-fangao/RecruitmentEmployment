@@ -2,13 +2,13 @@
   <el-header class="d-flex align-items-center" style="background: #545c64;">
     <el-menu
       :default-active="navBarIndex"
-      active-text-color="#ffd04b"
-      background-color="#545c64"
-<!--      border-bottom="0px solid #000"-->
       class="el-menu-demo"
       mode="horizontal"
+      border-bottom="0px solid #000"
+      @select="handleSelect"
+      background-color="#545c64"
       text-color="#fff"
-      @select="handleSelect">
+      active-text-color="#ffd04b">
       <el-menu-item index="1">首页</el-menu-item>
       <el-menu-item index="1">商品</el-menu-item>
       <el-menu-item index="1">订单</el-menu-item>
