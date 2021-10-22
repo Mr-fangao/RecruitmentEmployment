@@ -66,9 +66,9 @@ export default {
     async handleLogin() {
       console.log(this.$store);
       let loginFrom = Object.assign({}, this.loginFrom);
-      await this.$store.dispatch("api/user/query", loginFrom);
+      await this.$store.dispatch("api/user/queryuser", loginFrom);
       this.$message.success("登录成功");
-      this.$router.push("/home");
+      this.$router.push("/test");
     },
   },
 };
