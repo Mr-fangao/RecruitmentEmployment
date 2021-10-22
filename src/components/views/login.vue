@@ -41,7 +41,7 @@
                 class="button"
                 type="primary"
                 round
-                @click="handleLogin"
+                @click="handleLogin('loginFrom')"
                 >立即登录</el-button
               >
             </el-form-item>
@@ -66,7 +66,7 @@ export default {
     async handleLogin() {
       console.log(this.$store);
       let loginFrom = Object.assign({}, this.loginFrom);
-      await this.$store.dispatch("user/login", loginFrom);
+      await this.$store.dispatch("api/user/query", loginFrom);
       this.$message.success("登录成功");
       this.$router.push("/home");
     },
