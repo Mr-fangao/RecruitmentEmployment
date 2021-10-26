@@ -1,54 +1,33 @@
 <template>
-  <div class="header">
-    <el-header
-      class="d-flex align-items-center"
-      style="background: transparent"
-    >
-      <el-menu
-        :default-active="navBarIndex"
-        class="el-menu-demo"
-        mode="horizontal"
-        @select="handleSelect"
-        background-color="transparent"
-        active-text-color="#4edeff"
+  <div class="header" @select="handleSelect">
+    <el-row>
+      <el-col :span="8"
+        ><div class="left">
+          <p name="1">数据面板</p>
+          <p name="2">职位搜索</p>
+          <p name="3">空间查询</p>
+          <p name="4">技能需求</p>
+        </div></el-col
       >
-        <el-menu-item index="1">数据面板</el-menu-item>
-        <el-menu-item index="1">职位搜索</el-menu-item>
-        <el-menu-item index="1">空间查询</el-menu-item>
-        <el-menu-item index="1">技能需求</el-menu-item>
-        <el-menu-item index="1">技能需求</el-menu-item>
-      </el-menu>
-      <h1>行业招聘大数据分析与就业服务系统</h1>
-      <el-menu
-        :default-active="navBarIndex"
-        class="el-menu-demo"
-        mode="horizontal"
-        @select="handleSelect"
-        background-color="transparent"
-        text-color="#fff"
-        active-text-color="#4edeff"
+      <el-col :span="8"><h1>行业招聘大数据分析与就业服务系统</h1></el-col>
+      <el-col :span="8"
+        ><div class="right">
+          <p name="5">专题地图</p>
+          <p name="6">时空分析</p>
+          <p name="7">就业推荐</p>
+        </div></el-col
       >
-        <el-menu-item index="1">专题地图</el-menu-item>
-        <el-menu-item index="1">时空分析</el-menu-item>
-        <el-menu-item index="1">就业推荐</el-menu-item>
-      </el-menu>
-    </el-header>
+    </el-row>
   </div>
 </template>
 
 <script>
-// import '../../assets/css/global.css'
 export default {
   name: "Header",
   data() {
     return {
-      navBarIndex: "1",
+      handleSelect: "1",
     };
-  },
-  methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
-    },
   },
 };
 </script>
@@ -58,16 +37,18 @@ export default {
   height: 60px;
   width: 100%;
   background: url(../assets/img/headerbg.png);
-  //   background: url(../assets/img/headerbg.png);
   background-size: 100% 100%;
   display: flex;
   flex-direction: row;
-
-  .el-header {
+  .left {
     display: flex;
     flex-direction: row;
-    .el-menu-item {
+    margin: 0px 10px;
+    p {
       font-size: 20px;
+      border-bottom: none;
+      color: #4edeff;
+      padding: 20px 10px 0px 10px;
     }
   }
   h1 {
@@ -75,13 +56,21 @@ export default {
     color: #ffffff;
     font-family: Microsoft YaHei;
     font-weight: bold;
+    padding: 10px 58px;
+  }
+  .right {
+    display: flex;
+    flex-direction: row;
+    margin-left: 100px;
+    p {
+      font-size: 20px;
+      border-bottom: none;
+      color: #4edeff;
+      padding: 20px 10px 0px 10px;
+    }
   }
 }
-
-.el-menu.el-menu--horizontal {
-  border-bottom: none;
-}
-.el-menu--horizontal > .el-menu-item.is-active {
-  border-bottom: none;
+.el-row {
+  width: 100%;
 }
 </style>
