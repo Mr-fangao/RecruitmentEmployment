@@ -120,7 +120,11 @@ export default {
       align-items: center;
       position: relative;
       width: 40%;
-      height: 60%;
+      height: 70%;
+      .login-from {
+        display: flex;
+        flex-direction: column;
+      }
       h2 {
         font-size: 20px;
         color: #ffffff;
@@ -134,14 +138,19 @@ export default {
       }
       .username {
         border-bottom: 1px solid #b8b6b6;
-        width: 300px;
+        width: 250px;
       }
       .password {
         border-bottom: 1px solid #b8b6b6;
-        width: 300px;
+        width: 250px;
       }
       .check {
         color: #ffffff;
+        margin-left: 5px;
+      }
+      .button {
+        width: 250px;
+        margin-left: 15px;
       }
     }
   }

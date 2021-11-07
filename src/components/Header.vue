@@ -1,20 +1,20 @@
 <template>
-  <div class="header" @select="handleSelect">
+  <div class="header" @select="handleSelect" active-text-color="#ffd04b">
     <el-row>
       <el-col :span="8"
         ><div class="left">
-          <p name="1">数据面板</p>
-          <p name="2">职位搜索</p>
-          <p name="3">空间查询</p>
-          <p name="4">技能需求</p>
+          <p name="data" @click="godata">数据面板</p>
+          <p name="job" @click="gojob">职位搜索</p>
+          <p name="spatial" @click="gospatial">空间查询</p>
+          <p name="skill" @click="goskill">技能需求</p>
         </div></el-col
       >
       <el-col :span="8"><h1>行业招聘大数据分析与就业服务系统</h1></el-col>
       <el-col :span="8"
         ><div class="right">
-          <p name="5">专题地图</p>
-          <p name="6">时空分析</p>
-          <p name="7">就业推荐</p>
+          <p name="map" @click="gomap">专题地图</p>
+          <p name="analysis" @click="goanalysis">时空分析</p>
+          <p name="employment" @click="goemployment">就业推荐</p>
         </div></el-col
       >
     </el-row>
@@ -26,8 +26,38 @@ export default {
   name: "Header",
   data() {
     return {
-      handleSelect: "1",
+      data: "",
     };
+  },
+  // mounted() {
+  //   // default-active和 路由名称 相同时，导航栏背景高亮
+  //   this.routerName = this.$route.name;
+  // },
+  methods: {
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    godata() {
+      this.$router.push({ path: "/data" });
+    },
+    gojob() {
+      this.$router.push({ path: "/job" });
+    },
+    gospatial() {
+      this.$router.push({ path: "/spatial" });
+    },
+    goskill() {
+      this.$router.push({ path: "/skill" });
+    },
+    gomap() {
+      this.$router.push({ path: "/map" });
+    },
+    goanalysis() {
+      this.$router.push({ path: "/analysis" });
+    },
+    goemployment() {
+      this.$router.push({ path: "/employment" });
+    },
   },
 };
 </script>
@@ -72,5 +102,8 @@ export default {
 }
 .el-row {
   width: 100%;
+}
+.active {
+  background: url(../assets/img/menucurrent.png);
 }
 </style>
