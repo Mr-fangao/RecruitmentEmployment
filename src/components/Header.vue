@@ -3,8 +3,8 @@
     <el-row>
       <el-col :span="8"
         ><div class="left">
-          <p name="data" @click="godata">数据面板</p>
-          <p name="job" @click="gojob">职位搜索</p>
+          <p name="data" @click="godata" :class="{active:current=='数据面板'}">数据面板</p>
+          <p name="job" @click="gojob" :class="{active:current=='职位搜索'}">职位搜索</p>
           <p name="spatial" @click="gospatial">空间查询</p>
           <p name="skill" @click="goskill">技能需求</p>
         </div></el-col
@@ -26,7 +26,7 @@ export default {
   name: "Header",
   data() {
     return {
-      data: "",
+      current:['数据面板','职位搜索'],
     };
   },
   // mounted() {
@@ -34,6 +34,7 @@ export default {
   //   this.routerName = this.$route.name;
   // },
   methods: {
+
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
     },
@@ -80,6 +81,11 @@ export default {
       color: #4edeff;
       padding: 20px 10px 0px 10px;
     }
+    .active {
+      color: white;
+      border: 1px solid green;
+      color: white;
+    }
   }
   h1 {
     font-size: 24px;
@@ -103,7 +109,5 @@ export default {
 .el-row {
   width: 100%;
 }
-.active {
-  background: url(../assets/img/menucurrent.png);
-}
+
 </style>
