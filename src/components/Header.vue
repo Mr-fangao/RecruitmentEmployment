@@ -1,23 +1,17 @@
 <template>
   <div class="header" @select="handleSelect" active-text-color="#ffd04b">
-    <el-row>
-      <el-col :span="8"
-        ><div class="left">
-          <p name="data" @click="godata">数据面板</p>
-          <p name="job" @click="gojob">职位搜索</p>
-          <p name="spatial" @click="gospatial">空间查询</p>
-          <p name="skill" @click="goskill">技能需求</p>
-        </div></el-col
-      >
-      <el-col :span="8"><h1>行业招聘大数据分析与就业服务系统</h1></el-col>
-      <el-col :span="8"
-        ><div class="right">
-          <p name="map" @click="gomap">专题地图</p>
-          <p name="analysis" @click="goanalysis">时空分析</p>
-          <p name="employment" @click="goemployment">就业推荐</p>
-        </div></el-col
-      >
-    </el-row>
+    <div class="left">
+      <p name="data" @click="godata">数据面板</p>
+      <p name="job" @click="gojob">职位搜索</p>
+      <p name="spatial" @click="gospatial">空间查询</p>
+      <p name="skill" @click="goskill">技能需求</p>
+    </div>
+    <h1>行业招聘大数据分析与就业服务系统</h1>
+    <div class="right">
+      <p name="map" @click="gomap">专题地图</p>
+      <p name="analysis" @click="goanalysis">时空分析</p>
+      <p name="employment" @click="goemployment">就业推荐</p>
+    </div>
   </div>
 </template>
 
@@ -73,6 +67,7 @@ export default {
   .left {
     display: flex;
     flex-direction: row;
+    width: 30%;
     margin: 0px 10px;
     p {
       font-size: 20px;
@@ -88,10 +83,12 @@ export default {
     font-weight: bold;
     padding: 10px 58px;
   }
+
   .right {
     display: flex;
     flex-direction: row;
     margin-left: 100px;
+    width: 30%;
     p {
       font-size: 20px;
       border-bottom: none;
@@ -99,11 +96,5 @@ export default {
       padding: 20px 10px 0px 10px;
     }
   }
-}
-.el-row {
-  width: 100%;
-}
-.active {
-  background: url(../assets/img/menucurrent.png);
 }
 </style>
