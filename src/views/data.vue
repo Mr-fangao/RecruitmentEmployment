@@ -3,10 +3,11 @@
     <!-- 点击切换变色导航栏 -->
     <ul>
       <li
-          v-for="(item,index) in nav"
-          :class="{ active: index == current }"
-          :key="index"
-          @click="go(index)">
+        v-for="(item, index) in nav"
+        :class="{ active: index == current }"
+        :key="index"
+        @click="go(index)"
+      >
         {{ item }}
       </li>
     </ul>
@@ -19,28 +20,39 @@ export default {
   name: "data",
   data() {
     return {
-      current: 0,//切换标识
-      nav: [//导航栏数据
-        '首页',
-        '新闻中心',
-        '要闻资讯',
-        '联系我们'
-      ]
+      current: 1, //切换标识
+      nav: [
+        //导航栏数据
+        "首页",
+        "新闻中心",
+        "要闻资讯",
+        "联系我们",
+      ],
     };
   },
   methods: {
-
     // 导航栏切换
     go(index) {
-      this.current = index//激活样式
-    }
-
-  }
-}
+      this.current = index; //激活样式
+      if (index == "0") {
+      this.$router.push({ path: "/data" });
+      } else if (index == "1") {
+      this.$router.push({ path: "/job" });
+      }
+    },
+    // jump(index) {
+    //   if (index == "0") {
+    //     this.this.$router.push("/about");
+    //   }
+    //   else if(index == "1"){
+    //     this.this.$router.push("/about");
+    //   }
+    // },
+  },
+};
 </script>
 
-<style>
-
+<style lang="less" scoped>
 /*点击切换变色导航栏*/
 ul li {
   list-style: none;
@@ -49,8 +61,10 @@ ul li {
   padding: 10px;
 }
 
-.active { /*激活样式*/
+.active {
+  /*激活样式*/
   color: red;
+  background: url(../assets/img/menucurrent.png);
+  background-position: 47% -65%;
 }
-
 </style>

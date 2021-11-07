@@ -19,5 +19,6 @@ export default {
 <style lang="less" scoped>
 .app {
   background: url(../src/assets/img/mainbg.jpg);
+  // background-color: aliceblue;
 }
 </style>
