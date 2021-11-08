@@ -35,7 +35,7 @@ export default {
       this.$router.push({ path: "/data" });
     },
     gojob() {
-      this.$router.push({ path: "/job" });
+      this.$router.push({ path: "/jobsearch" });
     },
     gospatial() {
       this.$router.push({ path: "/spatial" });

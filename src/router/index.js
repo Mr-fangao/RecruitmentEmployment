@@ -27,11 +27,11 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
 
-  // {
-  //   path: "/login",
-  //   name: "login",
-  //   component: login,
-  // },
+  {
+    path: "/jobsearch",
+    name: "jobsearch",
+     component: () => import("@/views/jobsearch"),
+  },
 ];
 
 const router = createRouter({
