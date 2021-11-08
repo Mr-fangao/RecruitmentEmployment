@@ -1,90 +1,101 @@
 <template>
-  <div class="head">
-    <!-- 点击切换变色导航栏 -->
-    <ul>
-      <li
-        v-for="(item, index) in head"
-        :class="{ active: index == current }"
-        :key="index"
-        @click="go(index)"
-      >
-        {{ item }}
-      </li>
-      <h1>行业招聘大数据分析与就业服务系统</h1>
-      <li
-        v-for="(item, index) in head"
-        :class="{ active: index == current }"
-        :key="index"
-        @click="go(index)"
-      >
-        {{ item }}
-      </li>
-    </ul>
-    <!-- END -->
+  <div class="header" @select="handleSelect" active-text-color="#ffd04b">
+    <div class="left">
+      <p name="data" @click="godata(index)" :class="{ active: name == current }">数据面板</p>
+      <p name="job" @click="gojob">职位搜索</p>
+      <p name="spatial" @click="gospatial">空间查询</p>
+      <p name="skill" @click="goskill">技能需求</p>
+    </div>
+    <h1>行业招聘大数据分析与就业服务系统</h1>
+    <div class="right">
+      <p name="map" @click="gomap">专题地图</p>
+      <p name="analysis" @click="goanalysis">时空分析</p>
+      <p name="employment" @click="goemployment">就业推荐</p>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "data",
   data() {
     return {
-      current: 0, //切换标识
-      head: [
-        "首页",
-        "新闻中心",
-        "要闻资讯",
-        "1",
-        "3",
-        "2",
-      ],
+      current:"data",
+      data: "",
     };
   },
+  // mounted() {
+  //   // default-active和 路由名称 相同时，导航栏背景高亮
+  //   this.routerName = this.$route.name;
+  // },
   methods: {
-    // 导航栏切换
-    go(index) {
-      this.current = index; //激活样式
-      if (index == "0") {
-      this.$router.push({ path: "/data" });
-      } else if (index == "1") {
-      this.$router.push({ path: "/job" });
-      }
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath);
     },
-    // jump(index) {
-    //   if (index == "0") {
-    //     this.this.$router.push("/about");
-    //   }
-    //   else if(index == "1"){
-    //     this.this.$router.push("/about");
-    //   }
-    // },
+    godata(index) {
+      this.current = index; //激活样式
+      this.$router.push({ path: "/data" });
+    },
+    gojob() {
+      this.$router.push({ path: "/jobsearch" });
+    },
+    gospatial() {
+      this.$router.push({ path: "/spatial" });
+    },
+    goskill() {
+      this.$router.push({ path: "/skill" });
+    },
+    gomap() {
+      this.$router.push({ path: "/map" });
+    },
+    goanalysis() {
+      this.$router.push({ path: "/analysis" });
+    },
+    goemployment() {
+      this.$router.push({ path: "/employment" });
+    },
   },
 };
 </script>
 
 <style lang="less" scoped>
-.head{
-   height: 60px;
+.header {
+  height: 60px;
   width: 100%;
   background: url(../assets/img/headerbg.png);
   background-size: 100% 100%;
   display: flex;
   flex-direction: row;
-}
-/*点击切换变色导航栏*/
-ul li {
-  display: flex;
-  color: #FFFF;
-  list-style: none;
-  float: left;
-  margin-right: 20px;
-  padding: 10px;
-}
+  .left {
+    display: flex;
+    flex-direction: row;
+    width: 30%;
+    margin: 0px 10px;
+    p {
+      font-size: 20px;
+      border-bottom: none;
+      color: #4edeff;
+      padding: 20px 10px 0px 10px;
+    }
+  }
+  h1 {
+    font-size: 24px;
+    color: #ffffff;
+    font-family: Microsoft YaHei;
+    font-weight: bold;
+    padding: 10px 58px;
+  }
 
-.active {
-  /*激活样式*/
-  color: red;
-  background: url(../assets/img/menucurrent.png);
-  background-position: 47% -65%;
+  .right {
+    display: flex;
+    flex-direction: row;
+    margin-left: 100px;
+    width: 30%;
+    p {
+      font-size: 20px;
+      border-bottom: none;
+      color: #4edeff;
+      padding: 20px 10px 0px 10px;
+    }
+  }
 }
 </style>
