@@ -1,8 +1,8 @@
 <template>
   <div class="header" @select="handleSelect" active-text-color="#ffd04b">
     <div class="left">
-      <p name="data" @click="godata(index)" :class="{ active: name == current }">数据面板</p>
-      <p name="job" @click="gojob">职位搜索</p>
+      <p name="data" @click="godata(name)" :class="{ active: name == current }">数据面板</p>
+      <p name="job" @click="gojob(name)" :class="{ active: name == current }">职位搜索</p>
       <p name="spatial" @click="gospatial">空间查询</p>
       <p name="skill" @click="goskill">技能需求</p>
     </div>
@@ -31,11 +31,12 @@ export default {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
     },
-    godata(index) {
-      this.current = index; //激活样式
+    godata(name) {
+      this.current = name; //激活样式
       this.$router.push({ path: "/data" });
     },
-    gojob() {
+    gojob(name) {
+      this.current = name; //激活样式
       this.$router.push({ path: "/jobsearch" });
     },
     gospatial() {
@@ -76,6 +77,12 @@ export default {
       color: #4edeff;
       padding: 20px 10px 0px 10px;
     }
+    .active {
+  /*激活样式*/
+  color: red;
+  background: url(../assets/img/menucurrent.png);
+  background-position: 47% -65%;
+}
   }
   h1 {
     font-size: 24px;
