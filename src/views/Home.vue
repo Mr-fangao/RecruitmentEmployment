@@ -18,7 +18,7 @@
             <el-input
               class="username"
               placeholder="请输入用户账号"
-              v-model="loginFrom.userAccount"
+              v-model="loginFrom.username"
               type="text"
               clearable
             ></el-input>
@@ -54,27 +54,30 @@ export default {
   data() {
     return {
       loginFrom: {
-        userAccount: "",
+        username: "",
         password: "",
       },
     };
   },
   methods: {
     async handleLogin() {
-      request.post("/api/user/login", this.form).then((res) => {
-        if (res.code === "0") {
-          this.$message({
-            type: "success",
-            message: "登录成功",
-          });
-          this.$router.push("/test");
-        } else {
-          this.$message({
-            type: "error",
-            message: "用户或密码错误",
-          });
-        }
-      });
+      request.post("/api/user/queryuser",this.loginFrom).then(res =>{
+        console.log(res);
+      })
+      // request.post("/api/user/login", this.form).then((res) => {
+      //   if (res.code === "0") {
+      //     this.$message({
+      //       type: "success",
+      //       message: "登录成功",
+      //     });
+      //     this.$router.push("/test");
+      //   } else {
+      //     this.$message({
+      //       type: "error",
+      //       message: "用户或密码错误",
+      //     });
+      //   }
+      // });
     },
   },
 };
