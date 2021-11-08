@@ -3,7 +3,7 @@
     <!-- 点击切换变色导航栏 -->
     <div class="leftPanel">
       <template v-for="(item, index) in nav"
- :class="{ active: index == current }"
+        :class="{ active: index == current }"
         :key="index"
         @click="go(index)"
       >
