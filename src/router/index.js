@@ -30,8 +30,33 @@ const routes = [
   {
     path: "/jobsearch",
     name: "jobsearch",
-     component: () => import("@/views/jobsearch"),
+    component: () => import("@/views/jobsearch"),
   },
+  // {
+  //   path: "/spatial",
+  //   name: "spatial",
+  //   component: () => import("@/views/spatial"),
+  // },
+  // {
+  //   path: "/skill",
+  //   name: "skill",
+  //   component: () => import("@/views/skill"),
+  // },
+  // {
+  //   path: "/map",
+  //   name: "map",
+  //   component: () => import("@/views/map"),
+  // },
+  // {
+  //   path: "/analysis",
+  //   name: "analysis",
+  //   component: () => import("@/views/analysis"),
+  // },
+  // {
+  //   path: "/employment",
+  //   name: "employment",
+  //   component: () => import("@/views/employment"),
+  // },
 ];
 
 const router = createRouter({
