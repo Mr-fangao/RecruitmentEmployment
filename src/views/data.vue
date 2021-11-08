@@ -1,16 +1,25 @@
 <template>
-  <div class="nav">
+  <div class="headerPanel">
     <!-- 点击切换变色导航栏 -->
-    <ul>
-      <li
+    <div class="leftPanel">
+      <template v-for="(item, index) in nav"
+ :class="{ active: index == current }"
+        :key="index"
+        @click="go(index)"
+      >
+      </template>
+      {{ item }}
+    </div>
+    <div class="rightPanel">
+      <template
         v-for="(item, index) in nav"
         :class="{ active: index == current }"
         :key="index"
         @click="go(index)"
       >
-        {{ item }}
-      </li>
-    </ul>
+      </template>
+      {{ item }}
+    </div>
     <!-- END -->
   </div>
 </template>
@@ -35,19 +44,11 @@ export default {
     go(index) {
       this.current = index; //激活样式
       if (index == "0") {
-      this.$router.push({ path: "/data" });
+        this.$router.push({ path: "/data" });
       } else if (index == "1") {
-      this.$router.push({ path: "/job" });
+        this.$router.push({ path: "/job" });
       }
     },
-    // jump(index) {
-    //   if (index == "0") {
-    //     this.this.$router.push("/about");
-    //   }
-    //   else if(index == "1"){
-    //     this.this.$router.push("/about");
-    //   }
-    // },
   },
 };
 </script>
