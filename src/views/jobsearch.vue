@@ -20,7 +20,7 @@ export default {
 <style lang="less" scoped>
 .grid-container {
   display: grid;
-  height: calc(100% - 60px);
+  height: calc(100% - 45px);
   grid-template-columns: 1fr 2fr 1fr;
   grid-template-rows: repeat(3, 1fr);
   grid-template-areas:
