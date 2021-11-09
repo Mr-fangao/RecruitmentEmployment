@@ -62,8 +62,16 @@ export default {
   methods: {
     async handleLogin() {
       request.post("/api/user/queryuser", this.loginFrom).then((res) => {
-        console.log(res);
-        this.$router.push({ name: "data" });
+        console.log(res.code);
+        if (res.code == "0") {
+          this.$router.push({ name: "data" });
+        } 
+        else {
+          this.$message({
+            type: "error",
+            message: res.description,
+          });
+        }
       });
       // request.post("/api/user/login", this.form).then((res) => {
       //   if (res.code === "0") {
