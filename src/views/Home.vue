@@ -65,7 +65,7 @@ export default {
         console.log(res.code);
         if (res.code == "0") {
           this.$router.push({ name: "data" });
-        } 
+        }
         else {
           this.$message({
             type: "error",
