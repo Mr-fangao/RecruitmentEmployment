@@ -1,12 +1,12 @@
 <template>
   <div class="grid-container">
-    <div class="item1">1</div>
-    <div class="item2">2</div>
-    <div class="item3">3</div>
-    <div class="item4">4</div>
-    <div class="item5">5</div>
-    <div class="item6">6</div>
-    <div class="item7">7</div>
+    <div class="pt1">1</div>
+    <div class="pt2">2</div>
+    <div class="pt3">3</div>
+    <div class="pt4">4</div>
+    <div class="ptm5">5</div>
+    <div class="pt6">6</div>
+    <div class="pt7">7</div>
   </div>
 </template>
 
@@ -33,25 +33,25 @@ export default {
     font-size: 30px;
     outline: 1px dashed #fff;
   }
-  .item1 {
+  .pt1 {
     grid-area: pt1;
   }
-  .item2 {
+  .pt2 {
     grid-area: pt2;
   }
-  .item3 {
+  .ipt3 {
     grid-area: pt3;
   }
-  .item4 {
+  .pt4 {
     grid-area: pt4;
   }
-  .item5 {
+  .pt5 {
     grid-area: pt5;
   }
-  .item6 {
+  .pt6 {
     grid-area: pt6;
   }
-  .item7 {
+  .pt7 {
     grid-area: pt7;
   }
 }

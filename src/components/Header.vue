@@ -1,10 +1,18 @@
  <template>
   <div>
     <div class="tab-content">
-      <div class="tab-content1" @click="cur = 1,gotojobsearch()" :class="{ active: cur == 1 }">
+      <div
+        class="tab-content1"
+        @click="(cur = 1), gotojobsearch()"
+        :class="{ active: cur == 1 }"
+      >
         数据标注
       </div>
-      <div class="tab-content2" @click="cur = 2,gotodata()" :class="{ active: cur == 2 }">
+      <div
+        class="tab-content2"
+        @click="(cur = 2), gotodata()"
+        :class="{ active: cur == 2 }"
+      >
         案件数
       </div>
       <div class="tab-content3" @click="cur = 3" :class="{ active: cur == 3 }">
@@ -32,12 +40,12 @@ export default {
     };
   },
   methods: {
-    gotojobsearch(){
-       this.$router.replace('/jobsearch')
+    gotojobsearch() {
+      this.$router.replace("/jobsearch");
     },
-    gotodata(){
-      this.$router.replace('/data')
-    }
+    gotodata() {
+      this.$router.replace("/data");
+    },
   },
 };
 </script>
@@ -55,6 +63,7 @@ export default {
   line-height: 50px;
   font-weight: bold;
   .tab-mid {
+    cursor: pointer;
     flex: 6;
     line-height: 50px;
     font-size: 18pt;
@@ -62,32 +71,38 @@ export default {
     color: rgb(245, 245, 245);
   }
   .tab-content1 {
+    cursor: pointer;
     margin-left: 4%;
     flex: 1;
     width: 50px;
     height: 40px;
   }
   .tab-content2 {
+    cursor: pointer;
     flex: 1;
     width: 50px;
     height: 40px;
   }
   .tab-content3 {
+    cursor: pointer;
     flex: 1;
     width: 50px;
     height: 40px;
   }
   .tab-content4 {
+    cursor: pointer;
     flex: 1;
     width: 50px;
     height: 40px;
   }
   .tab-content5 {
+    cursor: pointer;
     flex: 1;
     width: 50px;
     height: 40px;
   }
   .tab-content6 {
+    cursor: pointer;
     margin-right: 4%;
     flex: 1;
     width: 50px;
@@ -95,6 +110,7 @@ export default {
   }
 }
 .tab-content .active {
+  cursor: pointer;
   background: url(../assets/img/menucurrent.png);
   background-position: 49% -81%;
   color: #fff;
