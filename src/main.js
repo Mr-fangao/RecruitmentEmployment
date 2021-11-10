@@ -8,4 +8,6 @@ import router from "./router";
 import store from "./store";
 import "./assets/css/global.css";
 
-createApp(App).use(store).use(router).use(ElementPlus).mount("#app");
+import myCharts from 'echarts'
+
+createApp(App).use(store).use(router).use(ElementPlus).use(myCharts).mount("#app");
