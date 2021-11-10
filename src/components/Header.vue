@@ -6,27 +6,27 @@
         @click="(cur = 1), gotojobsearch()"
         :class="{ active: cur == 1 }"
       >
-        数据标注
+        职位搜索
       </div>
       <div
         class="tab-content2"
         @click="(cur = 2), gotodata()"
         :class="{ active: cur == 2 }"
       >
-        案件数
+        就业统计
       </div>
       <div class="tab-content3" @click="cur = 3" :class="{ active: cur == 3 }">
-        数据标注
+        技能分析
       </div>
       <div class="tab-mid">网络招聘大数据分析与可视化系统</div>
       <div class="tab-content4" @click="cur = 4" :class="{ active: cur == 4 }">
-        案件数
+        空间查询
       </div>
       <div class="tab-content5" @click="cur = 5" :class="{ active: cur == 5 }">
-        数据标注
+        数据面板
       </div>
       <div class="tab-content6" @click="cur = 6" :class="{ active: cur == 6 }">
-        案件数
+        专题地图
       </div>
     </div>
   </div>
