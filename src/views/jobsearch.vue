@@ -1,23 +1,27 @@
 <template>
   <div class="grid-container">
-    <div class="pt1">1</div>
-    <div class="pt2">2</div>
-    <div class="pt3">3</div>
+    <div class="pt1"><header></header>1</div>
+    <div class="pt2"><header></header>2</div>
+    <div class="pt3"><header></header>3</div>
     <div class="pt4">4</div>
-    <div class="ptm5">5</div>
-    <div class="pt6">6</div>
-    <div class="pt7">7</div>
+    <div class="pt5"><header></header>5</div>
+    <div class="pt6"><header></header>6</div>
+    <div class="pt7"><header></header>7</div>
   </div>
 </template>
 
 <script>
+import Header from "../components/Header.vue";
 export default {
+  components: { Header },
   name: "jobsearch",
   data() {},
 };
 </script>
 
 <style lang="less" scoped>
+@import "../assets/css/globalpt.css";
+
 .grid-container {
   display: grid;
   height: calc(100% - 45px);
@@ -39,7 +43,7 @@ export default {
   .pt2 {
     grid-area: pt2;
   }
-  .ipt3 {
+  .pt3 {
     grid-area: pt3;
   }
   .pt4 {
