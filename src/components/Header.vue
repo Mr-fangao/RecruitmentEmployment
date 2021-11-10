@@ -4,7 +4,7 @@
       <div class="tab-content1" @click="cur = 1,gotojobsearch()" :class="{ active: cur == 1 }">
         数据标注
       </div>
-      <div class="tab-content2" @click="cur = 2" :class="{ active: cur == 2 }">
+      <div class="tab-content2" @click="cur = 2,gotodata()" :class="{ active: cur == 2 }">
         案件数
       </div>
       <div class="tab-content3" @click="cur = 3" :class="{ active: cur == 3 }">
@@ -34,6 +34,9 @@ export default {
   methods: {
     gotojobsearch(){
        this.$router.replace('/jobsearch')
+    },
+    gotodata(){
+      this.$router.replace('/data')
     }
   },
 };

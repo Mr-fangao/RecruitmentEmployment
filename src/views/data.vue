@@ -1,71 +1,58 @@
 <template>
-  <div class="headerPanel">
-    <!-- 点击切换变色导航栏 -->
-    <div class="leftPanel">
-      <template v-for="(item, index) in nav"
-        :class="{ active: index == current }"
-        :key="index"
-        @click="go(index)"
-      >
-      </template>
-      {{ item }}
-    </div>
-    <div class="rightPanel">
-      <template
-        v-for="(item, index) in nav"
-        :class="{ active: index == current }"
-        :key="index"
-        @click="go(index)"
-      >
-      </template>
-      {{ item }}
-    </div>
-    <!-- END -->
+  <div class="grid-container">
+    <div class="item1">1</div>
+    <div class="item2">2</div>
+    <div class="item3">3</div>
+    <div class="item4">4</div>
+    <div class="item5">5</div>
+    <div class="item6">6</div>
+    <div class="item7">7</div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "data",
-  data() {
-    return {
-      current: 1, //切换标识
-      nav: [
-        //导航栏数据
-        "首页",
-        "新闻中心",
-        "要闻资讯",
-        "联系我们",
-      ],
-    };
-  },
-  methods: {
-    // 导航栏切换
-    go(index) {
-      this.current = index; //激活样式
-      if (index == "0") {
-        this.$router.push({ path: "/data" });
-      } else if (index == "1") {
-        this.$router.push({ path: "/job" });
-      }
-    },
-  },
+  name: "jobsearch",
+  data() {},
 };
 </script>
 
 <style lang="less" scoped>
-/*点击切换变色导航栏*/
-ul li {
-  list-style: none;
-  float: left;
-  margin-right: 20px;
-  padding: 10px;
-}
-
-.active {
-  /*激活样式*/
-  color: red;
-  background: url(../assets/img/menucurrent.png);
-  background-position: 47% -65%;
+.grid-container {
+  display: grid;
+  height: calc(100% - 45px);
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-areas:
+    "pt1 pt4 pt5 "
+    "pt2 pt4 pt6 "
+    "pt3 pt4 pt7 ";
+  background-color: transparent;
+  div {
+    text-align: center;
+    font-size: 30px;
+    outline: 1px dashed #fff;
+  }
+  .item1 {
+    grid-area: pt1;
+  }
+  .item2 {
+    grid-area: pt2;
+  }
+  .item3 {
+    grid-area: pt3;
+  }
+  .item4 {
+    grid-area: pt4;
+  }
+  .item5 {
+    grid-area: pt5;
+  }
+  .item6 {
+    grid-area: pt6;
+  }
+  .item7 {
+    grid-area: pt7;
+  }
 }
 </style>
