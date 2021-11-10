@@ -59,14 +59,23 @@ export default {
       },
     };
   },
+  mounted() {
+    //登录绑定事件
+    window.addEventListener("keydown", this.keyDown);
+  },
   methods: {
+    keyDown(e) {
+      //如果是回车则执行登录方法
+      if (e.keyCode == 13) {
+        this.handleLogin();
+      }
+    },
     async handleLogin() {
       request.post("/api/user/queryuser", this.loginFrom).then((res) => {
         console.log(res.code);
         if (res.code == "0") {
           this.$router.push({ name: "data" });
-        }
-        else {
+        } else {
           this.$message({
             type: "error",
             message: res.description,
