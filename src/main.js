@@ -7,7 +7,6 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import "./assets/css/global.css";
+import "./assets/css/globalpt.css";
 
-import myCharts from 'echarts'
-
-createApp(App).use(store).use(router).use(ElementPlus).use(myCharts).mount("#app");
+createApp(App).use(store).use(router).use(ElementPlus).mount("#app");

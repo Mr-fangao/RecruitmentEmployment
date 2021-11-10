@@ -1,7 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
-// import Home from "../views/Home.vue";
-// import Login from"../views/Login.vue";
 
 const routes = [
   {
@@ -11,6 +9,11 @@ const routes = [
     meta: {
       showNav: true,
     },
+  },
+  {
+    path: "/jobsearch",
+    name: "jobsearch",
+    component: () => import("@/views/jobsearch"),
   },
   {
     path: "/data",
@@ -27,11 +30,7 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
 
-  {
-    path: "/jobsearch",
-    name: "jobsearch",
-    component: () => import("@/views/jobsearch"),
-  },
+
   // {
   //   path: "/spatial",
   //   name: "spatial",
