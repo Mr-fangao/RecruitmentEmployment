@@ -48,13 +48,16 @@ export default {
       // 绘制图表
       var option;
       option = {
-        color: ['#61a0a8'],
+        color: ["#61a0a8"],
         xAxis: {
           type: "category",
           data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
         },
         yAxis: {
           type: "value",
+          splitLine: {
+            show: false,
+          },
         },
         series: [
           {
@@ -63,6 +66,22 @@ export default {
             showBackground: true,
             backgroundStyle: {
               color: "rgba(180, 180, 180, 0.2)",
+            },
+            itemStyle: {
+              normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  { offset: 0, color: "#06B5D7" }, //柱图渐变色
+                  { offset: 0.5, color: "#44C0C1" }, //柱图渐变色
+                  { offset: 1, color: "#71C8B1" }, //柱图渐变色
+                ]),
+              },
+              // emphasis: {
+              //   color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              //     { offset: 0, color: "#71C8B1" }, //柱图高亮渐变色
+              //     { offset: 0.7, color: "#44C0C1" }, //柱图高亮渐变色
+              //     { offset: 1, color: "#06B5D7" }, //柱图高亮渐变色
+              //   ]),
+              // },
             },
           },
         ],
