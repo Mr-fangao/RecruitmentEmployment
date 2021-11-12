@@ -1,9 +1,10 @@
 <template>
   <div class="grid-container">
     <div class="pt1">
-      <header><h1>11111</h1></header>
-      <main id="myChart">
-      </main>
+      <header></header>
+      <div class="content" style="height: 203px; width: 400px">
+        <div id="myChart" :style="{ width: '400px', height: '203px' }"></div>
+      </div>
     </div>
     <div class="pt2">
       <header></header>
@@ -59,24 +60,32 @@ export default {
         },
         yAxis: {
           type: "value",
+          //y轴刻度横线 ：false
           splitLine: {
             show: false,
           },
         },
+        grid: {
+          x: 55,
+          y: 25,
+          x2: 35,
+          y2: 25,
+        },
         series: [
           {
+            barWidth: "60%",
             data: [120, 200, 150, 80, 70, 110],
             type: "bar",
             showBackground: true,
             backgroundStyle: {
-              color: "rgba(180, 180, 180, 0.2)",
+              color: "rgba(180, 180, 180, 0.1)",
             },
             itemStyle: {
               normal: {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                  { offset: 0, color: "#06B5D7" }, //柱图渐变色
-                  { offset: 0.5, color: "#44C0C1" }, //柱图渐变色
-                  { offset: 1, color: "#71C8B1" }, //柱图渐变色
+                  { offset: 0.4, color: "#1BFEFE" },
+                  { offset: 1, color: "#1BFEFE" },
+                  // { offset: 1, color: "#188df0" },
                 ]),
               },
               // emphasis: {
@@ -112,7 +121,7 @@ export default {
   div {
     text-align: center;
     font-size: 30px;
-    // outline: 1px dashed #fff;
+    //outline: 1px dashed rgb(136, 27, 27);
   }
   .pt1 {
     grid-area: pt1;

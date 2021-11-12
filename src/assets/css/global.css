@@ -10,12 +10,16 @@ span{
 }
 html,
 body,
+canvas,
 #app {
   height: 100%;
   margin: 0;
   padding: 0;
 }
-
+canvas{
+  margin: 0;
+  padding: 0;
+}
 #map{
   position: absolute;
   height: 88%;

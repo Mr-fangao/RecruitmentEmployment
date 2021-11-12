@@ -65,7 +65,7 @@ export default {
   .tab-mid {
     cursor: pointer;
     flex: 6;
-    line-height: 50px;
+    line-height: 44px;
     font-size: 18pt;
     font-weight: normal;
     color: rgb(245, 245, 245);
