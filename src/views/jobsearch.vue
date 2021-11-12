@@ -1,31 +1,35 @@
 <template>
   <div class="grid-container">
     <div class="pt1">
-      <header></header>
-      <div class="content" style="height: 192px; width: 400px">
-        <div id="myChart" :style="{ width: '300px', height: '300px' }"></div>
-      </div>
+      <header><h1>11111</h1></header>
+      <main id="myChart">
+      </main>
     </div>
     <div class="pt2">
       <header></header>
-      2
+      <main>
+      </main>
     </div>
     <div class="pt3">
       <header></header>
-      3
+      <main>
+      </main>
     </div>
     <div class="pt4">4</div>
     <div class="pt5">
       <header></header>
-      5
+      <main>
+      </main>
     </div>
     <div class="pt6">
       <header></header>
-      6
+      <main>
+      </main>
     </div>
     <div class="pt7">
       <header></header>
-      7
+      <main>
+      </main>
     </div>
   </div>
 </template>
@@ -97,7 +101,7 @@ export default {
 .grid-container {
   display: grid;
   height: calc(100% - 45px);
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 1fr 3fr 1fr;
   grid-template-rows: repeat(3, 1fr);
   grid-template-areas:
     "pt1 pt4 pt5 "
