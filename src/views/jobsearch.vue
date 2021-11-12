@@ -2,35 +2,30 @@
   <div class="grid-container">
     <div class="pt1">
       <header></header>
-      <div class="content" style="height: 203px; width: 400px">
-        <div id="myChart" :style="{ width: '400px', height: '203px' }"></div>
+      <div class="content" style="height: 100%; width: 100%">
+        <div id="myChart" :style="{ width: '100%', height: '90%' }"></div>
       </div>
     </div>
     <div class="pt2">
       <header></header>
-      <main>
-      </main>
+      <main></main>
     </div>
     <div class="pt3">
       <header></header>
-      <main>
-      </main>
+      <main></main>
     </div>
     <div class="pt4">4</div>
     <div class="pt5">
       <header></header>
-      <main>
-      </main>
+      <main></main>
     </div>
     <div class="pt6">
       <header></header>
-      <main>
-      </main>
+      <main></main>
     </div>
     <div class="pt7">
       <header></header>
-      <main>
-      </main>
+      <main></main>
     </div>
   </div>
 </template>
@@ -57,9 +52,22 @@ export default {
         xAxis: {
           type: "category",
           data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+          axisLine: {
+            //这是x轴文字颜色
+            lineStyle: {
+              color: " #999999",
+            },
+          },
         },
         yAxis: {
           type: "value",
+          boundaryGap: ["0", "0.1"],
+          axisLine: {
+            //这是x轴文字颜色
+            lineStyle: {
+              color: " #999999",
+            },
+          },
           //y轴刻度横线 ：false
           splitLine: {
             show: false,
@@ -67,14 +75,14 @@ export default {
         },
         grid: {
           x: 55,
-          y: 25,
+          y: 35,
           x2: 35,
           y2: 25,
         },
         series: [
           {
             barWidth: "60%",
-            data: [120, 200, 150, 80, 70, 110],
+            data: [120, 50, 150, 80, 70, 110],
             type: "bar",
             showBackground: true,
             backgroundStyle: {
@@ -83,18 +91,12 @@ export default {
             itemStyle: {
               normal: {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                  { offset: 0.4, color: "#1BFEFE" },
+                  // { offset: 0.4, color: "#1BFEFE" },
+                  // { offset: 1, color: "#1BFEFE" },
+                  { offset: 0.2, color: "#44C0C1" }, //柱图渐变色
                   { offset: 1, color: "#1BFEFE" },
-                  // { offset: 1, color: "#188df0" },
                 ]),
               },
-              // emphasis: {
-              //   color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-              //     { offset: 0, color: "#71C8B1" }, //柱图高亮渐变色
-              //     { offset: 0.7, color: "#44C0C1" }, //柱图高亮渐变色
-              //     { offset: 1, color: "#06B5D7" }, //柱图高亮渐变色
-              //   ]),
-              // },
             },
           },
         ],
