@@ -1,4 +1,4 @@
- <template>
+<template>
   <div>
     <div class="tab-content">
       <div
@@ -15,18 +15,50 @@
       >
         就业统计
       </div>
-      <div class="tab-content3" @click="cur = 3" :class="{ active: cur == 3 }">
+      <div
+        class="tab-content3"
+        @click="(cur = 3), gotoskillanalysis()"
+        :class="{ active: cur == 3 }"
+      >
         技能分析
       </div>
       <div class="tab-mid">网络招聘大数据分析与可视化系统</div>
-      <div class="tab-content4" @click="cur = 4" :class="{ active: cur == 4 }">
+      <div
+        class="tab-content4"
+        @click="(cur = 4), gotospatialquery()"
+        :class="{ active: cur == 4 }"
+      >
         空间查询
       </div>
-      <div class="tab-content5" @click="cur = 5" :class="{ active: cur == 5 }">
+      <div
+        class="tab-content5"
+        @click="(cur = 5), gotodatapanel()"
+        :class="{ active: cur == 5 }"
+      >
         数据面板
       </div>
-      <div class="tab-content6" @click="cur = 6" :class="{ active: cur == 6 }">
-        专题地图
+      <div
+        class="tab-content6"
+        @click="(cur = 6), gotothematicmap()"
+        :class="{ active: cur == 6 }"
+      >
+        <el-dropdown>
+          <span class="el-dropdown-link">
+            专题地图
+            <!-- <el-icon class="el-icon--right">
+              <arrow-down />
+            </el-icon> -->
+          </span>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item>Action 1</el-dropdown-item>
+              <el-dropdown-item>Action 2</el-dropdown-item>
+              <el-dropdown-item>Action 3</el-dropdown-item>
+              <el-dropdown-item>Action 4</el-dropdown-item>
+              <el-dropdown-item divided>Action 5</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
       </div>
     </div>
   </div>
@@ -45,6 +77,18 @@ export default {
     },
     gotodata() {
       this.$router.replace("/data");
+    },
+    gotoskillanalysis() {
+      this.$router.replace("/analysis");
+    },
+    gotospatialquery() {
+      this.$router.replace("/query");
+    },
+    gotodatapanel() {
+      this.$router.replace("/datapanel");
+    },
+    gotothematicmap() {
+      this.$router.replace("/map");
     },
   },
 };
@@ -107,6 +151,12 @@ export default {
     flex: 1;
     width: 50px;
     height: 40px;
+    span {
+    color: rgb(19, 173, 211);
+    line-height: 50px;
+    font-weight: bold;
+    font-size: 16px;
+    }
   }
 }
 .tab-content .active {

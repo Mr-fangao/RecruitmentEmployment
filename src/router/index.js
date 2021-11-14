@@ -29,33 +29,26 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
-
-
-  // {
-  //   path: "/spatial",
-  //   name: "spatial",
-  //   component: () => import("@/views/spatial"),
-  // },
-  // {
-  //   path: "/skill",
-  //   name: "skill",
-  //   component: () => import("@/views/skill"),
-  // },
-  // {
-  //   path: "/map",
-  //   name: "map",
-  //   component: () => import("@/views/map"),
-  // },
-  // {
-  //   path: "/analysis",
-  //   name: "analysis",
-  //   component: () => import("@/views/analysis"),
-  // },
-  // {
-  //   path: "/employment",
-  //   name: "employment",
-  //   component: () => import("@/views/employment"),
-  // },
+  {
+    path: "/analysis",
+    name: "analysis",
+    component: () => import("@/views/skillanalysis"),
+  },
+  {
+    path: "/query",
+    name: "query",
+    component: () => import("@/views/spatialquery"),
+  },
+  {
+    path: "/map",
+    name: "map",
+    component: () => import("@/views/thematicmap"),
+  },
+  {
+    path: "/datapanel",
+    name: "datapanel",
+    component: () => import("@/views/datapanel"),
+  },
 ];
 
 const router = createRouter({
