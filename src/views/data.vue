@@ -1,13 +1,16 @@
 <template>
   <div id="map">
     <div class="grid-container">
-      <div class="pt1">1</div>
-      <div class="pt2">2</div>
-      <div class="pt3">3</div>
-      <div class="pt4">4</div>
-      <div class="pt5">5</div>
-      <div class="pt6">6</div>
-      <div class="pt7">7</div>
+      <div class="left-part">
+        <div class="pt1">1</div>
+        <div class="pt2">2</div>
+        <div class="pt3">3</div>
+      </div>
+      <div class="right-part">
+        <div class="pt5">4</div>
+        <div class="pt6">5</div>
+        <div class="pt7">6</div>
+      </div>
     </div>
   </div>
 </template>
@@ -48,41 +51,77 @@ div {
 .map {
   position: relative;
 }
-.grid-container {
+.left-part {
   position: absolute;
-  display: grid;
-  height: calc(100%);
-  width: 100%;
-  // grid-template-columns: 1fr 2fr 1fr;
-  // grid-template-rows: repeat(3, 1fr);
-  grid-template-columns: 25%  50% 25%;
-  grid-template-rows: 33.3% 33.3% 33.3%;
-  grid-template-areas:
-    "pt1 pt4 pt5 "
-    "pt2 pt4 pt6 "
-    "pt3 pt4 pt7 ";
+
+  height: 100%;
+  width: 20%;
+  float: left;
+  display: flex;
+  flex-direction: column;
   .pt1 {
-    grid-area: pt1;
-    // width: 100px;
-    // height: calc((100% - 45px);
+    flex: 1;
   }
   .pt2 {
-    grid-area: pt2;
+    flex: 1;
   }
   .pt3 {
-    grid-area: pt3;
-  }
-  .pt4 {
-    grid-area: pt4;
-  }
-  .pt5 {
-    grid-area: pt5;
-  }
-  .pt6 {
-    grid-area: pt6;
-  }
-  .pt7 {
-    grid-area: pt7;
+    flex: 1;
   }
 }
+.right-part {
+  position: absolute;
+  left: 80%;
+  height: 80%;
+  width: 20%;
+  float: right;
+  display: flex;
+  flex-direction: column;
+  .pt4 {
+    flex: 1;
+  }
+  .pt5 {
+    flex: 1;
+  }
+  .pt6 {
+    flex: 1;
+  }
+}
+// .grid-container {
+//   position: absolute;
+//   display: grid;
+//   height: calc(100%);
+//   width: 100%;
+//   // grid-template-columns: 1fr 2fr 1fr;
+//   // grid-template-rows: repeat(3, 1fr);
+//   grid-template-columns: 25% 50% 25%;
+//   grid-template-rows: 33.3% 33.3% 33.3%;
+//   grid-template-areas:
+//     "pt1 · pt5 "
+//     "pt2 · pt6 "
+//     "pt3 · pt7 ";
+//   .pt1 {
+//     grid-area: pt1;
+//     // width: 100px;
+//     // height: calc((100% - 45px);
+//   }
+//   .pt2 {
+//     grid-area: pt2;
+//   }
+//   .pt3 {
+//     grid-area: pt3;
+//   }
+//   .pt4 {
+//     grid-area: pt4;
+//   }
+//   .pt5 {
+//     grid-area: pt5;
+//   }
+//   .pt6 {
+//     grid-area: pt6;
+//   }
+//   .pt7 {
+//     grid-area: pt7;
+//   }
+// }
 </style>
