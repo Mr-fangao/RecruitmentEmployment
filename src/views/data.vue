@@ -51,10 +51,11 @@ div {
 .grid-container {
   position: absolute;
   display: grid;
-  height: calc(100% - 45px);
+  height: calc(100%);
+  width: 100%;
   // grid-template-columns: 1fr 2fr 1fr;
   // grid-template-rows: repeat(3, 1fr);
-  grid-template-columns: 409px  600px 400px;
+  grid-template-columns: 25%  50% 25%;
   grid-template-rows: 33.3% 33.3% 33.3%;
   grid-template-areas:
     "pt1 pt4 pt5 "
