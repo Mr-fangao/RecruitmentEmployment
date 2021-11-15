@@ -21,9 +21,9 @@ canvas{
   padding: 0;
 }
 #map{
-  position: absolute;
-  height: 88%;
+  position: relative;
+  height: calc(100% - 45px);
   margin: 0;
   padding: 0;
-  width: 50%;
+  width: 100%;
 }
