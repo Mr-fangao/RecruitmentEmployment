@@ -1,8 +1,17 @@
 header {
-  margin: 0px 75px 0px 30px;
-  height: 40px;
-  background: url(../img/pt/pt_title.png);
-  background-size: 100% 100%;
+  margin: 5px 0px 0px 0px;
+  height: 30px;
+  background: url(../img/pt/pt_title.png)no-repeat;
+  background-size: 72% 74%;
+  background-position: 17% 84%;
+}
+.header-title{
+  color: aqua;
+  position: absolute;
+  line-height: 33px;
+  font-size: 14px;
+  top: 4px;
+  left: 37px;
 }
 h1 {
   font-size: 16px;

@@ -3,7 +3,9 @@
     <div class="container">
       <div class="left-part">
         <div class="pt1">
-          <header></header>
+          <header>
+            <div class="header-title">TOP10城市薪资水平</div>
+          </header>
         </div>
         <div class="pt2">2</div>
         <div class="pt3">3</div>
@@ -45,11 +47,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
-div {
-  text-align: center;
-  font-size: 30px;
-  //outline: 1px dashed rgb(136, 27, 27);
-}
+// div {
+
+//   outline: 1px dashed rgb(136, 27, 27);
+// }
 .map {
   position: relative;
 
@@ -82,6 +83,9 @@ div {
   float: right;
   display: flex;
   flex-direction: column;
+  // background: url(../assets/img/pt/rightsidepart.png);
+  // opacity: 1;
+  // background-size: 150% 100%;
   .pt4 {
     flex: 1;
   }
