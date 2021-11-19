@@ -53,6 +53,12 @@ export default {
     this.chart1();
     this.chart2();
     this.chart3();
+    //禁止页面滑动
+    let m = function (e) {
+      e.preventDefault();
+    };
+    document.body.style.overflow = "hidden";
+    document.addEventListener("touchmove", m, { passive: false });
   },
   methods: {
     //地图服务初始化
@@ -269,12 +275,18 @@ export default {
   background-size: 150% 100%;
   .pt1 {
     flex: 1;
+    background: url(../assets/img/pt/ptbackground.png) no-repeat;
+    background-size: 83% 100%;
   }
   .pt2 {
     flex: 1;
+    background: url(../assets/img/pt/ptbackground.png) no-repeat;
+    background-size: 83% 100%;
   }
   .pt3 {
     flex: 1;
+    background: url(../assets/img/pt/ptbackground.png) no-repeat;
+    background-size: 83% 100%;
   }
 }
 .right-part {

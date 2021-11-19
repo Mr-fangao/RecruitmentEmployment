@@ -103,13 +103,14 @@ export default {
   width: 100%;
   display: flex;
   flex-direction: row;
-  color: rgb(19, 173, 211);
+  color: rgb(0, 195, 255);
   line-height: 50px;
   font-weight: bold;
   .tab-mid {
     cursor: pointer;
     flex: 6;
     line-height: 44px;
+    font-family: 宋体;
     font-size: 18pt;
     font-weight: normal;
     color: rgb(245, 245, 245);
@@ -152,10 +153,10 @@ export default {
     width: 50px;
     height: 40px;
     span {
-    color: rgb(19, 173, 211);
-    line-height: 50px;
-    font-weight: bold;
-    font-size: 16px;
+      color: rgb(0, 195, 255);
+      line-height: 50px;
+      font-weight: bold;
+      font-size: 16px;
     }
   }
 }
