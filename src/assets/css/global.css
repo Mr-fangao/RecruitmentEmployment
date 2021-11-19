@@ -22,7 +22,7 @@ canvas{
 }
 #map{
   position: relative;
-  height: calc(100% - 48px);
+  height: calc(100% - 45px);
   margin: 0;
   padding: 0;
   width: 100%;
