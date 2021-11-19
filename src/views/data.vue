@@ -7,7 +7,7 @@
             <div class="header-title">TOP10城市薪资水平</div>
           </header>
           <div class="Lechartcontent">
-            <div id="chart1" :style="{ width: '100%', height: '110%' }"></div>
+            <div id="chart1" :style="{ width: '110%', height: '100%' }"></div>
           </div>
         </div>
         <div class="pt2">
@@ -15,7 +15,7 @@
             <div class="header-title">TOP10城市薪资水平</div>
           </header>
           <div class="Lechartcontent">
-            <div id="chart2" :style="{ width: '100%', height: '110%' }"></div>
+            <div id="chart2" :style="{ width: '110%', height: '100%' }"></div>
           </div>
         </div>
         <div class="pt3">
@@ -23,14 +23,35 @@
             <div class="header-title">TOP10城市薪资水平</div>
           </header>
           <div class="Lechartcontent">
-            <div id="chart3" :style="{ width: '100%', height: '110%' }"></div>
+            <div id="chart3" :style="{ width: '110%', height: '100%' }"></div>
           </div>
         </div>
       </div>
       <div class="right-part">
-        <div class="pt4">4</div>
-        <div class="pt5">5</div>
-        <div class="pt6">6</div>
+        <div class="pt4">
+          <header>
+            <div class="header-title">TOP10城市薪资水平</div>
+          </header>
+          <div class="Lechartcontent">
+            <div id="chart4" :style="{ width: '100%', height: '100%' }"></div>
+          </div>
+        </div>
+        <div class="pt5">
+          <header>
+            <div class="header-title">TOP10城市薪资水平</div>
+          </header>
+          <div class="Lechartcontent">
+            <div id="chart5" :style="{ width: '100%', height: '100%' }"></div>
+          </div>
+        </div>
+        <div class="pt6">
+          <header>
+            <div class="header-title">TOP10城市薪资水平</div>
+          </header>
+          <div class="Lechartcontent">
+            <div id="chart6" :style="{ width: '100%', height: '100%' }"></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -41,9 +62,12 @@ let echarts = require("echarts/lib/echarts");
 require("echarts/lib/chart/bar");
 require("echarts/lib/chart/line");
 require("echarts/lib/chart/pie");
+require("echarts/lib/chart/scatter");
+require("echarts/lib/chart/funnel");
 require("echarts/lib/component/tooltip");
 require("echarts/lib/component/title");
 require("echarts/lib/component/legend");
+
 const mapboxgl = require("mapbox-gl");
 export default {
   name: "jobsearch",
@@ -53,6 +77,9 @@ export default {
     this.chart1();
     this.chart2();
     this.chart3();
+    this.chart4();
+    this.chart5();
+    this.chart6();
     //禁止页面滑动
     let m = function (e) {
       e.preventDefault();
@@ -247,6 +274,290 @@ export default {
       };
       option && Chart3.setOption(option);
     },
+    chart4() {
+      //基于准备好的dom，初始化echarts实例
+      let Chart4 = echarts.init(document.getElementById("chart4"));
+      var option;
+      option = {
+        color: ["#61a0a8"],
+        xAxis: {
+          axisLine: {
+            //这是x轴文字颜色
+            lineStyle: {
+              color: " #999999",
+            },
+          },
+        },
+        yAxis: {
+          axisLine: {
+            //这是x轴文字颜色
+            lineStyle: {
+              color: " #999999",
+            },
+          },
+        },
+        series: [
+          {
+            symbolSize: 20,
+            data: [
+              [10.0, 8.04],
+              [8.07, 6.95],
+              [13.0, 7.58],
+              [9.05, 8.81],
+              [11.0, 8.33],
+              [14.0, 7.66],
+              [13.4, 6.81],
+              [10.0, 6.33],
+              [14.0, 8.96],
+              [12.5, 6.82],
+              [9.15, 7.2],
+              [11.5, 7.2],
+              [3.03, 4.23],
+              [12.2, 7.83],
+              [2.02, 4.47],
+              [1.05, 3.33],
+              [4.05, 4.96],
+              [6.03, 7.24],
+              [12.0, 6.26],
+              [12.0, 8.84],
+              [7.08, 5.82],
+              [5.02, 5.68],
+            ],
+            type: "scatter",
+          },
+        ],
+      };
+      //   var ROOT_PATH =
+      //     "https://cdn.jsdelivr.net/gh/apache/echarts-website@asf-site/examples";
+      //   var option;
+      //   $.get(
+      //     ROOT_PATH + "/data/asset/data/life-expectancy-table.json",
+      //     function (_rawData) {
+      //       run(_rawData);
+      //     }
+      //   );
+      //   function run(_rawData) {
+      //     // var countries = ['Australia', 'Canada', 'China', 'Cuba', 'Finland', 'France', 'Germany', 'Iceland', 'India', 'Japan', 'North Korea', 'South Korea', 'New Zealand', 'Norway', 'Poland', 'Russia', 'Turkey', 'United Kingdom', 'United States'];
+      //     const countries = [
+      //       "Finland",
+      //       "France",
+      //       "Germany",
+      //       "Iceland",
+      //       "Norway",
+      //       "Poland",
+      //       "Russia",
+      //       "United Kingdom",
+      //     ];
+      //     const datasetWithFilters = [];
+      //     const seriesList = [];
+      //     echarts.util.each(countries, function (country) {
+      //       var datasetId = "dataset_" + country;
+      //       datasetWithFilters.push({
+      //         id: datasetId,
+      //         fromDatasetId: "dataset_raw",
+      //         transform: {
+      //           type: "filter",
+      //           config: {
+      //             and: [
+      //               { dimension: "Year", gte: 1950 },
+      //               { dimension: "Country", "=": country },
+      //             ],
+      //           },
+      //         },
+      //       });
+      //       seriesList.push({
+      //         type: "line",
+      //         datasetId: datasetId,
+      //         showSymbol: false,
+      //         name: country,
+      //         endLabel: {
+      //           show: true,
+      //           formatter: function (params) {
+      //             return params.value[3] + ": " + params.value[0];
+      //           },
+      //         },
+      //         labelLayout: {
+      //           moveOverlap: "shiftY",
+      //         },
+      //         emphasis: {
+      //           focus: "series",
+      //         },
+      //         encode: {
+      //           x: "Year",
+      //           y: "Income",
+      //           label: ["Country", "Income"],
+      //           itemName: "Year",
+      //           tooltip: ["Income"],
+      //         },
+      //       });
+      //     });
+      //     option = {
+      //       animationDuration: 10000,
+      //       dataset: [
+      //         {
+      //           id: "dataset_raw",
+      //           source: _rawData,
+      //         },
+      //         ...datasetWithFilters,
+      //       ],
+      //       title: {
+      //         text: "Income of Germany and France since 1950",
+      //       },
+      //       tooltip: {
+      //         order: "valueDesc",
+      //         trigger: "axis",
+      //       },
+      //       xAxis: {
+      //         type: "category",
+      //         nameLocation: "middle",
+      //       },
+      //       yAxis: {
+      //         name: "Income",
+      //       },
+      //       grid: {
+      //         right: 140,
+      //       },
+      //       series: seriesList,
+      //     };
+      //     Chart4.setOption(option);
+      //   }
+
+      option && Chart4.setOption(option);
+    },
+    chart5() {
+      // 基于准备好的dom，初始化echarts实例
+      let Chart5 = echarts.init(document.getElementById("chart5"));
+      var option;
+      option = {
+        title: {
+          text: "Funnel",
+        },
+        tooltip: {
+          trigger: "item",
+          formatter: "{a} <br/>{b} : {c}%",
+        },
+        toolbox: {
+          feature: {
+            dataView: { readOnly: false },
+            restore: {},
+            saveAsImage: {},
+          },
+        },
+        legend: {
+          data: ["Show", "Click", "Visit", "Inquiry", "Order"],
+        },
+        series: [
+          {
+            name: "Funnel",
+            type: "funnel",
+            left: "10%",
+            top: 60,
+            bottom: 60,
+            width: "80%",
+            min: 0,
+            max: 100,
+            minSize: "0%",
+            maxSize: "100%",
+            sort: "descending",
+            gap: 2,
+            label: {
+              show: true,
+              position: "inside",
+            },
+            labelLine: {
+              length: 10,
+              lineStyle: {
+                width: 1,
+                type: "solid",
+              },
+            },
+            itemStyle: {
+              borderColor: "#fff",
+              borderWidth: 1,
+            },
+            emphasis: {
+              label: {
+                fontSize: 20,
+              },
+            },
+            data: [
+              { value: 60, name: "Visit" },
+              { value: 40, name: "Inquiry" },
+              { value: 20, name: "Order" },
+              { value: 80, name: "Click" },
+              { value: 100, name: "Show" },
+            ],
+          },
+        ],
+      };
+
+      option && Chart5.setOption(option);
+    },
+    chart6() {
+      // 基于准备好的dom，初始化echarts实例
+      let Chart6 = echarts.init(document.getElementById("chart6"));
+      var option;
+      option = {
+        color: ["#61a0a8"],
+        dataset: {
+          source: [
+            ["score", "amount", "product"],
+            [89.3, 58212, "Matcha Latte"],
+            [57.1, 78254, "Milk Tea"],
+            [74.4, 41032, "Cheese Cocoa"],
+            [50.1, 12755, "Cheese Brownie"],
+            [89.7, 20145, "Matcha Cocoa"],
+            [68.1, 79146, "Tea"],
+            [19.6, 91852, "Orange Juice"],
+            [10.6, 101852, "Lemon Juice"],
+            [32.7, 20112, "Walnut Brownie"],
+          ],
+        },
+        grid: { containLabel: true },
+        xAxis: {
+          name: "amount",
+          axisLine: {
+            //这是x轴文字颜色
+            lineStyle: {
+              color: " #999999",
+            },
+          },
+        },
+        yAxis: {
+          type: "category",
+          axisLine: {
+            //这是x轴文字颜色
+            lineStyle: {
+              color: " #999999",
+            },
+          },
+        },
+        visualMap: {
+          orient: "horizontal",
+          left: "center",
+          min: 10,
+          max: 100,
+          text: ["High Score", "Low Score"],
+          // Map the score column to color
+          dimension: 0,
+          inRange: {
+            color: ["#65B581", "#FFCE34", "#FD665F"],
+          },
+        },
+        series: [
+          {
+            type: "bar",
+            encode: {
+              // Map the "amount" column to X axis.
+              x: "amount",
+              // Map the "product" column to Y axis
+              y: "product",
+            },
+          },
+        ],
+      };
+      option && Chart6.setOption(option);
+    },
   },
 };
 </script>
@@ -260,55 +571,63 @@ export default {
   position: relative;
 }
 .Lechartcontent {
-  height: calc(100% - 48px);
-  right: 10%;
+  height: calc(100% - 32px);
+  width: 100%;
 }
 .left-part {
   position: absolute;
   height: 100%;
-  width: 25%;
+  width: 22%;
   float: left;
   display: flex;
   flex-direction: column;
+  padding: 10px;
   background: url(../assets/img/pt/leftsidepart.png) no-repeat;
   opacity: 1;
   background-size: 150% 100%;
   .pt1 {
     flex: 1;
     background: url(../assets/img/pt/ptbackground.png) no-repeat;
-    background-size: 83% 100%;
+    background-size: 100% 100%;
   }
   .pt2 {
     flex: 1;
     background: url(../assets/img/pt/ptbackground.png) no-repeat;
-    background-size: 83% 100%;
+    background-size: 100% 100%;
   }
   .pt3 {
     flex: 1;
     background: url(../assets/img/pt/ptbackground.png) no-repeat;
-    background-size: 83% 100%;
+    background-size: 100% 100%;
   }
 }
 .right-part {
   position: absolute;
-  left: 75%;
+  right: 0%;
   height: 100%;
-  width: 25%;
+  width: 22%;
   float: right;
   display: flex;
   flex-direction: column;
+  padding: 10px;
   background: url(../assets/img/pt/rightsidepart.png) no-repeat;
   opacity: 1;
   background-size: 145% 100%;
   background-position: 100% 10%;
   .pt4 {
     flex: 1;
+    background: url(../assets/img/pt/ptbackground.png) no-repeat;
+    background-size: 100% 100%;
   }
   .pt5 {
     flex: 1;
+    background: url(../assets/img/pt/ptbackground.png) no-repeat;
+    background-size: 100% 100%;
   }
   .pt6 {
     flex: 1;
+    background: url(../assets/img/pt/ptbackground.png) no-repeat;
+    background-size: 100% 100%;
   }
 }
 </style>
