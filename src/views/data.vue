@@ -296,6 +296,12 @@ export default {
             },
           },
         },
+        grid: {
+          x: 40,
+          y: 20,
+          x2: 40,
+          y2: 40,
+        },
         series: [
           {
             symbolSize: 12,
@@ -327,100 +333,6 @@ export default {
           },
         ],
       };
-      //   var ROOT_PATH =
-      //     "https://cdn.jsdelivr.net/gh/apache/echarts-website@asf-site/examples";
-      //   var option;
-      //   $.get(
-      //     ROOT_PATH + "/data/asset/data/life-expectancy-table.json",
-      //     function (_rawData) {
-      //       run(_rawData);
-      //     }
-      //   );
-      //   function run(_rawData) {
-      //     // var countries = ['Australia', 'Canada', 'China', 'Cuba', 'Finland', 'France', 'Germany', 'Iceland', 'India', 'Japan', 'North Korea', 'South Korea', 'New Zealand', 'Norway', 'Poland', 'Russia', 'Turkey', 'United Kingdom', 'United States'];
-      //     const countries = [
-      //       "Finland",
-      //       "France",
-      //       "Germany",
-      //       "Iceland",
-      //       "Norway",
-      //       "Poland",
-      //       "Russia",
-      //       "United Kingdom",
-      //     ];
-      //     const datasetWithFilters = [];
-      //     const seriesList = [];
-      //     echarts.util.each(countries, function (country) {
-      //       var datasetId = "dataset_" + country;
-      //       datasetWithFilters.push({
-      //         id: datasetId,
-      //         fromDatasetId: "dataset_raw",
-      //         transform: {
-      //           type: "filter",
-      //           config: {
-      //             and: [
-      //               { dimension: "Year", gte: 1950 },
-      //               { dimension: "Country", "=": country },
-      //             ],
-      //           },
-      //         },
-      //       });
-      //       seriesList.push({
-      //         type: "line",
-      //         datasetId: datasetId,
-      //         showSymbol: false,
-      //         name: country,
-      //         endLabel: {
-      //           show: true,
-      //           formatter: function (params) {
-      //             return params.value[3] + ": " + params.value[0];
-      //           },
-      //         },
-      //         labelLayout: {
-      //           moveOverlap: "shiftY",
-      //         },
-      //         emphasis: {
-      //           focus: "series",
-      //         },
-      //         encode: {
-      //           x: "Year",
-      //           y: "Income",
-      //           label: ["Country", "Income"],
-      //           itemName: "Year",
-      //           tooltip: ["Income"],
-      //         },
-      //       });
-      //     });
-      //     option = {
-      //       animationDuration: 10000,
-      //       dataset: [
-      //         {
-      //           id: "dataset_raw",
-      //           source: _rawData,
-      //         },
-      //         ...datasetWithFilters,
-      //       ],
-      //       title: {
-      //         text: "Income of Germany and France since 1950",
-      //       },
-      //       tooltip: {
-      //         order: "valueDesc",
-      //         trigger: "axis",
-      //       },
-      //       xAxis: {
-      //         type: "category",
-      //         nameLocation: "middle",
-      //       },
-      //       yAxis: {
-      //         name: "Income",
-      //       },
-      //       grid: {
-      //         right: 140,
-      //       },
-      //       series: seriesList,
-      //     };
-      //     Chart4.setOption(option);
-      //   }
 
       option && Chart4.setOption(option);
     },
@@ -444,7 +356,7 @@ export default {
           },
         },
         legend: {
-          data: ["Show", "Click", "Visit", "Inquiry", "Order"],
+          data: ["S", "C", "V", "I", "O"],
         },
         series: [
           {
@@ -457,7 +369,7 @@ export default {
             min: 0,
             max: 100,
             minSize: "0%",
-            maxSize: "100%",
+            maxSize: "90%",
             sort: "descending",
             gap: 2,
             label: {
@@ -481,11 +393,11 @@ export default {
               },
             },
             data: [
-              { value: 60, name: "Visit" },
-              { value: 40, name: "Inquiry" },
-              { value: 20, name: "Order" },
-              { value: 80, name: "Click" },
-              { value: 100, name: "Show" },
+              { value: 60, name: "V" },
+              { value: 40, name: "I" },
+              { value: 20, name: "O" },
+              { value: 80, name: "C" },
+              { value: 100, name: "S" },
             ],
           },
         ],
@@ -514,10 +426,10 @@ export default {
           ],
         },
         grid: {
-          x: 40,
+          x: 20,
           y: 20,
-          x2: 80,
-          y2: 40,
+          x2: 20,
+          y2: 10,
           containLabel: true,
         },
         xAxis: {
