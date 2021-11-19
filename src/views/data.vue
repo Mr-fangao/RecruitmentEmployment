@@ -279,7 +279,7 @@ export default {
       let Chart4 = echarts.init(document.getElementById("chart4"));
       var option;
       option = {
-        color: ["#61a0a8"],
+        color: ["#1E90FF"],
         xAxis: {
           axisLine: {
             //这是x轴文字颜色
@@ -298,7 +298,7 @@ export default {
         },
         series: [
           {
-            symbolSize: 20,
+            symbolSize: 12,
             data: [
               [10.0, 8.04],
               [8.07, 6.95],
@@ -429,9 +429,9 @@ export default {
       let Chart5 = echarts.init(document.getElementById("chart5"));
       var option;
       option = {
-        title: {
-          text: "Funnel",
-        },
+        // title: {
+        //   text: "Funnel",
+        // },
         tooltip: {
           trigger: "item",
           formatter: "{a} <br/>{b} : {c}%",
@@ -451,8 +451,8 @@ export default {
             name: "Funnel",
             type: "funnel",
             left: "10%",
-            top: 60,
-            bottom: 60,
+            top: 40,
+            bottom: 40,
             width: "80%",
             min: 0,
             max: 100,
@@ -477,7 +477,7 @@ export default {
             },
             emphasis: {
               label: {
-                fontSize: 20,
+                fontSize: 15,
               },
             },
             data: [
@@ -498,22 +498,28 @@ export default {
       let Chart6 = echarts.init(document.getElementById("chart6"));
       var option;
       option = {
-        color: ["#61a0a8"],
+        color: ["#4169E1"],
         dataset: {
           source: [
             ["score", "amount", "product"],
-            [89.3, 58212, "Matcha Latte"],
-            [57.1, 78254, "Milk Tea"],
-            [74.4, 41032, "Cheese Cocoa"],
-            [50.1, 12755, "Cheese Brownie"],
-            [89.7, 20145, "Matcha Cocoa"],
+            [89.3, 58212, "Matcha"],
+            [57.1, 78254, "Milk"],
+            [74.4, 41032, "Chees"],
+            [50.1, 12755, "Cheese"],
+            [89.7, 20145, "Matcha"],
             [68.1, 79146, "Tea"],
-            [19.6, 91852, "Orange Juice"],
-            [10.6, 101852, "Lemon Juice"],
-            [32.7, 20112, "Walnut Brownie"],
+            [19.6, 91852, "Orange"],
+            [10.6, 101852, "Lemon"],
+            [32.7, 20112, "Walnut"],
           ],
         },
-        grid: { containLabel: true },
+        grid: {
+          x: 40,
+          y: 20,
+          x2: 80,
+          y2: 40,
+          containLabel: true,
+        },
         xAxis: {
           name: "amount",
           axisLine: {
