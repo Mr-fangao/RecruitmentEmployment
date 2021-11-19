@@ -135,10 +135,10 @@ export default {
           },
         },
         grid: {
-          x: 55,
-          y: 35,
+          x: 40,
+          y: 20,
           x2: 80,
-          y2: 25,
+          y2: 40,
         },
         series: [
           {
@@ -196,10 +196,10 @@ export default {
           },
         },
         grid: {
-          x: 55,
-          y: 35,
+          x: 40,
+          y: 20,
           x2: 80,
-          y2: 25,
+          y2: 40,
         },
         series: [
           {
