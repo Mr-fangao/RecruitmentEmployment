@@ -62,32 +62,32 @@ const routes = [
   {
     path: "/aggregation",
     name: "aggregation",
-    component: () => import("@/views/pointaggregation"),
+    component: () => import("@/views/thematicmap/pointaggregation"),
   },
   {
     path: "/sequential",
     name: "sequential",
-    component: () => import("@/views/sequential"),
+    component: () => import("@/views/thematicmap/sequential"),
   },
   {
     path: "/graded",
     name: "graded",
-    component: () => import("@/views/gradedcolor"),
+    component: () => import("@/views/thematicmap/gradedcolor"),
   },
   {
     path: "/flow",
     name: "flow",
-    component: () => import("@/views/personnelflow"),
+    component: () => import("@/views/thematicmap/personnelflow"),
   },
   {
     path: "/thermodynamic",
     name: "thermodynamic",
-    component: () => import("@/views/thermodynamic"),
+    component: () => import("@/views/thematicmap/thermodynamic"),
   },
   {
     path: "/factor",
     name: "factor",
-    component: () => import("@/views/factorstatistics"),
+    component: () => import("@/views/thematicmap/factorstatistics"),
   },
 ];
 
