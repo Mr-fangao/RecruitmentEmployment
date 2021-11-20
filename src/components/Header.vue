@@ -6,6 +6,7 @@
         @click="(cur = 1), gotoskillanalysis()"
         :class="{ active: cur == 1 }"
       >
+        <!-- <img src="../assets/img/icon/skillanalysis1.png" /> -->
         技能分析
       </div>
       <div
@@ -173,13 +174,17 @@ export default {
   color: rgb(0, 195, 255);
   line-height: 50px;
   font-weight: bold;
+  img {
+      height: 20px;
+      // filter: drop-shadow(-1px 0 0 #ffffff);
+    }
   .tab-mid {
     cursor: pointer;
     flex: 6;
     line-height: 44px;
     font-family: 宋体;
     font-size: 18pt;
-    font-weight: normal;
+    font-weight: bold;
     color: rgb(245, 245, 245);
   }
   .tab-content1 {
