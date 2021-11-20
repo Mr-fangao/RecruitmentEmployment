@@ -70,7 +70,7 @@ require("echarts/lib/component/legend");
 
 const mapboxgl = require("mapbox-gl");
 export default {
-  name: "jobsearch",
+  name: "data",
   data() {},
   mounted() {
     this.initmap();

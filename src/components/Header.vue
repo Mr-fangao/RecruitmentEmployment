@@ -3,24 +3,24 @@
     <div class="tab-content">
       <div
         class="tab-content1"
-        @click="(cur = 1), gotojobsearch()"
+        @click="(cur = 1), gotoskillanalysis()"
         :class="{ active: cur == 1 }"
       >
-        职位搜索
+        技能分析
       </div>
       <div
         class="tab-content2"
-        @click="(cur = 2), gotodata()"
+        @click="(cur = 2), gotopostanalysis()"
         :class="{ active: cur == 2 }"
       >
-        就业统计
+        岗位分析
       </div>
       <div
         class="tab-content3"
-        @click="(cur = 3), gotoskillanalysis()"
+        @click="(cur = 3), gotoregionalanalysis()"
         :class="{ active: cur == 3 }"
       >
-        技能分析
+        地区分析
       </div>
       <div class="tab-mid">网络招聘大数据分析与可视化系统</div>
       <div
@@ -35,7 +35,17 @@
         @click="(cur = 5), gotodatapanel()"
         :class="{ active: cur == 5 }"
       >
-        数据面板
+        <el-dropdown>
+          <span class="el-dropdown-link"> 数据面板 </span>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item>职位详情</el-dropdown-item>
+              <el-dropdown-item>薪资统计</el-dropdown-item>
+              <el-dropdown-item>学历统计</el-dropdown-item>
+              <el-dropdown-item>工作经验</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
       </div>
       <div
         class="tab-content6"
@@ -55,7 +65,7 @@
               <el-dropdown-item>Action 2</el-dropdown-item>
               <el-dropdown-item>Action 3</el-dropdown-item>
               <el-dropdown-item>Action 4</el-dropdown-item>
-              <el-dropdown-item divided>Action 5</el-dropdown-item>
+              <el-dropdown-item>Action 5</el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>
@@ -72,13 +82,13 @@ export default {
     };
   },
   methods: {
-    gotojobsearch() {
-      this.$router.replace("/jobsearch");
+    gotoskillanalysis() {
+      this.$router.replace("/skillanalysis");
     },
-    gotodata() {
+    gotopostanalysis() {
       this.$router.replace("/data");
     },
-    gotoskillanalysis() {
+    gotoregionalanalysis() {
       this.$router.replace("/analysis");
     },
     gotospatialquery() {
@@ -145,6 +155,12 @@ export default {
     flex: 1;
     width: 50px;
     height: 40px;
+    span {
+      color: rgb(0, 195, 255);
+      line-height: 50px;
+      font-weight: bold;
+      font-size: 16px;
+    }
   }
   .tab-content6 {
     cursor: pointer;

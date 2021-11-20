@@ -74,7 +74,7 @@ export default {
       request.post("/api/user/queryuser", this.loginFrom).then((res) => {
         console.log(res.code);
         if (res.code == "0") {
-          this.$router.push({ name: "jobsearch" });
+          this.$router.push({ name: "skillanalysis" });
         } else {
           this.$message({
             type: "error",

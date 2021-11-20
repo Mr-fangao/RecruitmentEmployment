@@ -11,9 +11,9 @@ const routes = [
     },
   },
   {
-    path: "/jobsearch",
-    name: "jobsearch",
-    component: () => import("@/views/jobsearch"),
+    path: "/skillanalysis",
+    name: "skillanalysis",
+    component: () => import("@/views/skillanalysis"),
   },
   {
     path: "/data",
