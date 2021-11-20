@@ -20,15 +20,15 @@ const routes = [
     name: "data",
     component: () => import("@/views/data"),
   },
-  {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
-  },
+  // {
+  //   path: "/about",
+  //   name: "About",
+  //   // route level code-splitting
+  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   component: () =>
+  //     import(/* webpackChunkName: "about" */ "../views/About.vue"),
+  // },
   {
     path: "/analysis",
     name: "analysis",
@@ -40,14 +40,54 @@ const routes = [
     component: () => import("@/views/spatialquery"),
   },
   {
-    path: "/map",
-    name: "map",
-    component: () => import("@/views/thematicmap"),
+    path: "/jobdetails",
+    name: "jobdetails",
+    component: () => import("@/views/jobdetails"),
   },
   {
-    path: "/datapanel",
-    name: "datapanel",
-    component: () => import("@/views/datapanel"),
+    path: "/salary",
+    name: "salary",
+    component: () => import("@/views/salarystatistics"),
+  },
+  {
+    path: "/education",
+    name: "education",
+    component: () => import("@/views/educationstatistics"),
+  },
+  {
+    path: "/experience",
+    name: "experience",
+    component: () => import("@/views/workexperience"),
+  },
+  {
+    path: "/aggregation",
+    name: "aggregation",
+    component: () => import("@/views/pointaggregation"),
+  },
+  {
+    path: "/sequential",
+    name: "sequential",
+    component: () => import("@/views/sequential"),
+  },
+  {
+    path: "/graded",
+    name: "graded",
+    component: () => import("@/views/gradedcolor"),
+  },
+  {
+    path: "/flow",
+    name: "flow",
+    component: () => import("@/views/personnelflow"),
+  },
+  {
+    path: "/thermodynamic",
+    name: "thermodynamic",
+    component: () => import("@/views/thermodynamic"),
+  },
+  {
+    path: "/factor",
+    name: "factor",
+    component: () => import("@/views/factorstatistics"),
   },
 ];
 

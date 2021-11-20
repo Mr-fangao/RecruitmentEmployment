@@ -42,7 +42,7 @@ require("echarts/lib/chart/pie");
 require("echarts/lib/component/tooltip");
 require("echarts/lib/component/title");
 export default {
-  name: "jobsearch",
+  name: "jobdetails",
   data() {},
   mounted() {
     this.chart1();

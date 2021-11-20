@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: "map",
+  name: "education",
   data() {},}
 </script>
 

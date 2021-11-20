@@ -30,28 +30,36 @@
       >
         空间查询
       </div>
-      <div
-        class="tab-content5"
-        @click="(cur = 5), gotodatapanel()"
-        :class="{ active: cur == 5 }"
-      >
+      <div class="tab-content5">
         <el-dropdown>
           <span class="el-dropdown-link"> 数据面板 </span>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item>职位详情</el-dropdown-item>
-              <el-dropdown-item>薪资统计</el-dropdown-item>
-              <el-dropdown-item>学历统计</el-dropdown-item>
-              <el-dropdown-item>工作经验</el-dropdown-item>
+              <el-dropdown-item
+                @click="(cur = 5), gotojobdetails()"
+                :class="{ active: cur == 5 }"
+                >职位详情</el-dropdown-item
+              >
+              <el-dropdown-item
+                @click="(cur = 6), gotosalarystatistics()"
+                :class="{ active: cur == 6 }"
+                >薪资统计</el-dropdown-item
+              >
+              <el-dropdown-item
+                @click="(cur = 7), gotoeducationstatistics()"
+                :class="{ active: cur == 7 }"
+                >学历统计</el-dropdown-item
+              >
+              <el-dropdown-item
+                @click="(cur = 8), gotoworkexperience()"
+                :class="{ active: cur == 8 }"
+                >工作经验</el-dropdown-item
+              >
             </el-dropdown-menu>
           </template>
         </el-dropdown>
       </div>
-      <div
-        class="tab-content6"
-        @click="(cur = 6), gotothematicmap()"
-        :class="{ active: cur == 6 }"
-      >
+      <div class="tab-content6">
         <el-dropdown>
           <span class="el-dropdown-link">
             专题地图
@@ -61,11 +69,36 @@
           </span>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item>Action 1</el-dropdown-item>
-              <el-dropdown-item>Action 2</el-dropdown-item>
-              <el-dropdown-item>Action 3</el-dropdown-item>
-              <el-dropdown-item>Action 4</el-dropdown-item>
-              <el-dropdown-item>Action 5</el-dropdown-item>
+              <el-dropdown-item
+                @click="(cur = 9), gotopointaggregation()"
+                :class="{ active: cur == 9 }"
+                >点聚合</el-dropdown-item
+              >
+              <el-dropdown-item
+                @click="(cur = 10), gotosequential()"
+                :class="{ active: cur == 10 }"
+                >时序</el-dropdown-item
+              >
+              <el-dropdown-item
+                @click="(cur = 11), gotogradedcolor()"
+                :class="{ active: cur == 11 }"
+                >分级色彩</el-dropdown-item
+              >
+              <el-dropdown-item
+                @click="(cur = 12), gotopersonnelflow()"
+                :class="{ active: cur == 12 }"
+                >人员流向</el-dropdown-item
+              >
+              <el-dropdown-item
+                @click="(cur = 13), gotothermodynamic()"
+                :class="{ active: cur == 13 }"
+                >热力图</el-dropdown-item
+              >
+              <el-dropdown-item
+                @click="(cur = 14), gotofactorstatistics()"
+                :class="{ active: cur == 14 }"
+                >多要素统计</el-dropdown-item
+              >
             </el-dropdown-menu>
           </template>
         </el-dropdown>
@@ -94,11 +127,35 @@ export default {
     gotospatialquery() {
       this.$router.replace("/query");
     },
-    gotodatapanel() {
-      this.$router.replace("/datapanel");
+    gotojobdetails() {
+      this.$router.replace("/jobdetails");
     },
-    gotothematicmap() {
-      this.$router.replace("/map");
+    gotosalarystatistics() {
+      this.$router.replace("/salary");
+    },
+    gotoeducationstatistics() {
+      this.$router.replace("/education");
+    },
+    gotoworkexperience() {
+      this.$router.replace("/experience");
+    },
+    gotopointaggregation() {
+      this.$router.replace("/aggregation");
+    },
+    gotosequential() {
+      this.$router.replace("/sequential");
+    },
+    gotogradedcolor() {
+      this.$router.replace("/graded");
+    },
+    gotopersonnelflow() {
+      this.$router.replace("/flow");
+    },
+    gotothermodynamic() {
+      this.$router.replace("/thermodynamic");
+    },
+    gotofactorstatistics() {
+      this.$router.replace("/factor");
     },
   },
 };
