@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import request from "../utils/request";
+import request from "../../utils/request";
 let echarts = require("echarts/lib/echarts");
 require("echarts/lib/chart/bar");
 require("echarts/lib/chart/line");

@@ -1,52 +1,75 @@
 <template>
-  <div class="table">
-    <el-table :data="tableData" border style="width: 100%">
-      <el-table-column prop="date" label="Date" width="180" />
-      <el-table-column prop="name" label="Name" width="180" />
-      <el-table-column prop="address" label="Address" />
-    </el-table>
+  <div class="table_c">
+    <div class="table_all">
+      <el-card shadow="hover" class="tebale_card">
+        <el-table
+          :data="tableData"
+          border
+          style="width: 100%"
+          :row-style="getRowClass"
+          :header-row-style="getRowClass"
+          :header-cell-style="getRowClass"
+        >
+          <el-table-column prop="date" label="日期" width="180">
+          </el-table-column>
+          <el-table-column prop="name" label="姓名" width="180">
+          </el-table-column>
+          <el-table-column prop="address" label="地址"> </el-table-column>
+        </el-table>
+      </el-card>
+    </div>
   </div>
 </template>
 
-<script>
+    <script>
 export default {
-  name: "jobdetails",
+  name: "TableC",
   data() {
     return {
       tableData: [
         {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
+          date: "测试",
+          name: "测试",
+          address: "测试",
         },
         {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄",
+          date: "测试",
+          name: "测试",
+          address: "测试",
         },
         {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄",
+          date: "测试",
+          name: "测试",
+          address: "测试",
         },
         {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄",
+          date: "测试",
+          name: "测试",
+          address: "测试",
         },
       ],
     };
   },
+  methods: {
+    getRowClass({ row, column, rowIndex, columnIndex }) {
+      return "background:#3f5c6d2c;color:#FFFF;";
+    },
+  },
 };
 </script>
 
-<style lang="less" scoped>
-.table {
-  display: flex;
+    <style lang="less" scoped>
+.table_c {
+   background: url("../../assets/img/mainbg.jpg") center
+            center no-repeat;
+  margin: 10% 10% 10% 10%;
   padding: 10px;
-  
-  :deep(.el-table) {
-    background-color: transparent !important;
-  }
 }
-</style>
+.tebale_card {
+  background-color: #00a2ff2c;
+}
+.el-table,
+.el-table__expanded-cell {
+  background-color: #3f5c6d2c;
+}
+</style>>
