@@ -3,25 +3,24 @@
     <div class="item1">
       <div class="content">
         <div class="title">
-          <dir class="select">
+          <div class="select">
             <el-dropdown>
               <span class="el-dropdown-link">
-                Dropdown List
+                选择城市
                 <el-icon class="el-icon--right">
                   <arrow-down />
                 </el-icon>
               </span>
               <template #dropdown>
                 <el-dropdown-menu>
-                  <el-dropdown-item>Action 1</el-dropdown-item>
-                  <el-dropdown-item>Action 2</el-dropdown-item>
-                  <el-dropdown-item>Action 3</el-dropdown-item>
-                  <el-dropdown-item>Action 4</el-dropdown-item>
-                  <el-dropdown-item>Action 5</el-dropdown-item>
+                  <el-dropdown-item>北京</el-dropdown-item>
+                  <el-dropdown-item>上海</el-dropdown-item>
+                  <el-dropdown-item>广州</el-dropdown-item>
+                  <el-dropdown-item>深圳</el-dropdown-item>
                 </el-dropdown-menu>
               </template>
             </el-dropdown>
-          </dir>
+          </div>
         </div>
         <div class="chart">
           <div id="chart1" :style="{ width: '100%', height: '100%' }"></div>
@@ -134,10 +133,21 @@ export default {
   .item1 {
     grid-area: pt1;
     .title {
-      float: top;
+      // float: top;
       height: 70px;
       .select {
-
+        position: relative;
+        top: 50%;
+        left: 83%;
+        height: 36px;
+        width: 100px;
+        .el-dropdown-link{
+          height: 40px;
+          font-size: 12pt;
+          line-height: 40px;
+          text-align: center;
+          color:white;
+        }
       }
     }
   }
