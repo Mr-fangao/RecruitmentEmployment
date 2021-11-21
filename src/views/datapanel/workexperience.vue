@@ -18,7 +18,7 @@
                     :class="{ active: ct == 1 }"
                     >北京</el-dropdown-item
                   >
-                  <el-dropdown-item>上海</el-dropdown-item>
+                  <el-dropdown-item>{{chartdata1}}</el-dropdown-item>
                   <el-dropdown-item>广州</el-dropdown-item>
                   <el-dropdown-item>深圳</el-dropdown-item>
                 </el-dropdown-menu>
@@ -27,7 +27,8 @@
           </div>
         </div>
         <div class="chart">
-          <div id="chart1" :style="{ width: '100%', height: '100%' }"></div>
+          <!-- <h1>{{chartdata1}}</h1> -->
+          <div id="chart1" :style="{ width: '100%', height: '100%' }" ></div>
         </div>
       </div>
     </div>
@@ -38,6 +39,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import request from "../../utils/request";
 let echarts = require("echarts/lib/echarts");
 require("echarts/lib/chart/bar");
@@ -54,28 +56,26 @@ export default {
   data() {
     return {
       ct: 1,
-      dataChart1: {
-        name:"",
-        value:"",
-      },
+      chartdata1:[],
     };
   },
-  mounted() {
+  mounted:function(){
     this.chart1();
+    this.showct1().self;
   },
   methods: {
-    async showct1(ct) {
-      request.post("/api/data/querySalary", ct).then((res) => {
-        console.log(res.data);
-      });
-    },
-    // async getData() {
-    //   request.get("/api/data/querySalary").then((res) => {
-    //     console.log(res.data);
-    //   });
+    // consoleWrite(chartdata1){
+    //   console.log(chartdata1);
     // },
+    async showct1(ct) {
+      request.post("/api/data/querySalary",ct).then((res) => {
+        // console.log(res.data.value);
+        let data=res.data.value;
+        this.chartdata1=data;
+      });
+      return self.chartdata1;
+    },
     chart1() {
-      console.log(this.showct1());
       // 基于准备好的dom，初始化echarts实例
       let chart1 = echarts.init(document.getElementById("chart1"));
       // 绘制图表
@@ -133,11 +133,6 @@ export default {
           },
         ],
       });
-      // this.$axios.get("/api/data/querySalary", 1).then((res) => {
-      //   // console.log(res.data);
-      //     this.dataChart1.data = res.data;
-      //     console.log(this.dataChart1[0]);
-      // });
     },
     // chart1() {
     //   console.log(this.dataChart1.data);
