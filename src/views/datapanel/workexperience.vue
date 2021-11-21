@@ -13,7 +13,11 @@
               </span>
               <template #dropdown>
                 <el-dropdown-menu>
-                  <el-dropdown-item>北京</el-dropdown-item>
+                  <el-dropdown-item
+                    @click="(ct = 1), showct1()"
+                    :class="{ active: ct == 1 }"
+                    >北京</el-dropdown-item
+                  >
                   <el-dropdown-item>上海</el-dropdown-item>
                   <el-dropdown-item>广州</el-dropdown-item>
                   <el-dropdown-item>深圳</el-dropdown-item>
@@ -34,6 +38,7 @@
 </template>
 
 <script>
+import request from "../utils/request";
 let echarts = require("echarts/lib/echarts");
 require("echarts/lib/chart/bar");
 require("echarts/lib/chart/line");
@@ -46,64 +51,148 @@ require("echarts/lib/component/legend");
 export default {
   name: "experience",
 
-  data() {},
+  data() {
+    return {
+      ct: 1,
+      dataChart1: {
+        name:"",
+        value:"",
+      },
+    };
+  },
   mounted() {
     this.chart1();
   },
   methods: {
+    async showct1(ct) {
+      request.post("/api/data/querySalary", ct).then((res) => {
+        console.log(res.data);
+      });
+    },
+    // async getData() {
+    //   request.get("/api/data/querySalary").then((res) => {
+    //     console.log(res.data);
+    //   });
+    // },
     chart1() {
+      console.log(this.showct1());
       // 基于准备好的dom，初始化echarts实例
-      let Chart1 = echarts.init(document.getElementById("chart1"));
+      let chart1 = echarts.init(document.getElementById("chart1"));
       // 绘制图表
-      var option;
-      option = {
-        tooltip: {
-          trigger: "item",
-        },
-        legend: {
-          orient: "vertical",
-          left: "5%", //图例距离左的距离
-          y: "center", //图例上下居中
-          data: ["A", "B", "C", "D", "E"],
-          textStyle: {
-            //图例文字的样式
-            color: "#fff",
-            fontSize: 12,
+      chart1.setOption({
+        color: ["#61a0a8"],
+        xAxis: {
+          type: "category",
+          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+          axisLine: {
+            //这是x轴文字颜色
+            lineStyle: {
+              color: " #999999",
+            },
           },
         },
-
+        yAxis: {
+          type: "value",
+          boundaryGap: ["0", "0.1"],
+          axisLine: {
+            //这是x轴文字颜色
+            lineStyle: {
+              color: " #999999",
+            },
+          },
+          //y轴刻度横线 ：false
+          splitLine: {
+            show: false,
+          },
+        },
+        grid: {
+          x: 40,
+          y: 20,
+          x2: 80,
+          y2: 40,
+        },
         series: [
           {
-            name: "Access From",
-            type: "pie",
-            center: ["60%", "55%"],
-            radius: ["70%", "50%"],
-            label: {
+            barWidth: "60%",
+            data: [120, 50, 150, 80, 70, 110],
+            type: "bar",
+            showBackground: true,
+            backgroundStyle: {
+              color: "rgba(180, 180, 180, 0.1)",
+            },
+            itemStyle: {
               normal: {
-                show: true,
-                position: "outside",
-                formatter: "{b}",
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  // { offset: 0.4, color: "#1BFEFE" },
+                  // { offset: 1, color: "#1BFEFE" },
+                  { offset: 0.2, color: "#44C0C1" }, //柱图渐变色
+                  { offset: 1, color: "#1BFEFE" },
+                ]),
               },
             },
-            labelLine: {
-              normal: {
-                show: true,
-                length: 50,
-                length2: 10,
-              },
-            },
-            data: [
-              { value: 1048, name: "A" },
-              { value: 735, name: "B" },
-              { value: 580, name: "C" },
-              { value: 484, name: "D" },
-              { value: 300, name: "E" },
-            ],
           },
         ],
-      };
-      option && Chart1.setOption(option);
+      });
+      // this.$axios.get("/api/data/querySalary", 1).then((res) => {
+      //   // console.log(res.data);
+      //     this.dataChart1.data = res.data;
+      //     console.log(this.dataChart1[0]);
+      // });
     },
+    // chart1() {
+    //   console.log(this.dataChart1.data);
+    //   // 基于准备好的dom，初始化echarts实例
+    //   let Chart1 = echarts.init(document.getElementById("chart1"));
+    //   // 绘制图表
+    //   var option;
+    //   option = {
+    //     tooltip: {
+    //       trigger: "item",
+    //     },
+    //     legend: {
+    //       orient: "vertical",
+    //       left: "5%", //图例距离左的距离
+    //       y: "center", //图例上下居中
+    //       data: ["A", "B", "C", "D", "E"],
+    //       textStyle: {
+    //         //图例文字的样式
+    //         color: "#fff",
+    //         fontSize: 12,
+    //       },
+    //     },
+
+    //     series: [
+    //       {
+    //         name: "Access From",
+    //         type: "pie",
+    //         center: ["60%", "55%"],
+    //         radius: ["70%", "50%"],
+    //         label: {
+    //           normal: {
+    //             show: true,
+    //             position: "outside",
+    //             formatter: "{b}",
+    //           },
+    //         },
+    //         labelLine: {
+    //           normal: {
+    //             show: true,
+    //             length: 50,
+    //             length2: 10,
+    //           },
+    //         },
+    //         data: [
+    //           { value: 1111, name: "A" },
+    //           { value: 735, name: "B" },
+    //           { value: 580, name: "C" },
+    //           { value: 484, name: "D" },
+    //           { value: 300, name: "E" },
+    //         ],
+    //       },
+    //     ],
+    //   };
+    //   option && Chart1.setOption(option);
+    // },
   },
 };
 </script>
@@ -141,12 +230,12 @@ export default {
         left: 83%;
         height: 36px;
         width: 100px;
-        .el-dropdown-link{
+        .el-dropdown-link {
           height: 40px;
           font-size: 12pt;
           line-height: 40px;
           text-align: center;
-          color:white;
+          color: white;
         }
       }
     }
