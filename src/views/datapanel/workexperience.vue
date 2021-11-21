@@ -55,12 +55,12 @@ export default {
 
   data() {
     return {
-      ct: 1,
+      ct: 2,
       chartdata1:[],
     };
   },
   mounted:function(){
-    this.chart1();
+    // this.chart1();
     this.showct1().self;
   },
   methods: {
@@ -73,11 +73,7 @@ export default {
         let data=res.data.value;
         this.chartdata1=data;
       });
-      return self.chartdata1;
-    },
-    chart1() {
-      // 基于准备好的dom，初始化echarts实例
-      let chart1 = echarts.init(document.getElementById("chart1"));
+       let chart1 = echarts.init(document.getElementById("chart1"));
       // 绘制图表
       chart1.setOption({
         color: ["#61a0a8"],
@@ -114,7 +110,7 @@ export default {
         series: [
           {
             barWidth: "60%",
-            data: [120, 50, 150, 80, 70, 110],
+            data:this.chartdata1,
             type: "bar",
             showBackground: true,
             backgroundStyle: {
@@ -134,6 +130,65 @@ export default {
         ],
       });
     },
+    // chart1() {
+    //   // 基于准备好的dom，初始化echarts实例
+    //   let chart1 = echarts.init(document.getElementById("chart1"));
+    //   // 绘制图表
+    //   chart1.setOption({
+    //     color: ["#61a0a8"],
+    //     xAxis: {
+    //       type: "category",
+    //       data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    //       axisLine: {
+    //         //这是x轴文字颜色
+    //         lineStyle: {
+    //           color: " #999999",
+    //         },
+    //       },
+    //     },
+    //     yAxis: {
+    //       type: "value",
+    //       boundaryGap: ["0", "0.1"],
+    //       axisLine: {
+    //         //这是x轴文字颜色
+    //         lineStyle: {
+    //           color: " #999999",
+    //         },
+    //       },
+    //       //y轴刻度横线 ：false
+    //       splitLine: {
+    //         show: false,
+    //       },
+    //     },
+    //     grid: {
+    //       x: 40,
+    //       y: 20,
+    //       x2: 80,
+    //       y2: 40,
+    //     },
+    //     series: [
+    //       {
+    //         barWidth: "60%",
+    //         data: [120, 50, 150, 80, 70, 110],
+    //         type: "bar",
+    //         showBackground: true,
+    //         backgroundStyle: {
+    //           color: "rgba(180, 180, 180, 0.1)",
+    //         },
+    //         itemStyle: {
+    //           normal: {
+    //             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+    //               // { offset: 0.4, color: "#1BFEFE" },
+    //               // { offset: 1, color: "#1BFEFE" },
+    //               { offset: 0.2, color: "#44C0C1" }, //柱图渐变色
+    //               { offset: 1, color: "#1BFEFE" },
+    //             ]),
+    //           },
+    //         },
+    //       },
+    //     ],
+    //   });
+    // },
     // chart1() {
     //   console.log(this.dataChart1.data);
     //   // 基于准备好的dom，初始化echarts实例
@@ -189,6 +244,11 @@ export default {
     //   option && Chart1.setOption(option);
     // },
   },
+  // watch: {
+  //   xData() {
+  //     this.echartsInit();
+  //   },
+  // },
 };
 </script>
 
