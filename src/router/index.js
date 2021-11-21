@@ -42,22 +42,22 @@ const routes = [
   {
     path: "/jobdetails",
     name: "jobdetails",
-    component: () => import("@/views/jobdetails"),
+    component: () => import("@/views/datapanel/jobdetails"),
   },
   {
     path: "/salary",
     name: "salary",
-    component: () => import("@/views/salarystatistics"),
+    component: () => import("@/views/datapanel/salarystatistics"),
   },
   {
     path: "/education",
     name: "education",
-    component: () => import("@/views/educationstatistics"),
+    component: () => import("@/views/datapanel/educationstatistics"),
   },
   {
     path: "/experience",
     name: "experience",
-    component: () => import("@/views/workexperience"),
+    component: () => import("@/views/datapanel/workexperience"),
   },
   {
     path: "/aggregation",
