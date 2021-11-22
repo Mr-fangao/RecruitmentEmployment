@@ -14,11 +14,15 @@
               <template #dropdown>
                 <el-dropdown-menu>
                   <el-dropdown-item
-                    @click="(ct = 1), showct1()"
-                    :class="{ active: ct == 1 }"
+                    @click="(ct1 = 1), showct1(ct1)"
+                    :class="{ active: ct1 == 1 }"
+                    :popper-append-to-body="false"
                     >北京</el-dropdown-item
                   >
-                  <el-dropdown-item>{{chartdata1}}</el-dropdown-item>
+                  <el-dropdown-item
+                   @click="(ct1 = 2), showct1(ct1)"
+                    :class="{ active: ct1 == 2 }"
+                  >上海</el-dropdown-item>
                   <el-dropdown-item>广州</el-dropdown-item>
                   <el-dropdown-item>深圳</el-dropdown-item>
                 </el-dropdown-menu>
@@ -55,31 +59,28 @@ export default {
 
   data() {
     return {
-      ct: 2,
+      ct1: 1,
       chartdata1:[],
     };
   },
   mounted:function(){
-    // this.chart1();
     this.showct1().self;
   },
   methods: {
-    // consoleWrite(chartdata1){
-    //   console.log(chartdata1);
-    // },
-    async showct1(ct) {
-      request.post("/api/data/querySalary",ct).then((res) => {
+    async showct1(ct1) {
+      request.post("/api/data/querySalary",ct1).then((res) => {
         // console.log(res.data.value);
-        let data=res.data.value;
-        this.chartdata1=data;
+        let dataY=res.data.value;
+        let dataX=res.data.name;
+        this.chartdata1.Y=dataY;
+        this.chartdata1.X=dataX;
       });
        let chart1 = echarts.init(document.getElementById("chart1"));
       // 绘制图表
       chart1.setOption({
-        color: ["#61a0a8"],
         xAxis: {
           type: "category",
-          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+          data: this.chartdata1.X,
           axisLine: {
             //这是x轴文字颜色
             lineStyle: {
@@ -110,7 +111,7 @@ export default {
         series: [
           {
             barWidth: "60%",
-            data:this.chartdata1,
+            data:this.chartdata1.Y,
             type: "bar",
             showBackground: true,
             backgroundStyle: {
@@ -119,8 +120,6 @@ export default {
             itemStyle: {
               normal: {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                  // { offset: 0.4, color: "#1BFEFE" },
-                  // { offset: 1, color: "#1BFEFE" },
                   { offset: 0.2, color: "#44C0C1" }, //柱图渐变色
                   { offset: 1, color: "#1BFEFE" },
                 ]),
@@ -245,7 +244,7 @@ export default {
     // },
   },
   // watch: {
-  //   xData() {
+  //   chartdata1() {
   //     this.echartsInit();
   //   },
   // },
@@ -285,12 +284,16 @@ export default {
         left: 83%;
         height: 36px;
         width: 100px;
+        background-color: rgb(39, 126, 202);
         .el-dropdown-link {
           height: 40px;
           font-size: 12pt;
           line-height: 40px;
           text-align: center;
           color: white;
+          .el-dropdown-item{
+            background-color: aqua;
+          }
         }
       }
     }
