@@ -68,8 +68,11 @@ export default {
   },
   methods: {
     async showct1(ct1) {
-      request.post("/api/data/querySalary",ct1).then((res) => {
-        // console.log(res.data.value);
+      var sendData=ct1;
+      var code=JSON.stringify(sendData);
+      console.log(code);
+      request.post("/api/data/querySalary",{code}).then((res) => {
+        console.log(res.data.value);
         let dataY=res.data.value;
         let dataX=res.data.name;
         this.chartdata1.Y=dataY;
