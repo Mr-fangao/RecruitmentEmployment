@@ -12,6 +12,17 @@ module.exports = {
         }
       }
     }
-  }
-// lintOnSave:false
+  },
+  //解决Can‘t import the named export ‘ArrowDown‘ from non EcmaScript module 等报错信息
+  configureWebpack:{
+    module: {
+        rules: [
+            {
+                test: /\.mjs$/,
+                include: /node_modules/,
+                type: "javascript/auto"
+            },
+        ]
+    }
+}
 }
