@@ -27,27 +27,30 @@
         </el-table-column>
         <el-table-column prop="address" label="地址"> </el-table-column>
       </el-table>
-
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="currentPage1"
-        :page-size="pagesize"
-        layout="total ,prev, pager, next, jumper"
-        :total="tableData.length"
-      >
-      </el-pagination>
+      <div style="margin: 10px 0">
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="currentPage"
+          :page-size="pageSize"
+          layout="total ,prev, pager, next, jumper"
+          :total="total"
+        >
+        </el-pagination>
+      </div>
     </el-card>
   </div>
 </template>
 
 <script>
+import request from "../../utils/request";
 export default {
   name: "TableC",
   data() {
     return {
-      pagesize: 11,
-      currentPage1: 1,
+      total: 0,
+      currentPage: 1,
+      pageSize: 10,
       search: "",
       tableData: [
         {
@@ -109,31 +112,46 @@ export default {
       ],
     };
   },
+  created() {
+    this.load();
+  },
   methods: {
     getRowClass({ row, column, rowIndex, columnIndex }) {
       return "background:#3f5c6d2c;color:#FFF;";
     },
-    handleSizeChange1: function (pagesize) {
-      // 每页条数切换
-      this.pagesize = pagesize;
-      this.handleCurrentChange(this.currentPage1);
+    load() {
+      request
+        .get("/api/data/queryForm", {
+          pageNum: this.currentPage,
+          pageSize: this.pageSize,
+          search: this.search,
+        })
+        .then((res) => {
+          console.log(res);
+          this.tableData = res.data.records;
+        });
     },
-    handleCurrentChange: function (currentPage) {
-      //页码切换
-      this.currentPage1 = currentPage;
-      this.currentChangePage(this.tableData, currentPage);
-    },
-    //分页方法（重点）
-    currentChangePage(list, currentPage) {
-      let from = (currentPage - 1) * this.pagesize;
-      let to = currentPage * this.pagesize;
-      this.tableData = [];
-      for (; from < to; from++) {
-        if (list[from]) {
-          this.tableData.push(list[from]);
-        }
-      }
-    },
+    // handleSizeChange1: function (pagesize) {
+    //   // 每页条数切换
+    //   this.pagesize = pagesize;
+    //   this.handleCurrentChange(this.currentPage1);
+    // },
+    // handleCurrentChange: function (currentPage) {
+    //   //页码切换
+    //   this.currentPage1 = currentPage;
+    //   this.currentChangePage(this.tableData, currentPage);
+    // },
+    // //分页方法（重点）
+    // currentChangePage(list, currentPage) {
+    //   let from = (currentPage - 1) * this.pagesize;
+    //   let to = currentPage * this.pagesize;
+    //   this.tableData = [];
+    //   for (; from < to; from++) {
+    //     if (list[from]) {
+    //       this.tableData.push(list[from]);
+    //     }
+    //   }
+    // },
   },
 };
 </script>
@@ -168,6 +186,7 @@ export default {
 :deep(.el-pagination .el-pager li) {
   background-color: #00a2ff2c;
   color: #fff;
+  margin: 0 2px;
 }
 :deep(.el-pagination .btn-prev) {
   background-color: #00a2ff2c;
