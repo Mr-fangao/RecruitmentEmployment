@@ -7,9 +7,7 @@
             <el-dropdown>
               <span class="el-dropdown-link">
                 选择城市
-                <el-icon class="el-icon--right">
-                  <arrow-down />
-                </el-icon>
+                <i class="fa fa-angle-down"></i>
               </span>
               <template #dropdown>
                 <el-dropdown-menu>
@@ -42,7 +40,8 @@
 </template>
 
 <script>
-import axios from "axios";
+//import axios from "axios";
+import "font-awesome/css/font-awesome.css"
 import request from "../../utils/request";
 let echarts = require("echarts/lib/echarts");
 require("echarts/lib/chart/bar");

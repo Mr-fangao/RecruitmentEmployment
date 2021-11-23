@@ -13,6 +13,7 @@ module.exports = {
       }
     }
   },
+  //引用element plus报错
   //解决Can‘t import the named export ‘ArrowDown‘ from non EcmaScript module 等报错信息
   configureWebpack:{
     module: {
