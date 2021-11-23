@@ -61,10 +61,9 @@ export default {
       chartdata1: [],
     };
   },
-  created() {
-  },
+  created() {},
   mounted() {
-     this.fetchData(1);
+    this.fetchData(1);
   },
   methods: {
     fetchData(ct1) {
@@ -193,8 +192,7 @@ export default {
     //   option && Chart1.setOption(option);
     // },
   },
-  watch: {
-  },
+  watch: {},
 };
 </script>
 
@@ -208,13 +206,6 @@ export default {
     "pt1 pt3  "
     "pt2 pt4  ";
   background-color: transparent;
-  // .title{
-
-  // }
-
-  .chart {
-    height: 350px;
-  }
   div {
     text-align: center;
     font-size: 30px;
@@ -222,26 +213,36 @@ export default {
   }
   .item1 {
     grid-area: pt1;
-    .title {
-      // float: top;
-      height: 70px;
-      .select {
-        position: relative;
-        top: 50%;
-        left: 83%;
-        height: 36px;
-        width: 100px;
-        background-color: rgb(39, 126, 202);
-        .el-dropdown-link {
-          height: 40px;
-          font-size: 12pt;
-          line-height: 40px;
-          text-align: center;
-          color: white;
-          .el-dropdown-item {
-            background-color: aqua;
+    .content {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+      .title {
+        height: 60px;
+        display: flex;
+      flex-direction: row;
+        .select {
+          position: relative;
+          top: 50%;
+          left: 83%;
+          // height: 36px;
+          width: 100px;
+          background-color: rgb(39, 126, 202);
+          .el-dropdown-link {
+            height: 40px;
+            font-size: 12pt;
+            line-height: 40px;
+            text-align: center;
+            color: white;
+            .el-dropdown-item {
+              background-color: aqua;
+            }
           }
         }
+      }
+      .chart {
+        height: calc(100% - 60px);
       }
     }
   }
