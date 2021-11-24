@@ -3,6 +3,7 @@
     <div class="item item1">
       <div class="content">
         <div class="title">
+          <div class="title_back"><p>1111</p></div>
           <div class="select">
             <el-dropdown>
               <span class="el-dropdown-link">
@@ -208,6 +209,10 @@ export default {
     "pt1 pt3 pt5 "
     "pt2 pt4 pt6 ";
   background-color: transparent;
+  .p {
+    left: 10%;
+    text-align: left;
+  }
   div {
     // text-align: center;
     // font-size: 30px;
@@ -237,7 +242,7 @@ export default {
         .select {
           position: relative;
           top: 50%;
-          left: 83%;
+          left: 6%;
           // height: 36px;
           width: 100px;
           background-color: rgb(39, 126, 202);
