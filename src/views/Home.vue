@@ -37,7 +37,7 @@
             <el-checkbox class="check">记住登录密码</el-checkbox>
           </el-form-item>
           <el-form-item>
-            <el-button class="button" type="primary" round @click="handleLogin"
+            <el-button id="btn" class="button" type="primary" round @click="handleLogin"
               >立即登录</el-button
             >
           </el-form-item>
@@ -67,7 +67,7 @@ export default {
     keyDown(e) {
       //如果是回车则执行登录方法
       if (e.keyCode == 13) {
-        this.handleLogin();
+        document.getElementById("btn").click();
       }
     },
     async handleLogin() {

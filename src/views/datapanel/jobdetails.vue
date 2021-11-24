@@ -5,11 +5,10 @@
         v-model="search"
         size="mini"
         placeholder="输入关键字搜索"
-        prefix-icon="el-icon-search"
       />
       <el-table
         border
-        style="width: 100%"
+        style="width: 100%; align: center"
         :row-style="getRowClass"
         :header-row-style="getRowClass"
         :header-cell-style="getRowClass"
@@ -21,11 +20,29 @@
           ))
         "
       >
-        <el-table-column prop="date" label="日期" width="180">
+        <el-table-column prop="time" label="发布日期" width="120">
         </el-table-column>
-        <el-table-column prop="name" label="姓名" width="180">
+        <el-table-column prop="company" label="公司名称">
+        </el-table-column
+        ><el-table-column prop="position" label="岗位名称" width="150">
+        </el-table-column
+        ><el-table-column prop="region" label="工作地区" width="120">
+        </el-table-column
+        ><el-table-column prop="salary" label="薪资范围" width="120">
+        </el-table-column
+        ><el-table-column prop="require" label="学历要求" width="120">
+        </el-table-column
+        ><el-table-column prop="experience" label="工作经验" width="120">
+        </el-table-column
+        ><el-table-column prop="type" label="公司类型" width="120">
+        </el-table-column
+        ><el-table-column prop="type" label="公司规模" width="120">
         </el-table-column>
-        <el-table-column prop="address" label="地址"> </el-table-column>
+        <el-table-column prop="xxxx" label="详细信息" width="180"
+          ><el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
+            >详情</el-button
+          >
+        </el-table-column>
       </el-table>
       <div style="margin: 10px 0">
         <el-pagination
@@ -53,62 +70,17 @@ export default {
       pageSize: 10,
       search: "",
       tableData: [
-        {
-          date: "测试",
-          name: "测试1",
-          address: "测试",
-        },
-        {
-          date: "测试",
-          name: "测试",
-          address: "测试",
-        },
-        {
-          date: "测试",
-          name: "测试",
-          address: "测试",
-        },
-
-        {
-          date: "测试",
-          name: "测试",
-          address: "测试",
-        },
-        {
-          date: "测试",
-          name: "测试",
-          address: "测试",
-        },
-        {
-          date: "测试",
-          name: "测试",
-          address: "测试",
-        },
-        {
-          date: "测试",
-          name: "测试",
-          address: "测试",
-        },
-        {
-          date: "测试",
-          name: "测试",
-          address: "测试",
-        },
-        {
-          date: "测试",
-          name: "测试",
-          address: "测试",
-        },
-        {
-          date: "测试",
-          name: "测试2",
-          address: "测试",
-        },
-        {
-          date: "测试",
-          name: "测试3",
-          address: "测试",
-        },
+        // {
+        //   // fbrq: "1991-10-05",
+        //   // gsmc: "滁州科技公司",
+        //   // gwmc: "GIS开发工程师",
+        //   // gzdq: "滁州学院",
+        //   // xzfw: "0.7-1万/月",
+        //   // xlyq: "本科",
+        //   // gzjy: "1年",
+        //   // gslx: "民营公司",
+        //   // gsgm: "5",
+        // },
       ],
     };
   },
@@ -121,7 +93,7 @@ export default {
     },
     load() {
       request
-        .get("/api/data/queryForm", {
+        .post("/api/data/queryForm", {
           pageNum: this.currentPage,
           pageSize: this.pageSize,
           search: this.search,
@@ -168,6 +140,9 @@ export default {
 .el-table,
 .el-table__expanded-cell {
   background-color: #3f5c6d2c;
+}
+:deep(.el-table .cell) {
+  text-align: center;
 }
 .el-input {
   width: 300px;
