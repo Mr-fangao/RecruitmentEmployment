@@ -33,7 +33,10 @@
       </div>
       <div class="tab-content5">
         <el-dropdown>
-          <span class="el-dropdown-link"> 数据面板 </span>
+          <span class="el-dropdown-link">
+            数据面板
+            <i class="fa fa-angle-down"></i>
+          </span>
           <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item
@@ -64,9 +67,7 @@
         <el-dropdown>
           <span class="el-dropdown-link">
             专题地图
-            <!-- <el-icon class="el-icon--right">
-              <arrow-down />
-            </el-icon> -->
+            <i class="fa fa-angle-down"></i>
           </span>
           <template #dropdown>
             <el-dropdown-menu>
@@ -93,8 +94,8 @@
               <el-dropdown-item
                 @click="(cur = 13), gotothermodynamic()"
                 :class="{ active: cur == 13 }"
-                >热力图</el-dropdown-item
-              >
+                >热力图
+              </el-dropdown-item>
               <el-dropdown-item
                 @click="(cur = 14), gotofactorstatistics()"
                 :class="{ active: cur == 14 }"
@@ -175,9 +176,9 @@ export default {
   line-height: 50px;
   font-weight: bold;
   img {
-      height: 20px;
-      // filter: drop-shadow(-1px 0 0 #ffffff);
-    }
+    height: 20px;
+    // filter: drop-shadow(-1px 0 0 #ffffff);
+  }
   .tab-mid {
     cursor: pointer;
     flex: 6;

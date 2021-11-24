@@ -7,22 +7,20 @@
             <el-dropdown>
               <span class="el-dropdown-link">
                 选择城市
-                <el-icon class="el-icon--right">
-                  <arrow-down />
-                </el-icon>
+                <i class="fa fa-angle-down"></i>
               </span>
               <template #dropdown>
                 <el-dropdown-menu>
                   <el-dropdown-item
-                    @click="(ct1 = 1), showct1(ct1)"
+                    @click="(ct1 = 1), fetchData(ct1)"
                     :class="{ active: ct1 == 1 }"
-                    :popper-append-to-body="false"
                     >北京</el-dropdown-item
                   >
                   <el-dropdown-item
-                   @click="(ct1 = 2), showct1(ct1)"
+                    @click="(ct1 = 2), fetchData(ct1)"
                     :class="{ active: ct1 == 2 }"
-                  >上海</el-dropdown-item>
+                    >上海</el-dropdown-item
+                  >
                   <el-dropdown-item>广州</el-dropdown-item>
                   <el-dropdown-item>深圳</el-dropdown-item>
                 </el-dropdown-menu>
@@ -31,8 +29,7 @@
           </div>
         </div>
         <div class="chart">
-          <!-- <h1>{{chartdata1}}</h1> -->
-          <div id="chart1" :style="{ width: '100%', height: '100%' }" ></div>
+          <div id="chart1" :style="{ width: '100%', height: '100%' }"></div>
         </div>
       </div>
     </div>
@@ -43,7 +40,8 @@
 </template>
 
 <script>
-import axios from 'axios';
+//import axios from "axios";
+import "font-awesome/css/font-awesome.css"
 import request from "../../utils/request";
 let echarts = require("echarts/lib/echarts");
 require("echarts/lib/chart/bar");
@@ -56,36 +54,40 @@ require("echarts/lib/component/title");
 require("echarts/lib/component/legend");
 export default {
   name: "experience",
-
   data() {
     return {
       ct1: 1,
-      chartdata1:[],
+      chartdata1: [],
     };
   },
-  mounted:function(){
-    this.showct1().self;
+  created() {},
+  mounted() {
+    this.fetchData(1);
   },
   methods: {
-    async showct1(ct1) {
-      var sendData=ct1;
-      var code=JSON.stringify(sendData);
+    fetchData(ct1) {
+      var sendData = ct1;
+      var code = JSON.stringify(sendData);
       console.log(code);
-      request.post("/api/data/querySalary",{code}).then((res) => {
-        console.log(res.data.value);
-        let dataY=res.data.value;
-        let dataX=res.data.name;
-        this.chartdata1.Y=dataY;
-        this.chartdata1.X=dataX;
+      request.post("/api/data/querySalary", { code }).then((res) => {
+        this.chartdata1.ydata = res.data.value;
+        this.chartdata1.xdata = res.data.name;
+        console.log(this.chartdata1);
+        //解决 echarts动态渲染数据图形不生效问题:获取数据但不渲染，执行下一个循环才将数据渲染进echarts
+        this.$nextTick(() => {
+          this.showct1();
+        });
       });
-       let chart1 = echarts.init(document.getElementById("chart1"));
+    },
+    showct1() {
       // 绘制图表
+      var chart1 = echarts.init(document.getElementById("chart1"));
       chart1.setOption({
         xAxis: {
           type: "category",
-          data: this.chartdata1.X,
+          data: this.chartdata1.xdata,
           axisLine: {
-            //这是x轴文字颜色
+            //x轴文字颜色
             lineStyle: {
               color: " #999999",
             },
@@ -93,14 +95,15 @@ export default {
         },
         yAxis: {
           type: "value",
+          //坐标轴范围
           boundaryGap: ["0", "0.1"],
           axisLine: {
-            //这是x轴文字颜色
+            //轴文字颜色
             lineStyle: {
               color: " #999999",
             },
           },
-          //y轴刻度横线 ：false
+          //y轴刻度横线
           splitLine: {
             show: false,
           },
@@ -114,16 +117,16 @@ export default {
         series: [
           {
             barWidth: "60%",
-            data:this.chartdata1.Y,
             type: "bar",
             showBackground: true,
+            data: this.chartdata1.ydata,
             backgroundStyle: {
               color: "rgba(180, 180, 180, 0.1)",
             },
             itemStyle: {
               normal: {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                  { offset: 0.2, color: "#44C0C1" }, //柱图渐变色
+                  { offset: 0.2, color: "#44C0C1" },
                   { offset: 1, color: "#1BFEFE" },
                 ]),
               },
@@ -132,65 +135,7 @@ export default {
         ],
       });
     },
-    // chart1() {
-    //   // 基于准备好的dom，初始化echarts实例
-    //   let chart1 = echarts.init(document.getElementById("chart1"));
-    //   // 绘制图表
-    //   chart1.setOption({
-    //     color: ["#61a0a8"],
-    //     xAxis: {
-    //       type: "category",
-    //       data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-    //       axisLine: {
-    //         //这是x轴文字颜色
-    //         lineStyle: {
-    //           color: " #999999",
-    //         },
-    //       },
-    //     },
-    //     yAxis: {
-    //       type: "value",
-    //       boundaryGap: ["0", "0.1"],
-    //       axisLine: {
-    //         //这是x轴文字颜色
-    //         lineStyle: {
-    //           color: " #999999",
-    //         },
-    //       },
-    //       //y轴刻度横线 ：false
-    //       splitLine: {
-    //         show: false,
-    //       },
-    //     },
-    //     grid: {
-    //       x: 40,
-    //       y: 20,
-    //       x2: 80,
-    //       y2: 40,
-    //     },
-    //     series: [
-    //       {
-    //         barWidth: "60%",
-    //         data: [120, 50, 150, 80, 70, 110],
-    //         type: "bar",
-    //         showBackground: true,
-    //         backgroundStyle: {
-    //           color: "rgba(180, 180, 180, 0.1)",
-    //         },
-    //         itemStyle: {
-    //           normal: {
-    //             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-    //               // { offset: 0.4, color: "#1BFEFE" },
-    //               // { offset: 1, color: "#1BFEFE" },
-    //               { offset: 0.2, color: "#44C0C1" }, //柱图渐变色
-    //               { offset: 1, color: "#1BFEFE" },
-    //             ]),
-    //           },
-    //         },
-    //       },
-    //     ],
-    //   });
-    // },
+
     // chart1() {
     //   console.log(this.dataChart1.data);
     //   // 基于准备好的dom，初始化echarts实例
@@ -246,11 +191,7 @@ export default {
     //   option && Chart1.setOption(option);
     // },
   },
-  // watch: {
-  //   chartdata1() {
-  //     this.echartsInit();
-  //   },
-  // },
+  watch: {},
 };
 </script>
 
@@ -264,13 +205,6 @@ export default {
     "pt1 pt3  "
     "pt2 pt4  ";
   background-color: transparent;
-  // .title{
-
-  // }
-
-  .chart {
-    height: 350px;
-  }
   div {
     text-align: center;
     font-size: 30px;
@@ -278,26 +212,36 @@ export default {
   }
   .item1 {
     grid-area: pt1;
-    .title {
-      // float: top;
-      height: 70px;
-      .select {
-        position: relative;
-        top: 50%;
-        left: 83%;
-        height: 36px;
-        width: 100px;
-        background-color: rgb(39, 126, 202);
-        .el-dropdown-link {
-          height: 40px;
-          font-size: 12pt;
-          line-height: 40px;
-          text-align: center;
-          color: white;
-          .el-dropdown-item{
-            background-color: aqua;
+    .content {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+      .title {
+        height: 60px;
+        display: flex;
+      flex-direction: row;
+        .select {
+          position: relative;
+          top: 50%;
+          left: 83%;
+          // height: 36px;
+          width: 100px;
+          background-color: rgb(39, 126, 202);
+          .el-dropdown-link {
+            height: 40px;
+            font-size: 12pt;
+            line-height: 40px;
+            text-align: center;
+            color: white;
+            .el-dropdown-item {
+              background-color: aqua;
+            }
           }
         }
+      }
+      .chart {
+        height: calc(100% - 60px);
       }
     }
   }
