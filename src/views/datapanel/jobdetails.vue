@@ -1,11 +1,7 @@
 <template>
   <div class="table">
     <el-card shadow="hover" class="tebale_card"
-      ><el-input
-        v-model="search"
-        size="mini"
-        placeholder="输入关键字搜索"
-      />
+      ><el-input v-model="search" size="mini" placeholder="输入关键字搜索" />
       <el-table
         border
         style="width: 100%; align: center"
@@ -16,14 +12,14 @@
           (tableData,
           tableData.filter(
             (data) =>
-              !search || data.name.toLowerCase().includes(search.toLowerCase())
+              !search ||
+              data.company.toLowerCase().includes(search.toLowerCase())
           ))
         "
       >
         <el-table-column prop="time" label="发布日期" width="120">
         </el-table-column>
-        <el-table-column prop="company" label="公司名称">
-        </el-table-column
+        <el-table-column prop="company" label="公司名称"> </el-table-column
         ><el-table-column prop="position" label="岗位名称" width="150">
         </el-table-column
         ><el-table-column prop="region" label="工作地区" width="120">
@@ -49,7 +45,7 @@
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :current-page="currentPage"
-          :page-size="pageSize"
+          :page-size="10"
           layout="total ,prev, pager, next, jumper"
           :total="total"
         >
@@ -67,19 +63,23 @@ export default {
     return {
       total: 0,
       currentPage: 1,
-      pageSize: 10,
       search: "",
       tableData: [
         // {
-        //   // fbrq: "1991-10-05",
-        //   // gsmc: "滁州科技公司",
-        //   // gwmc: "GIS开发工程师",
-        //   // gzdq: "滁州学院",
-        //   // xzfw: "0.7-1万/月",
-        //   // xlyq: "本科",
-        //   // gzjy: "1年",
-        //   // gslx: "民营公司",
-        //   // gsgm: "5",
+        //   company: "网易",
+        //   position: "B2B大客户销售经理",
+        //   region: "北京-海淀区",
+        //   salary: "1.5-3万/月",
+        //   type: "上市公司",
+        //   time: "2021-10-15",
+        // },
+        // {
+        //   company: "辉瑞制药有限公司",
+        //   position: "医学事务解决方案副经理- RWE & NIS(J22363)",
+        //   region: "北京-东城区",
+        //   salary: "2.5-3.5万/月",
+        //   type: "外资（欧美）",
+        //   time: "2021-10-15",
         // },
       ],
     };
@@ -95,12 +95,14 @@ export default {
       request
         .post("/api/data/queryForm", {
           pageNum: this.currentPage,
-          pageSize: this.pageSize,
-          search: this.search,
+
+          // pageSize: this.pageSize,
+          // search: this.search,
         })
         .then((res) => {
           console.log(res);
           this.tableData = res.data.records;
+          this.total = res.data.total;
         });
     },
     // handleSizeChange1: function (pagesize) {
