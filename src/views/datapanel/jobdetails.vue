@@ -5,36 +5,52 @@
         v-model="search"
         size="mini"
         placeholder="输入关键字搜索"
-        prefix-icon="el-icon-search"
+        @input="Search"
       />
       <el-table
         border
-        style="width: 100%"
+        style="width: 100%; align: center"
         :row-style="getRowClass"
         :header-row-style="getRowClass"
         :header-cell-style="getRowClass"
-        :data="
-          (tableData,
+        :data="tableData"
+        ><!-- (tableData,
           tableData.filter(
             (data) =>
-              !search || data.name.toLowerCase().includes(search.toLowerCase())
-          ))
-        "
-      >
-        <el-table-column prop="date" label="日期" width="180">
+              !search ||
+              data.company.toLowerCase().includes(search.toLowerCase())
+          )) -->
+        <el-table-column prop="time" label="发布日期" width="120">
         </el-table-column>
-        <el-table-column prop="name" label="姓名" width="180">
+        <el-table-column prop="company" label="公司名称"> </el-table-column
+        ><el-table-column prop="position" label="岗位名称" width="150">
+        </el-table-column
+        ><el-table-column prop="region" label="工作地区" width="120">
+        </el-table-column
+        ><el-table-column prop="salary" label="薪资范围" width="120">
+        </el-table-column
+        ><el-table-column prop="require" label="学历要求" width="120">
+        </el-table-column
+        ><el-table-column prop="experience" label="工作经验" width="120">
+        </el-table-column
+        ><el-table-column prop="type" label="公司类型" width="120">
+        </el-table-column
+        ><el-table-column prop="type" label="公司规模" width="120">
         </el-table-column>
-        <el-table-column prop="address" label="地址"> </el-table-column>
+        <el-table-column prop="xxxx" label="详细信息" width="180"
+          ><el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
+            >详情</el-button
+          >
+        </el-table-column>
       </el-table>
       <div style="margin: 10px 0">
         <el-pagination
-          @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :current-page="currentPage"
-          :page-size="pageSize"
+          :page-size="8"
           layout="total ,prev, pager, next, jumper"
           :total="total"
+          @click="Click"
         >
         </el-pagination>
       </div>
@@ -50,65 +66,24 @@ export default {
     return {
       total: 0,
       currentPage: 1,
-      pageSize: 10,
       search: "",
       tableData: [
-        {
-          date: "测试",
-          name: "测试1",
-          address: "测试",
-        },
-        {
-          date: "测试",
-          name: "测试",
-          address: "测试",
-        },
-        {
-          date: "测试",
-          name: "测试",
-          address: "测试",
-        },
-
-        {
-          date: "测试",
-          name: "测试",
-          address: "测试",
-        },
-        {
-          date: "测试",
-          name: "测试",
-          address: "测试",
-        },
-        {
-          date: "测试",
-          name: "测试",
-          address: "测试",
-        },
-        {
-          date: "测试",
-          name: "测试",
-          address: "测试",
-        },
-        {
-          date: "测试",
-          name: "测试",
-          address: "测试",
-        },
-        {
-          date: "测试",
-          name: "测试",
-          address: "测试",
-        },
-        {
-          date: "测试",
-          name: "测试2",
-          address: "测试",
-        },
-        {
-          date: "测试",
-          name: "测试3",
-          address: "测试",
-        },
+        // {
+        //   company: "网易",
+        //   position: "B2B大客户销售经理",
+        //   region: "北京-海淀区",
+        //   salary: "1.5-3万/月",
+        //   type: "上市公司",
+        //   time: "2021-10-15",
+        // },
+        // {
+        //   company: "辉瑞制药有限公司",
+        //   position: "医学事务解决方案副经理- RWE & NIS(J22363)",
+        //   region: "北京-东城区",
+        //   salary: "2.5-3.5万/月",
+        //   type: "外资（欧美）",
+        //   time: "2021-10-15",
+        // },
       ],
     };
   },
@@ -121,37 +96,60 @@ export default {
     },
     load() {
       request
-        .get("/api/data/queryForm", {
+        .post("/api/data/queryForm", {
           pageNum: this.currentPage,
-          pageSize: this.pageSize,
-          search: this.search,
+          // pageSize: this.pageSize,
+          // search: this.search,
         })
         .then((res) => {
           console.log(res);
           this.tableData = res.data.records;
+          this.total = res.data.total;
         });
     },
-    // handleSizeChange1: function (pagesize) {
-    //   // 每页条数切换
-    //   this.pagesize = pagesize;
-    //   this.handleCurrentChange(this.currentPage1);
-    // },
-    // handleCurrentChange: function (currentPage) {
-    //   //页码切换
-    //   this.currentPage1 = currentPage;
-    //   this.currentChangePage(this.tableData, currentPage);
-    // },
-    // //分页方法（重点）
-    // currentChangePage(list, currentPage) {
-    //   let from = (currentPage - 1) * this.pagesize;
-    //   let to = currentPage * this.pagesize;
-    //   this.tableData = [];
-    //   for (; from < to; from++) {
-    //     if (list[from]) {
-    //       this.tableData.push(list[from]);
-    //     }
-    //   }
-    // },
+    Click(val) {
+      (this.currentPage = val),
+        request
+          .post("/api/data/queryForm", {
+            pageNum: this.currentPage,
+            // pageSize: this.pageSize,
+            // search: this.search,
+          })
+          .then((res) => {
+            console.log(res);
+            this.tableData = res.data.records;
+            this.total = res.data.total;
+          });
+    },
+    Search() {
+      request
+        .post("/api/data/queryAny", {
+          search: this.search,
+          pageNum: this.currentPage,
+        })
+        .then((res) => {
+          console.log(res);
+          this.tableData = res.data.records;
+          this.total = res.data.total;
+        });
+    },
+    handleCurrentChange(val) {
+      //页码切换
+      console.log("当前页:${val}");
+      this.currentPage = val;
+      // this.currentChangePage(this.tableData, currentPage);
+    },
+    //分页方法（重点）
+    currentChangePage(list, currentPage) {
+      let from = (currentPage - 1) * this.pageSize;
+      let to = currentPage * this.pageSize;
+      this.tableData = [];
+      for (; from < to; from++) {
+        if (list[from]) {
+          this.tableData.push(list[from]);
+        }
+      }
+    },
   },
 };
 </script>
@@ -168,6 +166,9 @@ export default {
 .el-table,
 .el-table__expanded-cell {
   background-color: #3f5c6d2c;
+}
+:deep(.el-table .cell) {
+  text-align: center;
 }
 .el-input {
   width: 300px;

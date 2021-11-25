@@ -1,8 +1,11 @@
 <template>
   <div class="grid-container">
-    <div class="item1">
+    <div class="item item1">
       <div class="content">
         <div class="title">
+          <div class="title_back">
+            <div class="title_text">111</div>
+          </div>
           <div class="select">
             <el-dropdown>
               <span class="el-dropdown-link">
@@ -33,15 +36,17 @@
         </div>
       </div>
     </div>
-    <div class="item2">2</div>
-    <div class="item3">3</div>
-    <div class="item4">4</div>
+    <div class="item item2">2</div>
+    <div class="item item3">3</div>
+    <div class="item item4">4</div>
+    <div class="item item5">5</div>
+    <div class="item item6">6</div>
   </div>
 </template>
 
 <script>
 //import axios from "axios";
-import "font-awesome/css/font-awesome.css"
+import "font-awesome/css/font-awesome.css";
 import request from "../../utils/request";
 let echarts = require("echarts/lib/echarts");
 require("echarts/lib/chart/bar");
@@ -82,6 +87,7 @@ export default {
     showct1() {
       // 绘制图表
       var chart1 = echarts.init(document.getElementById("chart1"));
+      chart1.resize();
       chart1.setOption({
         xAxis: {
           type: "category",
@@ -199,19 +205,35 @@ export default {
 .grid-container {
   display: grid;
   height: calc(100% - 45px);
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: repeat(2, 1fr);
   grid-template-areas:
-    "pt1 pt3  "
-    "pt2 pt4  ";
+    "pt1 pt3 pt5 "
+    "pt2 pt4 pt6 ";
   background-color: transparent;
-  div {
+  .el-dropdown {
+    width: 70%;
+    height: 73%;
+    background: url(../../assets/img/pt/button.png) no-repeat;
+    background-size: 89% 69%;
+  }
+  // div {
+  //   // text-align: center;
+  //   // font-size: 30px;
+  //   // outline: 1px dashed rgb(136, 27, 27);
+  // }
+  .item {
+    background: url(../../assets/img/pt/ptbackground.png) no-repeat;
+    background-size: 100% 100%;
     text-align: center;
     font-size: 30px;
-    outline: 1px dashed rgb(136, 27, 27);
+    margin: 2% 2% 2% 2%;
+    //outline: 1px dashed rgb(136, 27, 27);
   }
   .item1 {
     grid-area: pt1;
+    margin-left: 10%;
+    margin-top: 3%;
     .content {
       display: flex;
       flex-direction: column;
@@ -220,18 +242,17 @@ export default {
       .title {
         height: 60px;
         display: flex;
-      flex-direction: row;
+        flex-direction: row;
         .select {
           position: relative;
           top: 50%;
-          left: 83%;
+          left: 6%;
           // height: 36px;
-          width: 100px;
-          background-color: rgb(39, 126, 202);
+          width: 30%;
           .el-dropdown-link {
             height: 40px;
-            font-size: 12pt;
-            line-height: 40px;
+            font-size: 10pt;
+            line-height: 32px;
             text-align: center;
             color: white;
             .el-dropdown-item {
@@ -247,12 +268,30 @@ export default {
   }
   .item2 {
     grid-area: pt2;
+    margin-bottom: 3%;
+    margin-left: 10%;
   }
   .item3 {
     grid-area: pt3;
+    margin-top: 3%;
+    margin-left: 5%;
+    margin-right: 5%;
   }
   .item4 {
     grid-area: pt4;
+    margin-bottom: 3%;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  .item5 {
+    grid-area: pt5;
+    margin-top: 3%;
+    margin-right: 10%;
+  }
+  .item6 {
+    grid-area: pt6;
+    margin-bottom: 3%;
+    margin-right: 10%;
   }
 }
 </style>

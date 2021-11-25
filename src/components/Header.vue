@@ -172,7 +172,7 @@ export default {
   width: 100%;
   display: flex;
   flex-direction: row;
-  color: rgb(0, 195, 255);
+  color: #00d2df;
   line-height: 50px;
   font-weight: bold;
   img {
@@ -187,6 +187,16 @@ export default {
     font-size: 18pt;
     font-weight: bold;
     color: rgb(245, 245, 245);
+    background: linear-gradient(
+      0deg,
+      #6a86ff 0%,
+      #6a86ff 0%,
+      #87fffb 0%,
+      #FFFF 0%,
+      #00bfff 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
   .tab-content1 {
     cursor: pointer;

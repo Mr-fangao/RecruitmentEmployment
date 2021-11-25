@@ -5,17 +5,43 @@ header {
   background-size: 90% 72%;
   background-position: 17% 84%;
 }
-.header-title{
+
+.header-title {
   color: aqua;
   position: absolute;
   line-height: 32px;
   font-size: 14px;
   left: 15%;
 }
+
+.title_back {
+  width: 60%;
+  height: 100%;
+  background: url(../img/pt/pt_title.png)no-repeat;
+  background-size: 25% 20%;
+  background-position-y: 60%;
+  margin-left: 6%;
+}
+
+.title_text {
+  margin: 6% 35% 0% 0%;
+  font-size: 21px;
+  font-family: Microsoft YaHei;
+  font-weight: bold;
+  font-style: italic;
+  color: #FFFFFF;
+  line-height: 40px;
+
+  background: linear-gradient(0deg, #6A86FF 0%, #6A86FF 0%, #87FFFB 0%, #59D6FF 0%, #FFFFFF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 h1 {
   font-size: 16px;
   color: white;
 }
+
 main {
   height: calc(100% - 30px);
 }
