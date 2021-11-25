@@ -1,7 +1,7 @@
 <template>
   <div class="table">
     <el-card shadow="hover" class="tebale_card"
-      ><el-input v-model="search" size="mini" placeholder="输入关键字搜索" />
+      ><el-input v-model="search" size="mini" placeholder="输入关键字搜索" @input="Search" />
       <el-table
         border
         style="width: 100%; align: center"
@@ -101,10 +101,11 @@ export default {
           this.total = res.data.total;
         });
     },
-    search() {
+    Search() {
       request
         .post("/api/data/queryAny", {
           search: this.search,
+          pageNum: this.currentPage,
         })
         .then((res) => {
           console.log(res);
@@ -116,7 +117,7 @@ export default {
       //页码切换
       console.log("当前页:${val}");
       this.currentPage = val;
-      this.currentChangePage(this.tableData, currentPage);
+      // this.currentChangePage(this.tableData, currentPage);
     },
     //分页方法（重点）
     currentChangePage(list, currentPage) {
