@@ -8,15 +8,13 @@
         :row-style="getRowClass"
         :header-row-style="getRowClass"
         :header-cell-style="getRowClass"
-        :data="
-          (tableData,
+        :data="tableData"
+        ><!-- (tableData,
           tableData.filter(
             (data) =>
               !search ||
               data.company.toLowerCase().includes(search.toLowerCase())
-          ))
-        "
-      >
+          )) -->
         <el-table-column prop="time" label="发布日期" width="120">
         </el-table-column>
         <el-table-column prop="company" label="公司名称"> </el-table-column
@@ -42,10 +40,9 @@
       </el-table>
       <div style="margin: 10px 0">
         <el-pagination
-          @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :current-page="currentPage"
-          :page-size="10"
+          :page-size="8"
           layout="total ,prev, pager, next, jumper"
           :total="total"
         >
@@ -95,7 +92,6 @@ export default {
       request
         .post("/api/data/queryForm", {
           pageNum: this.currentPage,
-
           // pageSize: this.pageSize,
           // search: this.search,
         })
@@ -105,27 +101,34 @@ export default {
           this.total = res.data.total;
         });
     },
-    // handleSizeChange1: function (pagesize) {
-    //   // 每页条数切换
-    //   this.pagesize = pagesize;
-    //   this.handleCurrentChange(this.currentPage1);
-    // },
-    // handleCurrentChange: function (currentPage) {
-    //   //页码切换
-    //   this.currentPage1 = currentPage;
-    //   this.currentChangePage(this.tableData, currentPage);
-    // },
-    // //分页方法（重点）
-    // currentChangePage(list, currentPage) {
-    //   let from = (currentPage - 1) * this.pagesize;
-    //   let to = currentPage * this.pagesize;
-    //   this.tableData = [];
-    //   for (; from < to; from++) {
-    //     if (list[from]) {
-    //       this.tableData.push(list[from]);
-    //     }
-    //   }
-    // },
+    search() {
+      request
+        .post("/api/data/queryAny", {
+          search: this.search,
+        })
+        .then((res) => {
+          console.log(res);
+          this.tableData = res.data.records;
+          this.total = res.data.total;
+        });
+    },
+    handleCurrentChange(val) {
+      //页码切换
+      console.log("当前页:${val}");
+      this.currentPage = val;
+      this.currentChangePage(this.tableData, currentPage);
+    },
+    //分页方法（重点）
+    currentChangePage(list, currentPage) {
+      let from = (currentPage - 1) * this.pageSize;
+      let to = currentPage * this.pageSize;
+      this.tableData = [];
+      for (; from < to; from++) {
+        if (list[from]) {
+          this.tableData.push(list[from]);
+        }
+      }
+    },
   },
 };
 </script>
