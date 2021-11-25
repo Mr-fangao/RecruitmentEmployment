@@ -1,6 +1,6 @@
 <template>
   <div>
-    <iframe src="./GraphExper.html" width="100%" height="300%" frameborder="0"></iframe>
+    <iframe src="./GraphExper.html" width="100%" height="677px" frameborder="0"></iframe>
 		<!--
 		<div id="myChart" style="width: 400px;height: 560px;background-color: rgba(0,0,0,0.5);position: absolute;top: 25%;right: 1.5%;border-radius: 5px;">
 			<div id="main" style="width: 100%;height:389px;"></div>
