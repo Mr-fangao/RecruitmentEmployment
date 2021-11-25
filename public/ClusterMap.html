@@ -22,7 +22,15 @@
             width: 100%;
         }
 
-        #button1 {
+       
+    </style>
+</head>
+
+<body>
+    <div id='map'></div>
+
+    <style>
+         #button1 {
             z-index: 2;
             margin-top: 40px;
             margin-left: 10px;
@@ -36,11 +44,6 @@
             position: fixed;
         }
     </style>
-</head>
-
-<body>
-    <div id='map'></div>
-
     <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg';
         var map = new mapboxgl.Map({
