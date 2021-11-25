@@ -3,7 +3,9 @@
     <div class="item item1">
       <div class="content">
         <div class="title">
-          <div class="title_back"><p>1111</p></div>
+          <div class="title_back">
+            <div class="title_text">111</div>
+          </div>
           <div class="select">
             <el-dropdown>
               <span class="el-dropdown-link">
@@ -209,22 +211,24 @@ export default {
     "pt1 pt3 pt5 "
     "pt2 pt4 pt6 ";
   background-color: transparent;
-  .p {
-    left: 10%;
-    text-align: left;
+  .el-dropdown {
+    width: 70%;
+    height: 73%;
+    background: url(../../assets/img/pt/button.png) no-repeat;
+    background-size: 89% 69%;
   }
-  div {
-    // text-align: center;
-    // font-size: 30px;
-    // outline: 1px dashed rgb(136, 27, 27);
-  }
+  // div {
+  //   // text-align: center;
+  //   // font-size: 30px;
+  //   // outline: 1px dashed rgb(136, 27, 27);
+  // }
   .item {
     background: url(../../assets/img/pt/ptbackground.png) no-repeat;
     background-size: 100% 100%;
     text-align: center;
     font-size: 30px;
     margin: 2% 2% 2% 2%;
-    outline: 1px dashed rgb(136, 27, 27);
+    //outline: 1px dashed rgb(136, 27, 27);
   }
   .item1 {
     grid-area: pt1;
@@ -244,12 +248,11 @@ export default {
           top: 50%;
           left: 6%;
           // height: 36px;
-          width: 100px;
-          background-color: rgb(39, 126, 202);
+          width: 30%;
           .el-dropdown-link {
             height: 40px;
-            font-size: 12pt;
-            line-height: 40px;
+            font-size: 10pt;
+            line-height: 32px;
             text-align: center;
             color: white;
             .el-dropdown-item {
