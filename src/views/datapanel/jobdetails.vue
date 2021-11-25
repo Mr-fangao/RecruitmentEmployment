@@ -1,7 +1,12 @@
 <template>
   <div class="table">
     <el-card shadow="hover" class="tebale_card"
-      ><el-input v-model="search" size="mini" placeholder="输入关键字搜索" @input="Search" />
+      ><el-input
+        v-model="search"
+        size="mini"
+        placeholder="输入关键字搜索"
+        @input="Search"
+      />
       <el-table
         border
         style="width: 100%; align: center"
@@ -45,6 +50,7 @@
           :page-size="8"
           layout="total ,prev, pager, next, jumper"
           :total="total"
+          @click="Click"
         >
         </el-pagination>
       </div>
@@ -100,6 +106,20 @@ export default {
           this.tableData = res.data.records;
           this.total = res.data.total;
         });
+    },
+    Click(val) {
+      (this.currentPage = val),
+        request
+          .post("/api/data/queryForm", {
+            pageNum: this.currentPage,
+            // pageSize: this.pageSize,
+            // search: this.search,
+          })
+          .then((res) => {
+            console.log(res);
+            this.tableData = res.data.records;
+            this.total = res.data.total;
+          });
     },
     Search() {
       request
