@@ -1,12 +1,11 @@
 <template>
   <div class="table">
-    <el-card shadow="hover" class="tebale_card"
-      ><el-input
+    <el-card shadow="hover" class="tebale_card">
+      <el-input
         v-model="search"
         size="mini"
         placeholder="输入关键字搜索"
-        @input="Search"
-      />
+      /><el-button size="mini" id="button" @click="Search">查询</el-button>
       <el-table
         border
         style="width: 100%; align: center"
@@ -14,12 +13,8 @@
         :header-row-style="getRowClass"
         :header-cell-style="getRowClass"
         :data="tableData"
-        ><!-- (tableData,
-          tableData.filter(
-            (data) =>
-              !search ||
-              data.company.toLowerCase().includes(search.toLowerCase())
-          )) -->
+        :height="getheight"
+      >
         <el-table-column prop="time" label="发布日期" width="120">
         </el-table-column>
         <el-table-column prop="company" label="公司名称"> </el-table-column
@@ -47,7 +42,7 @@
         <el-pagination
           @current-change="handleCurrentChange"
           :current-page="currentPage"
-          :page-size="10"
+          :page-size="9"
           layout="total ,prev, pager, next, jumper"
           :total="total"
           @click="Click"
@@ -68,31 +63,30 @@ export default {
       currentPage: 1,
       search: "",
       tableData: [
-        // {
-        //   company: "网易",
-        //   position: "B2B大客户销售经理",
-        //   region: "北京-海淀区",
-        //   salary: "1.5-3万/月",
-        //   type: "上市公司",
-        //   time: "2021-10-15",
-        // },
-        // {
-        //   company: "辉瑞制药有限公司",
-        //   position: "医学事务解决方案副经理- RWE & NIS(J22363)",
-        //   region: "北京-东城区",
-        //   salary: "2.5-3.5万/月",
-        //   type: "外资（欧美）",
-        //   time: "2021-10-15",
-        // },
+        
       ],
     };
   },
+  mounted() {
+    //登录绑定事件
+    window.addEventListener("keydown", this.keyDown);
+  },
   created() {
     this.load();
+    this.getHeight();
   },
   methods: {
     getRowClass({ row, column, rowIndex, columnIndex }) {
       return "background:#3f5c6d2c;color:#FFF;";
+    },
+    keyDown(e) {
+      //如果是回车则执行登录方法
+      if (e.keyCode == 13) {
+        document.getElementById("button").click();
+      }
+    },
+    getHeight(){
+      this.getheight = window.innerHeight - 170 + "px";
     },
     load() {
       request
@@ -161,7 +155,12 @@ export default {
 .tebale_card {
   background-color: #00a2ff2c;
   height: 100%;
+  .el-input {
+    width: 300px;
+    margin: 0px 20px 10px 72%;
+  }
 }
+
 .el-table,
 .el-table__expanded-cell {
   background-color: #3f5c6d2c;
@@ -169,11 +168,7 @@ export default {
 :deep(.el-table .cell) {
   text-align: center;
 }
-.el-input {
-  width: 300px;
-  left: 75%;
-  margin-bottom: 10px;
-}
+
 .el-pagination {
   margin: 10px 0px 0px 520px;
 }
