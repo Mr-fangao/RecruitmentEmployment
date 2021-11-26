@@ -14,14 +14,13 @@
         :header-cell-style="getRowClass"
         :data="tableData"
         :height="getheight"
-        @row-click="handleDetail"
       >
         <el-table-column prop="time" label="发布日期" width="120">
         </el-table-column>
-        <el-table-column prop="company" label="公司名称"> </el-table-column
-        ><el-table-column prop="position" label="岗位名称" width="210">
-        </el-table-column
-        ><el-table-column prop="region" label="工作地区" width="120">
+        <el-table-column prop="company" label="公司名称"> </el-table-column>
+        <el-table-column prop="position" label="岗位名称" width="210">
+        </el-table-column>
+        <el-table-column prop="region" label="工作地区" width="120">
         </el-table-column
         ><el-table-column prop="salary" label="薪资范围" width="120">
         </el-table-column
@@ -34,37 +33,23 @@
         ><el-table-column prop="type" label="公司规模" width="120">
         </el-table-column>
         <el-table-column prop="detail" label="详细信息" width="120">
-          <el-button size="mini" @click="dialogTableVisible = true"
-            >详情</el-button
-          ><el-dialog v-model="dialogTableVisible" title="公司详情">
-            <el-table
-              border
-              style="width: 100%; align: center"
-              :row-style="getRowClass"
-              :header-row-style="getRowClass"
-              :header-cell-style="getRowClass"
-              :data="dialogData"
-            >
-              <el-table-column prop="company" label="公司名称" width="120">
-              </el-table-column>
-              <el-table-column prop="position" label="岗位名称">
-              </el-table-column
-            ></el-table>
-            <!--<el-table border style="margin-top: 50px" :data="transData">-->
-            <!-- <el-table-column
-                v-for="(item, index) in transTitle"
-                :label="item"
-                :key="index"
-                align="center"
-              >-->
-            <!-- 添加下面该注释，可取消下一行eslint的规范检索 -->
-            <!-- eslint-disable-next-line -->
-            <!--<template slot-scope="{}">-->
-            <!-- {{ scope.row[index] }}-->
-            <!-- </template>-->
-            <!-- </el-table-column>-->
-            <!--</el-table>-->
-          </el-dialog>
+          <template #default="scope"
+            ><el-button size="mini" @click="dialogTableVisible = true"
+              >详情</el-button
+            > <el-dialog v-model="dialogTableVisible" title="公司详情">
+             <el-form label-position="left" inline class="demo">
+                <el-form-item label="公司名称">
+                  <p>{{ scope.row.company }}</p>
+                </el-form-item>
+                <el-form-item label="岗位名称">
+                  <p>{{ scope.row.position }}</p>
+                </el-form-item>
+                <el-form-item label="工作地区">
+                  <p>{{ scope.row.region }}</p>
+                </el-form-item>
+              </el-form>
+            </el-dialog></template
+          >
         </el-table-column>
       </el-table>
       <div style="margin: 10px 0">
@@ -95,7 +80,6 @@ export default {
       dialogTableVisible: false,
       tableData: [],
       // transTitle: ["", "学生1", "学生2", "学生3"], // transTitle 该标题为转化后的标题
-      dialogData: [],
     };
   },
   mounted() {
@@ -128,7 +112,7 @@ export default {
       return "background:#3f5c6d2c;color:#FFF;";
     },
     keyDown(e) {
-      //如果是回车则执行登录方法
+      //如果是回车则执行查询方法
       if (e.keyCode == 13) {
         document.getElementById("button").click();
       }
@@ -192,11 +176,15 @@ export default {
       }
     },
     //获取详细信息
-    handleDetail(row) {
-      console.log(row);
-      this.dialogData.company = row.company;
-      this.dialogData.position = row.position;
-    },
+    // rowDbclick(row, column) {
+    //   var id = row.ID;
+    //   this.handleDetail(id);
+    // },
+    // handleDetail(row) {
+    //   console.log(row);
+    //   this.dialogData.company = row.company;
+    //   this.dialogData.position = row.position;
+    // },
   },
 };
 </script>
