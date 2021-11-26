@@ -110,6 +110,7 @@
 </template>
 
 <script>
+import "font-awesome/css/font-awesome.css";
 export default {
   data() {
     return {
@@ -229,7 +230,7 @@ export default {
     width: 50px;
     height: 40px;
     span {
-      color: rgb(0, 195, 255);
+       color: #00d2df;
       line-height: 50px;
       font-weight: bold;
       font-size: 16px;
@@ -242,7 +243,7 @@ export default {
     width: 50px;
     height: 40px;
     span {
-      color: rgb(0, 195, 255);
+        color: #00d2df;
       line-height: 50px;
       font-weight: bold;
       font-size: 16px;

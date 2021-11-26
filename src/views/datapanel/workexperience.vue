@@ -15,17 +15,30 @@
               <template #dropdown>
                 <el-dropdown-menu>
                   <el-dropdown-item
-                    @click="(ct1 = 1), fetchData(ct1)"
+                    @click="(ct1 = 1), fetchData1(ct1)"
                     :class="{ active: ct1 == 1 }"
+                    >全国</el-dropdown-item
+                  >
+                  <el-dropdown-item
+                    @click="(ct1 = 2), fetchData1(ct1)"
+                    :class="{ active: ct1 == 2 }"
                     >北京</el-dropdown-item
                   >
                   <el-dropdown-item
-                    @click="(ct1 = 2), fetchData(ct1)"
-                    :class="{ active: ct1 == 2 }"
-                    >上海</el-dropdown-item
+                    @click="(ct1 = 3), fetchData1(ct1)"
+                    :class="{ active: ct1 == 3 }"
+                    >上海
+                  </el-dropdown-item>
+                  <el-dropdown-item
+                    @click="(ct1 = 4), fetchData1(ct1)"
+                    :class="{ active: ct1 == 4 }"
+                    >广州</el-dropdown-item
                   >
-                  <el-dropdown-item>广州</el-dropdown-item>
-                  <el-dropdown-item>深圳</el-dropdown-item>
+                  <el-dropdown-item
+                    @click="(ct1 = 5), fetchData1(ct1)"
+                    :class="{ active: ct1 == 5 }"
+                    >深圳</el-dropdown-item
+                  >
                 </el-dropdown-menu>
               </template>
             </el-dropdown>
@@ -51,17 +64,30 @@
               <template #dropdown>
                 <el-dropdown-menu>
                   <el-dropdown-item
-                    @click="(ct2 = 1), fetchData(ct1)"
+                    @click="(ct2 = 1), fetchData2(ct2)"
                     :class="{ active: ct2 == 1 }"
+                    >全国</el-dropdown-item
+                  >
+                  <el-dropdown-item
+                    @click="(ct2 = 2), fetchData2(ct2)"
+                    :class="{ active: ct2 == 2 }"
                     >北京</el-dropdown-item
                   >
                   <el-dropdown-item
-                    @click="(ct2 = 2), fetchData(ct1)"
-                    :class="{ active: ct2 == 2 }"
-                    >上海</el-dropdown-item
+                    @click="(ct2 = 3), fetchData2(ct2)"
+                    :class="{ active: ct1 == 3 }"
+                    >上海
+                  </el-dropdown-item>
+                  <el-dropdown-item
+                    @click="(ct2 = 4), fetchData2(ct2)"
+                    :class="{ active: ct2 == 4 }"
+                    >广州</el-dropdown-item
                   >
-                  <el-dropdown-item>广州</el-dropdown-item>
-                  <el-dropdown-item>深圳</el-dropdown-item>
+                  <el-dropdown-item
+                    @click="(ct2 = 5), fetchData2(ct2)"
+                    :class="{ active: ct2 == 5 }"
+                    >深圳</el-dropdown-item
+                  >
                 </el-dropdown-menu>
               </template>
             </el-dropdown>
@@ -76,7 +102,7 @@
       <div class="content">
         <div class="title">
           <div class="title_back">
-            <div class="title_text">城市工作经验占比</div>
+            <div class="title_text">工作经验月变化折线图</div>
           </div>
           <div class="select">
             <el-dropdown>
@@ -120,7 +146,8 @@
         </div>
       </div>
     </div>
-    <div class="item item5">5</div>
+
+    <!-- <div class="item item5">5</div> -->
   </div>
 </template>
 
@@ -150,31 +177,49 @@ export default {
       ct5: 1,
       ct6: 1,
       chartdata1: [],
+      chartdata2: [],
+      chartdata3: [],
+      chartdata4: [],
     };
   },
   created() {},
   mounted() {
-    this.fetchData(1);
-              this.showct1();
-          this.showct2();
-          this.showct4();
-          this.showct3();
+    this.fetchData1(1);
+    this.fetchData2(1);
+    // this.fetchData3(1);
+    // this.fetchData4(1);
+    this.showct1();
+    this.showct2();
+    this.showct4();
+    this.showct3();
   },
   methods: {
-    fetchData(ct1) {
+    fetchData1(ct1) {
       var sendData = ct1;
       var code = JSON.stringify(sendData);
       console.log(code);
-      request.post("/api/data/querySalary", { code }).then((res) => {
-        // this.chartdata1.ydata = res.data.value;
-        // this.chartdata1.xdata = res.data.name;
-        // console.log(this.chartdata1);
+      request.post("/api//data/salaryRe", { code }).then((res) => {
+        this.chartdata1.ydata = res.data[ct1 - 1];
+        // this.chartdata1.xdata = res.data.data.ct1;
+        console.log(res.data[ct1]);
         //解决 echarts动态渲染数据图形不生效问题:获取数据但不渲染，执行下一个循环才将数据渲染进echarts
         this.$nextTick(() => {
           this.showct1();
           this.showct2();
           this.showct4();
           this.showct3();
+        });
+      });
+    },
+    fetchData2(ct2) {
+      var code = JSON.stringify(ct2);
+      console.log(code);
+      request.post("/api//data/experienceCo", { code }).then((res) => {
+        this.chartdata2 = res.data.exp;
+        console.log(res.data[ct2 - 1]);
+        //解决 echarts动态渲染数据图形不生效问题:获取数据但不渲染，执行下一个循环才将数据渲染进echarts
+        this.$nextTick(() => {
+          this.showct2();
         });
       });
     },
@@ -244,7 +289,7 @@ export default {
           {
             type: "line",
             showBackground: true,
-            data: [5.85, 6.67, 7.85, 8.12, 9.16, 13.99, 17.25, 23.8],
+            data: this.chartdata1.ydata,
             backgroundStyle: {
               color: "rgba(180, 180, 180, 0.1)",
             },
@@ -294,20 +339,19 @@ export default {
           orient: "vertical",
           left: "5%", //图例距离左的距离
           y: "center", //图例上下居中
-          data: ["A", "B", "C", "D", "E"],
+          data: ["无需", "在校/应届生", "1年", "2年", "3-4年", "5-7年", "8-9年", "10年以上"],
           textStyle: {
             //图例文字的样式
             color: "#fff",
             fontSize: 12,
           },
         },
-
         series: [
           {
             name: "Access From",
             type: "pie",
-            center: ["60%", "55%"],
-            radius: ["70%", "50%"],
+            center: ["65%", "50%"],
+            radius: ["0%", "75%"],
             label: {
               normal: {
                 show: true,
@@ -318,16 +362,19 @@ export default {
             labelLine: {
               normal: {
                 show: true,
-                length: 50,
+                length: 15,
                 length2: 10,
               },
             },
             data: [
-              { value: 1111, name: "A" },
-              { value: 735, name: "B" },
-              { value: 580, name: "C" },
-              { value: 484, name: "D" },
-              { value: 300, name: "E" },
+              { value: this.chartdata2[0], name: "无需" },
+              { value: this.chartdata2[1], name: "在校/应届生" },
+              { value: this.chartdata2[2], name: "1年" },
+              { value: this.chartdata2[3], name: "2年" },
+              { value: this.chartdata2[4], name: "3-4年" },
+              { value: this.chartdata2[5], name: "5-7年" },
+              { value: this.chartdata2[6], name: "8-9年" },
+              { value: this.chartdata2[7], name: "10年以上" },
             ],
           },
         ],
@@ -336,40 +383,116 @@ export default {
     showct3() {
       var chart3 = echarts.init(document.getElementById("chart3"));
       chart3.setOption({
+        color: [
+          "#37a2da",
+          "#ff6106",
+          "#88e681",
+          "#ffff00",
+          "#ff9f7f",
+          "#fb4d72",
+          "#bb99c5",
+          "#5449ea",
+        ],
+        tooltip: {
+          trigger: "axis",
+        },
         legend: {
-          data: ["本周", "上周"],
-          textStyle: { fontSize: 16 },
+          data: [
+            "无需",
+            "在校/应届",
+            "1年",
+            "2年",
+            "3-4年",
+            "5-7年",
+            "8-9年",
+            "10年以上",
+          ],
+          textStyle: { fontSize: 12, color: "rgba(255, 255, 255, 0.5)" },
         },
         xAxis: {
           type: "category",
+          axisLine: { lineStyle: { color: "rgba(255, 255, 255, 0.5)" } },
           data: [
-            "2020-11-16",
-            "2020-11-17",
-            "2020-11-18",
-            "2020-11-19",
-            "2020-11-20",
-            "2020-11-21",
-            "2020-11-22",
+            "1月",
+            "2月",
+            "3月",
+            "4月",
+            "5月",
+            "6月",
+            "7月",
+            "8月",
+            "9月",
+            "10月",
+            "11月",
+            "12月",
           ],
         },
         yAxis: {
           type: "value",
-           splitLine: {
+          splitLine: {
             show: false,
           },
+          axisLine: {
+            //轴文字颜色
+            lineStyle: {
+              color: "rgba(255, 255, 255, 0.5)",
+            },
+          },
+        },
+        grid: {
+          x: 60,
+          y: 30,
+          x2: 30,
+          y2: 40,
         },
         series: [
           {
-            data: [3293.5, 3945.6, 3760.9, 996.6, 3481.6, 4514.9, 3223.5],
-            name: "本周",
-            smooth: true,
+            name: "无需",
             type: "line",
+            itemStyle: { color: "#3378bc" },
+            data: [0, 0, 18, 183, 109, 6, 12, 216, 5, 13, 64, 370],
           },
           {
-            data: [1553.9, 1180.8, 2583.9, 2488.5, 1890, 1881.3, 3258.5],
-            name: "上周",
-            smooth: true,
+            name: "在校/应届",
             type: "line",
+            itemStyle: { color: "#ff7274" },
+            data: [0, 0, 15, 83, 34, 6, 12, 64, 19, 26, 43, 508],
+          },
+          {
+            name: "1年",
+            type: "line",
+            itemStyle: { color: "#2cd879" },
+            data: [0, 0, 72, 520, 386, 42, 100, 734, 50, 88, 266, 1230],
+          },
+          {
+            name: "2年",
+            type: "line",
+            itemStyle: { color: "#82d8e1" },
+            data: [0, 0, 110, 647, 341, 55, 125, 739, 75, 89, 264, 1229],
+          },
+          {
+            name: "3-4年",
+            type: "line",
+            itemStyle: { color: "#ef4fef" },
+            data: [0, 0, 188, 819, 381, 70, 127, 945, 71, 108, 355, 1778],
+          },
+          {
+            name: "5-7年",
+            type: "line",
+            itemStyle: { color: "#ffaa00" },
+            data: [0, 0, 60, 227, 127, 16, 56, 320, 22, 30, 133, 673],
+          },
+          {
+            name: "8-9年",
+            type: "line",
+            itemStyle: { color: "#aaaa7f" },
+            data: [0, 0, 13, 28, 5, 0, 3, 38, 1, 4, 9, 69],
+          },
+          {
+            name: "10年以上",
+            type: "line",
+            itemStyle: { color: "#00557f" },
+            data: [0, 0, 2, 14, 9, 1, 1, 16, 0, 0, 7, 43],
           },
         ],
       });
@@ -487,7 +610,7 @@ export default {
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: repeat(2, 1fr);
   grid-template-areas:
-    "pt1 pt3 pt5 "
+    "pt1 pt3 pt3 "
     "pt2 pt4 pt4 ";
   background-color: transparent;
   .el-dropdown {
@@ -518,10 +641,7 @@ export default {
         flex-direction: row;
         .select {
           position: relative;
-          top: 50%;
-          left: 6%;
-          // height: 36px;
-          width: 30%;
+
           .el-dropdown-link {
             height: 40px;
             font-size: 10pt;
@@ -544,20 +664,47 @@ export default {
     grid-area: pt1;
     margin-left: 10%;
     margin-top: 3%;
+    .select {
+      top: 50%;
+      left: 6%;
+      width: 30%;
+    }
   }
   .item2 {
     grid-area: pt2;
     margin-bottom: 3%;
     margin-left: 10%;
+    .select {
+      top: 50%;
+      left: 6%;
+      width: 30%;
+    }
     /deep/ .title_text {
       margin: 6% 6% 0% 0%;
     }
   }
   .item3 {
     grid-area: pt3;
-    margin-top: 3%;
-    margin-left: 5%;
+    margin-bottom: 1.5%;
+    margin-left: 2.5%;
     margin-right: 5%;
+    margin-top: 1.5%;
+    .select {
+      top: 50%;
+      left: 15%;
+      width: 15%;
+    }
+    /deep/ .title_back {
+      width: 60%;
+      height: 100%;
+      background-size: 10% 20%;
+      background-position-y: 62%;
+      background-position-x: 0%;
+      margin-left: 6%;
+      .title_text {
+        margin: 3% 50% -2% 0%;
+      }
+    }
   }
   .item4 {
     grid-area: pt4;
@@ -577,10 +724,10 @@ export default {
       }
     }
   }
-  .item5 {
-    grid-area: pt5;
-    margin-top: 3%;
-    margin-right: 10%;
-  }
+  // .item5 {
+  //   grid-area: pt5;
+  //   margin-top: 3%;
+  //   margin-right: 10%;
+  // }
 }
 </style>
