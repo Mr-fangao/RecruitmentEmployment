@@ -14,6 +14,7 @@
         :header-cell-style="getRowClass"
         :data="tableData"
         :height="getheight"
+        @row-click="handleDetail"
       >
         <el-table-column prop="time" label="发布日期" width="120">
         </el-table-column>
@@ -32,10 +33,38 @@
         </el-table-column
         ><el-table-column prop="type" label="公司规模" width="120">
         </el-table-column>
-        <el-table-column prop="xxxx" label="详细信息" width="120"
-          ><el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
+        <el-table-column prop="detail" label="详细信息" width="120">
+          <el-button size="mini" @click="dialogTableVisible = true"
             >详情</el-button
-          >
+          ><el-dialog v-model="dialogTableVisible" title="公司详情">
+            <el-table
+              border
+              style="width: 100%; align: center"
+              :row-style="getRowClass"
+              :header-row-style="getRowClass"
+              :header-cell-style="getRowClass"
+              :data="dialogData"
+            >
+              <el-table-column prop="company" label="公司名称" width="120">
+              </el-table-column>
+              <el-table-column prop="position" label="岗位名称">
+              </el-table-column
+            ></el-table>
+            <!--<el-table border style="margin-top: 50px" :data="transData">-->
+            <!-- <el-table-column
+                v-for="(item, index) in transTitle"
+                :label="item"
+                :key="index"
+                align="center"
+              >-->
+            <!-- 添加下面该注释，可取消下一行eslint的规范检索 -->
+            <!-- eslint-disable-next-line -->
+            <!--<template slot-scope="{}">-->
+            <!-- {{ scope.row[index] }}-->
+            <!-- </template>-->
+            <!-- </el-table-column>-->
+            <!--</el-table>-->
+          </el-dialog>
         </el-table-column>
       </el-table>
       <div style="margin: 10px 0">
@@ -46,6 +75,7 @@
           layout="total ,prev, pager, next, jumper"
           :total="total"
           @click="Click"
+          background
         >
         </el-pagination>
       </div>
@@ -62,9 +92,10 @@ export default {
       total: 0,
       currentPage: 1,
       search: "",
-      tableData: [
-        
-      ],
+      dialogTableVisible: false,
+      tableData: [],
+      // transTitle: ["", "学生1", "学生2", "学生3"], // transTitle 该标题为转化后的标题
+      dialogData: [],
     };
   },
   mounted() {
@@ -74,6 +105,23 @@ export default {
   created() {
     this.load();
     this.getHeight();
+    // // 数组按矩阵思路, 变成转置矩阵
+    // let matrixData = this.originData.map((row, i) => {
+    //   let arr = [];
+    //   for (let key in row) {
+    //     arr.push(row[key]);
+    //   }
+    //   return arr;
+    // });
+    // // 加入标题拼接最终的数据
+    // this.transData = matrixData[0].map((col, i) => {
+    //   return [
+    //     this.originTitle[i],
+    //     ...matrixData.map((row) => {
+    //       return row[i];
+    //     }),
+    //   ];
+    // });
   },
   methods: {
     getRowClass({ row, column, rowIndex, columnIndex }) {
@@ -85,9 +133,10 @@ export default {
         document.getElementById("button").click();
       }
     },
-    getHeight(){
+    getHeight() {
       this.getheight = window.innerHeight - 170 + "px";
     },
+    //加载表格数据
     load() {
       request
         .post("/api/data/queryForm", {
@@ -101,12 +150,11 @@ export default {
           this.total = res.data.total;
         });
     },
+    //获取当前页面数据
     Click() {
       request
         .post("/api/data/queryForm", {
           pageNum: this.currentPage,
-          // pageSize: this.pageSize,
-          // search: this.search,
         })
         .then((res) => {
           console.log(res);
@@ -114,6 +162,7 @@ export default {
           this.total = res.data.total;
         });
     },
+    //查询
     Search() {
       request
         .post("/api/data/queryAny", {
@@ -130,7 +179,6 @@ export default {
       //页码切换
       console.log("当前页:${val}");
       this.currentPage = val;
-      // this.currentChangePage(this.tableData, currentPage);
     },
     //分页方法（重点）
     currentChangePage(list, currentPage) {
@@ -142,6 +190,12 @@ export default {
           this.tableData.push(list[from]);
         }
       }
+    },
+    //获取详细信息
+    handleDetail(row) {
+      console.log(row);
+      this.dialogData.company = row.company;
+      this.dialogData.position = row.position;
     },
   },
 };
@@ -160,7 +214,9 @@ export default {
     margin: 0px 20px 10px 72%;
   }
 }
-
+:deep(.el-overlay) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
 .el-table,
 .el-table__expanded-cell {
   background-color: #3f5c6d2c;
