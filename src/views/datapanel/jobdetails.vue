@@ -23,7 +23,7 @@
         <el-table-column prop="time" label="发布日期" width="120">
         </el-table-column>
         <el-table-column prop="company" label="公司名称"> </el-table-column
-        ><el-table-column prop="position" label="岗位名称" width="150">
+        ><el-table-column prop="position" label="岗位名称" width="210">
         </el-table-column
         ><el-table-column prop="region" label="工作地区" width="120">
         </el-table-column
@@ -37,7 +37,7 @@
         </el-table-column
         ><el-table-column prop="type" label="公司规模" width="120">
         </el-table-column>
-        <el-table-column prop="xxxx" label="详细信息" width="180"
+        <el-table-column prop="xxxx" label="详细信息" width="120"
           ><el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
             >详情</el-button
           >
@@ -47,7 +47,7 @@
         <el-pagination
           @current-change="handleCurrentChange"
           :current-page="currentPage"
-          :page-size="8"
+          :page-size="10"
           layout="total ,prev, pager, next, jumper"
           :total="total"
           @click="Click"
@@ -103,23 +103,22 @@ export default {
         })
         .then((res) => {
           console.log(res);
-          this.tableData = res.data.records;
+          this.tableData = res.data.jobInfos;
           this.total = res.data.total;
         });
     },
-    Click(val) {
-      (this.currentPage = val),
-        request
-          .post("/api/data/queryForm", {
-            pageNum: this.currentPage,
-            // pageSize: this.pageSize,
-            // search: this.search,
-          })
-          .then((res) => {
-            console.log(res);
-            this.tableData = res.data.records;
-            this.total = res.data.total;
-          });
+    Click() {
+      request
+        .post("/api/data/queryForm", {
+          pageNum: this.currentPage,
+          // pageSize: this.pageSize,
+          // search: this.search,
+        })
+        .then((res) => {
+          console.log(res);
+          this.tableData = res.data.jobInfos;
+          this.total = res.data.total;
+        });
     },
     Search() {
       request
@@ -129,7 +128,7 @@ export default {
         })
         .then((res) => {
           console.log(res);
-          this.tableData = res.data.records;
+          this.tableData = res.data.jobInfos;
           this.total = res.data.total;
         });
     },
