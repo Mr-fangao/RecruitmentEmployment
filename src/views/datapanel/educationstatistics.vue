@@ -18,6 +18,43 @@
           <div class="title_back">
             <div class="title_text">学历要求折线图</div>
           </div>
+          <div class="select">
+            <el-dropdown>
+              <span class="el-dropdown-link">
+                选择城市
+                <i class="fa fa-angle-down"></i>
+              </span>
+              <template #dropdown>
+                <el-dropdown-menu>
+                  <el-dropdown-item
+                    @click="(ct1 = 1), fetchData1(ct1)"
+                    :class="{ active: ct1 == 1 }"
+                    >全国</el-dropdown-item
+                  >
+                  <el-dropdown-item
+                    @click="(ct1 = 2), fetchData1(ct1)"
+                    :class="{ active: ct1 == 2 }"
+                    >北京</el-dropdown-item
+                  >
+                  <el-dropdown-item
+                    @click="(ct1 = 3), fetchData1(ct1)"
+                    :class="{ active: ct1 == 3 }"
+                    >上海
+                  </el-dropdown-item>
+                  <el-dropdown-item
+                    @click="(ct1 = 4), fetchData1(ct1)"
+                    :class="{ active: ct1 == 4 }"
+                    >广州</el-dropdown-item
+                  >
+                  <el-dropdown-item
+                    @click="(ct1 = 5), fetchData1(ct1)"
+                    :class="{ active: ct1 == 5 }"
+                    >深圳</el-dropdown-item
+                  >
+                </el-dropdown-menu>
+              </template>
+            </el-dropdown>
+          </div>
         </div>
         <div class="chart">
           <div id="chart2" :style="{ width: '100%', height: '100%' }"></div>
@@ -30,6 +67,43 @@
           <div class="title_back">
             <div class="title_text">学历要求柱状图</div>
           </div>
+          <div class="select">
+            <el-dropdown>
+              <span class="el-dropdown-link">
+                选择城市
+                <i class="fa fa-angle-down"></i>
+              </span>
+              <template #dropdown>
+                <el-dropdown-menu>
+                  <el-dropdown-item
+                    @click="(ct1 = 1), fetchData1(ct1)"
+                    :class="{ active: ct1 == 1 }"
+                    >全国</el-dropdown-item
+                  >
+                  <el-dropdown-item
+                    @click="(ct1 = 2), fetchData1(ct1)"
+                    :class="{ active: ct1 == 2 }"
+                    >北京</el-dropdown-item
+                  >
+                  <el-dropdown-item
+                    @click="(ct1 = 3), fetchData1(ct1)"
+                    :class="{ active: ct1 == 3 }"
+                    >上海
+                  </el-dropdown-item>
+                  <el-dropdown-item
+                    @click="(ct1 = 4), fetchData1(ct1)"
+                    :class="{ active: ct1 == 4 }"
+                    >广州</el-dropdown-item
+                  >
+                  <el-dropdown-item
+                    @click="(ct1 = 5), fetchData1(ct1)"
+                    :class="{ active: ct1 == 5 }"
+                    >深圳</el-dropdown-item
+                  >
+                </el-dropdown-menu>
+              </template>
+            </el-dropdown>
+          </div>
         </div>
         <div class="chart">
           <div id="chart3" :style="{ width: '100%', height: '100%' }"></div>
@@ -41,6 +115,43 @@
         <div class="title">
           <div class="title_back">
             <div class="title_text">学历要求占比图</div>
+          </div>
+          <div class="select">
+            <el-dropdown>
+              <span class="el-dropdown-link">
+                选择城市
+                <i class="fa fa-angle-down"></i>
+              </span>
+              <template #dropdown>
+                <el-dropdown-menu>
+                  <el-dropdown-item
+                    @click="(ct1 = 1), fetchData1(ct1)"
+                    :class="{ active: ct1 == 1 }"
+                    >全国</el-dropdown-item
+                  >
+                  <el-dropdown-item
+                    @click="(ct1 = 2), fetchData1(ct1)"
+                    :class="{ active: ct1 == 2 }"
+                    >北京</el-dropdown-item
+                  >
+                  <el-dropdown-item
+                    @click="(ct1 = 3), fetchData1(ct1)"
+                    :class="{ active: ct1 == 3 }"
+                    >上海
+                  </el-dropdown-item>
+                  <el-dropdown-item
+                    @click="(ct1 = 4), fetchData1(ct1)"
+                    :class="{ active: ct1 == 4 }"
+                    >广州</el-dropdown-item
+                  >
+                  <el-dropdown-item
+                    @click="(ct1 = 5), fetchData1(ct1)"
+                    :class="{ active: ct1 == 5 }"
+                    >深圳</el-dropdown-item
+                  >
+                </el-dropdown-menu>
+              </template>
+            </el-dropdown>
           </div>
         </div>
         <div class="chart">
@@ -125,11 +236,11 @@ export default {
         radar: {
           // shape: 'circle',
           indicator: [
-            { name: "大专以下", max: 6500 },
+            { name: "大专以下", max: 10000 },
             { name: "博士", max: 16000 },
             { name: "大专", max: 30000 },
-            { name: "硕士", max: 38000 },
-            { name: "本科", max: 52000 },
+            { name: "硕士", max: 70000 },
+            { name: "本科", max: 80000 },
           ],
         },
         series: [
@@ -139,6 +250,36 @@ export default {
             data: [
               {
                 value: [4200, 3000, 20000, 35000, 50000, 18000],
+                name: "学历",
+                lineStyle: {
+                  color: "#97FFFF",
+                },
+              },{
+                value: [1000, 2000, 3000, 10000, 32000, 12000],
+                name: "学历",
+                lineStyle: {
+                  color: "#FFF68F",
+                },
+              },{
+                value: [5200, 8000, 16000, 22000, 43000, 10000],
+                name: "学历",
+                lineStyle: {
+                  color: "#BFEFFF",
+                },
+              },{
+                value: [5800, 3600, 22000, 45000, 23000, 21000],
+                name: "学历",
+                lineStyle: {
+                  color: "#836FFF",
+                },
+              },{
+                value: [4500, 5000, 11000, 35000, 62000, 25000],
+                name: "学历",
+                lineStyle: {
+                  color: "#FFBBFF",
+                },
+              },{
+                value: [6600, 8000, 24000, 48000, 54000, 31000],
                 name: "学历",
                 lineStyle: {
                   color: "#64DFFF",
@@ -380,6 +521,19 @@ export default {
         height: 60px;
         display: flex;
         flex-direction: row;
+        .select {
+          position: relative;
+          .el-dropdown-link {
+            height: 40px;
+            font-size: 10pt;
+            line-height: 32px;
+            text-align: center;
+            color: white;
+            .el-dropdown-item {
+              background-color: aqua;
+            }
+          }
+        }
       }
       .chart {
         height: calc(100% - 60px);
@@ -390,11 +544,7 @@ export default {
     grid-area: pt1;
     margin-left: 10%;
     margin-top: 3%;
-    .select {
-      top: 50%;
-      left: 6%;
-      width: 30%;
-    }
+
     /deep/ .title_text {
       margin: 5% 22% 0% 0%;
     }
@@ -406,9 +556,9 @@ export default {
     margin-right: 2.5%;
     margin-top: 1.5%;
     .select {
-      top: 50%;
-      left: 6%;
-      width: 30%;
+      top: 15%;
+      left: 16%;
+      width: 18%;
     }
     /deep/ .title_text {
       margin: 3% 0% 0% -35%;
@@ -421,9 +571,9 @@ export default {
     margin-right: 5%;
     margin-top: 1.5%;
     .select {
-      top: 50%;
-      left: 15%;
-      width: 15%;
+      top: 15%;
+      left: 16%;
+      width: 18%;
     }
     /deep/ .title_back {
       width: 60%;
@@ -443,6 +593,11 @@ export default {
     margin-left: 1%;
     margin-right: 8%;
     margin-top: 1.5%;
+    .select {
+      top: 15%;
+      left: 10%;
+      width: 25%;
+    }
     /deep/ .title_back {
       width: 60%;
       height: 100%;
