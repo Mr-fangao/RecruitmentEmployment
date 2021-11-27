@@ -674,7 +674,7 @@ export default {
       left: 6%;
       width: 30%;
     }
-   :deep(title_text) {
+   /deep/ .title_text{
       margin: 6% 6% 0% 0%;
     }
   }
@@ -689,7 +689,7 @@ export default {
       left: 15%;
       width: 15%;
     }
-    :deep(title_back){
+    /deep/ .title_back{
       width: 60%;
       height: 100%;
       background-size: 10% 20%;
@@ -707,7 +707,7 @@ export default {
     margin-left: 2.5%;
     margin-right: 5%;
     margin-top: 1%;
-    :deep(title_back){
+   /deep/ .title_back{
       width: 60%;
       height: 100%;
       background-size: 10% 20%;
