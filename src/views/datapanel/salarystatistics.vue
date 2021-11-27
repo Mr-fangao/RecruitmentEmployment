@@ -89,7 +89,7 @@
       <div class="content">
         <div class="title">
           <div class="title_back">
-            <div class="title_text">城市区县薪资柱状图</div>
+            <div class="title_text">城市职位薪资极差图</div>
           </div>
           <div class="select">
             <el-dropdown>
@@ -137,7 +137,7 @@
       <div class="content">
         <div class="title">
           <div class="title_back">
-            <div class="title_text">城市职位薪资极差图</div>
+            <div class="title_text">城市职位薪资Top15</div>
           </div>
           <div class="select">
             <el-dropdown>
@@ -169,18 +169,6 @@
         </div>
       </div>
     </div>
-    <div class="item item6">
-      <div class="content">
-        <div class="title">
-          <div class="title_back">
-            <div class="title_text">城市职位薪资Top15</div>
-          </div>
-        </div>
-        <div class="chart">
-          <div id="chart6" :style="{ width: '100%', height: '100%' }"></div>
-        </div>
-      </div>
-    </div>
     <!-- <div class="item item5">5</div> -->
   </div>
 </template>
@@ -192,14 +180,15 @@ import request from "../../utils/request";
 let echarts = require("echarts/lib/echarts");
 require("echarts/lib/chart/bar");
 require("echarts/lib/chart/line");
-require("echarts/lib/chart/pie");
-require("echarts/lib/chart/scatter");
-require("echarts/lib/chart/heatmap");
-require("echarts/lib/chart/funnel");
+// require("echarts/lib/chart/pie");
+// require("echarts/lib/chart/scatter");散点图
+// require("echarts/lib/chart/heatmap");热力图
+// require("echarts/lib/chart/funnel");
 require("echarts/lib/component/tooltip");
 require("echarts/lib/component/title");
 require("echarts/lib/component/legend");
-require("echarts/lib/component/visualMap");
+require("echarts/lib/chart/treemap"); //极差矩形树图
+// require("echarts/lib/component/visualMap");//映射工具
 export default {
   name: "salary",
   data() {
@@ -230,7 +219,7 @@ export default {
       var code = JSON.stringify(sendData);
       console.log(code);
       request.post("/api/data/querySalary", { code }).then((res) => {
-        this.chartdata1.ydata = res.data.data.ct1;
+        this.chartdata1.ydata = res.data.data;
         // this.chartdata1.xdata = res.data.data.ct1;
         // console.log(this.chartdata1);
         //解决 echarts动态渲染数据图形不生效问题:获取数据但不渲染，执行下一个循环才将数据渲染进echarts
@@ -343,57 +332,7 @@ export default {
         ],
       });
     },
-    showct2() {
-      // 绘制图表
-      var chart = echarts.init(document.getElementById("chart2"));
-      chart.resize();
-      chart.setOption({
-        tooltip: {
-          trigger: "item",
-        },
-        legend: {
-          orient: "vertical",
-          left: "5%", //图例距离左的距离
-          y: "center", //图例上下居中
-          data: ["A", "B", "C", "D", "E"],
-          textStyle: {
-            //图例文字的样式
-            color: "#fff",
-            fontSize: 12,
-          },
-        },
-
-        series: [
-          {
-            name: "Access From",
-            type: "pie",
-            center: ["60%", "55%"],
-            radius: ["70%", "50%"],
-            label: {
-              normal: {
-                show: true,
-                position: "outside",
-                formatter: "{b}",
-              },
-            },
-            labelLine: {
-              normal: {
-                show: true,
-                length: 50,
-                length2: 10,
-              },
-            },
-            data: [
-              { value: 1111, name: "A" },
-              { value: 735, name: "B" },
-              { value: 580, name: "C" },
-              { value: 484, name: "D" },
-              { value: 300, name: "E" },
-            ],
-          },
-        ],
-      });
-    },
+    showct2() {},
     showct3() {
       // 绘制图表
       var chart3 = echarts.init(document.getElementById("chart3"));
@@ -466,114 +405,14 @@ export default {
             },
             itemStyle: {
               normal: {
-                color: '#fafa96',
+                color: "#fafa96",
               },
             },
           },
         ],
       });
     },
-    showct4() {
-      const hours = [
-        "12a",
-        "1a",
-        "2a",
-        "3a",
-        "4a",
-        "5a",
-        "6a",
-        "7a",
-        "8a",
-        "9a",
-        "10a",
-        "11a",
-        "12p",
-        "1p",
-        "2p",
-        "3p",
-        "4p",
-        "5p",
-        "6p",
-        "7p",
-        "8p",
-        "9p",
-        "10p",
-        "11p",
-      ];
-      // prettier-ignore
-      const days = ['Saturday', 'Friday', 'Thursday','Wednesday', 'Tuesday', 'Monday', 'Sunday'];
-      // prettier-ignore
-      const data = [[0,0,5],[0,1,1],[0,2,0],[0,3,0],[0,4,0],[0,5,0],[0,6,0],[0,7,0],[0,8,0],[0,9,0],[0,10,0],[0,11,2],[0,12,4],[0,13,1],[0,14,1],[0,15,3],[0,16,4],[0,17,6],[0,18,4],[0,19,4],[0,20,3],[0,21,3],[0,22,2],[0,23,5],[1,0,7],[1,1,0],[1,2,0],[1,3,0],[1,4,0],[1,5,0],[1,6,0],[1,7,0],[1,8,0],[1,9,0],[1,10,5],[1,11,2],[1,12,2],[1,13,6],[1,14,9],[1,15,11],[1,16,6],[1,17,7],[1,18,8],[1,19,12],[1,20,5],[1,21,5],[1,22,7],[1,23,2],[2,0,1],[2,1,1],[2,2,0],[2,3,0],[2,4,0],[2,5,0],[2,6,0],[2,7,0],[2,8,0],[2,9,0],[2,10,3],[2,11,2],[2,12,1],[2,13,9],[2,14,8],[2,15,10],[2,16,6],[2,17,5],[2,18,5],[2,19,5],[2,20,7],[2,21,4],[2,22,2],[2,23,4],[3,0,7],[3,1,3],[3,2,0],[3,3,0],[3,4,0],[3,5,0],[3,6,0],[3,7,0],[3,8,1],[3,9,0],[3,10,5],[3,11,4],[3,12,7],[3,13,14],[3,14,13],[3,15,12],[3,16,9],[3,17,5],[3,18,5],[3,19,10],[3,20,6],[3,21,4],[3,22,4],[3,23,1],[4,0,1],[4,1,3],[4,2,0],[4,3,0],[4,4,0],[4,5,1],[4,6,0],[4,7,0],[4,8,0],[4,9,2],[4,10,4],[4,11,4],[4,12,2],[4,13,4],[4,14,4],[4,15,14],[4,16,12],[4,17,1],[4,18,8],[4,19,5],[4,20,3],[4,21,7],[4,22,3],[4,23,0],[5,0,2],[5,1,1],[5,2,0],[5,3,3],[5,4,0],[5,5,0],[5,6,0],[5,7,0],[5,8,2],[5,9,0],[5,10,4],[5,11,1],[5,12,5],[5,13,10],[5,14,5],[5,15,7],[5,16,11],[5,17,6],[5,18,0],[5,19,5],[5,20,3],[5,21,4],[5,22,2],[5,23,0],[6,0,1],[6,1,0],[6,2,0],[6,3,0],[6,4,0],[6,5,0],[6,6,0],[6,7,0],[6,8,0],[6,9,0],[6,10,1],[6,11,0],[6,12,2],[6,13,1],[6,14,3],[6,15,4],[6,16,0],[6,17,0],[6,18,0],[6,19,0],[6,20,1],[6,21,2],[6,22,2],[6,23,6]]
-    .map(function (item) {
-        return [item[1], item[0], item[2] || '-'];
-    });
-      var chart4 = echarts.init(document.getElementById("chart4"));
-      chart4.resize();
-      var option4;
-      option4 = {
-        tooltip: {
-          position: "top",
-        },
-        grid: {
-          height: "70%",
-          bottom: "15%",
-        },
-        xAxis: {
-          type: "category",
-          axisLine: {
-            lineStyle: {
-              color: "rgba(255, 255, 255, 0.5)",
-            },
-          },
-          data: hours,
-          splitArea: {
-            show: true,
-          },
-        },
-        yAxis: {
-          type: "category",
-          data: days,
-          axisLine: {
-            lineStyle: {
-              color: "rgba(255, 255, 255, 0.5)",
-            },
-          },
-          splitArea: {
-            show: true,
-          },
-        },
-        visualMap: {
-          min: 0,
-          max: 10,
-          calculable: true,
-          orient: "horizontal",
-          left: "77%",
-          top: "-5%",
-          right: "5%",
-          textStyle: {
-            color: "rgba(255, 255, 255, 0.5)",
-          },
-        },
-        series: [
-          {
-            name: "Punch Card",
-            type: "heatmap",
-            data: data,
-            label: {
-              show: true,
-            },
-            emphasis: {
-              itemStyle: {
-                shadowBlur: 10,
-                shadowColor: "rgba(0, 0, 0, 0.5)",
-              },
-            },
-          },
-        ],
-      };
-
-      chart4.setOption(option4);
-    },
+    showct4() {},
   },
   watch: {},
 };
@@ -586,8 +425,8 @@ export default {
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: repeat(2, 1fr);
   grid-template-areas:
-    "pt1 pt3 pt5 "
-    "pt2 pt4 pt6 ";
+    "pt1 pt3 pt3 "
+    "pt2 pt4 pt5 ";
   background-color: transparent;
   .el-dropdown {
     width: 70%;
@@ -653,10 +492,25 @@ export default {
   }
   .item3 {
     grid-area: pt3;
-    margin-bottom: 3%;
-    margin-left: 5%;
+    margin-bottom: 1.5%;
+    margin-left: 2.5%;
     margin-right: 5%;
-    margin-top: 3%;
+    margin-top: 1.5%;
+    .title_back {
+      width: 60%;
+      height: 100%;
+      background-size: 10% 20%;
+      background-position-y: 60%;
+      background-position-x: 10%;
+      margin-left: 0%;
+      .title_text {
+        margin: 3% 34% 0% 0% !important;
+      }
+    }
+    .select {
+      left: 6% !important;
+      width: 30% !important;
+    }
   }
   .item4 {
     grid-area: pt4;
@@ -666,11 +520,6 @@ export default {
   }
   .item5 {
     grid-area: pt5;
-    margin-top: 3%;
-    margin-right: 10%;
-  }
-  .item6 {
-    grid-area: pt6;
     margin-bottom: 3%;
     margin-right: 10%;
   }
