@@ -6,7 +6,7 @@
           <div class="title_back">
             <div class="title_text">工作经验-薪资关系折线图</div>
           </div>
-          <div class="select">
+                    <div class="select">
             <el-dropdown>
               <span class="el-dropdown-link">
                 选择城市
@@ -36,7 +36,7 @@
                   >
                   <el-dropdown-item
                     @click="(ct1 = 5), fetchData1(ct1)"
-                    :class="{ active: ct1 == 5 }"
+                    :class="{ active: ct1 == 1 }"
                     >深圳</el-dropdown-item
                   >
                 </el-dropdown-menu>
@@ -190,20 +190,32 @@ export default {
     this.showct3();
   },
   methods: {
+    // fetchData1(ct1) {
+    //   var sendData = ct1;
+    //   var code = JSON.stringify(sendData);
+    //   console.log(code);
+    //   request.post("/api//data/salaryRe", { code }).then((res) => {
+    //     this.chartdata1 = res.data[ct1 - 1];
+    //     // this.chartdata1.xdata = res.data.data.ct1;
+    //     console.log(res.data[ct1]);
+    //     //解决 echarts动态渲染数据图形不生效问题:获取数据但不渲染，执行下一个循环才将数据渲染进echarts
+    //     this.$nextTick(() => {
+    //       this.showct1();
+    //       this.showct2();
+    //       this.showct4();
+    //       this.showct3();
+    //     });
+    //   });
+    // },
     fetchData1(ct1) {
-      var sendData = ct1;
-      var code = JSON.stringify(sendData);
+      var code = JSON.stringify(ct1);
       console.log(code);
       request.post("/api//data/salaryRe", { code }).then((res) => {
-        this.chartdata1.ydata = res.data[ct1 - 1];
-        // this.chartdata1.xdata = res.data.data.ct1;
-        console.log(res.data[ct1]);
+        this.chartdata1 = res.data[ct1 - 1];
+        console.log(res.data[ct1 - 1]);
         //解决 echarts动态渲染数据图形不生效问题:获取数据但不渲染，执行下一个循环才将数据渲染进echarts
         this.$nextTick(() => {
           this.showct1();
-          this.showct2();
-          this.showct4();
-          this.showct3();
         });
       });
     },
@@ -285,7 +297,7 @@ export default {
           {
             type: "line",
             showBackground: true,
-            data: this.chartdata1.ydata,
+            data:this.chartdata1,
             backgroundStyle: {
               color: "rgba(180, 180, 180, 0.1)",
             },
