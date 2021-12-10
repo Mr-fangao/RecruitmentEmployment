@@ -1,5 +1,7 @@
 // 跨域配置
 module.exports = {
+
+  
   publicPath: './',//解决打包部署找不到资源路径
   devServer: {                //记住，别写错了devServer//设置本地默认端口  选填
     port: 8098,
