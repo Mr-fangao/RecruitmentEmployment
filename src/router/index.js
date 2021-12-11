@@ -33,7 +33,7 @@ const routes = [
   {
     path: "/analysis",
     name: "analysis",
-    component: () => import("@/views/skillanalysis"),
+    component: () => import("@/views/regionalanalysis"),
   },
   {
     path: "/query",
