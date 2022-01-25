@@ -1,12 +1,11 @@
 <template>
   <div class="login">
-    <div class="header">
-      <img src="../assets/login/logo.png" />
-      <h1>行业招聘大数据分析与就业服务系统</h1>
-    </div>
     <div class="main">
+      <div class="header">
+        <h1>就业推荐与智能分析系统</h1>
+      </div>
       <div class="login_style">
-        <h2>用户平台登录</h2>
+        <h2>用户登录</h2>
         <el-form
           ref="loginFrom"
           :model="loginFrom"
@@ -37,7 +36,12 @@
             <el-checkbox class="check">记住登录密码</el-checkbox>
           </el-form-item>
           <el-form-item>
-            <el-button id="btn" class="button" type="primary" round @click="handleLogin"
+            <el-button
+              id="btn"
+              class="button"
+              type="primary"
+              round
+              @click="handleLogin"
               >立即登录</el-button
             >
           </el-form-item>
@@ -74,7 +78,7 @@ export default {
       request.post("/api/user/queryuser", this.loginFrom).then((res) => {
         console.log(res.code);
         if (res.code == "0") {
-          this.$router.push({ name: "skillanalysis" });
+          this.$router.push({ name: "recommend" });
         } else {
           this.$message({
             type: "error",
@@ -85,7 +89,6 @@ export default {
       // request.get("/api/data/querySalary", this.loginFrom).then((res) => {
       //   console.log(res.data);
       // });
-      
     },
   },
 };
@@ -97,51 +100,49 @@ export default {
   flex-direction: column;
   width: 100%;
   height: 100%;
-  background: url(../assets/login/login_background.jpg);
+  background: url(../assets/login/bg.jpeg);
   background-size: 100% 100%;
-  .header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 10%;
-    width: 100%;
-    img {
-      height: 40px;
-      margin-left: 20px;
-    }
-    h1 {
-      font-size: 24px;
-      color: #ffffff;
-      font-family: Microsoft YaHei;
-      font-weight: bold;
-      margin-left: 20px;
-    }
-  }
+
   .main {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 100%;
-    background-size: 100% 100%;
-    margin: 150px 0px;
+    margin: 120px 0px;
+    .header {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      height: 30%;
+      width: 100%;
+      padding-bottom: 15px;
+      
+      h1 {
+        font-size: 40px;
+        color: #ffffff;
+        font-family: Microsoft YaHei;
+        font-weight: bold;
+        margin-left: 10px;
+      }
+    }
     .login_style {
       display: flex;
       flex-direction: column;
       align-items: center;
       position: relative;
-      width: 40%;
+      width: 32%;
       height: 70%;
-      .login-from {
-        display: flex;
-        flex-direction: column;
-      }
+      background-color: rgba(79, 106, 135, 0.6);
       h2 {
         font-size: 20px;
         color: #ffffff;
         font-family: Microsoft YaHei;
         font-weight: bold;
-        margin-bottom: 20px;
+        margin-top: 20px;
+        margin-bottom: 10px;
       }
       img {
         height: 20px;
@@ -161,6 +162,8 @@ export default {
       }
       .button {
         width: 250px;
+        font-family: Microsoft YaHei;
+        font-weight: bold;
         margin-left: 15px;
       }
     }

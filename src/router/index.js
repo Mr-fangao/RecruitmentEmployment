@@ -11,38 +11,34 @@ const routes = [
     },
   },
   {
-    path: "/skillanalysis",
-    name: "skillanalysis",
-    component: () => import("@/views/skillanalysis"),
+    path: "/recommend",
+    name: "recommend",
+    component: () => import("@/views/recommend"),
+  },
+  {
+    path: "/skill",
+    name: "skill",
+    component: () => import("@/views/skill"),
   },
   {
     path: "/data",
     name: "data",
     component: () => import("@/views/data"),
   },
-  // {
-  //   path: "/about",
-  //   name: "About",
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () =>
-  //     import(/* webpackChunkName: "about" */ "../views/About.vue"),
-  // },
   {
-    path: "/analysis",
-    name: "analysis",
-    component: () => import("@/views/skillanalysis"),
+    path: "/skAnalysis",
+    name: "skAnalysis",
+    component: () => import("@/views/skAnalysis"),
   },
   {
     path: "/query",
     name: "query",
-    component: () => import("@/views/spatialquery"),
+    component: () => import("@/views/query"),
   },
   {
-    path: "/jobdetails",
-    name: "jobdetails",
-    component: () => import("@/views/datapanel/jobdetails"),
+    path: "/thememap",
+    name: "thememap",
+    component: () => import("@/views/thememap"),
   },
   {
     path: "/salary",

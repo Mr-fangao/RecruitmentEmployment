@@ -1,259 +1,108 @@
 <template>
-  <div>
-    <div class="tab-content">
-      <div
-        class="tab-content1"
-        @click="(cur = 1), gotoskillanalysis()"
-        :class="{ active: cur == 1 }"
-      >
-        <!-- <img src="../assets/img/icon/skillanalysis1.png" /> -->
-        技能分析
-      </div>
-      <div
-        class="tab-content2"
-        @click="(cur = 2), gotopostanalysis()"
-        :class="{ active: cur == 2 }"
-      >
-        岗位分析
-      </div>
-      <div
-        class="tab-content3"
-        @click="(cur = 3), gotoregionalanalysis()"
-        :class="{ active: cur == 3 }"
-      >
-        地区分析
-      </div>
-      <div class="tab-mid">网络招聘大数据分析与可视化系统</div>
-      <div
-        class="tab-content4"
-        @click="(cur = 4), gotospatialquery()"
-        :class="{ active: cur == 4 }"
-      >
-        空间查询
-      </div>
-      <div class="tab-content5">
-        <el-dropdown>
-          <span class="el-dropdown-link">
-            数据面板
-            <i class="fa fa-angle-down"></i>
-          </span>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item
-                @click="(cur = 5), gotojobdetails()"
-                :class="{ active: cur == 5 }"
-                >职位详情</el-dropdown-item
-              >
-              <el-dropdown-item
-                @click="(cur = 6), gotosalarystatistics()"
-                :class="{ active: cur == 6 }"
-                >薪资统计</el-dropdown-item
-              >
-              <el-dropdown-item
-                @click="(cur = 7), gotoeducationstatistics()"
-                :class="{ active: cur == 7 }"
-                >学历统计</el-dropdown-item
-              >
-              <el-dropdown-item
-                @click="(cur = 8), gotoworkexperience()"
-                :class="{ active: cur == 8 }"
-                >工作经验</el-dropdown-item
-              >
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
-      </div>
-      <div class="tab-content6">
-        <el-dropdown>
-          <span class="el-dropdown-link">
-            专题地图
-            <i class="fa fa-angle-down"></i>
-          </span>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item
-                @click="(cur = 9), gotopointaggregation()"
-                :class="{ active: cur == 9 }"
-                >点聚合</el-dropdown-item
-              >
-              <el-dropdown-item
-                @click="(cur = 10), gotosequential()"
-                :class="{ active: cur == 10 }"
-                >时序</el-dropdown-item
-              >
-              <el-dropdown-item
-                @click="(cur = 11), gotogradedcolor()"
-                :class="{ active: cur == 11 }"
-                >分级色彩</el-dropdown-item
-              >
-              <el-dropdown-item
-                @click="(cur = 12), gotopersonnelflow()"
-                :class="{ active: cur == 12 }"
-                >人员流向</el-dropdown-item
-              >
-              <el-dropdown-item
-                @click="(cur = 13), gotothermodynamic()"
-                :class="{ active: cur == 13 }"
-                >热力图
-              </el-dropdown-item>
-              <el-dropdown-item
-                @click="(cur = 14), gotofactorstatistics()"
-                :class="{ active: cur == 14 }"
-                >多要素统计</el-dropdown-item
-              >
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
-      </div>
-    </div>
-  </div>
+  <nav>
+    <ul>
+      <li>
+        <router-link to="/recommend" exact>智能推荐</router-link>
+        <router-link to="/query" exact>职位查询</router-link>
+        <router-link to="/data" exact>就业统计</router-link>
+        <h1>前程无忧 · 就业推荐与智能分析系统</h1>
+        <router-link to="/skAnalysis" exact>综合分析</router-link>
+        <router-link to="/skill" exact>技能分析</router-link>
+        <router-link to="/thememap" exact>专题地图</router-link>
+      </li>
+    </ul>
+    <span class="times">{{ time }}</span>
+  </nav>
 </template>
 
 <script>
-import "font-awesome/css/font-awesome.css";
 export default {
   data() {
     return {
-      cur: 1,
+      time: "08月31日 10:29",
     };
   },
+  mounted() {
+    this.currentTime();
+  },
   methods: {
-    gotoskillanalysis() {
-      this.$router.replace("/skillanalysis");
+    currentTime() {
+      setInterval(this.getTime, 500);
     },
-    gotopostanalysis() {
-      this.$router.replace("/data");
-    },
-    gotoregionalanalysis() {
-      this.$router.replace("/analysis");
-    },
-    gotospatialquery() {
-      this.$router.replace("/query");
-    },
-    gotojobdetails() {
-      this.$router.replace("/jobdetails");
-    },
-    gotosalarystatistics() {
-      this.$router.replace("/salary");
-    },
-    gotoeducationstatistics() {
-      this.$router.replace("/education");
-    },
-    gotoworkexperience() {
-      this.$router.replace("/experience");
-    },
-    gotopointaggregation() {
-      this.$router.replace("/aggregation");
-    },
-    gotosequential() {
-      this.$router.replace("/sequential");
-    },
-    gotogradedcolor() {
-      this.$router.replace("/graded");
-    },
-    gotopersonnelflow() {
-      this.$router.replace("/flow");
-    },
-    gotothermodynamic() {
-      this.$router.replace("/thermodynamic");
-    },
-    gotofactorstatistics() {
-      this.$router.replace("/factor");
+    getTime() {
+      let mm = new Date().getMonth() + 1;
+      let dd = new Date().getDate();
+      let hh = new Date().getHours();
+      let mf =
+        new Date().getMinutes() < 10
+          ? "0" + new Date().getMinutes()
+          : new Date().getMinutes();
+      let ss =
+        new Date().getSeconds() < 10
+          ? "0" + new Date().getSeconds()
+          : new Date().getSeconds();
+      this.time =
+        mm + "月" + dd + "日 " + hh + ":" + mf + ":" + ss;
     },
   },
 };
 </script>
 
 <style lang="less" scoped>
-.tab-content {
-  background: url(../assets/img/headerbg.png);
-  background-size: 100% 120%;
-  text-align: center;
-  height: 40px;
-  width: 100%;
+nav {
   display: flex;
   flex-direction: row;
-  color: #00d2df;
-  line-height: 50px;
-  font-weight: bold;
-  img {
-    height: 20px;
-    // filter: drop-shadow(-1px 0 0 #ffffff);
-  }
-  .tab-mid {
-    cursor: pointer;
-    flex: 6;
-    line-height: 44px;
-    font-family: 宋体;
-    font-size: 18pt;
-    font-weight: bold;
-    color: rgb(245, 245, 245);
-    background: linear-gradient(
-      0deg,
-      #6a86ff 0%,
-      #6a86ff 0%,
-      #87fffb 0%,
-      #FFFF 0%,
-      #00bfff 100%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  .tab-content1 {
-    cursor: pointer;
-    margin-left: 4%;
-    flex: 1;
+  align-items: center;
+  height: 50px;
+  background: url(../assets/img/headerbg.png);
+  background-size: 100% 100%;
+  padding: 0px;
+  .times {
     width: 50px;
-    height: 40px;
+    margin:0px 5px 0px 30px;
+    font-size: 10px;
+    float: right;
+    font-family: Microsoft YaHei;
+    
+    color: #ffffff;
   }
-  .tab-content2 {
-    cursor: pointer;
-    flex: 1;
-    width: 50px;
-    height: 40px;
-  }
-  .tab-content3 {
-    cursor: pointer;
-    flex: 1;
-    width: 50px;
-    height: 40px;
-  }
-  .tab-content4 {
-    cursor: pointer;
-    flex: 1;
-    width: 50px;
-    height: 40px;
-  }
-  .tab-content5 {
-    cursor: pointer;
-    flex: 1;
-    width: 50px;
-    height: 40px;
-    span {
-       color: #00d2df;
-      line-height: 50px;
-      font-weight: bold;
-      font-size: 16px;
-    }
-  }
-  .tab-content6 {
-    cursor: pointer;
-    margin-right: 4%;
-    flex: 1;
-    width: 50px;
-    height: 40px;
-    span {
-        color: #00d2df;
-      line-height: 50px;
-      font-weight: bold;
-      font-size: 16px;
+  ul {
+    height: 100%;
+    list-style-type: none; /*消除黑点*/
+    text-align: center;
+    margin: 0px;
+    li {
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin: 0px 0px 0px 40px;
+      
+      h1 {
+        font-size: 26px;
+        color: #ffffff;
+        font-family: Microsoft YaHei;
+      
+        margin:0px 105px 10px 160px;
+      }
+      a {
+        font-size: 18px;
+        color: #fff; /*设置字体颜色*/
+        font-family: Microsoft YaHei;
+        text-decoration: none; /*消除下划线*/
+        border-radius: 5px;
+        margin: 0px 0px 0px 45px;
+        padding:0px 2px 2px 2px;
+      }
     }
   }
 }
-.tab-content .active {
+/*选中则发生一些变化*/
+.router-link-active {
   cursor: pointer;
+
+  color: #ffffff;
   background: url(../assets/img/menucurrent.png);
-  background-position: 49% -81%;
-  color: #fff;
+  background-position: 49% 25%;
 }
 </style>

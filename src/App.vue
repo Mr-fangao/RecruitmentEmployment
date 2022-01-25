@@ -17,7 +17,6 @@ export default {
 
 <style lang="less" scoped>
 .app {
-  background: url(../src/assets/img/b1.png);
-    background-size: 100% 100%;
+  background: #021D33;
 }
 </style>
