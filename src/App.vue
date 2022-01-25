@@ -1,22 +1,29 @@
 <template>
-  <div id="app" class="app">
-    <Header v-show="$route.name !== 'Home'"></Header>
+  <div id="app">
+    <div class="header" v-if="$route.meta.keepAlive">
+      <pageheader></pageheader>
+    </div>
     <router-view />
   </div>
 </template>
 
 <script>
-import Header from "./components/Header";
+import pageheader from '../src/components/Header.vue';
 export default {
   name: "App",
   components: {
-    Header,
+    pageheader,
   },
 };
 </script>
 
-<style lang="less" scoped>
-.app {
-  background: #021D33;
+<style>
+#app {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 0px;
 }
 </style>

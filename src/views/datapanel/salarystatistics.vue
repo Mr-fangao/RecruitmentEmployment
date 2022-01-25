@@ -190,10 +190,11 @@
 //import axios from "axios";
 import "font-awesome/css/font-awesome.css";
 import request from "../../utils/request";
-//词云
-import wordCloud, {
-  translate,
-} from "../../assets/js/echarts-wordcloud-master/dist/echarts-wordcloud";
+
+// //词云
+// import wordCloud, {
+//   translate,
+// } from "../../assets/js/echarts-wordcloud-master/dist/echarts-wordcloud";
 let echarts = require("echarts/lib/echarts");
 require("echarts/lib/chart/bar");
 require("echarts/lib/chart/line");
