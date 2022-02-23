@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import pageheader from '../src/components/Header.vue';
+import pageheader from "../src/components/Header.vue";
 export default {
   name: "App",
   components: {
@@ -25,5 +25,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 0px;
+  background: url(../src/assets/img/bg.png);
+  background-size: 100% 100%;
 }
 </style>

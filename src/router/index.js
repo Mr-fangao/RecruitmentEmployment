@@ -14,14 +14,7 @@ export default new Router({
         keepAlive: false //
       }
     },
-    {
-      path: "/recommend",
-      name: "recommend",
-      component: () => import("@/views/recommend"),
-      meta: {
-        keepAlive: true //
-      }
-    },
+   
     {
       path: "/skill",
       name: "skill",
