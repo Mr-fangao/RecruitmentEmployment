@@ -15,7 +15,9 @@
 <script>
 export default {
   name: "query",
-  data() {},}
+  data() {
+     return {} 
+  },}
 </script>
 
 <style lang="less" scoped>
