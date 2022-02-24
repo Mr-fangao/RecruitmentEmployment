@@ -54,10 +54,13 @@ nav {
   align-items: center;
   height: 50px;
   padding: 0px;
+  img{
+    margin-left: 200px;
+  }
   .times {
-    width: 80px;
-    margin: 0px 5px 0px 30px;
-    font-size: 16px;
+    width: 160px;
+    margin-left: 10px;
+    font-size: 18px;
     float: right;
     font-family: Microsoft YaHei;
     color: #ffffff;
@@ -66,7 +69,7 @@ nav {
     height: 100%;
     list-style-type: none; /*消除黑点*/
     text-align: center;
-    margin: 0px;
+    padding-right: 70px;
     background: url(../assets/img/header_bg.png);
     background-size: 100% 100%;
     li {
@@ -77,9 +80,9 @@ nav {
       margin: 0px;
       h1 {
         font-size: 26px;
-        color: #1bcddd;
+        color: #fff;
         font-family: Microsoft YaHei;
-        margin: 0px 20px 0px 20px;
+        margin: 0px 60px 0px 20px;
       }
       a {
         font-size: 18px;
@@ -88,8 +91,8 @@ nav {
         font-family: Microsoft YaHei;
         text-decoration: none; /*消除下划线*/
         border-radius: 5px;
-        margin: 0px 0px 0px 45px;
-        padding: 0px 2px 2px 2px;
+        margin: 0px 50px 0px 0px;
+
         line-height: 32px;
       }
     }
