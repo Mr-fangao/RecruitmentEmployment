@@ -220,6 +220,7 @@ export default {
 }
 /deep/ .el-input--mini .el-input__inner {
   background-color: #3f5c6d2c;
+  color: #fff;
 }
 /deep/.el-table tbody tr:hover > td {
   background-color: #09e8f02c !important;
