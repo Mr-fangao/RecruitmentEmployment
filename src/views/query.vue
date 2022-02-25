@@ -3,7 +3,6 @@
     <div class="left">
       <div class="main"><div id="map"></div></div>
       <div class="bottom">
-        <div class="">
         <div class="hd">
           <span>123</span>
         </div>

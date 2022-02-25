@@ -127,5 +127,13 @@ export default new Router({
         keepAlive: true
       }
     },
+    {
+      path: "/job",
+      name: "job",
+      component: () => import("@/views/datapanel/jobdetails"),
+      meta: {
+        keepAlive: true //
+      }
+    },
   ]
 })

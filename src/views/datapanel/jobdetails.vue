@@ -209,29 +209,33 @@ export default {
 .el-table__expanded-cell {
   background-color: #3f5c6d2c;
 }
-:deep(.el-table .cell) {
+/deep/ .el-table .cell {
   text-align: center;
 }
 
 .el-pagination {
   margin: 10px 0px 0px 520px;
 }
-:deep(.el-input--mini .el-input__inner) {
+/deep/ .el-input--mini .el-input__inner {
   background-color: #3f5c6d2c;
 }
-:deep(.el-table tbody tr:hover > td) {
+/deep/.el-table tbody tr:hover > td {
   background-color: #09e8f02c !important;
 }
-:deep(.el-pagination .el-pager li) {
+/deep/.el-table tr{
+  background-color: #3f5c6d2c;
+  color: #fff;
+}
+/deep/ .el-pagination .el-pager li {
   background-color: #00a2ff2c;
   color: #fff;
   margin: 0 2px;
 }
-:deep(.el-pagination .btn-prev) {
+/deep/ .el-pagination .btn-prev {
   background-color: #00a2ff2c;
   color: #fff;
 }
-:deep(.el-pagination .btn-next) {
+/deep/ .el-pagination .btn-next {
   background-color: #00a2ff2c;
   color: #fff;
 }
