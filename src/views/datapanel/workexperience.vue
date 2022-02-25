@@ -633,7 +633,7 @@ export default {
   //   // outline: 1px dashed rgb(136, 27, 27);
   // }
   .item {
-    background: url(../../assets/img/pt/ptbackground.png) no-repeat;
+    background: url(../../assets/img/pt/ptbg.png) no-repeat;
     background-size: 100% 100%;
     text-align: center;
     font-size: 30px;

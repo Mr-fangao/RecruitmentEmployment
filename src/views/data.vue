@@ -500,22 +500,20 @@ export default {
   display: flex;
   flex-direction: column;
   padding: 10px;
-  background: url(../assets/img/pt/leftsidepart.png) no-repeat;
   opacity: 1;
-  background-size: 150% 100%;
   .pt1 {
     flex: 1;
-    background: url(../assets/img/pt/ptbackground.png) no-repeat;
+    background: url(../assets/img/pt/ptbg.png) no-repeat;
     background-size: 100% 100%;
   }
   .pt2 {
     flex: 1;
-    background: url(../assets/img/pt/ptbackground.png) no-repeat;
+    background: url(../assets/img/pt/ptbg.png) no-repeat;
     background-size: 100% 100%;
   }
   .pt3 {
     flex: 1;
-    background: url(../assets/img/pt/ptbackground.png) no-repeat;
+    background: url(../assets/img/pt/ptbg.png) no-repeat;
     background-size: 100% 100%;
   }
 }
@@ -528,23 +526,20 @@ export default {
   display: flex;
   flex-direction: column;
   padding: 10px;
-  background: url(../assets/img/pt/rightsidepart.png) no-repeat;
   opacity: 1;
-  background-size: 145% 100%;
-  background-position: 100% 10%;
   .pt4 {
     flex: 1;
-    background: url(../assets/img/pt/ptbackground.png) no-repeat;
+    background: url(../assets/img/pt/ptbg.png) no-repeat;
     background-size: 100% 100%;
   }
   .pt5 {
     flex: 1;
-    background: url(../assets/img/pt/ptbackground.png) no-repeat;
+    background: url(../assets/img/pt/ptbg.png) no-repeat;
     background-size: 100% 100%;
   }
   .pt6 {
     flex: 1;
-    background: url(../assets/img/pt/ptbackground.png) no-repeat;
+    background: url(../assets/img/pt/ptbg.png) no-repeat;
     background-size: 100% 100%;
   }
 }
