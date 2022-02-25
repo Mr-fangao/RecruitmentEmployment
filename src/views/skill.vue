@@ -38,11 +38,11 @@ export default {
   },
   methods: {
     initmap() {
-      mapboxgl.accessToken =
+      this.$mapboxgl.accessToken =
         "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
-      var map = new mapboxgl.Map({
+      var map = new this.$mapboxgl.Map({
         container: "map",
-        style: "mapbox:/ylesenjq/cl010ychv001214pdpa5xyq5a",
+        style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
         center: [105, 35],
         zoom: 3.5,
       });
@@ -55,7 +55,7 @@ export default {
 #map {
   position: relative;
   z-index: 0;
-    margin: 0;
+  margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
@@ -63,10 +63,12 @@ export default {
 .skill {
   position: fixed;
   display: flex;
-  height: calc(100% - 50px);
+  height: 100%;
+  width: 100%;
   background-color: transparent;
   .left {
-    position: absolute;z-index: 999;
+    position: absolute;
+    z-index: 999;
     top: 1;
     display: flex;
     height: 100%;

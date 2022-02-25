@@ -68,7 +68,7 @@ require("echarts/lib/component/tooltip");
 require("echarts/lib/component/title");
 require("echarts/lib/component/legend");
 
-const mapboxgl = require("mapbox-gl");
+// const mapboxgl = require("mapbox-gl");
 export default {
   name: "data",
   data() {},
