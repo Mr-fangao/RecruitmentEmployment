@@ -2,6 +2,7 @@
   <div class="table">
     <el-card shadow="hover" class="tebale_card">
       <el-input
+        prefix-icon="el-icon-search"
         v-model="search"
         size="mini"
         placeholder="输入关键字搜索"
@@ -36,8 +37,9 @@
           <template #default="scope"
             ><el-button size="mini" @click="dialogTableVisible = true"
               >详情</el-button
-            > <el-dialog v-model="dialogTableVisible" title="公司详情">
-             <el-form label-position="left" inline class="demo">
+            >
+            <el-dialog v-model="dialogTableVisible" title="公司详情">
+              <el-form label-position="left" inline class="demo">
                 <el-form-item label="公司名称">
                   <p>{{ scope.row.company }}</p>
                 </el-form-item>
@@ -192,7 +194,7 @@ export default {
 <style lang="less" scoped>
 .table {
   padding: 10px;
-  height: calc(100% - 40px);
+  height: calc(100% - 50px);
 }
 .tebale_card {
   background-color: #00a2ff2c;
@@ -222,7 +224,7 @@ export default {
 /deep/.el-table tbody tr:hover > td {
   background-color: #09e8f02c !important;
 }
-/deep/.el-table tr{
+/deep/.el-table tr {
   background-color: #3f5c6d2c;
   color: #fff;
 }
