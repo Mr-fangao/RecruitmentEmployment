@@ -92,16 +92,13 @@ nav {
         text-decoration: none; /*消除下划线*/
         border-radius: 5px;
         margin: 0px 50px 0px 0px;
-
         line-height: 32px;
       }
     }
   }
 }
 /*选中则发生一些变化*/
-
 .router-link-active {
-  cursor: pointer;
   color: #1bcddd;
   background: url(../assets/img/menucurrent.png);
   background-size: 100% 100%;
