@@ -12,12 +12,12 @@
     <div class="table">
       <el-card shadow="hover" class="tebale_card">
         <el-table
-          border
           style="width: 100%; align: center"
           :row-style="getRowClass"
           :header-row-style="getRowClass"
           :header-cell-style="getRowClass"
           :data="tableData"
+          :cell-style="{padding:'2px 0'}"
           :height="getheight"
         >
           <el-table-column prop="time" label="发布日期" width="120">
@@ -126,7 +126,7 @@ export default {
       }
     },
     getHeight() {
-      this.getheight = window.innerHeight - 170 + "px";
+      this.getheight = window.innerHeight - 520 + "px";
     },
     //加载表格数据
     load() {
@@ -229,12 +229,16 @@ export default {
 .tebale_card {
   background-color: #00a2ff2c;
   height: 100%;
-  .el-input {
-    width: 300px;
-    margin: 0px 20px 10px 72%;
-  }
+  border: none;
 }
-:deep(.el-overlay) {
+.el-input {
+    width: 300px;
+    margin: 0px 20px 10px 0px;
+  }
+/deep/.el-card__body{
+  padding: 10px;
+}
+/deep/.el-overlay {
   background-color: rgba(255, 255, 255, 0.02);
 }
 .el-table,
