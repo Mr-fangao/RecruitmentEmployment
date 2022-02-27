@@ -80,7 +80,7 @@ nav {
       margin: 0px;
       h1 {
         font-size: 26px;
-        color: #fff;
+        color: #1bcddd;
         font-family: Microsoft YaHei;
         margin: 0px 60px 0px 20px;
       }
