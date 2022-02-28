@@ -42,6 +42,7 @@
 </template>
 
 <script>
+const mapboxgl = require("mapbox-gl");
 export default {
   name: "skill",
   data() {
@@ -54,12 +55,13 @@ export default {
     initmap() {
       this.$mapboxgl.accessToken =
         "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
-      var map = new this.$mapboxgl.Map({
+      this.map = new mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
         center: [105, 35],
         zoom: 3.5,
       });
+    
     },
   },
 };

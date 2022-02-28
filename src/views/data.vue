@@ -1,56 +1,55 @@
 <template>
-  <div id="map">
-    <div class="container">
-      <div class="left-part">
-        <div class="pt1">
-          <header>
-            <div class="header-title">TOP10城市薪资水平</div>
-          </header>
-          <div class="Lechartcontent">
-            <div id="chart1" :style="{ width: '110%', height: '100%' }"></div>
-          </div>
-        </div>
-        <div class="pt2">
-          <header>
-            <div class="header-title">TOP10城市薪资水平</div>
-          </header>
-          <div class="Lechartcontent">
-            <div id="chart2" :style="{ width: '110%', height: '100%' }"></div>
-          </div>
-        </div>
-        <div class="pt3">
-          <header>
-            <div class="header-title">TOP10城市薪资水平</div>
-          </header>
-          <div class="Lechartcontent">
-            <div id="chart3" :style="{ width: '110%', height: '100%' }"></div>
-          </div>
+  <div class="container">
+    <div id="map" />
+    <div class="left-part">
+      <div class="pt1">
+        <header>
+          <div class="header-title">TOP10城市薪资水平</div>
+        </header>
+        <div class="Lechartcontent">
+          <div id="chart1" :style="{ width: '110%', height: '100%' }"></div>
         </div>
       </div>
-      <div class="right-part">
-        <div class="pt4">
-          <header>
-            <div class="header-title">TOP10城市薪资水平</div>
-          </header>
-          <div class="Lechartcontent">
-            <div id="chart4" :style="{ width: '100%', height: '100%' }"></div>
-          </div>
+      <div class="pt2">
+        <header>
+          <div class="header-title">TOP10城市薪资水平</div>
+        </header>
+        <div class="Lechartcontent">
+          <div id="chart2" :style="{ width: '110%', height: '100%' }"></div>
         </div>
-        <div class="pt5">
-          <header>
-            <div class="header-title">TOP10城市薪资水平</div>
-          </header>
-          <div class="Lechartcontent">
-            <div id="chart5" :style="{ width: '100%', height: '100%' }"></div>
-          </div>
+      </div>
+      <div class="pt3">
+        <header>
+          <div class="header-title">TOP10城市薪资水平</div>
+        </header>
+        <div class="Lechartcontent">
+          <div id="chart3" :style="{ width: '110%', height: '100%' }"></div>
         </div>
-        <div class="pt6">
-          <header>
-            <div class="header-title">TOP10城市薪资水平</div>
-          </header>
-          <div class="Lechartcontent">
-            <div id="chart6" :style="{ width: '100%', height: '100%' }"></div>
-          </div>
+      </div>
+    </div>
+    <div class="right-part">
+      <div class="pt4">
+        <header>
+          <div class="header-title">TOP10城市薪资水平</div>
+        </header>
+        <div class="Lechartcontent">
+          <div id="chart4" :style="{ width: '100%', height: '100%' }"></div>
+        </div>
+      </div>
+      <div class="pt5">
+        <header>
+          <div class="header-title">TOP10城市薪资水平</div>
+        </header>
+        <div class="Lechartcontent">
+          <div id="chart5" :style="{ width: '100%', height: '100%' }"></div>
+        </div>
+      </div>
+      <div class="pt6">
+        <header>
+          <div class="header-title">TOP10城市薪资水平</div>
+        </header>
+        <div class="Lechartcontent">
+          <div id="chart6" :style="{ width: '100%', height: '100%' }"></div>
         </div>
       </div>
     </div>
@@ -68,7 +67,7 @@ require("echarts/lib/component/tooltip");
 require("echarts/lib/component/title");
 require("echarts/lib/component/legend");
 
-// const mapboxgl = require("mapbox-gl");
+const mapboxgl = require("mapbox-gl");
 export default {
   name: "data",
   data() {},
@@ -90,19 +89,16 @@ export default {
   methods: {
     //地图服务初始化
     initmap() {
-      mapboxgl.accessToken =
-        "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg"; //这里请换成自己的token
-      var map = new mapboxgl.Map({
-        container: "map", // container id 绑定的组件的id
-        style: "mapbox://styles/chenjq/ckqkfcjks2rpq17r1wcs2k81x", //地图样式，可以使用官网预定义的样式,也可以自定义
-        center: [103.06756, 38.050558], // 初始坐标系，这个是南京建邺附近
-        zoom: 3, // starting zoom 地图初始的拉伸比例
-        pitch: 0, //地图的角度，不写默认是0，取值是0-60度，一般在3D中使用
-        bearing: 0, //地图的初始方向，值是北的逆时针度数，默认是0，即是正北
-        antialias: true, //抗锯齿，通过false关闭提升性能
-        attributionControl: false,
+      this.$mapboxgl.accessToken =
+        "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
+      this.map = new mapboxgl.Map({
+        container: "map",
+        style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
+        center: [105, 35],
+        zoom: 3.5,
       });
     },
+    
     chart1() {
       // 基于准备好的dom，初始化echarts实例
       let Chart1 = echarts.init(document.getElementById("chart1"));
@@ -481,21 +477,27 @@ export default {
 </script>
 
 <style lang="less" scoped>
-// div {
-
-//   outline: 1px dashed rgb(136, 27, 27);
-// }
-.map {
+.container{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+}
+#map {
   position: relative;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
 }
 .Lechartcontent {
-  height: calc(100% - 32px);
+  height: 100%;
   width: 100%;
 }
 .left-part {
   position: absolute;
-  height: 100%;
+  height: 91%;
   width: 22%;
+  left: 0px;
+  top: 0px;
   float: left;
   display: flex;
   flex-direction: column;
@@ -519,10 +521,11 @@ export default {
 }
 .right-part {
   position: absolute;
-  right: 0%;
-  height: 100%;
+  right: 0px;
+  top: 0px;
+  height: 90%;
   width: 22%;
-  float: right;
+  float: left;
   display: flex;
   flex-direction: column;
   padding: 10px;

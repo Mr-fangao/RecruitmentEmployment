@@ -13,6 +13,7 @@
       <el-card shadow="hover" class="tebale_card">
         <el-table
           style="width: 100%; align: center"
+          :row-click="Detail"
           :row-style="getRowClass"
           :header-row-style="getRowClass"
           :header-cell-style="getRowClass"
@@ -22,47 +23,61 @@
         >
           <el-table-column prop="time" label="发布日期" width="120">
           </el-table-column>
-          <el-table-column prop="company" label="公司名称"> </el-table-column>
-          <el-table-column prop="position" label="岗位名称" width="210">
+          <el-table-column
+            prop="company"
+            label="公司名称"
+            :show-overflow-tooltip="true"
+          >
           </el-table-column>
-          <el-table-column prop="region" label="工作地区" width="120">
+          <el-table-column
+            prop="position"
+            label="岗位名称"
+            width="210"
+            :show-overflow-tooltip="true"
+          >
+          </el-table-column>
+          <el-table-column prop="region" label="工作地区" width="100">
           </el-table-column
-          ><el-table-column prop="salary" label="薪资范围" width="120">
+          ><el-table-column prop="salary" label="薪资范围" width="100">
           </el-table-column
-          ><el-table-column prop="require" label="学历要求" width="120">
+          ><el-table-column prop="require" label="学历要求" width="100">
           </el-table-column
-          ><el-table-column prop="experience" label="工作经验" width="120">
+          ><el-table-column prop="experience" label="工作经验" width="100">
           </el-table-column
           ><el-table-column prop="type" label="公司类型" width="120">
           </el-table-column
           ><el-table-column prop="type" label="公司规模" width="120">
           </el-table-column>
           <el-table-column prop="detail" label="详细信息" width="120">
-            <template #default="scope"
-              ><el-button size="mini" @click="dialogTableVisible = true"
-                >详情</el-button
-              >
-              <el-dialog v-model="dialogTableVisible" title="公司详情">
-                <el-form label-position="left" inline class="demo">
-                  <el-form-item label="公司名称">
-                    <p>{{ scope.row.company }}</p>
-                  </el-form-item>
-                  <el-form-item label="岗位名称">
-                    <p>{{ scope.row.position }}</p>
-                  </el-form-item>
-                  <el-form-item label="工作地区">
-                    <p>{{ scope.row.region }}</p>
-                  </el-form-item>
-                </el-form>
-              </el-dialog></template
+            <el-button size="mini" @click="Detail(val)">详情</el-button>
+            <poppage
+              :show="show"
+              :porpID="porpID"
+              @hideModal="hideModal"
+              @submit="submit"
             >
+              <p>这里放弹窗的内容</p>
+            </poppage>
+            <!-- <el-dialog title="公司详情" :visible.sync="dialogTableVisible" append-to-body>
+                <el-table :data="tableData">
+                  <el-table-column label="公司名称"
+                    ><p>{{ scope.row.company }}</p></el-table-column
+                  >
+                  <el-table-column label="岗位名称"
+                    ><p>{{ scope.row.position }}</p></el-table-column
+                  >
+                  <el-table-column label="工作地区"
+                    ><p>{{ scope.row.region }}</p></el-table-column
+                  >
+                </el-table>
+              </el-dialog> -->
           </el-table-column>
         </el-table>
-        <div style="margin: 10px 0">
+        <div style="margin: 5px 0px">
           <el-pagination
             @current-change="handleCurrentChange"
             :current-page="currentPage"
-            :page-size="9"
+            :page-size="pageSize"
             layout="total ,prev, pager, next, jumper"
             :total="total"
             @click="Click"
@@ -76,16 +91,22 @@
 </template>
 
 <script>
+const mapboxgl = require("mapbox-gl");
 import request from "../utils/request";
+import poppage from "../components/poppage.vue";
 export default {
   name: "query",
+  components: { poppage },
   data() {
     return {
       total: 0,
       currentPage: 1,
       search: "",
-      dialogTableVisible: false,
+      show: false,
+      // dialogTableVisible: false,
       tableData: [],
+      pageSize: 5,
+      porpID: "",
       // transTitle: ["", "学生1", "学生2", "学生3"], // transTitle 该标题为转化后的标题
     };
   },
@@ -116,6 +137,24 @@ export default {
     // });
   },
   methods: {
+    Detail(val) {
+      let thisRowData = this;
+      thisRowData = val;
+      console.log(val);
+      this.showPop(val);
+    },
+    showPop(val) {
+      this.porpID = val.id;
+      this.show = true;
+    },
+    hideModal() {
+      // 取消弹窗回调
+      this.show = false;
+    },
+    submit() {
+      // 确认弹窗回调
+      this.show = false;
+    },
     getRowClass({ row, column, rowIndex, columnIndex }) {
       return "background:#3f5c6d2c;color:#FFF;";
     },
@@ -126,7 +165,7 @@ export default {
       }
     },
     getHeight() {
-      this.getheight = window.innerHeight - 520 + "px";
+      this.getheight = window.innerHeight - 505 + "px";
     },
     //加载表格数据
     load() {
@@ -196,7 +235,7 @@ export default {
     initmap() {
       this.$mapboxgl.accessToken =
         "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
-      var map = new this.$mapboxgl.Map({
+      this.map = new mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
         center: [105, 35],
@@ -213,9 +252,15 @@ export default {
   height: 100%;
   width: 100%;
 }
+.cx {
+  position: absolute;
+  top: 10px;
+  left: 0px;
+  width: 20%;
+}
 .table {
   position: absolute;
-  bottom: 58px;
+  bottom: 52px;
   right: 0px;
   width: 85%;
   height: 40%;
@@ -227,13 +272,13 @@ export default {
   z-index: 0;
 }
 .tebale_card {
-  background-color: #00a2ff2c;
+  background-color: #00a2ff49;
   height: 100%;
   border: none;
 }
 .el-input {
-  width: 300px;
-  margin: 0px 20px 10px 0px;
+  width: 200px;
+  margin-right: 20px;
 }
 /deep/.el-card__body {
   padding: 10px;
@@ -253,14 +298,16 @@ export default {
   text-align: center;
 }
 /deep/.el-table::before {
-        background-color: transparent;
-      }
-.el-pagination {
-  margin: 10px 0px 0px 520px;
+  background-color: transparent;
+}
+/deep/.el-pagination__total,
+/deep/.el-pagination__jump {
+  color: #fff;
 }
 /deep/ .el-input--mini .el-input__inner {
   background-color: #3f5c6d2c;
   color: #fff;
+  border: 2px solid #fff;
 }
 /deep/.el-table tbody tr:hover > td {
   background-color: #09e8f02c !important;
@@ -269,15 +316,8 @@ export default {
   background-color: #3f5c6d2c;
   color: #fff;
 }
-/deep/ .el-pagination .el-pager li {
-  background-color: #00a2ff2c;
-  color: #fff;
-  margin: 0 2px;
-}
-/deep/ .el-pagination .btn-prev {
-  background-color: #00a2ff2c;
-  color: #fff;
-}
+/deep/ .el-pagination .el-pager li,
+/deep/ .el-pagination .btn-prev,
 /deep/ .el-pagination .btn-next {
   background-color: #00a2ff2c;
   color: #fff;

@@ -19,12 +19,11 @@ export default {
 
 <style>
 #app {
-
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  background-color:#183a56;
+  background-color:#183a56f5;
   margin-top: 0px;
 }
 </style>
