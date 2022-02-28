@@ -17,7 +17,7 @@
           :header-row-style="getRowClass"
           :header-cell-style="getRowClass"
           :data="tableData"
-          :cell-style="{padding:'2px 0'}"
+          :cell-style="{ padding: '2px 0' }"
           :height="getheight"
         >
           <el-table-column prop="time" label="发布日期" width="120">
@@ -232,23 +232,29 @@ export default {
   border: none;
 }
 .el-input {
-    width: 300px;
-    margin: 0px 20px 10px 0px;
-  }
-/deep/.el-card__body{
+  width: 300px;
+  margin: 0px 20px 10px 0px;
+}
+/deep/.el-card__body {
   padding: 10px;
 }
 /deep/.el-overlay {
   background-color: rgba(255, 255, 255, 0.02);
 }
-.el-table,
+/deep/.el-table,
 .el-table__expanded-cell {
   background-color: #3f5c6d2c;
+}
+/deep/.el-table td.el-table__cell,
+/deep/.el-table th.el-table__cell.is-leaf {
+  border: transparent !important;
 }
 /deep/ .el-table .cell {
   text-align: center;
 }
-
+/deep/.el-table::before {
+        background-color: transparent;
+      }
 .el-pagination {
   margin: 10px 0px 0px 520px;
 }
