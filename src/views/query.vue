@@ -174,7 +174,7 @@ export default {
       }
     },
     getHeight() {
-      this.getheight = window.innerHeight - 505 + "px";
+      this.getheight = window.innerHeight - 495 + "px";
     },
     //加载表格数据
     load() {
@@ -265,7 +265,7 @@ export default {
       });
     },
   },
-  watch:{},
+  watch: {},
 };
 </script>
 
@@ -280,12 +280,23 @@ export default {
   top: 10px;
   left: 0px;
   width: 20%;
+  .el-input {
+    width: 200px;
+    margin-right: 20px;
+    background-image: url("../assets/img/fq/bg9.png");
+    background-size: 100% 100%;
+  }
+  .el-button {
+    background-color: #225e81e3;
+    border-color: #1edaeb;
+    color: #fff;
+  }
 }
 .table {
   position: absolute;
-  bottom: 52px;
+  bottom: 46px;
   right: 0px;
-  width: 85%;
+  width: 90%;
   height: 40%;
 }
 #map {
@@ -295,14 +306,11 @@ export default {
   z-index: 0;
 }
 .tebale_card {
-  background-color: #00a2ff49;
+  background-color: #18608aad;
   height: 100%;
-  border: none;
+  border-color: #1edaeb;
 }
-.el-input {
-  width: 200px;
-  margin-right: 20px;
-}
+
 /deep/.el-card__body {
   padding: 10px;
 }
@@ -330,7 +338,7 @@ export default {
 /deep/ .el-input--mini .el-input__inner {
   background-color: #3f5c6d2c;
   color: #fff;
-  border: 2px solid #fff;
+  border: none;
 }
 /deep/.el-table tbody tr:hover > td {
   background-color: #09e8f02c !important;

@@ -2,52 +2,52 @@
   <div class="container">
     <div id="map" />
     <div class="left-part">
-      <div class="pt1">
-        <header>
-          <div class="header-title">TOP10城市薪资水平</div>
-        </header>
+      <div class="pt pt1">
+        <div class="hd">
+          <span>TOP10城市薪资水平</span>
+        </div>
         <div class="Lechartcontent">
           <div id="chart1" :style="{ width: '110%', height: '100%' }"></div>
         </div>
       </div>
-      <div class="pt2">
-        <header>
-          <div class="header-title">TOP10城市薪资水平</div>
-        </header>
+      <div class="pt pt2">
+        <div class="hd">
+          <span>TOP10城市薪资水平</span>
+        </div>
         <div class="Lechartcontent">
           <div id="chart2" :style="{ width: '110%', height: '100%' }"></div>
         </div>
       </div>
-      <div class="pt3">
-        <header>
-          <div class="header-title">TOP10城市薪资水平</div>
-        </header>
+      <div class="pt pt3">
+        <div class="hd">
+          <span>TOP10城市薪资水平</span>
+        </div>
         <div class="Lechartcontent">
           <div id="chart3" :style="{ width: '110%', height: '100%' }"></div>
         </div>
       </div>
     </div>
     <div class="right-part">
-      <div class="pt4">
-        <header>
-          <div class="header-title">TOP10城市薪资水平</div>
-        </header>
+      <div class="pt pt4">
+        <div class="hd">
+          <span>TOP10城市薪资水平</span>
+        </div>
         <div class="Lechartcontent">
           <div id="chart4" :style="{ width: '100%', height: '100%' }"></div>
         </div>
       </div>
-      <div class="pt5">
-        <header>
-          <div class="header-title">TOP10城市薪资水平</div>
-        </header>
+      <div class="pt pt5">
+        <div class="hd">
+          <span>TOP10城市薪资水平</span>
+        </div>
         <div class="Lechartcontent">
           <div id="chart5" :style="{ width: '100%', height: '100%' }"></div>
         </div>
       </div>
-      <div class="pt6">
-        <header>
-          <div class="header-title">TOP10城市薪资水平</div>
-        </header>
+      <div class="pt pt6">
+        <div class="hd">
+          <span>TOP10城市薪资水平</span>
+        </div>
         <div class="Lechartcontent">
           <div id="chart6" :style="{ width: '100%', height: '100%' }"></div>
         </div>
@@ -98,7 +98,7 @@ export default {
         zoom: 3.5,
       });
     },
-    
+
     chart1() {
       // 基于准备好的dom，初始化echarts实例
       let Chart1 = echarts.init(document.getElementById("chart1"));
@@ -477,7 +477,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.container{
+.container {
   position: fixed;
   height: 100%;
   width: 100%;
@@ -501,22 +501,18 @@ export default {
   float: left;
   display: flex;
   flex-direction: column;
-  padding: 10px;
   opacity: 1;
   .pt1 {
-    flex: 1;
-    background: url(../assets/img/pt/ptbg.png) no-repeat;
-    background-size: 100% 100%;
+    width: 100%;
+    height: 33%;
   }
   .pt2 {
-    flex: 1;
-    background: url(../assets/img/pt/ptbg.png) no-repeat;
-    background-size: 100% 100%;
+    width: 100%;
+    height: 33%;
   }
   .pt3 {
-    flex: 1;
-    background: url(../assets/img/pt/ptbg.png) no-repeat;
-    background-size: 100% 100%;
+    width: 100%;
+    height: 33%;
   }
 }
 .right-part {
@@ -528,22 +524,43 @@ export default {
   float: left;
   display: flex;
   flex-direction: column;
-  padding: 10px;
   opacity: 1;
   .pt4 {
-    flex: 1;
-    background: url(../assets/img/pt/ptbg.png) no-repeat;
-    background-size: 100% 100%;
+    width: 100%;
+    height: 33%;
   }
   .pt5 {
-    flex: 1;
-    background: url(../assets/img/pt/ptbg.png) no-repeat;
-    background-size: 100% 100%;
+    width: 100%;
+    height: 33%;
   }
   .pt6 {
-    flex: 1;
-    background: url(../assets/img/pt/ptbg.png) no-repeat;
-    background-size: 100% 100%;
+    width: 100%;
+    height: 33%;
+  }
+}
+.pt {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  margin: 10px 0px 0px 10px;
+  background: url(../assets/img/pt/ptbg.png) no-repeat;
+  background-size: 100% 100%;
+  .hd {
+    display: flex;
+    width: 75%;
+    margin: 10px;
+    height: 28px;
+    background: url(../assets/img/pt/pt_title1.png) no-repeat;
+    background-size: 100% 82%;
+    span {
+      font-size: 17px;
+      margin-left: 23px;
+      line-height: 23px;
+
+      color: #fff;
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #38e9e0,
+        0 0 70px #0cf3f3;
+    }
   }
 }
 </style>

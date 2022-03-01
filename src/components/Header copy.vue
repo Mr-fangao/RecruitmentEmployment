@@ -2,11 +2,10 @@
   <nav>
     <ul>
       <li>
-        <h1>就业推荐与智能分析系统</h1>
         <router-link to="/query" exact>职位查询</router-link>
         <router-link to="/data" exact>就业统计</router-link>
         <router-link to="/skAnalysis" exact>综合分析</router-link>
-
+        <h1>就业推荐与智能分析系统</h1>
         <router-link to="/skill" exact>技能分析</router-link>
         <router-link to="/thememap" exact>专题地图</router-link>
       </li>
@@ -55,14 +54,15 @@ nav {
   align-items: center;
   height: 45px;
   padding: 0px;
-
+  background: url(../assets/img/old/headerbg3.png);
+  background-size: 100% 100%;
   img {
-    margin-left: 280px;
+    margin-left: 40px;
   }
   .times {
-    width: 140px;
+    width: 80px;
     margin-left: 10px;
-    font-size: 18px;
+    font-size: 17px;
     float: right;
     font-family: Microsoft YaHei;
     color: #ffffff;
@@ -71,20 +71,18 @@ nav {
     height: 100%;
     list-style-type: none; /*消除黑点*/
     text-align: center;
-    background: url(../assets/img/header_bg.png);
-    background-size: 100% 100%;
+
     li {
       height: 100%;
       display: flex;
       flex-direction: row;
       align-items: center;
       margin-left: 10px;
-      margin-right: 30px;
       h1 {
         font-size: 26px;
-        color: #1bcddd;
+        color: #fff;
         font-family: Microsoft YaHei;
-        margin: 0px 30px 0px 10px;
+        margin: 9px 200px 0px 200px;
       }
       a {
         font-size: 18px;
@@ -93,7 +91,7 @@ nav {
         font-family: Microsoft YaHei;
         text-decoration: none; /*消除下划线*/
         border-radius: 5px;
-        margin-right: 40px;
+        margin: 10px 20px 0px 20px;
         line-height: 32px;
       }
     }
@@ -102,8 +100,8 @@ nav {
 /*选中则发生一些变化*/
 .router-link-active {
   color: #1bcddd;
-  background: url(../assets/img/menucurrent.png);
-  background-size: 100% 100%;
-
+  background: url(../assets/img/old/menucurrent1.png);
+  background-size: 150% 150%;
+  background-position: -23px -1px;
 }
 </style>

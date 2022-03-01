@@ -5,7 +5,8 @@
       <div class="pt pt1">
         <div class="hd">
           <span>123</span>
-        </div></div>
+        </div>
+      </div>
       <div class="pt pt2">
         <div class="hd">
           <span>123</span>
@@ -13,13 +14,12 @@
         <div id="Chart"></div>
       </div>
     </div>
-        <div class="middle">
+    <div class="middle">
       <div class="pt pt3">
         <div class="hd">
           <span>123</span>
         </div>
       </div>
-      
     </div>
     <div class="right">
       <div class="pt pt4">
@@ -61,7 +61,6 @@ export default {
         center: [105, 35],
         zoom: 3.5,
       });
-    
     },
   },
 };
@@ -96,7 +95,7 @@ export default {
     height: 70%;
   }
 }
-.middle{
+.middle {
   position: absolute;
   bottom: 0px;
   right: 32%;
@@ -104,7 +103,7 @@ export default {
   width: 34%;
   float: left;
   display: flex;
-.pt3 {
+  .pt3 {
     width: 90%;
     height: 75%;
   }
@@ -137,17 +136,18 @@ export default {
   width: 100%;
   height: 100%;
   margin: 10px 0px 0px 10px;
-  background: url(../assets/img/pt/pt_bg.png) no-repeat;
+  background: url(../assets/img/pt/ptbg.png) no-repeat;
   background-size: 100% 100%;
   .hd {
     display: flex;
-    width: 100%;
-    height: 30px;
-    margin-top: 5px;
-    background: url(../assets/img/pt/h_bg.png) no-repeat;
-    background-size: 50% 100%;
+    width: 65%;
+    margin: 10px;
+    height: 28px;
+    background: url(../assets/img/pt/pt_title1.png) no-repeat;
+    background-size: 100% 100%;
     span {
-      margin-left: 20px;
+      font-size: 18px;
+      margin-left: 32px;
       line-height: 30px;
       font-size: 18px;
       color: #fff;

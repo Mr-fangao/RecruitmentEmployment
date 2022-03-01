@@ -24,6 +24,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   background-color:#183a56f5;
+  background-image: url("../src/assets/img/old/mainbg.jpg");
   margin-top: 0px;
 }
 </style>
