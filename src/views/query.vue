@@ -49,15 +49,18 @@
           ><el-table-column prop="type" label="公司规模" width="120">
           </el-table-column>
           <el-table-column prop="detail" label="详细信息" width="120">
-            <el-button size="mini" @click="Detail(val)">详情</el-button>
-            <poppage
-              :show="show"
-              :porpID="porpID"
-              @hideModal="hideModal"
-              @submit="submit"
-            >
-              <p>这里放弹窗的内容</p>
-            </poppage>
+            <template slot-scope="scope">
+              <el-button
+                type="text"
+                @click="flyToLocation(scope.row.x, scope.row.y)"
+                >定位</el-button
+              >
+              <el-button
+                type="text"
+                @click="flyToLocation(scope.row.x, scope.row.y)"
+                >详情</el-button
+              >
+            </template>
             <!-- <el-dialog title="公司详情" :visible.sync="dialogTableVisible" append-to-body>
                 <el-table :data="tableData">
                   <el-table-column label="公司名称"
@@ -82,6 +85,7 @@
             :total="total"
             @click="Click"
             background
+            small
           >
           </el-pagination>
         </div>
@@ -137,23 +141,28 @@ export default {
     // });
   },
   methods: {
-    Detail(val) {
-      let thisRowData = this;
-      thisRowData = val;
-      console.log(val);
-      this.showPop(val);
+    Detail(row) {
+      console.log(row);
     },
-    showPop(val) {
-      this.porpID = val.id;
-      this.show = true;
-    },
-    hideModal() {
-      // 取消弹窗回调
-      this.show = false;
-    },
-    submit() {
-      // 确认弹窗回调
-      this.show = false;
+    // showPop(val) {
+    //   this.porpID = val.id;
+    //   this.show = true;
+    // },
+    // hideModal() {
+    //   // 取消弹窗回调
+    //   this.show = false;
+    // },
+    // submit() {
+    //   // 确认弹窗回调
+    //   this.show = false;
+    // },
+    flyToLocation(x, y) {
+      console.log(x, y);
+      this.map.flyTo({
+        center: [x, y], // 中心点
+        zoom: 16.5, // 缩放比例
+        pitch: 45, // 倾斜度
+      });
     },
     getRowClass({ row, column, rowIndex, columnIndex }) {
       return "background:#3f5c6d2c;color:#FFF;";
@@ -172,13 +181,14 @@ export default {
       request
         .post("/api/data/queryForm", {
           pageNum: this.currentPage,
-          // pageSize: this.pageSize,
+          pageSize: this.pageSize,
           // search: this.search,
         })
         .then((res) => {
           console.log(res);
           this.tableData = res.data.jobInfos;
           this.total = res.data.total;
+          this.pagecount = res.data.pages;
         });
     },
     //获取当前页面数据
@@ -208,20 +218,32 @@ export default {
     },
     handleCurrentChange(val) {
       //页码切换
-      console.log("当前页:${val}");
+      // console.log("当前页:${val}");
+      // this.currentPage = val;
       this.currentPage = val;
+      console.log(val);
+      request
+        .post("/api/data/queryForm", {
+          pageNum: val,
+          pageSize: this.pageSize,
+        })
+        .then((res) => {
+          console.log(res, val);
+          this.tableData = res.data.jobInfos;
+          this.pageSize = res.data.pages;
+        });
     },
     //分页方法（重点）
-    currentChangePage(list, currentPage) {
-      let from = (currentPage - 1) * this.pageSize;
-      let to = currentPage * this.pageSize;
-      this.tableData = [];
-      for (; from < to; from++) {
-        if (list[from]) {
-          this.tableData.push(list[from]);
-        }
-      }
-    },
+    // currentChangePage(list, currentPage) {
+    //   let from = (currentPage - 1) * this.pageSize;
+    //   let to = currentPage * this.pageSize;
+    //   this.tableData = [];
+    //   for (; from < to; from++) {
+    //     if (list[from]) {
+    //       this.tableData.push(list[from]);
+    //     }
+    //   }
+    // },
     //获取详细信息
     // rowDbclick(row, column) {
     //   var id = row.ID;
@@ -243,6 +265,7 @@ export default {
       });
     },
   },
+  watch:{},
 };
 </script>
 
