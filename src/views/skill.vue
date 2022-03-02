@@ -146,7 +146,6 @@ export default {
     background: url(../assets/img/pt/pt_title1.png) no-repeat;
     background-size: 100% 100%;
     span {
-      font-size: 18px;
       margin-left: 32px;
       line-height: 30px;
       font-size: 18px;
