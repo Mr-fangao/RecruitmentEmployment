@@ -5,7 +5,7 @@
         <router-link to="/query" exact>职位查询</router-link>
         <router-link to="/data" exact>就业统计</router-link>
         <router-link to="/skAnalysis" exact>综合分析</router-link>
-        <h1>就业推荐与智能分析系统</h1>
+        <h1>GIS类专业招聘大数据分析与制图系统</h1>
         <router-link to="/skill" exact>技能分析</router-link>
         <router-link to="/thememap" exact>专题地图</router-link>
       </li>
