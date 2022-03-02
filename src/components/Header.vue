@@ -3,10 +3,9 @@
     <ul>
       <li>
         <h1>GIS类专业招聘大数据分析与制图系统</h1>
-        <router-link to="/query" exact>职位查询</router-link>
         <router-link to="/data" exact>就业统计</router-link>
+        <router-link to="/query" exact>职位查询</router-link>
         <router-link to="/skAnalysis" exact>综合分析</router-link>
-
         <router-link to="/skill" exact>技能分析</router-link>
         <router-link to="/thememap" exact>专题地图</router-link>
       </li>
@@ -57,7 +56,7 @@ nav {
   padding: 0px;
 
   img {
-    margin-left: 280px;
+    margin-left: 150px;
   }
   .times {
     width: 140px;
@@ -104,6 +103,5 @@ nav {
   color: #1bcddd;
   background: url(../assets/img/menucurrent.png);
   background-size: 100% 100%;
-
 }
 </style>
