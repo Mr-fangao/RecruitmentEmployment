@@ -68,10 +68,10 @@
             <template slot-scope="scope">
               <el-button
                 type="text"
-                @click="flyToLocation(scope.row.x, scope.row.y)"
+                @click.native.stop="flyToLocation(scope.row.x, scope.row.y)"
                 >定位</el-button
               >
-              <el-button type="text" @click="clickData(scope.row)"
+              <el-button type="text" @click.native.stop="clickData(scope.row)"
                 >详情</el-button
               >
             </template>
