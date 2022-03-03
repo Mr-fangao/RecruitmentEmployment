@@ -7,7 +7,7 @@
           <span>标准差椭圆分析</span>
         </div>
         <div class="toppart">
-          <span>数据时间:</span>
+          <span>时间尺度:</span>
           <el-date-picker
             v-model="value1"
             type="daterange"
@@ -15,13 +15,27 @@
             size="small"
             start-placeholder="开始日期"
             end-placeholder="结束日期"
+            popper-class="date-style"
           >
           </el-date-picker>
-          <div class="maptool">
-            <el-button>请求数据</el-button>
-            <el-button>开始分析</el-button>
-          </div>
         </div>
+        <div class="spatial">
+          <span>空间尺度:</span>
+          <el-select v-model="value2" clearable placeholder="请选择">
+            <el-option
+              v-for="item in options"
+              :key="item.value2"
+              :label="item.label"
+              :value="item.value2"
+            >
+            </el-option>
+          </el-select>
+        </div>
+        <div class="maptool">
+          <el-button>请求数据</el-button>
+          <el-button>开始分析</el-button>
+        </div>
+
         <div class="bottompart"></div>
       </div>
     </div>
@@ -50,7 +64,18 @@ export default {
   data() {
     return {
       DateValue: new Date(),
-      value1,
+      value1: "",
+      value2: "",
+      options: [
+        {
+          value2: "选项1",
+          label: "省份",
+        },
+        {
+          value2: "选项2",
+          label: "城市",
+        },
+      ],
     };
   },
   mounted() {
@@ -70,8 +95,8 @@ export default {
   },
 };
 </script>
-
-<style scoped lang="less">
+<style lang="less" scoped>
+// @import "../../assets/css/time.css";
 #map {
   position: relative;
   width: 100%;
@@ -84,24 +109,23 @@ export default {
   width: 100%;
 }
 .content {
-  height: 100%;
+  height: 90%;
   width: 20%;
   position: absolute;
   z-index: 100;
-  top: 0%;
+  top: 2%;
   right: 0.2%;
   display: flex;
+  border-radius: 15px;
   flex-direction: row;
+  background-color: #11355a75;
   .right {
-    height: 90%;
+    height: 100%;
     width: 100%;
-    margin-top: 3%;
-    margin-right: 0.5%;
-    background: url("../../assets/img/fq/bg.png");
+    // margin-top: 3%;
+    // margin-right: 0.5%;
+    background: url("../../assets/img/fq/bg-5.png");
     background-size: 100% 100%;
-    // background: #14659467;
-    // border: 1px solid #0cf3f3;
-    border-radius: 10px;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -127,26 +151,40 @@ export default {
       }
     }
     .toppart {
-      position: absolute;
-      top: 10%;
+      // position: absolute;
+      display: flex;
+      flex-direction: column;
+      // top: 10%;
       width: 100%;
-      height: 30%;
       > span {
         width: 33%;
-        height: 10%;
-        margin-left: -44%;
-        margin-top: 2%;
+        // margin-left: -44%;
+        // margin-top: 2%;
         border-left: 5px solid #0cf3f3;
-        font-size: 12pt;
+        font-size: 13pt;
         line-height: 22px;
         color: aliceblue;
-        position: absolute;
+        // position: absolute;
       }
-      .maptool {
-        position: absolute;
-        top: 25%;
-        left: 13%;
+    }
+    .spatial {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      > span {
+        width: 33%;
+        border-left: 5px solid #0cf3f3;
+        font-size: 13pt;
+        line-height: 22px;
+        color: aliceblue;
       }
+      .el-select {
+        width: 80%;
+        margin-left: 7%;
+      }
+    }
+    .maptool {
+      margin-top: 5%;
     }
     .bottompart {
       position: absolute;
@@ -156,32 +194,45 @@ export default {
     }
   }
 }
-/deep/.el-input__inner {
-  left: 20%;
-  position: absolute;
-  display: inline-block;
+/deep/.toppart .el-input__inner {
+  // left: 20%;
+  // position: absolute;
+  // display: inline-block;
   -webkit-appearance: none;
   background: transparent;
   border-radius: 4px;
   border: 0px solid #dcdfe6;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  color: rgba(220, 225, 227, 0.96);
+  color: #fff;
   // display: inline-block;
   font-size: inherit;
   height: 40px;
   line-height: 33px;
-  width: 100%;
-  padding: 0 0 0 35px;
+  // width: 100%;
+  margin: 10px 0 10px 25px;
+}
+/deep/.spatial .el-input__inner {
+  border: none;
+  font-size: inherit;
+  height: 40px;
+  line-height: 33px;
+  color: #fff;
+  background-image: url("../../assets/img/fq/bg9.png");
+  background-size: 100% 100%;
+  background-color: transparent;
+  margin: 10px 0px;
 }
 /deep/.el-date-editor .el-range-input {
   width: 30%;
-  height: 60%;
+  // height: 60%;
+  color: #fff;
   background: rgba(82, 173, 209, 0.3);
 }
 /deep/.el-button {
-  
-  background: rgba(11, 176, 241, 0.493);
+  // background: rgba(11, 176, 241, 0.493);
+  background: url("../../assets/img/fq/wggl_tab.png");
+  background-size: 100% 100%;
   border: none;
   color: #ffffff;
   padding: 12px 20px;
@@ -199,4 +250,18 @@ export default {
   line-height: 24px;
   color: transparent;
 }
+/deep/.el-icon-date:before {
+  color: #fff;
+}
+// /deep/.el-popper {
+//   margin-left: 120px;
+//   width: 520px;
+// }
+// /deep/.el-date-range-picker .el-picker-panel__body {
+//   max-width: 520px;
+// }
+// /deep/.el-picker-panel {
+//   background: #1b334b;
+//   color: #fff;
+// }
 </style>

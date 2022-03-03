@@ -91,7 +91,8 @@ export default {
   width: 3%;
   top: 0;
   left: 0;
-  background-color: rgba(2, 25, 31, 0.8);
+  background-color: #1432509f;
+  // background-color: rgba(83, 198, 226, 0.705);
   .el-menu {
     top: 30%;
     width: 100%;
@@ -101,7 +102,7 @@ export default {
     border: none;
   }
   .el-menu-item.is-active {
-    color: #15abc5;
+    color: #1bcddd;
     background: transparent
   }
   .el-menu-item {

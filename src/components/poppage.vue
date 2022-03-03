@@ -2,24 +2,18 @@
   <div class="modal-bg" v-show="show">
     <div class="modal-container">
       <div class="modal-header">
-          <span class="text">公司详情</span>
-              <div class="close-btn" @click="hideModal"><i class="fa fa-times" aria-hidden="true" style="color:red;"></i></div>
+        <span class="text">公司详情</span>
+        <div class="close-btn" @click="hideModal">
+          <i class="fa fa-times" aria-hidden="true" style="color: red"></i>
+        </div>
       </div>
       <div class="modal-main">
         <div class="ptChart">
-          {{ porpID }}
+          {{ porpName }}
         </div>
-        <div class="ptChart">
+        <!-- <div class="ptChart">
           {{ porpID }}
-        </div>
-        <div class="ptChart">{{ porpID }}</div>
-        <div class="ptChart">
-          {{ porpID }}
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button @click="hideModal">取消</button>
-        <button @click="submit">确认</button>
+        </div> -->
       </div>
     </div>
   </div>
@@ -32,7 +26,7 @@ export default {
       type: Boolean,
       default: false,
     },
-    porpID: {
+    porpName: {
       type: String,
       default: "",
     },
@@ -50,7 +44,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .modal-bg {
-        position:absolute;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -77,13 +71,13 @@ export default {
   align-items: center;
   justify-content: center;
   cursor: move;
-  .text{
-      position:absolute inherit;
-      text-align: center;
+  .text {
+    position: absolute inherit;
+    text-align: center;
   }
-  .close-btn{
-      position: absolute;
-      margin-right: -90% !important
+  .close-btn {
+    position: absolute;
+    margin-right: -90% !important;
   }
 }
 .modal-footer {

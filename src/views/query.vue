@@ -1,6 +1,9 @@
 <template>
   <div class="query">
     <div id="map" />
+    <transition name="fade">
+      <loading v-if="isLoading"></loading>
+    </transition>
     <div class="cx">
       <el-input
         prefix-icon="el-icon-search"
@@ -13,7 +16,7 @@
       <el-card shadow="hover" class="tebale_card">
         <el-table
           style="width: 100%; align: center"
-          :row-click="Detail"
+          @row-click="clickRow"
           :row-style="getRowClass"
           :header-row-style="getRowClass"
           :header-cell-style="getRowClass"
@@ -36,11 +39,24 @@
             :show-overflow-tooltip="true"
           >
           </el-table-column>
-          <el-table-column prop="region" label="工作地区" width="100">
+          <el-table-column
+            prop="region"
+            label="工作地区"
+            width="100"
+            :show-overflow-tooltip="true"
+          >
           </el-table-column
-          ><el-table-column prop="salary" label="薪资范围" width="100">
+          ><el-table-column
+            prop="salary"
+            label="薪资范围"
+            width="100"
+            :show-overflow-tooltip="true"
+          >
           </el-table-column
-          ><el-table-column prop="require" label="学历要求" width="100">
+          ><el-table-column prop="x" label="x" v-if="false"> </el-table-column>
+          <el-table-column prop="y" label="y" v-if="false"> </el-table-column>
+          <el-table-column type="id" label="id" v-if="false"> </el-table-column>
+          <el-table-column prop="require" label="学历要求" width="100">
           </el-table-column
           ><el-table-column prop="experience" label="工作经验" width="100">
           </el-table-column
@@ -55,25 +71,10 @@
                 @click="flyToLocation(scope.row.x, scope.row.y)"
                 >定位</el-button
               >
-              <el-button
-                type="text"
-                @click="flyToLocation(scope.row.x, scope.row.y)"
+              <el-button type="text" @click="clickData(scope.row)"
                 >详情</el-button
               >
             </template>
-            <!-- <el-dialog title="公司详情" :visible.sync="dialogTableVisible" append-to-body>
-                <el-table :data="tableData">
-                  <el-table-column label="公司名称"
-                    ><p>{{ scope.row.company }}</p></el-table-column
-                  >
-                  <el-table-column label="岗位名称"
-                    ><p>{{ scope.row.position }}</p></el-table-column
-                  >
-                  <el-table-column label="工作地区"
-                    ><p>{{ scope.row.region }}</p></el-table-column
-                  >
-                </el-table>
-              </el-dialog> -->
           </el-table-column>
         </el-table>
         <div style="margin: 5px 0px">
@@ -90,6 +91,14 @@
           </el-pagination>
         </div>
       </el-card>
+      <poppage
+        :show="show"
+        :porpName="porpName"
+        @hideModal="hideModal"
+        @submit="submit"
+      >
+        <p>这里放弹窗的内容</p>
+      </poppage>
     </div>
   </div>
 </template>
@@ -97,21 +106,23 @@
 <script>
 const mapboxgl = require("mapbox-gl");
 import request from "../utils/request";
+import loading from "../components/loading.vue";
 import poppage from "../components/poppage.vue";
 export default {
   name: "query",
-  components: { poppage },
+  components: { poppage, loading },
   data() {
     return {
-      total: 0,
-      currentPage: 1,
-      search: "",
-      show: false,
-      // dialogTableVisible: false,
+      isLoading: true,
       tableData: [],
+      getheight: "",
+      search: "",
+      currentPage: 1,
+      total: 0,
       pageSize: 5,
-      porpID: "",
-      // transTitle: ["", "学生1", "学生2", "学生3"], // transTitle 该标题为转化后的标题
+      location: [],
+      show: false,
+      porpName: "",
     };
   },
   mounted() {
@@ -141,20 +152,28 @@ export default {
     // });
   },
   methods: {
-    Detail(row) {
+    hideModal() {
+      // 取消弹窗回调
+      this.show = false;
+    },
+
+    submit() {
+      // 确认弹窗回调
+      this.show = false;
+    },
+    clickData(row) {
+      this.porpName = row.company;
+      this.show = true;
       console.log(row);
     },
+    clickRow(val) {
+      console.log(val);
+      this.porpName = val.company;
+      this.show = true;
+    },
     // showPop(val) {
-    //   this.porpID = val.id;
+    //   this.porpName = val.company;
     //   this.show = true;
-    // },
-    // hideModal() {
-    //   // 取消弹窗回调
-    //   this.show = false;
-    // },
-    // submit() {
-    //   // 确认弹窗回调
-    //   this.show = false;
     // },
     flyToLocation(x, y) {
       console.log(x, y);
@@ -188,7 +207,9 @@ export default {
           console.log(res);
           this.tableData = res.data.jobInfos;
           this.total = res.data.total;
-          this.pagecount = res.data.pages;
+          if (this.tableData != null) {
+            this.isLoading = false;
+          }
         });
     },
     //获取当前页面数据
@@ -294,7 +315,7 @@ export default {
 }
 .table {
   position: absolute;
-  bottom: 46px;
+  bottom: 6.5%;
   right: 0px;
   width: 90%;
   height: 40%;
@@ -306,8 +327,12 @@ export default {
   z-index: 0;
 }
 .tebale_card {
-  background-color: #18608aad;
+  // background: url("../assets/img/fq/bg7.png");
+  // background-size: 100% 100%;
+  // border: none;
   height: 100%;
+  border-radius: 15px;
+  background-color: #18608aad;
   border-color: #1edaeb;
 }
 

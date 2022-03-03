@@ -1,0 +1,12 @@
+
+ .date-style.el-popper{
+    margin-left: 120px !important;
+    width: 520px !important;
+  }
+  .el-date-range-picker .el-picker-panel__body {
+    max-width: 520px !important;
+  }
+  .el-picker-panel {
+    background: #1b334b !important;
+    color: #fff !important;
+  }

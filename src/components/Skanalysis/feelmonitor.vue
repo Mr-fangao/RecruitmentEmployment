@@ -92,22 +92,25 @@ export default {
   z-index: 0;
 }
 .content {
-  height: 100%;
+  height: 90%;
   width: 20%;
   position: absolute;
   z-index: 100;
-  top: 0%;
+  top: 2%;
   right: 0.2%;
   display: flex;
+  border-radius: 15px;
   flex-direction: row;
+  background-color: #11355a75;
   .right {
-    margin: 1%;
-    height: 90%;
+    height: 100%;
     width: 100%;
-    margin-left: 0.5%;
-    background: #14659467;
-    border: 1px solid #0cf3f3;
-    border-radius: 10px;
+    background: url("../../assets/img/fq/bg-5.png");
+    background-size: 100% 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
     .title {
       // flex: 0.5;
       margin-top: 5%;
@@ -147,5 +150,41 @@ export default {
       }
     }
   }
+}
+/deep/.el-input__inner {
+  border: none;
+  font-size: inherit;
+  height: 40px;
+  line-height: 33px;
+  background-image: url("../../assets/img/fq/bg9.png");
+  background-size: 100% 100%;
+  background-color: transparent;
+
+  margin: 10px 0px;
+}
+/deep/.el-date-editor .el-range-input {
+  width: 30%;
+  height: 60%;
+  background: rgba(82, 173, 209, 0.3);
+}
+/deep/.el-button {
+  background: url("../../assets/img/fq/wggl_tab.png");
+  background-size: 100% 100%;
+  border: none;
+  color: #ffffff;
+  padding: 12px 20px;
+  font-size: 14px;
+  border-radius: 5px;
+}
+/deep/.el-button:focus,
+.el-button:hover {
+  color: #409eff;
+  border-color: #c6e2ff;
+  background-color: #ecf5ff;
+}
+/deep/.el-range-editor--small .el-range__close-icon,
+.el-range-editor--small .el-range__icon {
+  line-height: 24px;
+  color: transparent;
 }
 </style>
