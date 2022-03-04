@@ -1,6 +1,6 @@
 <!--多要素统计-->
 <template>
-	<div class="drag" style="width: 100%; height: 698px;" alt="整个页面">
+	<!-- <div class="drag" style="width: 100%; height: 698px;" alt="整个页面">
 		<nav class="drag_box" alt="侧边功能导航条">
 			<div v-if='isShow'>
 				<a class="a a1" @click="toggleTabs(Educ);">职位学历统计专题图</a>
@@ -10,43 +10,43 @@
 			</div>
 		</nav>
 		<Educ :is="currentView" keep-alive></Educ>
-	</div>
+	</div> -->
 </template>
 <script>
-	import Educ from '../../components/factors/Educ.vue'
-	import Exper from '../../components/factors/Exper.vue'
-	import CType from '../../components/factors/CType.vue'
-	import CSize from '../../components/factors/CSize.vue'
-	export default {
-		data() {
-			return {
-				isShow: true,
-				Educ: "Educ",
-				Exper: "Exper",
-				CType: "CType",
-				CSize: "CSize",
-				currentView: 'Educ',
-			};
-		},
-		components: {
-			Educ,
-			Exper,
-			CType,
-			CSize
-		},
-		methods: {
-			toggleTabs(tabText) {
-				this.currentView = tabText;
-			},
-			change: function() {
-				this.isShow = !this.isShow
-			}
-		}
-	}
+	// import Educ from '../../components/factors/Educ.vue'
+	// import Exper from '../../components/factors/Exper.vue'
+	// import CType from '../../components/factors/CType.vue'
+	// import CSize from '../../components/factors/CSize.vue'
+	// export default {
+	// 	data() {
+	// 		return {
+	// 			isShow: true,
+	// 			Educ: "Educ",
+	// 			Exper: "Exper",
+	// 			CType: "CType",
+	// 			CSize: "CSize",
+	// 			currentView: 'Educ',
+	// 		};
+	// 	},
+	// 	components: {
+	// 		Educ,
+	// 		Exper,
+	// 		CType,
+	// 		CSize
+	// 	},
+	// 	methods: {
+	// 		toggleTabs(tabText) {
+	// 			this.currentView = tabText;
+	// 		},
+	// 		change: function() {
+	// 			this.isShow = !this.isShow
+	// 		}
+	// 	}
+	// }
 </script>
 
 <style scoped>
-	.drag_box {
+	/* .drag_box {
 		position: fixed;
 		top: 10%;
 		right: 1%;
@@ -75,5 +75,5 @@
 	.a:active {
 		background-color: rgba(255, 0, 0, 0.6);
 		box-shadow: 0px 2px 2px rgba(0, 255, 255, 0.3);
-	}
+	} */
 </style>
