@@ -6,7 +6,7 @@
           <div class="title_back">
             <div class="title_text">工作经验-薪资关系折线图</div>
           </div>
-                    <div class="select">
+          <div class="select">
             <el-dropdown>
               <span class="el-dropdown-link">
                 选择城市
@@ -297,7 +297,7 @@ export default {
           {
             type: "line",
             showBackground: true,
-            data:this.chartdata1,
+            data: this.chartdata1,
             backgroundStyle: {
               color: "rgba(180, 180, 180, 0.1)",
             },
@@ -347,7 +347,16 @@ export default {
           orient: "vertical",
           left: "5%", //图例距离左的距离
           y: "center", //图例上下居中
-          data: ["无需", "在校/应届生", "1年", "2年", "3-4年", "5-7年", "8-9年", "10年以上"],
+          data: [
+            "无需",
+            "在校/应届生",
+            "1年",
+            "2年",
+            "3-4年",
+            "5-7年",
+            "8-9年",
+            "10年以上",
+          ],
           textStyle: {
             //图例文字的样式
             color: "#fff",
@@ -686,7 +695,7 @@ export default {
       left: 6%;
       width: 30%;
     }
-   /deep/ .title_text{
+    /deep/ .title_text {
       margin: 6% 6% 0% 0%;
     }
   }
@@ -701,7 +710,7 @@ export default {
       left: 15%;
       width: 15%;
     }
-    /deep/ .title_back{
+    /deep/ .title_back {
       width: 60%;
       height: 100%;
       background-size: 10% 20%;
@@ -719,7 +728,7 @@ export default {
     margin-left: 2.5%;
     margin-right: 5%;
     margin-top: 1%;
-   /deep/ .title_back{
+    /deep/ .title_back {
       width: 60%;
       height: 100%;
       background-size: 10% 20%;
