@@ -172,16 +172,19 @@ export default {
     this.showct2();
     this.showct3();
     this.showct4();
-    this.showct5();
-    this.initChart5();
+     this.initChart5();
+    let myChart5 = this.$echarts.init(this.$refs.Chart5);
+    myChart5.setOption(this.option5);
     // this.fetchData1(1);
     // this.fetchData2(1);
     // this.loadList();
     // this.initmap();
-    myChart.setOption(option);
-    window.addEventListener("resize", function () {
-      myChart.resize();
-    });
+
+    //自适应
+    // myChart.setOption(option);
+    // window.addEventListener("resize", function () {
+    //   myChart.resize();
+    // });
   },
   methods: {
     getRowClass({ row, column, rowIndex, columnIndex }) {
@@ -200,11 +203,11 @@ export default {
     //     });
     //   });
     // },
-    showct5() {
-      let myChart = this.$echarts.init(this.$refs.Chart5);
-      // let myChart5 = this.$echarts.init(document.getElementById("chart5"));
-      myChart.setOption(this.option5);
-    },
+    // showct5() {
+    //   let myChart = this.$echarts.init(this.$refs.Chart5);
+    //   // let myChart5 = this.$echarts.init(document.getElementById("chart5"));
+    //   myChart.setOption(this.option5);
+    // },
     initChart5() {
       for (var i = 0; i < this.plan_table.length; i++) {
         this.option5.xAxis.data.push(this.plan_table[i].xxx);
@@ -666,8 +669,8 @@ export default {
               { text: "Indicator4" },
               { text: "Indicator5" },
             ],
-            center: ["25%", "50%"],
-            radius: 120,
+            center: ["55%", "50%"],
+            radius: 50,
             startAngle: 90,
             splitNumber: 4,
             shape: "circle",
@@ -1181,7 +1184,7 @@ export default {
 }
 #chart3 {
   width: 100%;
-  height: calc(100% - 40px);
+  height:100%;
 }
 #chart4 {
   width: 100%;
@@ -1208,6 +1211,8 @@ export default {
     }
     .pt2 {
       flex: 1;
+          height: 100%;
+    width: 100%;
     }
     .pt3 {
       flex: 1;
