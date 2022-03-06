@@ -102,16 +102,33 @@ export default {
         calculable: true,
         xAxis: {
           data: [],
+          axisLine: {
+              lineStyle: {
+                color:'#fff',
+              },
+            },
         },
         yAxis: [
           {
+            splitLine: { show: false },
             type: "value",
             name: "单位:万元",
             min: "0",
             max: "",
             splitNumber: 20,
+            axisLine: {
+              lineStyle: {
+                color:'#fff',
+              },
+            },
           },
         ],
+        grid: {
+          x: 40,
+          y: 40,
+          x2: 30,
+          y2: 30,
+        },
         series: [
           {
             type: "line",
@@ -172,7 +189,7 @@ export default {
     this.showct2();
     this.showct3();
     this.showct4();
-     this.initChart5();
+    this.initChart5();
     let myChart5 = this.$echarts.init(this.$refs.Chart5);
     myChart5.setOption(this.option5);
     // this.fetchData1(1);
@@ -663,11 +680,11 @@ export default {
         radar: [
           {
             indicator: [
-              { text: "Indicator1" },
-              { text: "Indicator2" },
-              { text: "Indicator3" },
-              { text: "Indicator4" },
-              { text: "Indicator5" },
+              { text: "北京" },
+              { text: "上海" },
+              { text: "杭州" },
+              { text: "深圳" },
+              { text: "苏州" },
             ],
             center: ["55%", "50%"],
             radius: 50,
@@ -1119,16 +1136,16 @@ export default {
               },
             },
             categories: [
-              { value: 10, itemStyle: { normal: { color: "#00ff7f" } } },
+              { value: 10, itemStyle: { normal: { color: "#0087cb" } } },
               { itemStyle: { normal: { color: "#0055ff" } } },
-              { itemStyle: { normal: { color: "#ffaa00" } } },
+              { itemStyle: { normal: { color: "#74af96" } } },
               { itemStyle: { normal: { color: "#ff55ff" } } },
               { itemStyle: { normal: { color: "#e26691" } } },
-              { itemStyle: { normal: { color: "#79dae2" } } },
-              { itemStyle: { normal: { color: "#2fffff" } } },
-              { itemStyle: { normal: { color: "#aaff7f" } } },
+              { itemStyle: { normal: { color: "#004e66" } } },
+              { itemStyle: { normal: { color: "#587498" } } },
+              { itemStyle: { normal: { color: "#3DC7BE" } } },
               { itemStyle: { normal: { color: "#ffaa7f" } } },
-              { itemStyle: { normal: { color: "#fab452" } } },
+              { itemStyle: { normal: { color: "#80bd9e" } } },
             ],
             data: datas,
             links: lines,
@@ -1180,19 +1197,19 @@ export default {
 }
 #chart2 {
   width: 100%;
-  height: calc(100% - 40px);
+  height: calc(100% - 24px);
 }
 #chart3 {
   width: 100%;
-  height:100%;
+  height: calc(100% - 24px);
 }
 #chart4 {
   width: 100%;
-  height: calc(100% - 40px);
+  height: calc(100% - 24px);
 }
 #chart5 {
   width: 100%;
-  height: calc(100% - 40px);
+  height: calc(100% - 24px);
 }
 .right {
   height: 93%;
@@ -1206,13 +1223,15 @@ export default {
     flex: 1;
     float: left;
     .hd {
-      width: 95%;
-      height: 27px;
+      background-size: 20% 50%;
+      span {
+        margin-left: 22%;
+      }
     }
     .pt2 {
       flex: 1;
-          height: 100%;
-    width: 100%;
+      height: 100%;
+      width: 100%;
     }
     .pt3 {
       flex: 1;
@@ -1236,15 +1255,14 @@ export default {
   background-size: 100% 100%;
   .hd {
     display: flex;
-    width: 65%;
-    // margin: 3%;
-    padding: 2%;
-    height: 28px;
+    width: 75%;
+    margin: 0.5%;
     background: url(../../assets/img/pt/pt_title.png) no-repeat;
     background-size: 10% 50%;
+    background-position: 0% 50%;
     span {
-      margin-left: 32px;
-      line-height: 30px;
+      margin-left: 11%;
+      // line-height: 30px;
       font-size: 18px;
       color: #fff;
       // text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #38e9e0,
