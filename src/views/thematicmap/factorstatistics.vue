@@ -1,6 +1,6 @@
 <!--多要素统计-->
 <template>
-	<!-- <div class="drag" style="width: 100%; height: 698px;" alt="整个页面">
+	<div class="drag" style="width: 100%; height: 698px;" alt="整个页面">
 		<nav class="drag_box" alt="侧边功能导航条">
 			<div v-if='isShow'>
 				<a class="a a1" @click="toggleTabs(Educ);">职位学历统计专题图</a>
@@ -10,7 +10,7 @@
 			</div>
 		</nav>
 		<Educ :is="currentView" keep-alive></Educ>
-	</div> -->
+	</div>
 </template>
 <script>
 	// import Educ from '../../components/factors/Educ.vue'

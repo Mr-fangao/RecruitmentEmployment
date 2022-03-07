@@ -8,8 +8,8 @@
           :class="index === 1 ? 'active' : ''"
           plain
         >
-          <i class="fa fa-eercast fa-lg"></i>
-          
+          <i class="fa fa-line-chart"></i>
+          <span class="tab">匹配</span>
         </el-menu-item>
         <el-menu-item
           index="2"
@@ -17,8 +17,8 @@
           :class="index === 2 ? 'active' : ''"
           plain
         >
-          <i class="fa fa-exchange fa-lg"></i>
-          
+          <i class="fa fa-map"></i>
+          <span class="tab">地图</span>
         </el-menu-item>
       </el-menu>
     </div>
@@ -74,6 +74,7 @@ export default {
   top: 0;
   left: 0;
   background-color: #1432509f;
+  // border-right:1PX solid #1bcddd;
   // background-color: rgba(83, 198, 226, 0.705);
   .el-menu {
     top: 30%;

@@ -24,7 +24,7 @@
           <div class="hd">
             <span>热门技能词云</span>
           </div>
-          <div id="chart4"></div>
+          <div id="chart4" ref="cloudEl"></div>
         </div>
       </div>
       <div class="pt pt4">
@@ -44,6 +44,7 @@
 <script>
 // const mapboxgl = require("mapbox-gl");
 import echarts from "echarts";
+import wordcloud from "../../assets/js/echarts-wordcloud-master/index";
 // import 'echarts/theme/macarons.js';
 // import 'echarts-wordcloud/dist/echarts-wordcloud.js';
 // import 'echarts-wordcloud/dist/echarts-wordcloud.min.js';
@@ -55,8 +56,45 @@ import echarts from "echarts";
 // require("echarts/lib/component/legend");
 export default {
   name: "mate",
+  components: {
+    wordcloud,
+  },
   data() {
     return {
+      cloudData: [
+        { value: 1800, name: "纳木措" },
+        { value: 1200, name: "西藏" },
+        { value: 1000, name: "海拔" },
+        { value: 900, name: "景色" },
+        { value: 700, name: "湖水" },
+        { value: 650, name: "雪山" },
+        { value: 630, name: "值得" },
+        { value: 610, name: "没有" },
+        { value: 600, name: "地方" },
+        { value: 543, name: "风景" },
+        { value: 523, name: "景区" },
+        { value: 500, name: "感觉" },
+        { value: 500, name: "高原" },
+        { value: 490, name: "湖面" },
+        { value: 490, name: "圣湖" },
+        { value: 490, name: "小时" },
+        { value: 430, name: "湖泊" },
+        { value: 430, name: "大圣" },
+        { value: 430, name: "美丽" },
+        { value: 380, name: "景点" },
+        { value: 380, name: "牦牛" },
+        { value: 340, name: "时间" },
+        { value: 280, name: "咸水湖" },
+        { value: 260, name: "天湖" },
+        { value: 260, name: "藏民" },
+        { value: 200, name: "朋友" },
+        { value: 200, name: "蓝天白云" },
+        { value: 100, name: "开车" },
+        { value: 50, name: "神圣" },
+        { value: 40, name: "推荐" },
+        { value: 25, name: "限速" },
+        { value: 13, name: "距离" },
+      ],
       option5: {
         // title: {
         //   x: "150", // 水平安放位置，默认为左对齐，可选为：
@@ -103,10 +141,10 @@ export default {
         xAxis: {
           data: [],
           axisLine: {
-              lineStyle: {
-                color:'#fff',
-              },
+            lineStyle: {
+              color: "#fff",
             },
+          },
         },
         yAxis: [
           {
@@ -115,10 +153,10 @@ export default {
             name: "单位:万元",
             min: "0",
             max: "",
-            splitNumber: 20,
+            splitNumber: 5,
             axisLine: {
               lineStyle: {
-                color:'#fff',
+                color: "#fff",
               },
             },
           },
@@ -192,6 +230,7 @@ export default {
     this.initChart5();
     let myChart5 = this.$echarts.init(this.$refs.Chart5);
     myChart5.setOption(this.option5);
+    this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
     // this.fetchData1(1);
     // this.fetchData2(1);
     // this.loadList();
@@ -673,10 +712,16 @@ export default {
       var myChart = echarts.init(document.getElementById("chart3"));
       myChart.setOption({
         color: ["#67F9D8", "#FFE434", "#56A3F1", "#FF917C"],
-        title: {
-          text: "Customized Radar Chart",
+        // title: {
+        //   text: "Customized Radar Chart",
+        // },
+        legend: {
+          textStyle: {
+            //图例文字的样式
+            color: "#fff",
+            fontSize: 12,
+          },
         },
-        legend: {},
         radar: [
           {
             indicator: [
@@ -686,7 +731,7 @@ export default {
               { text: "深圳" },
               { text: "苏州" },
             ],
-            center: ["55%", "50%"],
+            center: ["55%", "60%"],
             radius: 50,
             startAngle: 90,
             splitNumber: 4,
@@ -731,7 +776,21 @@ export default {
                 value: [60, 5, 0.3, -100, 1500],
                 name: "Data B",
                 areaStyle: {
-                  color: "rgba(255, 228, 52, 0.6)",
+                  // color: "rgba(255, 228, 52, 0.6)",
+                },
+              },
+              {
+                value: [80, 6, 0.8, -10, 1800],
+                name: "Data C",
+                areaStyle: {
+                  // color: "rgba(255, 228, 52, 0.6)",
+                },
+              },
+              {
+                value: [60, 5, 0.3, -100, 1500],
+                name: "Data D",
+                areaStyle: {
+                  // color: "rgba(255, 228, 52, 0.6)",
                 },
               },
             ],
@@ -741,107 +800,155 @@ export default {
     },
     showct4() {
       // 绘制图表
-      var myChart = echarts.init(document.getElementById("chart4"));
-      myChart.setOption({
+      // var myChart = echarts.init(document.getElementById("chart4"));
+      // myChart.setOption({
+      //   tooltip: {
+      //     trigger: "axis", //鼠标经过提示
+      //     formatter: "{b0}:{c0}万", //单位
+      //   },
+      //   legend: {
+      //     icon: "roundRect", //icon为圆角矩形
+      //     data: ["样例1", "样例2", "样例3"],
+      //     textStyle: {
+      //       //图例文字的样式
+      //       color: "#fff",
+      //       fontSize: 16,
+      //     },
+      //   },
+      //   xAxis: {
+      //     type: "category",
+      //     data: [
+      //       "无需",
+      //       "在校/应届",
+      //       "1年",
+      //       "2年",
+      //       "3-4年",
+      //       "5-7年",
+      //       "8-9年",
+      //       "10年以上",
+      //     ],
+      //     axisLabel: {
+      //       interval: 0,
+      //     },
+      //     axisLine: {
+      //       //x轴文字颜色
+      //       lineStyle: {
+      //         color: "rgba(255, 255, 255, 0.5)",
+      //       },
+      //     },
+      //   },
+      //   yAxis: {
+      //     type: "value",
+      //     name: "单位：个",
+      //     //坐标轴范围
+      //     boundaryGap: ["0", "0.1"],
+      //     axisLine: {
+      //       //轴文字颜色
+      //       lineStyle: {
+      //         color: "rgba(255, 255, 255, 0.5)",
+      //       },
+      //     },
+      //     //y轴刻度横线
+      //     splitLine: {
+      //       show: false,
+      //     },
+      //   },
+      //   grid: {
+      //     x: 50,
+      //     y: 30,
+      //     x2: 30,
+      //     y2: 40,
+      //   },
+      //   series: [
+      //     {
+      //       type: "line",
+      //       showBackground: true,
+      //       // data: this.chartdata1,
+      //       data: [820, 932, 901, 934, 1290, 1330, 1320, 2000],
+      //       backgroundStyle: {
+      //         color: "rgba(180, 180, 180, 0.1)",
+      //       },
+      //       itemStyle: {
+      //         normal: {
+      //           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+      //             { offset: 0.2, color: "#44C0C1" },
+      //             { offset: 1, color: "#1BFEFE" },
+      //           ]),
+      //         },
+      //       },
+      //       areaStyle: {
+      //         normal: {
+      //           //右，下，左，上
+      //           color: new echarts.graphic.LinearGradient(
+      //             0,
+      //             0,
+      //             0,
+      //             1,
+      //             [
+      //               {
+      //                 offset: 0,
+      //                 color: "#1BFEFE",
+      //               },
+      //               {
+      //                 offset: 1,
+      //                 color: "rgba(207, 247, 255, 0.3)",
+      //               },
+      //             ],
+      //             false
+      //           ),
+      //         },
+      //       },
+      //     },
+      //   ],
+      // });
+    },
+    wordCloudInti(wrapEl, data) {
+      let myChart = echarts.init(wrapEl);
+      var option = {
         tooltip: {
-          trigger: "axis", //鼠标经过提示
-          formatter: "{b0}:{c0}万", //单位
-        },
-        legend: {
-          icon: "roundRect", //icon为圆角矩形
-          data: ["样例1", "样例2", "样例3"],
-          textStyle: {
-            //图例文字的样式
-            color: "#fff",
-            fontSize: 16,
-          },
-        },
-        xAxis: {
-          type: "category",
-          data: [
-            "无需",
-            "在校/应届",
-            "1年",
-            "2年",
-            "3-4年",
-            "5-7年",
-            "8-9年",
-            "10年以上",
-          ],
-          axisLabel: {
-            interval: 0,
-          },
-          axisLine: {
-            //x轴文字颜色
-            lineStyle: {
-              color: "rgba(255, 255, 255, 0.5)",
-            },
-          },
-        },
-        yAxis: {
-          type: "value",
-          name: "单位：个",
-          //坐标轴范围
-          boundaryGap: ["0", "0.1"],
-          axisLine: {
-            //轴文字颜色
-            lineStyle: {
-              color: "rgba(255, 255, 255, 0.5)",
-            },
-          },
-          //y轴刻度横线
-          splitLine: {
-            show: false,
-          },
-        },
-        grid: {
-          x: 50,
-          y: 30,
-          x2: 30,
-          y2: 40,
+          show: true,
         },
         series: [
           {
-            type: "line",
-            showBackground: true,
-            // data: this.chartdata1,
-            data: [820, 932, 901, 934, 1290, 1330, 1320, 2000],
-            backgroundStyle: {
-              color: "rgba(180, 180, 180, 0.1)",
+            name: "热词",
+            type: "wordCloud",
+            sizeRange: [10, 35],
+            rotationRange: [-20, 20],
+            shape: "circle",
+            left: "center",
+            top: "center",
+            width: "100%",
+            height: "100%",
+            gridSize: 7,
+            textPadding: 0,
+            autoSize: {
+              enable: true,
+              minSize: 4,
             },
-            itemStyle: {
+            textStyle: {
               normal: {
-                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                  { offset: 0.2, color: "#44C0C1" },
-                  { offset: 1, color: "#1BFEFE" },
-                ]),
+                color: function () {
+                  return (
+                    "rgb(" +
+                    [
+                      Math.round(Math.random() * 250),
+                      Math.round(Math.random() * 250),
+                      Math.round(Math.random() * 250),
+                    ].join(",") +
+                    ")"
+                  );
+                },
+              },
+              emphasis: {
+                shadowBlur: 10,
+                shadowColor: "#333",
               },
             },
-            areaStyle: {
-              normal: {
-                //右，下，左，上
-                color: new echarts.graphic.LinearGradient(
-                  0,
-                  0,
-                  0,
-                  1,
-                  [
-                    {
-                      offset: 0,
-                      color: "#1BFEFE",
-                    },
-                    {
-                      offset: 1,
-                      color: "rgba(207, 247, 255, 0.3)",
-                    },
-                  ],
-                  false
-                ),
-              },
-            },
+            data: data,
           },
         ],
-      });
+      };
+      myChart.setOption(option);
     },
     showct1() {
       let myChart = echarts.init(document.getElementById("chart1"));

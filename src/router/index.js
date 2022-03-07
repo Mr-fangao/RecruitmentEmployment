@@ -24,9 +24,9 @@ export default new Router({
       }
     },
     {
-      path: "/data",
-      name: "data",
-      component: () => import("@/views/data"),
+      path: "/statistics",
+      name: "statistics",
+      component: () => import("@/views/statistics"),
       meta: {
         keepAlive: true //
       }
