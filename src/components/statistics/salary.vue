@@ -1,91 +1,75 @@
 <template>
   <div id="salary">
+    <div id="map" />
+    <div class="left">
+      <div class="col-content">
+        <div class="row1title">
+          <!-- <img src="../../assets/img/pt/pt_title.png" alt="" /> -->
+          <div class="imgBK"></div>
+          <span>城市薪资统计</span>
+        </div>
+        <div class="row1chartcontent" id="chart1"></div>
+      </div>
+      <div class="col-content">
+        <div class="row1title">
+          <!-- <img src="../../assets/img/pt/pt_title.png" alt="" /> -->
+          <div class="imgBK"></div>
+          <span>公司类型-薪资统计</span>
+        </div>
+        <div class="row1chartcontent" id="chart2" ref="chart2"></div>
+      </div>
+      <div class="col-content">
+        <div class="row1title">
+          <!-- <img src="../../assets/img/pt/pt_title.png" alt="" /> -->
+          <div class="imgBK"></div>
+          <span>薪资极差统计</span>
+        </div>
+        <div class="row1chartcontent" id="chart3"></div>
+      </div>
+    </div>
     <div class="main">
-      <el-row>
-        <el-col :span="8">
-          <div class="col-content">
-            <div class="row1title">
-              <!-- <img src="../../assets/img/pt/pt_title.png" alt="" /> -->
-              <div class="imgBK"></div>
-              <span>城市薪资TOP10</span>
-            </div>
-            <div class="row1chartcontent" id="chart1"></div>
-          </div>
-        </el-col>
-        <el-col :span="8">
-          <div class="col-content">
-            <div class="row1title">
-              <!-- <img src="../../assets/img/pt/pt_title.png" alt="" /> -->
-              <div class="imgBK"></div>
-              <span>薪资-公司类型雷达图</span>
-            </div>
-            <div class="row1chartcontent" id="chart2" ref="chart2"></div>
-          </div>
-        </el-col>
-        <el-col :span="8">
-          <div class="col-content">
-            <div class="row1title">
-              <!-- <img src="../../assets/img/pt/pt_title.png" alt="" /> -->
-              <div class="imgBK"></div>
-              <span>区域薪资TOP10</span>
-            </div>
-            <div class="row1chartcontent" id="chart"></div>
-          </div>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="8">
-          <div class="col-content">
-            <div class="row1title">
-              <!-- <img src="../../assets/img/pt/pt_title.png" alt="" /> -->
-              <div class="imgBK"></div>
-              <span>薪资占比</span>
-            </div>
-            <div class="row1chartcontent" id="chart3"></div>
-          </div>
-        </el-col>
-        <el-col :span="16">
-          <div class="col-content">
-            <div class="row2title">
-              <!-- <img src="../../assets/img/pt/pt_title.png" alt="" /> -->
-              <div class="imgBK"></div>
-              <span>薪资-城市年变化</span>
-            </div>
-            <div class="row1chartcontent" id="chart4"></div>
-          </div>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="8"
-          ><div class="col-content">
-            <div class="row1title">
-              <!-- <img src="../../assets/img/pt/pt_title.png" alt="" /> -->
-              <div class="imgBK"></div>
-              <span>薪资-行业TOP10</span>
-            </div>
-            <div class="row1chartcontent" id="chart5"></div></div
-        ></el-col>
-        <el-col :span="8">
-          <div class="col-content">
-            <div class="row1title">
-              <!-- <img src="../../assets/img/pt/pt_title.png" alt="" /> -->
-              <div class="imgBK"></div>
-              <span>热门薪资区间词云</span>
-            </div>
-            <div class="row1chartcontent" id="chart6" ref="cloudEl"></div>
-          </div>
-        </el-col>
-        <el-col :span="8">
-          <div class="col-content">
-            <div class="row1title">
-              <!-- <img src="../../assets/img/pt/pt_title.png" alt="" /> -->
-              <div class="imgBK"></div>
-              <span>薪资极差</span>
-            </div>
-            <div class="row1chartcontent" id="chart7"></div>
-          </div>
-        </el-col>
-      </el-row>
+      <!-- <div class="map">
+        <div class="row1title">
+         <img src="../../assets/img/pt/pt_title.png" alt="" /> -->
+      <!-- <div class="imgBK"></div> -->
+      <!-- <span>薪资占比</span> -->
+      <!-- </div> -->
+      <!-- <div class="row1chartcontent" id="chart3"></div> -->
+      <!-- </div> -->
+      <div class="col-content">
+        <div class="row2title">
+          <!-- <img src="../../assets/img/pt/pt_title.png" alt="" /> -->
+          <div class="imgBK"></div>
+          <span>城市薪资年变化</span>
+        </div>
+        <div class="row1chartcontent" id="chart4" ref="Chart4"></div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="col-content">
+        <div class="row1title">
+          <!-- <img src="../../assets/img/pt/pt_title.png" alt="" /> -->
+          <div class="imgBK"></div>
+          <span>区域薪资统计</span>
+        </div>
+        <div class="row1chartcontent" id="chart5"></div>
+      </div>
+      <div class="col-content">
+        <div class="row1title">
+          <!-- <img src="../../assets/img/pt/pt_title.png" alt="" /> -->
+          <div class="imgBK"></div>
+          <span>热门薪资区间词云</span>
+        </div>
+        <div class="row1chartcontent" id="chart6" ref="cloudEl"></div>
+      </div>
+      <div class="col-content">
+        <div class="row1title">
+          <!-- <img src="../../assets/img/pt/pt_title.png" alt="" /> -->
+          <div class="imgBK"></div>
+          <span>行业薪资统计</span>
+        </div>
+        <div class="row1chartcontent" id="chart7"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -230,14 +214,143 @@ export default {
           },
         ],
       },
-      test:
-        "大，导致一条弄堂里，和张方敏年纪相仿的男女有六七个之多，他们念过同一所小学，如今分道扬镳，散落到高中、职校和技校。人的未来大致由学校决定，张家爸妈心里是不大看得起弄堂其他小孩的。张方敏读的是区重点，明年肯定能考上一所好大学。张方敏没有此类等级观念，她最好的玩伴是住在九号的程勉。程勉比她大三岁，因为念书晚又复读过，只比她高一级，刚从职校毕业。她过了拐角来到九号门口的时候，程勉的姨婆正在楼下厨房炒菜。九号的一楼大半属于另一户人家，房主将其租给饭店，店门开在后马路上。程家的厨房和饭店后厨只隔一道薄墙，在夏季热如火炉，张方敏很佩服程勉姨婆不怕热地站在这里。刺激的香气钻进张方敏的鼻孔，她看见锅里翻炒的 […]" +
-        "年纪相仿的男女有六七个之多，他们念过同一所小学，如今分道扬镳，散落到高中、职校和技校。人的未来大致由学校决定，张家爸妈心里是不大看得起弄堂其他小孩的。张方敏读的是区重点，明年肯定能考上一所好大学。张方敏没有此类等级观念，她最好的玩伴是住在九号的程勉。程勉比她大三岁，因为念书晚又复读过，只比她高一级，刚从职校毕业。她过了拐角来到九号门口的时候，程勉的姨婆正在楼下厨房炒菜。九号的一楼大半属于另一户人家，房主将其租给饭店，店门开在后马路上。程家的厨房和饭店后厨只隔一道薄墙，在夏季热如火炉，张方敏很佩服程勉姨婆不怕热地站在这里。刺激的香气钻进张方敏的鼻孔，她看见锅里翻炒",
+      option4: {
+        // title: {
+        //   x: "150", // 水平安放位置，默认为左对齐，可选为：
+        //   // 'center' ¦ 'left' ¦ 'right'
+        //   // ¦ {number}（x坐标，单位px）
+        //   y: "top",
+        //   //textAlign: null
+        //   backgroundColor: "rgba(0,0,0,0)",
+        //   borderColor: "#ccc", // 标题边框颜色
+        //   borderWidth: 0, // 标题边框线宽，单位px，默认为0（无边框）
+        //   padding: 5, // 标题内边距，单位px，默认各方向内边距为5，
+        //   itemGap: 10, // 主副标题纵向间隔，单位px，默认为10，
+        //   textStyle: {
+        //     fontSize: 18,
+        //     fontWeight: "bolder",
+        //     color: "#ff6666", // 主标题文字颜色
+        //   },
+        //   text: "全省大中修资金统计",
+        // },
+        color: [
+          "#ff7f50",
+          "#87cefa",
+          "#da70d6",
+          "#32cd32",
+          "#6495ed",
+          "#ff69b4",
+          "#ba55d3",
+          "#cd5c5c",
+          "#ffa500",
+          "#40e0d0",
+        ],
+        tooltip: { trigger: "axis" },
+        //图例--折线提示提示
+        legend: {
+          x: "center",
+          y: "30",
+          borderColor: "#6699FF", //边框颜色
+          textStyle: {
+            color: "#1e90ff", // 图例文字颜色
+          },
+          data: ["大修金额", "中修沥青砼金额", "预防性养护金额", "金额总计"],
+        },
+        calculable: true,
+        xAxis: {
+          data: [],
+          axisLine: {
+            lineStyle: {
+              color: "#fff",
+            },
+          },
+        },
+        yAxis: [
+          {
+            splitLine: { show: false },
+            type: "value",
+            name: "单位:万元",
+            min: "0",
+            max: "",
+            splitNumber: 5,
+            axisLine: {
+              lineStyle: {
+                color: "#fff",
+              },
+            },
+          },
+        ],
+        grid: {
+          x: 40,
+          y: 40,
+          x2: 30,
+          y2: 30,
+        },
+        series: [
+          {
+            type: "line",
+            name: "大修金额",
+            data: [],
+          },
+          {
+            type: "line",
+            name: "中修沥青砼金额",
+            data: [],
+          },
+          {
+            type: "line",
+            name: "预防性养护金额",
+            data: [],
+          },
+          {
+            type: "line",
+            name: "金额总计",
+            data: [],
+          },
+        ],
+      },
+      plan_table: [
+        {
+          xxx: "1",
+          d: "200",
+          z: "300",
+          y: "400",
+          sum: "500",
+        },
+        {
+          xxx: "2",
+          d: "100",
+          z: "400",
+          y: "50",
+          sum: "500",
+        },
+        {
+          xxx: "3",
+          d: "150",
+          z: "410",
+          y: "250",
+          sum: "500",
+        },
+        {
+          xxx: "4",
+          d: "200",
+          z: "450",
+          y: "350",
+          sum: "500",
+        },
+      ],
     };
   },
   mounted() {
+    this.initmap();
     this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
+    this.initChart1();
+    this.initChart2();
+    this.initChart3();
     this.initChart4();
+    let myChart4 = this.$echarts.init(this.$refs.Chart4);
+    myChart4.setOption(this.option4);
+    this.initChart5();
     this.$nextTick(() => {
       window.addEventListener("resize", () => {
         this.handleResize();
@@ -245,15 +358,577 @@ export default {
     });
   },
   methods: {
-    initChart6() {
-      this.myChart4 = this.$echarts.init(document.getElementById("chart4"));
+    initmap() {
+      this.$mapboxgl.accessToken =
+        "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
+      var map = new this.$mapboxgl.Map({
+        container: "map",
+        style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
+        center: [105, 35],
+        zoom: 3.5,
+      });
+    },
+    initChart1() {
+      var myChart = echarts.init(document.getElementById("chart1"));
+      myChart.setOption({
+        xAxis: {
+          type: "category",
+          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        },
+        yAxis: {
+          type: "value",
+        },
+        series: [
+          {
+            data: [120, 200, 150, 80, 70, 110, 130],
+            type: "bar",
+          },
+        ],
+      });
+    },
+    initChart2() {
+      var myChart = echarts.init(document.getElementById("chart2"));
+      myChart.setOption({
+        color: ["#67F9D8", "#FFE434", "#56A3F1", "#FF917C"],
+        // title: {
+        //   text: "Customized Radar Chart",
+        // },
+        legend: {
+          textStyle: {
+            //图例文字的样式
+            color: "#fff",
+            fontSize: 12,
+          },
+        },
+        radar: [
+          {
+            indicator: [
+              { text: "北京" },
+              { text: "上海" },
+              { text: "杭州" },
+              { text: "深圳" },
+              { text: "苏州" },
+            ],
+            center: ["55%", "60%"],
+            radius: 50,
+            startAngle: 90,
+            splitNumber: 4,
+            shape: "circle",
+            axisName: {
+              formatter: "【{value}】",
+              color: "#428BD4",
+            },
+            splitArea: {
+              areaStyle: {
+                color: ["#77EADF", "#26C3BE", "#64AFE9", "#428BD4"],
+                shadowColor: "rgba(0, 0, 0, 0.2)",
+                shadowBlur: 10,
+              },
+            },
+            axisLine: {
+              lineStyle: {
+                color: "rgba(211, 253, 250, 0.8)",
+              },
+            },
+            splitLine: {
+              lineStyle: {
+                color: "rgba(211, 253, 250, 0.8)",
+              },
+            },
+          },
+        ],
+        series: [
+          {
+            type: "radar",
+            emphasis: {
+              lineStyle: {
+                width: 4,
+              },
+            },
+            data: [
+              {
+                value: [100, 8, 0.4, -80, 2000],
+                name: "Data A",
+              },
+              {
+                value: [60, 5, 0.3, -100, 1500],
+                name: "Data B",
+                areaStyle: {
+                  // color: "rgba(255, 228, 52, 0.6)",
+                },
+              },
+              {
+                value: [80, 6, 0.8, -10, 1800],
+                name: "Data C",
+                areaStyle: {
+                  // color: "rgba(255, 228, 52, 0.6)",
+                },
+              },
+              {
+                value: [60, 5, 0.3, -100, 1500],
+                name: "Data D",
+                areaStyle: {
+                  // color: "rgba(255, 228, 52, 0.6)",
+                },
+              },
+            ],
+          },
+        ],
+      });
+    },
+    initChart3() {
+      let myChart = this.$echarts.init(document.getElementById("chart3"));
+      myChart.setOption({
+        title: {
+          text: "    总评率随热词分布中,最高为肺炎,最低为症状",
+          textStyle: {
+            color: "rgba(255, 255, 255, .8)",
+            fontSize: 12,
+          },
+        },
+        tooltip: {
+          trigger: "item",
+          formatter: "{b}: {c}%",
+        },
+        grid: {
+          top: "25%", //距上边距
+          left: "15%", //距离左边距
+          right: "55%", //距离右边距
+          bottom: "20%", //距离下边距
+        },
+        calculable: false,
+        series: [
+          {
+            name: "矩形图",
+            type: "treemap",
+            radius: "85%",
+            center: ["50%", "50%"],
+            breadcrumb: false, //矩形图下的提示显示与否
+            itemStyle: {
+              normal: {
+                label: {
+                  show: true,
+                  formatter: "{b}:{c}%",
+                  fontSize: 10,
+                },
+                borderWidth: 0,
+              },
+              emphasis: {
+                label: {
+                  show: true,
+                },
+              },
+            },
+            data: [
+              {
+                name: "肺炎",
+                value: 9.06,
+              },
+              {
+                name: "疫情",
+                value: 7.74,
+              },
+              {
+                name: "微博",
+                value: 7.25,
+              },
+              {
+                name: "病例",
+                value: 6.95,
+              },
+              {
+                name: "新冠",
+                value: 6.88,
+              },
+              {
+                name: "确诊",
+                value: 6.59,
+              },
+              {
+                name: "武汉",
+                value: 5.2,
+              },
+              {
+                name: "视频",
+                value: 4.86,
+              },
+              {
+                name: "冠状病毒",
+                value: 4.34,
+              },
+              {
+                name: "口罩",
+                value: 4.28,
+              },
+              {
+                name: "新型",
+                value: 3.49,
+              },
+              {
+                name: "患者",
+                value: 3.05,
+              },
+              {
+                name: "防控",
+                value: 2.92,
+              },
+              {
+                name: "感染",
+                value: 2.81,
+              },
+              {
+                name: "医院",
+                value: 2.73,
+              },
+              {
+                name: "新增",
+                value: 2.43,
+              },
+              {
+                name: "隔离",
+                value: 2.19,
+              },
+              {
+                name: "出院",
+                value: 2.17,
+              },
+              {
+                name: "湖北",
+                value: 2.1,
+              },
+              {
+                name: "病毒",
+                value: 1.79,
+              },
+              {
+                name: "累计",
+                value: 1.79,
+              },
+              {
+                name: "加油",
+                value: 1.6,
+              },
+              {
+                name: "哈哈哈",
+                value: 1.53,
+              },
+              {
+                name: "韩国",
+                value: 1.39,
+              },
+              {
+                name: "医护人员",
+                value: 1.35,
+              },
+              {
+                name: "治愈",
+                value: 1.3,
+              },
+              {
+                name: "人员",
+                value: 1.28,
+              },
+              {
+                name: "死亡",
+                value: 1.23,
+              },
+              {
+                name: "投票",
+                value: 1.2,
+              },
+              {
+                name: "武汉市",
+                value: 1.19,
+              },
+              {
+                name: "工作",
+                value: 1.18,
+              },
+              {
+                name: "科比",
+                value: 1.39,
+              },
+              {
+                name: "复工",
+                value: 1.17,
+              },
+              {
+                name: "密切接触者",
+                value: 1.16,
+              },
+              {
+                name: "抗疫",
+                value: 1.15,
+              },
+              {
+                name: "疑似病例",
+                value: 1.14,
+              },
+              {
+                name: "中国",
+                value: 1.23,
+              },
+              {
+                name: "防疫",
+                value: 1.13,
+              },
+              {
+                name: "治疗",
+                value: 1.12,
+              },
+              {
+                name: "检测",
+                value: 1.1,
+              },
+              {
+                name: "目前",
+                value: 1.09,
+              },
+              {
+                name: "物资",
+                value: 1.08,
+              },
+              {
+                name: "医学观察",
+                value: 1.07,
+              },
+              {
+                name: "例新冠状",
+                value: 1.06,
+              },
+              {
+                name: "发热",
+                value: 1.05,
+              },
+              {
+                name: "时间",
+                value: 1.04,
+              },
+              {
+                name: "大家",
+                value: 1.03,
+              },
+              {
+                name: "一线工作者",
+                value: 1.02,
+              },
+              {
+                name: "央视",
+                value: 1.01,
+              },
+              {
+                name: "医疗",
+                value: 1.0,
+              },
+              {
+                name: "在家",
+                value: 0.98,
+              },
+              {
+                name: "开学",
+                value: 0.96,
+              },
+              {
+                name: "放舱",
+                value: 0.95,
+              },
+              {
+                name: "救治",
+                value: 0.94,
+              },
+              {
+                name: "战役",
+                value: 0.92,
+              },
+              {
+                name: "核酸检测",
+                value: 0.91,
+              },
+              {
+                name: "卫健委",
+                value: 0.88,
+              },
+              {
+                name: "火神山",
+                value: 0.87,
+              },
+              {
+                name: "美国",
+                value: 0.86,
+              },
+              {
+                name: "消毒",
+                value: 0.85,
+              },
+              {
+                name: "乘客",
+                value: 0.84,
+              },
+              {
+                name: "留学生",
+                value: 0.83,
+              },
+              {
+                name: "英雄回归",
+                value: 0.82,
+              },
+              {
+                name: "境外输入",
+                value: 0.8,
+              },
+              {
+                name: "塞尔维亚",
+                value: 0.79,
+              },
+              {
+                name: "马云",
+                value: 0.78,
+              },
+              {
+                name: "大学生返校",
+                value: 0.76,
+              },
+              {
+                name: "高三",
+                value: 0.75,
+              },
+              {
+                name: "高考",
+                value: 0.74,
+              },
+              {
+                name: "高考延期",
+                value: 0.73,
+              },
+              {
+                name: "高三开学",
+                value: 0.72,
+              },
+              {
+                name: "初三",
+                value: 0.71,
+              },
+              {
+                name: "小学",
+                value: 0.68,
+              },
+              {
+                name: "李兰娟",
+                value: 0.65,
+              },
+              {
+                name: "钟南山",
+                value: 0.64,
+              },
+              {
+                name: "拐点",
+                value: 0.63,
+              },
+              {
+                name: "疫情",
+                value: 0.62,
+              },
+              {
+                name: "地图",
+                value: 0.61,
+              },
+              {
+                name: "舆情",
+                value: 0.6,
+              },
+              {
+                name: "脱贫",
+                value: 0.59,
+              },
+              {
+                name: "江苏",
+                value: 0.58,
+              },
+              {
+                name: "安徽",
+                value: 0.57,
+              },
+              {
+                name: "电影",
+                value: 0.56,
+              },
+              {
+                name: "隔离",
+                value: 0.55,
+              },
+              {
+                name: "意大利",
+                value: 0.54,
+              },
+              {
+                name: "塞尔维亚",
+                value: 0.53,
+              },
+              {
+                name: "英国",
+                value: 0.52,
+              },
+              {
+                name: "退税",
+                value: 0.51,
+              },
+              {
+                name: "大学生开学",
+                value: 0.5,
+              },
+              {
+                name: "英国首相",
+                value: 0.49,
+              },
+              {
+                name: "日本",
+                value: 0.48,
+              },
+              {
+                name: "韩国",
+                value: 0.47,
+              },
+              {
+                name: "西藏",
+                value: 0.46,
+              },
+              {
+                name: "南京开学",
+                value: 0.45,
+              },
+              {
+                name: "宿管阿姨",
+                value: 0.44,
+              },
+            ],
+          },
+        ],
+      });
+    },
+    initChart4() {
+      for (var i = 0; i < this.plan_table.length; i++) {
+        this.option4.xAxis.data.push(this.plan_table[i].xxx);
+        //大修金额总计
+        this.option4.series[0].data.push(this.plan_table[i].d);
+        //中修金额
+        this.option4.series[1].data.push(this.plan_table[i].z);
+        //预防性养护金额合计
+        this.option4.series[2].data.push(this.plan_table[i].y);
+        //金额总计
+        this.option4.series[3].data.push(this.plan_table[i].sum);
+        //Y轴最大值的设置：向上取整并家500
+        this.option4.yAxis[0].max = Math.ceil(this.plan_table[0].sum) + 500;
+      }
+    },
+    initChart5() {
+      this.myChart5 = this.$echarts.init(document.getElementById("chart5"));
       // 指定图表的配置项和数据
       let option = this.option;
       // 使用刚指定的配置项和数据显示图表。
-      this.myChart4.setOption(option);
+      this.myChart5.setOption(option);
     },
     handleResize() {
-      this.myChart4 && this.myChart4.resize();
+      this.myChart5 && this.myChart5.resize();
     },
     wordCloudInti(wrapEl, data) {
       let myChart = echarts.init(wrapEl);
@@ -313,131 +988,125 @@ export default {
   position: fixed;
   width: 100%;
   height: 100%;
-}
-.main {
-  height: 100%;
-  width: 97%;
-  position: relative;
-  left: 3%;
-  float: left;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: stretch;
-  .el-row {
-    margin-bottom: 0;
-    height: 98%;
-    width: 100%;
-    top: 1%;
-    .el-col {
-      height: 100%;
-      padding: 5px;
-      .col-content {
-        height: 100%;
-        .row1title {
-          height: 15%;
-          width: 100%;
-          color: aliceblue;
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-          .imgBK {
-            width: 11%;
-            height: 40%;
-            background: url("../../assets/img/pt/pt_title.png") no-repeat;
-            background-size: 100% 100%;
-          }
-          span {
-            // color: rgb(115, 215, 228);
-            color: #fff;
-            font-size: 13pt;
-            margin-left: 1%;
-            margin-top: -0.5%;
-          }
-        }
-        .row2title {
-          height: 15%;
-          width: 100%;
-          color: aliceblue;
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-          .imgBK {
-            width: 5.5%;
-            height: 40%;
-            background: url("../../assets/img/pt/pt_title.png") no-repeat;
-            background-size: 100% 100%;
-          }
-          span {
-            // color: rgb(115, 215, 228);
-            color: #fff;
-            font-size: 13pt;
-            margin-left: 0.5%;
-            margin-top: -0.3%;
-          }
-        }
-      }
-
-      .row1chartcontent {
-        height: 100%;
-        width: 100%;
-      }
-    }
-
-    // .el-col:nth-child(1) {
-    //   .col-content {
-    //     height: 100%;
-    //     float: left;
-    //     .row1title {
-    //       height: 15%;
-    //       width: 100%;
-    //       color: aliceblue;
-    //       display: flex;
-    //       justify-content: flex-start;
-    //       align-items: center;
-    //       .imgBK {
-    //         height: 90%;
-    //         width: 7%;
-    //       }
-    //       > span {
-    //         color: rgb(115, 215, 228);
-    //         font-size: 12pt;
-    //       }
-    //     }
-    //     .row1chartcontent {
-    //       height: 100%;
-    //       width: 100%;
-    //     }
-    //   }
+  .left {
+    height: 100%;
+    width: 25%;
+    position: absolute;
+    top: 0%;
+    left: 3%;
+    float: left;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: stretch;
+    background: url("../../assets/img/fq/ptbg3.png");
+    background-size: 100% 100%;
+  }
+  .main {
+    // #map{
+    //   width: 100%;
+    //   height: 66.6%;
     // }
-    // .el-col:nth-child(2) {
-    //   .col-content {
-    //     height: 100%;
-    //     float: left;
-    //     .row2title {
-    //       height: 15%;
-    //       width: 100%;
-    //       color: aliceblue;
-    //       display: flex;
-    //       justify-content: flex-start;
-    //       align-items: center;
-    //       .imgBK {
-    //         height: 90%;
-    //         width: 7%;
-    //         margin-left: 2%;
-    //       }
-    //       > span {
-    //         color: rgb(115, 215, 228);
-    //         font-size: 12pt;
-    //       }
-    //     }
-    //     .row1chartcontent {
-    //       height: 100%;
-    //       width: 100%;
-    //     }
-    //   }
-    // }
+    // height: 100%;
+    height: 33.3%;
+    width: 47%;
+    position: absolute;
+    float: left;
+    bottom: 0%;
+    left: 28%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: stretch;
+    background: url("../../assets/img/fq/ptbg3.png");
+    background-size: 100% 100%;
+  }
+  .right {
+    height: 100%;
+    width: 25%;
+    bottom: 0%;
+    right: 0%;
+    position: absolute;
+    float: left;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: stretch;
+    background: url("../../assets/img/fq/ptbg3.png");
+    background-size: 100% 100%;
+    // background: rgba(7, 41, 61, 0.637);
   }
 }
+#map {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.col-content {
+  height: 100%;
+  flex: 1;
+  margin-bottom: 0;
+  width: 100%;
+  top: 1%;
+
+  .row1chartcontent {
+    height: 85%;
+    width: 100%;
+  }
+}
+
+.row1title {
+  height: 15%;
+  width: 100%;
+  color: aliceblue;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 2%;
+  .imgBK {
+    width: 11%;
+    height: 39%;
+    background: url("../../assets/img/pt/pt_title.png") no-repeat;
+    background-size: 100% 100%;
+  }
+  span {
+    // color: rgb(115, 215, 228);
+    color: #fff;
+    font-size: 13pt;
+    margin-left: 1%;
+    margin-top: -0.5%;
+  }
+}
+.row2title {
+  height: 15%;
+  width: 100%;
+  color: aliceblue;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 2%;
+  .imgBK {
+    width: 5.5%;
+    height: 38%;
+    background: url("../../assets/img/pt/pt_title.png") no-repeat;
+    background-size: 100% 100%;
+  }
+  span {
+    // color: rgb(115, 215, 228);
+    color: #fff;
+    font-size: 13pt;
+    margin-left: 0.5%;
+    margin-top: -0.3%;
+  }
+}
+// /deep/.mapboxgl-ctrl-attrib-inner{
+//   a{
+//     color: transparent;
+//   }
+// }
 </style>

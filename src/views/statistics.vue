@@ -100,7 +100,7 @@ export default {
   width: 3%;
   top: 0;
   left: 0;
-  background-color: #1432509f;
+  background-color: #1b3147;
   .el-menu {
     top: 25%;
     width: 100%;
