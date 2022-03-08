@@ -373,17 +373,38 @@ export default {
       myChart.setOption({
         xAxis: {
           type: "category",
+          splitLine: { show: false },
           data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          axisLine: {
+            lineStyle: {
+              color: "#fff",
+            },
+          },
         },
         yAxis: {
           type: "value",
+          splitLine: { show: false },
+          axisLine: {
+            lineStyle: {
+              color: "#fff",
+            },
+          },
         },
+        legend: {
+          textStyle: {
+            //图例文字的样式
+            color: "#fff",
+            fontSize: 12,
+          },
+        },
+        color:'#1BFEFE',
         series: [
           {
             data: [120, 200, 150, 80, 70, 110, 130],
             type: "bar",
           },
         ],
+        
       });
     },
     initChart2() {
