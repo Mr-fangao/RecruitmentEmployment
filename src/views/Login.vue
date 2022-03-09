@@ -2,7 +2,7 @@
   <div class="login">
     <div class="main">
       <div class="header">
-        <h1>GIS类专业招聘大数据分析与制图系统</h1>
+        <h1>GIS专业招聘大数据分析与制图系统</h1>
       </div>
       <div class="login_style">
         <h2>用户登录</h2>

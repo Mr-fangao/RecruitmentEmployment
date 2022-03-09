@@ -4,43 +4,31 @@
     <div class="left">
       <div class="col-content">
         <div class="row1title">
-          <!-- <img src="../../assets/img/pt/pt_title.png" alt="" /> -->
           <div class="imgBK"></div>
-          <span>城市薪资统计</span>
+          <span>城市平均薪资统计</span>
         </div>
         <div class="row1chartcontent" id="chart1"></div>
       </div>
       <div class="col-content">
         <div class="row1title">
-          <!-- <img src="../../assets/img/pt/pt_title.png" alt="" /> -->
           <div class="imgBK"></div>
-          <span>公司类型-薪资统计</span>
+          <span>城市平均薪资极差统计</span>
         </div>
-        <div class="row1chartcontent" id="chart2" ref="chart2"></div>
+        <div class="row1chartcontent" id="chart2"></div>
       </div>
       <div class="col-content">
         <div class="row1title">
-          <!-- <img src="../../assets/img/pt/pt_title.png" alt="" /> -->
           <div class="imgBK"></div>
-          <span>薪资极差统计</span>
+          <span>公司类型平均薪资统计</span>
         </div>
         <div class="row1chartcontent" id="chart3"></div>
       </div>
     </div>
     <div class="main">
-      <!-- <div class="map">
-        <div class="row1title">
-         <img src="../../assets/img/pt/pt_title.png" alt="" /> -->
-      <!-- <div class="imgBK"></div> -->
-      <!-- <span>薪资占比</span> -->
-      <!-- </div> -->
-      <!-- <div class="row1chartcontent" id="chart3"></div> -->
-      <!-- </div> -->
       <div class="col-content">
         <div class="row2title">
-          <!-- <img src="../../assets/img/pt/pt_title.png" alt="" /> -->
           <div class="imgBK"></div>
-          <span>城市薪资年变化</span>
+          <span>城市平均薪资年变化</span>
         </div>
         <div class="row1chartcontent" id="chart4" ref="Chart4"></div>
       </div>
@@ -48,25 +36,25 @@
     <div class="right">
       <div class="col-content">
         <div class="row1title">
-          <!-- <img src="../../assets/img/pt/pt_title.png" alt="" /> -->
+
           <div class="imgBK"></div>
-          <span>区域薪资统计</span>
+          <span>区域平均薪资统计</span>
         </div>
         <div class="row1chartcontent" id="chart5"></div>
       </div>
       <div class="col-content">
         <div class="row1title">
-          <!-- <img src="../../assets/img/pt/pt_title.png" alt="" /> -->
+
           <div class="imgBK"></div>
-          <span>热门薪资区间词云</span>
+          <span>平均薪资区间词云</span>
         </div>
         <div class="row1chartcontent" id="chart6" ref="cloudEl"></div>
       </div>
       <div class="col-content">
         <div class="row1title">
-          <!-- <img src="../../assets/img/pt/pt_title.png" alt="" /> -->
+ 
           <div class="imgBK"></div>
-          <span>行业薪资统计</span>
+          <span>行业平均薪资统计</span>
         </div>
         <div class="row1chartcontent" id="chart7"></div>
       </div>
@@ -117,103 +105,103 @@ export default {
         { value: 25, name: "限速" },
         { value: 13, name: "距离" },
       ],
-      option: {
-        tooltip: {
-          trigger: "axis",
-          formatter: (params) => {
-            return (
-              params[0].seriesName +
-              ": " +
-              params[0].data +
-              "<br>" +
-              params[1].seriesName +
-              ": " +
-              params[1].data +
-              "%"
-            );
-          },
-        },
-        legend: {
-          data: ["城市形象", "全国平均水平"],
-        },
-        xAxis: [
-          {
-            type: "category",
-            data: [
-              "交通",
-              "住宿",
-              "地理位置",
-              "旅行体验",
-              "景区环境",
-              "景区设施",
-              "服务",
-              "饮食",
-            ],
-          },
-        ],
-        yAxis: [
-          {
-            splitLine: { show: false },
-            type: "value",
-            name: "数量",
-            interval: 50,
-            axisLabel: {
-              formatter: "{value} ",
-            },
-          },
-        ],
-        series: [
-          {
-            name: "城市形象",
-            type: "bar",
-            /*设置柱状图颜色*/
-            itemStyle: {
-              normal: {
-                color: function (params) {
-                  // build a color map as your need.
-                  var colorList = [
-                    "#fe4f4f",
-                    "#fead33",
-                    "#feca2b",
-                    "#fef728",
-                    "#c5ee4a",
-                    "#87ee4a",
-                    "#46eda9",
-                    "#47e4ed",
-                    "#4bbbee",
-                    "#7646d8",
-                    "#924ae2",
-                    "#C6E579",
-                    "#F4E001",
-                    "#F0805A",
-                    "#26C0C0",
-                  ];
-                  return colorList[params.dataIndex];
-                },
-                /*信息显示方式*/
-                label: {
-                  show: true,
-                  position: "top",
-                  formatter: "{b}\n{c}",
-                },
-              },
-            },
-            data: [0.28, 0.278, 0.478, 0.637, 0.669, 0.369, 0.547, 0.372],
-          },
-          {
-            name: "全国平均水平",
-            yAxisIndex: 0, //这里要设置哪个y轴，默认是最左边的是0，然后1，2顺序来。
-            type: "line",
-            itemStyle: {
-              /*设置折线颜色*/
-              normal: {
-                // color:'#c4cddc'
-              },
-            },
-            data: [0.193, 0.178, 0.512, 0.683, 0.721, 0.358, 0.432, 0.498],
-          },
-        ],
-      },
+      // option: {
+      //   tooltip: {
+      //     trigger: "axis",
+      //     formatter: (params) => {
+      //       return (
+      //         params[0].seriesName +
+      //         ": " +
+      //         params[0].data +
+      //         "<br>" +
+      //         params[1].seriesName +
+      //         ": " +
+      //         params[1].data +
+      //         "%"
+      //       );
+      //     },
+      //   },
+      //   legend: {
+      //     data: ["城市形象", "全国平均水平"],
+      //   },
+      //   xAxis: [
+      //     {
+      //       type: "category",
+      //       data: [
+      //         "交通",
+      //         "住宿",
+      //         "地理位置",
+      //         "旅行体验",
+      //         "景区环境",
+      //         "景区设施",
+      //         "服务",
+      //         "饮食",
+      //       ],
+      //     },
+      //   ],
+      //   yAxis: [
+      //     {
+      //       splitLine: { show: false },
+      //       type: "value",
+      //       name: "数量",
+      //       interval: 50,
+      //       axisLabel: {
+      //         formatter: "{value} ",
+      //       },
+      //     },
+      //   ],
+      //   series: [
+      //     {
+      //       name: "城市形象",
+      //       type: "bar",
+      //       /*设置柱状图颜色*/
+      //       itemStyle: {
+      //         normal: {
+      //           color: function (params) {
+      //             // build a color map as your need.
+      //             var colorList = [
+      //               "#fe4f4f",
+      //               "#fead33",
+      //               "#feca2b",
+      //               "#fef728",
+      //               "#c5ee4a",
+      //               "#87ee4a",
+      //               "#46eda9",
+      //               "#47e4ed",
+      //               "#4bbbee",
+      //               "#7646d8",
+      //               "#924ae2",
+      //               "#C6E579",
+      //               "#F4E001",
+      //               "#F0805A",
+      //               "#26C0C0",
+      //             ];
+      //             return colorList[params.dataIndex];
+      //           },
+      //           /*信息显示方式*/
+      //           label: {
+      //             show: true,
+      //             position: "top",
+      //             formatter: "{b}\n{c}",
+      //           },
+      //         },
+      //       },
+      //       data: [0.28, 0.278, 0.478, 0.637, 0.669, 0.369, 0.547, 0.372],
+      //     },
+      //     {
+      //       name: "全国平均水平",
+      //       yAxisIndex: 0, //这里要设置哪个y轴，默认是最左边的是0，然后1，2顺序来。
+      //       type: "line",
+      //       itemStyle: {
+      //         /*设置折线颜色*/
+      //         normal: {
+      //           // color:'#c4cddc'
+      //         },
+      //       },
+      //       data: [0.193, 0.178, 0.512, 0.683, 0.721, 0.358, 0.432, 0.498],
+      //     },
+      //   ],
+      // },
       option4: {
         // title: {
         //   x: "150", // 水平安放位置，默认为左对齐，可选为：
@@ -351,6 +339,7 @@ export default {
     let myChart4 = this.$echarts.init(this.$refs.Chart4);
     myChart4.setOption(this.option4);
     this.initChart5();
+    this.initChart7();
     this.$nextTick(() => {
       window.addEventListener("resize", () => {
         this.handleResize();
@@ -407,98 +396,53 @@ export default {
         
       });
     },
-    initChart2() {
-      var myChart = echarts.init(document.getElementById("chart2"));
+    initChart3() {
+      var myChart = echarts.init(document.getElementById("chart3"));
       myChart.setOption({
-        color: ["#67F9D8", "#FFE434", "#56A3F1", "#FF917C"],
-        // title: {
-        //   text: "Customized Radar Chart",
-        // },
-        legend: {
-          textStyle: {
-            //图例文字的样式
-            color: "#fff",
-            fontSize: 12,
-          },
+        tooltip: {
+          trigger: "item",
+          formatter: "{a} <br/>{b} : {c} ({d}%)",
         },
-        radar: [
-          {
-            indicator: [
-              { text: "北京" },
-              { text: "上海" },
-              { text: "杭州" },
-              { text: "深圳" },
-              { text: "苏州" },
-            ],
-            center: ["55%", "60%"],
-            radius: 50,
-            startAngle: 90,
-            splitNumber: 4,
-            shape: "circle",
-            axisName: {
-              formatter: "【{value}】",
-              color: "#428BD4",
-            },
-            splitArea: {
-              areaStyle: {
-                color: ["#77EADF", "#26C3BE", "#64AFE9", "#428BD4"],
-                shadowColor: "rgba(0, 0, 0, 0.2)",
-                shadowBlur: 10,
-              },
-            },
-            axisLine: {
-              lineStyle: {
-                color: "rgba(211, 253, 250, 0.8)",
-              },
-            },
-            splitLine: {
-              lineStyle: {
-                color: "rgba(211, 253, 250, 0.8)",
-              },
-            },
-          },
-        ],
+        legend: {
+          left: "right",
+          top: "top",
+          // data: ["rose1", "rose2", "rose3", "rose4", "rose5", "rose6"],
+        },
+        toolbox: {
+          show: false,
+        },
         series: [
           {
-            type: "radar",
+            name: "Radius Mode",
+            type: "pie",
+            radius: [20, 80],
+            center: ["50%", "50%"],
+            roseType: "radius",
+            itemStyle: {
+              borderRadius: 5,
+            },
+            label: {
+              show: false,
+            },
             emphasis: {
-              lineStyle: {
-                width: 4,
+              label: {
+                show: true,
               },
             },
             data: [
-              {
-                value: [100, 8, 0.4, -80, 2000],
-                name: "Data A",
-              },
-              {
-                value: [60, 5, 0.3, -100, 1500],
-                name: "Data B",
-                areaStyle: {
-                  // color: "rgba(255, 228, 52, 0.6)",
-                },
-              },
-              {
-                value: [80, 6, 0.8, -10, 1800],
-                name: "Data C",
-                areaStyle: {
-                  // color: "rgba(255, 228, 52, 0.6)",
-                },
-              },
-              {
-                value: [60, 5, 0.3, -100, 1500],
-                name: "Data D",
-                areaStyle: {
-                  // color: "rgba(255, 228, 52, 0.6)",
-                },
-              },
+              { value: 40, name: "rose 1" },
+              { value: 33, name: "rose 2" },
+              { value: 28, name: "rose 3" },
+              { value: 22, name: "rose 4" },
+              { value: 20, name: "rose 5" },
+              { value: 15, name: "rose 6" },
             ],
           },
         ],
       });
     },
-    initChart3() {
-      let myChart = this.$echarts.init(document.getElementById("chart3"));
+    initChart2() {
+      let myChart = this.$echarts.init(document.getElementById("chart2"));
       myChart.setOption({
         title: {
           text: "    总评率随热词分布中,最高为肺炎,最低为症状",
@@ -941,16 +885,52 @@ export default {
         this.option4.yAxis[0].max = Math.ceil(this.plan_table[0].sum) + 500;
       }
     },
+    // initChart5() {
+    //   this.myChart5 = this.$echarts.init(document.getElementById("chart5"));
+    //   // 指定图表的配置项和数据
+    //   let option = this.option;
+    //   // 使用刚指定的配置项和数据显示图表。
+    //   this.myChart5.setOption(option);
+    // },
     initChart5() {
-      this.myChart5 = this.$echarts.init(document.getElementById("chart5"));
-      // 指定图表的配置项和数据
-      let option = this.option;
-      // 使用刚指定的配置项和数据显示图表。
-      this.myChart5.setOption(option);
+      var myChart = echarts.init(document.getElementById("chart5"));
+      myChart.setOption({
+        xAxis: {
+          type: "category",
+          boundaryGap: false,
+          axisLine: {
+            lineStyle: {
+              color: "#fff",
+            },
+          },
+          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        },
+        yAxis: {
+          type: "value",
+          splitLine: { show: false },
+          axisLine: {
+            lineStyle: {
+              color: "#fff",
+            },
+          },
+        },
+        series: [
+          {
+            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            type: "line",
+            areaStyle: {
+              color: "rgb(115, 215, 228)",
+            },
+            lineStyle: {
+              color: "rgb(115, 215, 228)",
+            },
+          },
+        ],
+      });
     },
-    handleResize() {
-      this.myChart5 && this.myChart5.resize();
-    },
+    // handleResize() {
+    //   this.myChart5 && this.myChart5.resize();
+    // },
     wordCloudInti(wrapEl, data) {
       let myChart = echarts.init(wrapEl);
       var option = {
@@ -998,6 +978,52 @@ export default {
         ],
       };
       myChart.setOption(option);
+    },
+    initChart7() {
+      var myChart = echarts.init(document.getElementById("chart7"));
+      myChart.setOption({
+        tooltip: {
+          trigger: "item",
+        },
+        legend: {
+          top: "5%",
+          left: "center",
+        },
+        series: [
+          {
+            name: "Access From",
+            type: "pie",
+            radius: ["40%", "70%"],
+            avoidLabelOverlap: false,
+            itemStyle: {
+              borderRadius: 10,
+              borderColor: "#fff",
+              borderWidth: 2,
+            },
+            label: {
+              show: false,
+              position: "center",
+            },
+            emphasis: {
+              label: {
+                show: true,
+                fontSize: "40",
+                fontWeight: "bold",
+              },
+            },
+            labelLine: {
+              show: false,
+            },
+            data: [
+              { value: 1048, name: "Search Engine" },
+              { value: 735, name: "Direct" },
+              { value: 580, name: "Email" },
+              { value: 484, name: "Union Ads" },
+              { value: 300, name: "Video Ads" },
+            ],
+          },
+        ],
+      });
     },
   },
 };

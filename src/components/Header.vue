@@ -2,7 +2,7 @@
   <nav>
     <ul>
       <li>
-        <h1>GIS类专业招聘大数据分析与制图系统</h1>
+        <h1>GIS专业招聘大数据分析与制图系统</h1>
         <router-link to="/statistics" exact>就业统计</router-link>
         <router-link to="/query" exact>职位查询</router-link>
         <router-link to="/skAnalysis" exact>综合分析</router-link>

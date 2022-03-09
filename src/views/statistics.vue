@@ -59,9 +59,9 @@
 
 <script>
 import salary from "../components/statistics/salary.vue";
-// import feelmonitor from "../components/feeling/feelmonitor.vue";
+import education from "../components/statistics/education.vue";
 export default {
-  components: { salary },
+  components: { salary,education },
   name: "statistics",
   data() {
     return {
@@ -72,12 +72,10 @@ export default {
   },
   methods: {
     show(value) {
-      if (value === 1) this.comp = "pointgather";
-      else if (value === 2) this.comp = "gradedcolormap";
+      if (value === 1) this.comp = "salary";
+      else if (value === 2) this.comp = "education";
       else if (value === 3) this.comp = "heatmap";
       else if (value === 4) this.comp = "multimap";
-      else if (value === 5) this.comp = "timemap";
-      //   else if (value === 3) this.comp = "density";
     },
   },
 };
@@ -100,7 +98,7 @@ export default {
   width: 3%;
   top: 0;
   left: 0;
-  background-color: #1b3147;
+  background-color: #0d1f30;
   .el-menu {
     top: 25%;
     width: 100%;
@@ -111,7 +109,7 @@ export default {
   }
   .el-menu-item.is-active {
     color: #15abc5;
-    border-right: 5px solid #0cf3f3;
+    border-left: 5px solid #0cf3f3;
     background: transparent;
   }
   .el-menu-item {
