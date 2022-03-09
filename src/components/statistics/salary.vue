@@ -1057,11 +1057,11 @@ export default {
     // }
     // height: 100%;
     height: 33.3%;
-    width: 47%;
+    width: 46.8%;
     position: absolute;
     float: left;
     bottom: 0%;
-    left: 28%;
+    left: 28.1%;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -1100,7 +1100,9 @@ export default {
   margin-bottom: 0;
   width: 100%;
   top: 1%;
-
+  margin-bottom: 0.5%;
+  background: url("../../assets/img/fq/buttonbg.png") no-repeat;
+  background-size: 100% 100%;
   .row1chartcontent {
     height: 85%;
     width: 100%;
@@ -1114,7 +1116,9 @@ export default {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-left: 2%;
+  padding-left: 2%;
+  // background-color: rgba(26, 62, 83, 0.623);
+  // background-color: #1b3147;
   .imgBK {
     width: 11%;
     height: 39%;
@@ -1136,7 +1140,8 @@ export default {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-left: 2%;
+  padding-left: 2%;
+  // background-color: #1b3147;
   .imgBK {
     width: 5.5%;
     height: 38%;

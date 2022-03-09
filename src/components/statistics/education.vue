@@ -64,7 +64,7 @@
 import wordcloud from "../../assets/js/echarts-wordcloud-master/index";
 import echarts from "echarts";
 export default {
-  name: "salary",
+  name: "education",
   components: {
     wordcloud,
   },
@@ -360,44 +360,6 @@ export default {
     initChart1() {
       var myChart = echarts.init(document.getElementById("chart1"));
       myChart.setOption({
-        xAxis: {
-          type: "category",
-          splitLine: { show: false },
-          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-          axisLine: {
-            lineStyle: {
-              color: "#fff",
-            },
-          },
-        },
-        yAxis: {
-          type: "value",
-          splitLine: { show: false },
-          axisLine: {
-            lineStyle: {
-              color: "#fff",
-            },
-          },
-        },
-        legend: {
-          textStyle: {
-            //图例文字的样式
-            color: "#fff",
-            fontSize: 12,
-          },
-        },
-        color: "#1BFEFE",
-        series: [
-          {
-            data: [120, 200, 150, 80, 70, 110, 130],
-            type: "bar",
-          },
-        ],
-      });
-    },
-    initChart7() {
-      var myChart = echarts.init(document.getElementById("chart7"));
-      myChart.setOption({
         tooltip: {
           trigger: "item",
         },
@@ -441,47 +403,111 @@ export default {
         ],
       });
     },
+    initChart7() {
+      var myChart = echarts.init(document.getElementById("chart7"));
+      myChart.setOption({
+        legend: {},
+        tooltip: {},
+        dataset: {
+          dimensions: ["product", "2015", "2016", "2017"],
+          source: [
+            { product: "Matcha Latte", 2015: 43.3, 2016: 85.8, 2017: 93.7 },
+            { product: "Milk Tea", 2015: 83.1, 2016: 73.4, 2017: 55.1 },
+            { product: "Cheese Cocoa", 2015: 86.4, 2016: 65.2, 2017: 82.5 },
+            { product: "Walnut Brownie", 2015: 72.4, 2016: 53.9, 2017: 39.1 },
+          ],
+        },
+        xAxis: { type: "category" },
+        yAxis: {},
+        // Declare several bar series, each will be mapped
+        // to a column of dataset.source by default.
+        series: [{ type: "bar" }, { type: "bar" }, { type: "bar" }],
+      });
+    },
     initChart3() {
       let myChart = this.$echarts.init(document.getElementById("chart3"));
       myChart.setOption({
         tooltip: {
-          trigger: "item",
-          formatter: "{a} <br/>{b} : {c} ({d}%)",
+          trigger: "axis",
+          axisPointer: {
+            // Use axis to trigger tooltip
+            type: "shadow", // 'shadow' as default; can also be 'line' or 'shadow'
+          },
         },
-        legend: {
-          left: "right",
-          top: "top",
-          // data: ["rose1", "rose2", "rose3", "rose4", "rose5", "rose6"],
+        legend: {},
+        grid: {
+          left: "3%",
+          right: "4%",
+          bottom: "3%",
+          containLabel: true,
         },
-        toolbox: {
-          show: false,
+        xAxis: {
+          type: "value",
+        },
+        yAxis: {
+          type: "category",
+          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
         },
         series: [
           {
-            name: "Radius Mode",
-            type: "pie",
-            radius: [20, 80],
-            center: ["50%", "50%"],
-            roseType: "radius",
-            itemStyle: {
-              borderRadius: 5,
-            },
+            name: "Direct",
+            type: "bar",
+            stack: "total",
             label: {
-              show: false,
+              show: true,
             },
             emphasis: {
-              label: {
-                show: true,
-              },
+              focus: "series",
             },
-            data: [
-              { value: 40, name: "rose 1" },
-              { value: 33, name: "rose 2" },
-              { value: 28, name: "rose 3" },
-              { value: 22, name: "rose 4" },
-              { value: 20, name: "rose 5" },
-              { value: 15, name: "rose 6" },
-            ],
+            data: [320, 302, 301, 334, 390, 330, 320],
+          },
+          {
+            name: "Mail Ad",
+            type: "bar",
+            stack: "total",
+            label: {
+              show: true,
+            },
+            emphasis: {
+              focus: "series",
+            },
+            data: [120, 132, 101, 134, 90, 230, 210],
+          },
+          {
+            name: "Affiliate Ad",
+            type: "bar",
+            stack: "total",
+            label: {
+              show: true,
+            },
+            emphasis: {
+              focus: "series",
+            },
+            data: [220, 182, 191, 234, 290, 330, 310],
+          },
+          {
+            name: "Video Ad",
+            type: "bar",
+            stack: "total",
+            label: {
+              show: true,
+            },
+            emphasis: {
+              focus: "series",
+            },
+            data: [150, 212, 201, 154, 190, 330, 410],
+          },
+          {
+            name: "Search Engine",
+            type: "bar",
+            stack: "total",
+            label: {
+              show: true,
+            },
+            emphasis: {
+              focus: "series",
+            },
+            data: [820, 832, 901, 934, 1290, 1330, 1320],
           },
         ],
       });
@@ -504,35 +530,64 @@ export default {
     initChart5() {
       var myChart = echarts.init(document.getElementById("chart5"));
       myChart.setOption({
+        title: {
+          text: "Stacked Line",
+        },
+        tooltip: {
+          trigger: "axis",
+        },
+        legend: {
+          data: ["Email", "Union Ads", "Video Ads", "Direct", "Search Engine"],
+        },
+        grid: {
+          left: "3%",
+          right: "4%",
+          bottom: "3%",
+          containLabel: true,
+        },
+        toolbox: {
+          feature: {
+            saveAsImage: {},
+          },
+        },
         xAxis: {
           type: "category",
           boundaryGap: false,
-          axisLine: {
-            lineStyle: {
-              color: "#fff",
-            },
-          },
           data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
         },
         yAxis: {
           type: "value",
-          splitLine: { show: false },
-          axisLine: {
-            lineStyle: {
-              color: "#fff",
-            },
-          },
         },
         series: [
           {
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            name: "Email",
             type: "line",
-            areaStyle: {
-              color: "rgb(115, 215, 228)",
-            },
-            lineStyle: {
-              color: "rgb(115, 215, 228)",
-            },
+            stack: "Total",
+            data: [120, 132, 101, 134, 90, 230, 210],
+          },
+          {
+            name: "Union Ads",
+            type: "line",
+            stack: "Total",
+            data: [220, 182, 191, 234, 290, 330, 310],
+          },
+          {
+            name: "Video Ads",
+            type: "line",
+            stack: "Total",
+            data: [150, 232, 201, 154, 190, 330, 410],
+          },
+          {
+            name: "Direct",
+            type: "line",
+            stack: "Total",
+            data: [320, 332, 301, 334, 390, 330, 320],
+          },
+          {
+            name: "Search Engine",
+            type: "line",
+            stack: "Total",
+            data: [820, 932, 901, 934, 1290, 1330, 1320],
           },
         ],
       });
@@ -543,7 +598,7 @@ export default {
     initChart6() {
       var myChart = echarts.init(document.getElementById("chart6"));
       myChart.setOption({
-       color: ["#67F9D8", "#FFE434", "#56A3F1", "#FF917C"],
+        color: ["#67F9D8", "#FFE434", "#56A3F1", "#FF917C"],
         // title: {
         //   text: "Customized Radar Chart",
         // },
@@ -900,9 +955,4 @@ export default {
     margin-top: -0.3%;
   }
 }
-// /deep/.mapboxgl-ctrl-attrib-inner{
-//   a{
-//     color: transparent;
-//   }
-// }
 </style>
