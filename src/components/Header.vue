@@ -59,8 +59,7 @@ nav {
     margin-left: 150px;
   }
   .times {
-    width: 140px;
-    margin-left: 10px;
+        width: 165px;
     font-size: 18px;
     float: right;
     font-family: Microsoft YaHei;

@@ -5,7 +5,7 @@
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
-          <span>学历要求统计</span>
+          <span>公司类型学历统计</span>
         </div>
         <div class="row1chartcontent" id="chart1"></div>
       </div>
@@ -19,7 +19,7 @@
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
-          <span>学历薪资统计</span>
+          <span>职位学历统计</span>
         </div>
         <div class="row1chartcontent" id="chart3"></div>
       </div>
@@ -38,14 +38,14 @@
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
-          <span>职位学历统计</span>
+          <span>学历薪资统计</span>
         </div>
         <div class="row1chartcontent" id="chart5"></div>
       </div>
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
-          <span>公司类型学历统计</span>
+          <span>学历要求统计</span>
         </div>
         <div class="row1chartcontent" id="chart6"></div>
       </div>
@@ -268,10 +268,10 @@ export default {
           },
         ],
         grid: {
-          x: 40,
-          y: 40,
-          x2: 30,
-          y2: 30,
+          x: 50,
+          y: 30,
+          x2: 40,
+          y2: 60,
         },
         series: [
           {
@@ -357,21 +357,26 @@ export default {
         zoom: 3.5,
       });
     },
-    initChart1() {
-      var myChart = echarts.init(document.getElementById("chart1"));
+    initChart5() {
+      var myChart = echarts.init(document.getElementById("chart5"));
       myChart.setOption({
         tooltip: {
           trigger: "item",
         },
         legend: {
-          top: "5%",
+          top: "2%",
           left: "center",
+          textStyle: {
+            //图例文字的样式
+            color: "#fff",
+            fontSize: 12,
+          },
         },
         series: [
           {
-            name: "Access From",
             type: "pie",
-            radius: ["40%", "70%"],
+            center: ["50%", "55%"],
+            radius: ["30%", "70%"],
             avoidLabelOverlap: false,
             itemStyle: {
               borderRadius: 10,
@@ -385,7 +390,7 @@ export default {
             emphasis: {
               label: {
                 show: true,
-                fontSize: "40",
+                fontSize: "26",
                 fontWeight: "bold",
               },
             },
@@ -393,11 +398,11 @@ export default {
               show: false,
             },
             data: [
-              { value: 1048, name: "Search Engine" },
-              { value: 735, name: "Direct" },
-              { value: 580, name: "Email" },
-              { value: 484, name: "Union Ads" },
-              { value: 300, name: "Video Ads" },
+              { value: 1048, name: "博士" },
+              { value: 735, name: "硕士" },
+              { value: 580, name: "本科" },
+              { value: 484, name: "专科" },
+              { value: 300, name: "无需" },
             ],
           },
         ],
@@ -406,19 +411,45 @@ export default {
     initChart7() {
       var myChart = echarts.init(document.getElementById("chart7"));
       myChart.setOption({
-        legend: {},
+        grid: {
+          right: "4%",
+          top: "12%",
+          height:"55%",
+          width:"85%",
+        },
+        legend: {
+          textStyle: {
+            //图例文字的样式
+            color: "#fff",
+            fontSize: 12,
+          },
+        },
         tooltip: {},
         dataset: {
-          dimensions: ["product", "2015", "2016", "2017"],
+          dimensions: ["product", "博士", "硕士", "本科", "专科", "高中及以下"],
           source: [
-            { product: "Matcha Latte", 2015: 43.3, 2016: 85.8, 2017: 93.7 },
-            { product: "Milk Tea", 2015: 83.1, 2016: 73.4, 2017: 55.1 },
-            { product: "Cheese Cocoa", 2015: 86.4, 2016: 65.2, 2017: 82.5 },
-            { product: "Walnut Brownie", 2015: 72.4, 2016: 53.9, 2017: 39.1 },
+            { product: "计算机", 博士: 43.3, 硕士: 85.8, 本科: 93.7 },
+            { product: "Milk Tea", 博士: 83.1, 硕士: 73.4, 本科: 55.1 },
+            { product: "Cheese Cocoa", 博士: 86.4, 硕士: 65.2, 本科: 82.5 },
+            { product: "Walnut Brownie", 博士: 72.4, 硕士: 53.9, 本科: 39.1 },
           ],
         },
-        xAxis: { type: "category" },
-        yAxis: {},
+        xAxis: {
+          type: "category",
+          axisLine: {
+            lineStyle: {
+              color: "#fff",
+            },
+          },
+        },
+        yAxis: {
+          splitLine: { show: false },
+          axisLine: {
+            lineStyle: {
+              color: "#fff",
+            },
+          },
+        },
         // Declare several bar series, each will be mapped
         // to a column of dataset.source by default.
         series: [{ type: "bar" }, { type: "bar" }, { type: "bar" }],
@@ -434,23 +465,41 @@ export default {
             type: "shadow", // 'shadow' as default; can also be 'line' or 'shadow'
           },
         },
-        legend: {},
+        legend: {
+          textStyle: {
+            //图例文字的样式
+            color: "#fff",
+            fontSize: 12,
+          },
+        },
         grid: {
-          left: "3%",
-          right: "4%",
-          bottom: "3%",
+          right: "5%",
+          top: "14%",
+          height:"63%",
+          width:"92%",
           containLabel: true,
         },
         xAxis: {
           type: "value",
+          axisLine: {
+            lineStyle: {
+              color: "#fff",
+            },
+          },
         },
         yAxis: {
           type: "category",
           data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          splitLine: { show: false },
+          axisLine: {
+            lineStyle: {
+              color: "#fff",
+            },
+          },
         },
         series: [
           {
-            name: "Direct",
+            name: "博士",
             type: "bar",
             stack: "total",
             label: {
@@ -462,7 +511,7 @@ export default {
             data: [320, 302, 301, 334, 390, 330, 320],
           },
           {
-            name: "Mail Ad",
+            name: "硕士",
             type: "bar",
             stack: "total",
             label: {
@@ -474,7 +523,7 @@ export default {
             data: [120, 132, 101, 134, 90, 230, 210],
           },
           {
-            name: "Affiliate Ad",
+            name: "本科",
             type: "bar",
             stack: "total",
             label: {
@@ -486,7 +535,7 @@ export default {
             data: [220, 182, 191, 234, 290, 330, 310],
           },
           {
-            name: "Video Ad",
+            name: "大专及以下",
             type: "bar",
             stack: "total",
             label: {
@@ -498,7 +547,7 @@ export default {
             data: [150, 212, 201, 154, 190, 330, 410],
           },
           {
-            name: "Search Engine",
+            name: "无需",
             type: "bar",
             stack: "total",
             label: {
@@ -527,76 +576,53 @@ export default {
         this.option4.yAxis[0].max = Math.ceil(this.plan_table[0].sum) + 500;
       }
     },
-    initChart5() {
-      var myChart = echarts.init(document.getElementById("chart5"));
+    initChart6() {
+      var myChart = echarts.init(document.getElementById("chart6"));
       myChart.setOption({
-        title: {
-          text: "Stacked Line",
-        },
-        tooltip: {
-          trigger: "axis",
-        },
-        legend: {
-          data: ["Email", "Union Ads", "Video Ads", "Direct", "Search Engine"],
-        },
         grid: {
-          left: "3%",
-          right: "4%",
-          bottom: "3%",
-          containLabel: true,
-        },
-        toolbox: {
-          feature: {
-            saveAsImage: {},
-          },
+          height: "75%",
+          width:"80%",
+          top: "5%",
+          right: "5%",
         },
         xAxis: {
           type: "category",
           boundaryGap: false,
+          axisLine: {
+            lineStyle: {
+              color: "#fff",
+            },
+          },
           data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
         },
         yAxis: {
           type: "value",
+          splitLine: { show: false },
+          axisLine: {
+            lineStyle: {
+              color: "#fff",
+            },
+          },
         },
         series: [
           {
-            name: "Email",
-            type: "line",
-            stack: "Total",
-            data: [120, 132, 101, 134, 90, 230, 210],
-          },
-          {
-            name: "Union Ads",
-            type: "line",
-            stack: "Total",
-            data: [220, 182, 191, 234, 290, 330, 310],
-          },
-          {
-            name: "Video Ads",
-            type: "line",
-            stack: "Total",
-            data: [150, 232, 201, 154, 190, 330, 410],
-          },
-          {
-            name: "Direct",
-            type: "line",
-            stack: "Total",
-            data: [320, 332, 301, 334, 390, 330, 320],
-          },
-          {
-            name: "Search Engine",
-            type: "line",
-            stack: "Total",
             data: [820, 932, 901, 934, 1290, 1330, 1320],
+            type: "line",
+            areaStyle: {
+              color: "rgb(115, 215, 228)",
+            },
+            lineStyle: {
+              color: "rgb(115, 215, 228)",
+            },
           },
         ],
       });
     },
-    handleResize() {
-      this.myChart5 && this.myChart5.resize();
-    },
-    initChart6() {
-      var myChart = echarts.init(document.getElementById("chart6"));
+    // handleResize() {
+    //   this.myChart5 && this.myChart5.resize();
+    // },
+    initChart1() {
+      var myChart = echarts.init(document.getElementById("chart1"));
       myChart.setOption({
         color: ["#67F9D8", "#FFE434", "#56A3F1", "#FF917C"],
         // title: {
@@ -618,8 +644,8 @@ export default {
               { text: "深圳" },
               { text: "苏州" },
             ],
-            center: ["55%", "60%"],
-            radius: 50,
+            center: ["50%", "60%"],
+            radius: 70,
             startAngle: 90,
             splitNumber: 4,
             shape: "circle",
@@ -657,25 +683,32 @@ export default {
             data: [
               {
                 value: [100, 8, 0.4, -80, 2000],
-                name: "Data A",
+                name: "博士",
               },
               {
                 value: [60, 5, 0.3, -100, 1500],
-                name: "Data B",
+                name: "硕士",
                 areaStyle: {
                   // color: "rgba(255, 228, 52, 0.6)",
                 },
               },
               {
                 value: [80, 6, 0.8, -10, 1800],
-                name: "Data C",
+                name: "本科",
                 areaStyle: {
                   // color: "rgba(255, 228, 52, 0.6)",
                 },
               },
               {
                 value: [60, 5, 0.3, -100, 1500],
-                name: "Data D",
+                name: "大专及以下",
+                areaStyle: {
+                  // color: "rgba(255, 228, 52, 0.6)",
+                },
+              },
+              {
+                value: [60, 5, 0.3, -100, 1500],
+                name: "无需",
                 areaStyle: {
                   // color: "rgba(255, 228, 52, 0.6)",
                 },
@@ -735,18 +768,18 @@ export default {
     // },
     initChart2() {
       var myChart = echarts.init(document.getElementById("chart2"));
-      const hours = [
-        "12a",
-        "1a",
-        "2a",
-        "3a",
-        "4a",
-        "5a",
-        "6a",
-        "7a",
-        "8a",
-        "9a",
-        "10a",
+      const city = [
+        "北京",
+        "上海",
+        "南京",
+        "深圳",
+        "重庆",
+        "杭州",
+        "广东",
+        "成都",
+        "郑州",
+        "苏州",
+        "九江",
         "11a",
         "12p",
         "1p",
@@ -762,13 +795,14 @@ export default {
         "11p",
       ];
       const days = [
-        "Saturday",
-        "Friday",
-        "Thursday",
-        "Wednesday",
-        "Tuesday",
-        "Monday",
-        "Sunday",
+        "博士",
+        "硕士",
+        "本科",
+        "大专",
+        "高中",
+       "无需", 
+        "无需",
+        
       ];
 
       // prettier-ignore
@@ -781,14 +815,21 @@ export default {
           position: "top",
         },
         grid: {
-          height: "50%",
-          top: "10%",
+          height: "60%",
+          width:"85%",
+          top: "5%",
+          right: "2%",
         },
         xAxis: {
           type: "category",
-          data: hours,
+          data: city,
           splitArea: {
             show: true,
+          },
+          axisLine: {
+            lineStyle: {
+              color: "#fff",
+            },
           },
         },
         yAxis: {
@@ -797,18 +838,22 @@ export default {
           splitArea: {
             show: true,
           },
+          axisLine: {
+            lineStyle: {
+              color: "#fff",
+            },
+          },
         },
         visualMap: {
           min: 0,
-          max: 10,
+          max: 30,
           calculable: true,
           orient: "horizontal",
           left: "center",
-          bottom: "15%",
+          bottom: "5%",
         },
         series: [
           {
-            name: "Punch Card",
             type: "heatmap",
             data: data,
             label: {
