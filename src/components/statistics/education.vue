@@ -5,21 +5,21 @@
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
-          <span>公司类型学历统计</span>
+          <span>学历要求统计</span>
         </div>
         <div class="row1chartcontent" id="chart1"></div>
       </div>
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
-          <span>城市学历统计</span>
+          <span>学历平均薪资统计</span>
         </div>
         <div class="row1chartcontent" id="chart2" ref="Chart2"></div>
       </div>
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
-          <span>职位学历统计</span>
+          <span>行业学历统计</span>
         </div>
         <div class="row1chartcontent" id="chart3"></div>
       </div>
@@ -38,21 +38,21 @@
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
-          <span>学历薪资统计</span>
+          <span>公司类型学历统计</span>
         </div>
         <div class="row1chartcontent" id="chart5"></div>
       </div>
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
-          <span>学历要求统计</span>
+          <span>城市学历统计</span>
         </div>
         <div class="row1chartcontent" id="chart6"></div>
       </div>
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
-          <span>行业学历统计</span>
+          <span>职位学历统计</span>
         </div>
         <div class="row1chartcontent" id="chart7"></div>
       </div>
@@ -357,8 +357,8 @@ export default {
         zoom: 3.5,
       });
     },
-    initChart5() {
-      var myChart = echarts.init(document.getElementById("chart5"));
+    initChart1() {
+      var myChart = echarts.init(document.getElementById("chart1"));
       myChart.setOption({
         tooltip: {
           trigger: "item",
@@ -408,8 +408,8 @@ export default {
         ],
       });
     },
-    initChart7() {
-      var myChart = echarts.init(document.getElementById("chart7"));
+    initChart3() {
+      var myChart = echarts.init(document.getElementById("chart3"));
       myChart.setOption({
         grid: {
           right: "4%",
@@ -428,10 +428,10 @@ export default {
         dataset: {
           dimensions: ["product", "博士", "硕士", "本科", "专科", "高中及以下"],
           source: [
-            { product: "计算机", 博士: 43.3, 硕士: 85.8, 本科: 93.7 },
-            { product: "Milk Tea", 博士: 83.1, 硕士: 73.4, 本科: 55.1 },
-            { product: "Cheese Cocoa", 博士: 86.4, 硕士: 65.2, 本科: 82.5 },
-            { product: "Walnut Brownie", 博士: 72.4, 硕士: 53.9, 本科: 39.1 },
+            { product: "计算机软件", 博士: 43.3, 硕士: 85.8, 本科: 93.7 },
+            { product: "航天", 博士: 83.1, 硕士: 73.4, 本科: 55.1 },
+            { product: "互联网", 博士: 86.4, 硕士: 65.2, 本科: 82.5 },
+            { product: "机械", 博士: 72.4, 硕士: 53.9, 本科: 39.1 },
           ],
         },
         xAxis: {
@@ -455,8 +455,8 @@ export default {
         series: [{ type: "bar" }, { type: "bar" }, { type: "bar" }],
       });
     },
-    initChart3() {
-      let myChart = this.$echarts.init(document.getElementById("chart3"));
+    initChart7() {
+      let myChart = this.$echarts.init(document.getElementById("chart7"));
       myChart.setOption({
         tooltip: {
           trigger: "axis",
@@ -489,7 +489,7 @@ export default {
         },
         yAxis: {
           type: "category",
-          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          data: ["webgis", "", "Wed", "Thu", "Fri", "Sat", "Sun"],
           splitLine: { show: false },
           axisLine: {
             lineStyle: {
@@ -576,8 +576,8 @@ export default {
         this.option4.yAxis[0].max = Math.ceil(this.plan_table[0].sum) + 500;
       }
     },
-    initChart6() {
-      var myChart = echarts.init(document.getElementById("chart6"));
+    initChart2() {
+      var myChart = echarts.init(document.getElementById("chart2"));
       myChart.setOption({
         grid: {
           height: "75%",
@@ -593,7 +593,7 @@ export default {
               color: "#fff",
             },
           },
-          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          data: ["博士", "硕士", "本科", "大专", "高中", "无需",],
         },
         yAxis: {
           type: "value",
@@ -621,8 +621,8 @@ export default {
     // handleResize() {
     //   this.myChart5 && this.myChart5.resize();
     // },
-    initChart1() {
-      var myChart = echarts.init(document.getElementById("chart1"));
+    initChart5() {
+      var myChart = echarts.init(document.getElementById("chart5"));
       myChart.setOption({
         color: ["#67F9D8", "#FFE434", "#56A3F1", "#FF917C"],
         // title: {
@@ -766,33 +766,27 @@ export default {
     //   };
     //   myChart.setOption(option);
     // },
-    initChart2() {
-      var myChart = echarts.init(document.getElementById("chart2"));
+    initChart6() {
+      var myChart = echarts.init(document.getElementById("chart6"));
       const city = [
-        "北京",
-        "上海",
-        "南京",
-        "深圳",
-        "重庆",
-        "杭州",
-        "广东",
-        "成都",
+        "北京","11a",
+        "12p",
+        "上海","1p",
+        "2p",
+        "南京","3p",
+        "4p",
+        "深圳","5p",
+        "6p",
+        "重庆","7p",
+        "8p",
+        "杭州","7p",
+        "8p",
+        "广东","7p",
+        "8p",
+        "成都","7p",
+        "8p",
         "郑州",
         "苏州",
-        "九江",
-        "11a",
-        "12p",
-        "1p",
-        "2p",
-        "3p",
-        "4p",
-        "5p",
-        "6p",
-        "7p",
-        "8p",
-        "9p",
-        "10p",
-        "11p",
       ];
       const days = [
         "博士",
@@ -800,7 +794,7 @@ export default {
         "本科",
         "大专",
         "高中",
-       "无需", 
+       "高中以下", 
         "无需",
         
       ];

@@ -38,7 +38,7 @@
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
-          <span>工作经验薪资统计</span>
+          <span>工作经验平均薪资统计</span>
         </div>
         <div class="row1chartcontent" id="chart5"></div>
       </div>

@@ -770,25 +770,25 @@ export default {
             data: [
               {
                 value: [100, 8, 0.4, -80, 2000],
-                name: "Data A",
+                name: "VUE",
               },
               {
                 value: [60, 5, 0.3, -100, 1500],
-                name: "Data B",
+                name: "AE开发",
                 areaStyle: {
                   // color: "rgba(255, 228, 52, 0.6)",
                 },
               },
               {
                 value: [80, 6, 0.8, -10, 1800],
-                name: "Data C",
+                name: "JS",
                 areaStyle: {
                   // color: "rgba(255, 228, 52, 0.6)",
                 },
               },
               {
                 value: [60, 5, 0.3, -100, 1500],
-                name: "Data D",
+                name: "三维GIS",
                 areaStyle: {
                   // color: "rgba(255, 228, 52, 0.6)",
                 },

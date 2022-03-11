@@ -61,9 +61,9 @@
 import salary from "../components/statistics/salary.vue";
 import education from "../components/statistics/education.vue";
 import experience from "../components/statistics/experience.vue";
-// import voation from "../components/statistics/voation.vue";
+import vocation from "../components/statistics/vocation.vue";
 export default {
-  components: { salary, education, experience, },
+  components: { salary, education, experience, vocation},
   name: "statistics",
   data() {
     return {
@@ -77,7 +77,7 @@ export default {
       if (value === 1) this.comp = "salary";
       else if (value === 2) this.comp = "education";
       else if (value === 3) this.comp = "experience";
-      else if (value === 4) this.comp = "voation";
+      else if (value === 4) this.comp = "vocation";
     },
   },
 };

@@ -91,19 +91,19 @@ export default {
   width: 3%;
   top: 0;
   left: 0;
-  background-color: #1432509f;
-  // background-color: rgba(83, 198, 226, 0.705);
+  background-color: #0d1f30;
   .el-menu {
-    top: 30%;
+    top: 25%;
     width: 100%;
-    height: 10%;
-    left: 0%;
+    height: 8%;
+    right: 0%;
     background: transparent;
     border: none;
   }
   .el-menu-item.is-active {
-    color: #1bcddd;
-    background: transparent
+    color: #15abc5;
+    border-left: 5px solid #0cf3f3;
+    background: transparent;
   }
   .el-menu-item {
     color: #fff;

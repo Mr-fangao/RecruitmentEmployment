@@ -120,7 +120,7 @@ export default {
   width: 3%;
   top: 0;
   left: 0;
-  background-color: #1432509f;
+  background-color: #0d1f30;
   .el-menu {
     top: 25%;
     width: 100%;
@@ -131,7 +131,7 @@ export default {
   }
   .el-menu-item.is-active {
     color: #15abc5;
-    border-right: 5px solid #0cf3f3;
+    border-left: 5px solid #0cf3f3;
     background: transparent;
   }
   .el-menu-item {
