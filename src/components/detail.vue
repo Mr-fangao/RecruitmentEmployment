@@ -1,6 +1,6 @@
 <template>
   <div class="details">
-    <div class="header">
+    <div class="he">
       <div class="other">
         <div class="title">
           <span>精选图片</span>
@@ -126,41 +126,56 @@ export default {
 
 <style lang="less" scoped>
 .detail {
-  position: fixed;
-  height: 100%;
+  // position: fixed;
+  height: cala(100%-45px);
   width: 100%;
   display: flex;
   flex-direction: column;
-  .header {
-    height: 40%;
-    width: 100%;
-    display: flex;
-    margin: 2%;
-    .other {
-      height: 100%;
-      flex: 1;
-    }
-    .others {
-      height: 100%;
-      flex: 1;
-    }
+}
+.he {
+  height: 40%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex: 1.5;
+  padding: 2%;
+  .other {
+    height: 100%;
+    flex: 1;
+    background: url("../assets/img/fq/bg-1.png") no-repeat;
+    background-size: 100% 100%;
   }
-  .middle{
-    height: 30%;
-    width: 100%;
-    display: flex;
-    margin: 2%;
+  .others {
+    height: 100%;
+    flex: 1;
   }
-  .foot{
-    height: 30%;
-    width: 100%;
+}
+.middle {
+  // height: 30%;
+  width: 100%;
+  display: flex;
+  flex: 1;
+  padding: 2%;
+}
+.foot {
+  // height: 30%;
+  width: 100%;
+  display: flex;
+  flex: 1;
+  padding: 2%;
+}
+.title {
+  height: 20%;
+  width: 100%;
+}
+.content {
+  height: 80%;
+  width: 100%;
+  display: flex;
+
+  .el-row {
     display: flex;
-    margin: 2%;
-  }
-  .title{
-    height: 20%;
-    width: 100%;
-    // background-image: url("../");
+    flex-direction: column;
   }
 }
 </style>
