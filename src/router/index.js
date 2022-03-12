@@ -127,5 +127,13 @@ export default new Router({
         keepAlive: true
       }
     },
+    {
+      path: "/detail",
+      name: "detail",
+      component: () => import("@/components/detail"),
+      meta: {
+        keepAlive: true
+      }
+    },
   ]
 })

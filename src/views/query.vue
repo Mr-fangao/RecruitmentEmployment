@@ -71,7 +71,7 @@
                 @click.native.stop="flyToLocation(scope.row.x, scope.row.y)"
                 >定位</el-button
               >
-              <el-button type="text" @click.native.stop="clickData(scope.row)"
+              <el-button type="text" @click.native.stop="clickData(scope.row.id)"
                 >详情</el-button
               >
             </template>
@@ -108,9 +108,10 @@ const mapboxgl = require("mapbox-gl");
 import request from "../utils/request";
 import loading from "../components/loading.vue";
 import poppage from "../components/poppage.vue";
+import Bus from "../assets/js/bus.js";
 export default {
   name: "query",
-  components: { poppage, loading },
+  components: { loading,},
   data() {
     return {
       isLoading: true,
@@ -161,10 +162,9 @@ export default {
       // 确认弹窗回调
       this.show = false;
     },
-    clickData(row) {
-      this.porpName = row.company;
-      this.show = true;
-      console.log(row);
+    clickData(val) {
+      Bus.$emit('myevent',val);
+      this.$router.push({ name: "detail" });
     },
     clickRow(val) {
       console.log(val);
