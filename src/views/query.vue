@@ -17,7 +17,7 @@
       <el-card shadow="hover" class="tebale_card">
         <el-table
           style="width: 100%; align: center"
-          @row-click="clickRow"
+@row-click="clickRow"
           :row-style="getRowClass"
           :header-row-style="getRowClass"
           :header-cell-style="getRowClass"
@@ -48,7 +48,7 @@
           >
           </el-table-column
           ><el-table-column
-            prop="salary"
+            prop="salarySe"
             label="薪资范围"
             width="100"
             :show-overflow-tooltip="true"
@@ -57,13 +57,13 @@
           ><el-table-column prop="x" label="x" v-if="false"> </el-table-column>
           <el-table-column prop="y" label="y" v-if="false"> </el-table-column>
           <el-table-column type="id" label="id" v-if="false"> </el-table-column>
-          <el-table-column prop="require" label="学历要求" width="100">
+          <el-table-column prop="education" label="学历要求" width="100">
           </el-table-column
           ><el-table-column prop="experience" label="工作经验" width="100">
           </el-table-column
           ><el-table-column prop="type" label="公司类型" width="120">
           </el-table-column
-          ><el-table-column prop="type" label="公司规模" width="120">
+          ><el-table-column prop="size" label="公司规模" width="120">
           </el-table-column>
           <el-table-column prop="detail" label="详细信息" width="120">
             <template slot-scope="scope">
@@ -166,6 +166,7 @@ export default {
     clickData(val) {
       Bus.$emit('myevent',val);
       this.$router.push({ name: "detail" });
+      this.id = row.id
     },
     clickRow(val) {
       console.log(val);
@@ -320,6 +321,7 @@ export default {
   left: 0%;
   width: 20%;
   height: 60%;
+  // background-color: #225e81e3;
 }
 .table {
   position: absolute;

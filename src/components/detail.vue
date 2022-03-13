@@ -1,5 +1,5 @@
 <template>
-  <div class="details">
+  <div class="details" :data="detailData">
     <div class="he">
       <div class="other">
         <div class="title">
@@ -8,41 +8,41 @@
         </div>
         <div class="content">
           <div class="png"></div>
-          <div class="vocation">
+          <div class="vocation" >
             <el-row :gutter="20">
               <el-col :span="8"><span>公司名称:</span></el-col>
               <el-col :span="16"
-                ><div class="details" prop="company"></div
+                ><div class="details" prop="company">{{ detailData.company }}</div
               ></el-col>
             </el-row>
             <el-row :gutter="20">
               <el-col :span="8"><span>公司类型:</span></el-col>
               <el-col :span="16"
-                ><div class="details" prop="type"></div
+                ><div class="details" prop="type">{{ detailData.type }}</div
               ></el-col>
             </el-row>
             <el-row :gutter="20">
               <el-col :span="8"><span>公司规模:</span></el-col>
               <el-col :span="16"
-                ><div class="details" prop="size"></div
+                ><div class="details" prop="size">{{ detailData.size }}</div
               ></el-col>
             </el-row>
             <el-row :gutter="20">
               <el-col :span="8"><span>行业领域:</span></el-col>
               <el-col :span="16"
-                ><div class="details" prop="industry"></div
+                ><div class="details" prop="industry">{{ detailData.industry }}</div
               ></el-col>
             </el-row>
             <el-row :gutter="20">
               <el-col :span="8"><span>工作地区:</span></el-col>
               <el-col :span="16"
-                ><div class="details" prop="region"></div
+                ><div class="details" prop="region">{{ detailData.region }}</div
               ></el-col>
             </el-row>
             <el-row :gutter="20">
               <el-col :span="8"><span>公司福利:</span></el-col>
               <el-col :span="16"
-                ><div class="details" prop="treat"></div
+                ><div class="details" prop="treat">{{ detailData.treat }}</div
               ></el-col>
             </el-row>
           </div>
@@ -59,37 +59,37 @@
             <el-row :gutter="20">
               <el-col :span="8"><span>职位名称:</span></el-col>
               <el-col :span="16"
-                ><div class="details" prop="profession"></div
+                ><div class="details" prop="profession">{{ detailData.profession }}</div
               ></el-col>
             </el-row>
             <el-row :gutter="20">
               <el-col :span="8"><span>学历要求:</span></el-col>
               <el-col :span="16"
-                ><div class="details" prop="education"></div
+                ><div class="details" prop="education">{{ detailData.education }}</div
               ></el-col>
             </el-row>
             <el-row :gutter="20">
               <el-col :span="8"><span>工作经验:</span></el-col>
               <el-col :span="16"
-                ><div class="details" prop="experience"></div
+                ><div class="details" prop="experience">{{ detailData.experience }}</div
               ></el-col>
             </el-row>
             <el-row :gutter="20">
               <el-col :span="8"><span>工作地点:</span></el-col>
               <el-col :span="16"
-                ><div class="details" prop="address"></div
+                ><div class="details" prop="address">{{ detailData.address }}</div
               ></el-col>
             </el-row>
             <el-row :gutter="20">
               <el-col :span="8"><span>职位薪资:</span></el-col>
               <el-col :span="16"
-                ><div class="details" prop="salary"></div
+                ><div class="details" prop="salarySe">{{ detailData.salarySe }}</div
               ></el-col>
             </el-row>
             <el-row :gutter="20">
               <el-col :span="8"><span>发布时间:</span></el-col>
               <el-col :span="16"
-                ><div class="details" prop="time"></div
+                ><div class="details" prop="time">{{ detailData.time }}</div
               ></el-col>
             </el-row>
           </div>
@@ -119,16 +119,43 @@ import Bus from "../assets/js/bus.js";
 export default {
   components: {},
   data() {
-    return {};
+    return {
+      detailData:[],
+    };
   },
   mounted() {
     this.getAllData();
+    this.getTravels();
   },
   methods: {
     getAllData() {
       Bus.$on("myevent", (val) => {
         console.log(val);
       });
+    },
+    getTravels() {
+      request
+        .post("/api/data/queryAll", {
+          count: "100",
+          code: this.id,
+        })
+        .then((res) => {
+          console.log(res);
+          this.detailData.company = res.data.company;
+          this.detailData.position = res.data.position;
+          this.detailData.region = res.data.region;
+          this.detailData.experience = res.data.experience;
+          this.detailData.requirement = res.data.requirement;
+          this.detailData.type = res.data.type;
+          this.detailData.time = res.data.time;
+          this.detailData.salarySe = res.data.salarySe;
+          this.detailData.industry = res.data.industry;
+          this.detailData.introduce = res.data.introduce;
+          this.detailData.treat = res.data.treat;
+          this.detailData.education = res.data.education;
+          this.detailData.size = res.data.size;
+          this.detailData.address = res.data.address;
+        });
     },
   },
 };
