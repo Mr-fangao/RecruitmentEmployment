@@ -12,6 +12,7 @@
         placeholder="输入关键字搜索"
       /><el-button size="mini" id="button" @click="Search">查询</el-button>
     </div>
+    <div class="charts"></div>
     <div class="table">
       <el-card shadow="hover" class="tebale_card">
         <el-table
@@ -313,11 +314,18 @@ export default {
     color: #fff;
   }
 }
+.charts{
+  position: absolute;
+  bottom: 6.5%;
+  left: 0%;
+  width: 20%;
+  height: 60%;
+}
 .table {
   position: absolute;
   bottom: 6.5%;
-  right: 0px;
-  width: 90%;
+  right: 0%;
+  width: 80%;
   height: 40%;
 }
 #map {
