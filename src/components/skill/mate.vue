@@ -1281,16 +1281,17 @@ export default {
     width: 60%;
     display: flex;
     flex-direction: column;
-    margin: 1% 1% 1% 3%;
+    margin: 0.2% 1% 0% 3%;
     .hd {
       display: flex;
       width: 42%;
-      margin: 0px 0px 10px 10px;
+      margin: 0px 0px 10px 5px;
       height: 28px;
-      background: url(../../assets/img/pt/pt_title1.png) no-repeat;
-      background-size: 100% 100%;
+      background: url(../../assets/img/pt/pt_title.png) no-repeat;
+      background-size: 11% 45%;
+      background-position: 0% 50%;
       span {
-        margin-left: 9%;
+        margin-left: 12%;
         line-height: 30px;
         font-size: 18px;
         color: #fff;
