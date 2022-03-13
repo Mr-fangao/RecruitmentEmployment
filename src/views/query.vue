@@ -166,7 +166,7 @@ export default {
     clickData(val) {
       Bus.$emit('myevent',val);
       this.$router.push({ name: "detail" });
-      this.id = row.id
+      
     },
     clickRow(val) {
       console.log(val);
