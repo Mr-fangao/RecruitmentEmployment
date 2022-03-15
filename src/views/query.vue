@@ -17,7 +17,7 @@
       <el-card shadow="hover" class="tebale_card">
         <el-table
           style="width: 100%; align: center"
-@row-click="clickRow"
+          @row-click="clickRow"
           :row-style="getRowClass"
           :header-row-style="getRowClass"
           :header-cell-style="getRowClass"
@@ -72,7 +72,9 @@
                 @click.native.stop="flyToLocation(scope.row.x, scope.row.y)"
                 >定位</el-button
               >
-              <el-button type="text" @click.native.stop="clickData(scope.row.id)"
+              <el-button
+                type="text"
+                @click.native.stop="clickData(scope.row.id)"
                 >详情</el-button
               >
             </template>
@@ -110,9 +112,11 @@ import request from "../utils/request";
 import loading from "../components/loading.vue";
 import poppage from "../components/poppage.vue";
 import Bus from "../assets/js/bus.js";
+import global from "../components/global";
+
 export default {
   name: "query",
-  components: { loading,},
+  components: { loading, poppage },
   data() {
     return {
       isLoading: true,
@@ -125,6 +129,7 @@ export default {
       location: [],
       show: false,
       porpName: "",
+      dataid: global.dataid,
     };
   },
   mounted() {
@@ -164,9 +169,10 @@ export default {
       this.show = false;
     },
     clickData(val) {
-      Bus.$emit('myevent',val);
+      this.dataid = val;
+      Bus.$emit('myevent',dataid);
       this.$router.push({ name: "detail" });
-      
+      this.detailData = val.tableData;
     },
     clickRow(val) {
       console.log(val);
@@ -315,7 +321,7 @@ export default {
     color: #fff;
   }
 }
-.charts{
+.charts {
   position: absolute;
   bottom: 6.5%;
   left: 0%;

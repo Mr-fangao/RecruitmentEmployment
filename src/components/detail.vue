@@ -1,6 +1,5 @@
 <template>
   <div class="details">
-
     <div class="he">
       <div class="other">
         <div class="title">
@@ -112,7 +111,7 @@
             <el-row :gutter="20">
               <el-col :span="8"><span>发布时间:</span></el-col>
               <el-col :span="16">
-                <sapn> {{time }}</sapn>
+                <span> {{ detailData.time }}</span>
               </el-col>
             </el-row>
           </div>
@@ -124,62 +123,71 @@
         <div class="imgBK"></div>
         <span>公司介绍</span>
       </div>
-      <div class="in" porp="introduce"></div>
+      <div class="in" porp="introduce">{{ detailData.introduce }}</div>
     </div>
     <div class="foot">
       <div class="title">
         <div class="imgBK"></div>
         <span>任职要求</span>
       </div>
-      <div class="re" porp="requirement"></div>
+      <div class="re" porp="requirement">{{ detailData.requirement }}</div>
     </div>
   </div>
 </template>
 
 <script>
+  import global from '@/components/global'
 import request from "@/utils/request";
 import Bus from "../assets/js/bus.js";
+import Vue from "vue";
 export default {
-  components: {},
+  // name :"detail",
+  //  props: {
+  //   // show: {
+  //   //   type: Boolean,
+  //   //   default: false,
+  //   // },
+  //   detailData: {
+  //     type: Array,
+  //     default: "",
+  //   },
+  // },
   data() {
     return {
       detailData: [],
-      time: "",
-      id: 0,
+      dataid: global.dataid,
+      // detailFun: global.detailFun,
+      // globalHttpUrl: global.httpUrl,
     };
   },
+  // created() {
+  //   this.getAllData();
+  // },
   mounted() {
     this.getAllData();
+
+    this.$nextTick(function () {
+      this.getAllData();
+    });
   },
   methods: {
     getAllData() {
-      Bus.$on("myevent", (val) => {
-        console.log(val);
-        request
-          .post("/api/data/queryAll", {
-            code: val,
-          })
-          .then((res) => {
-            console.log(res);
-            this.detailData = res.data[0];
-            console.log(this.detailData);
-            console.log(this.detailData.time);
-            this.time = this.detailData.time;
-            // this.detailData.position = res.data.position;
-            // this.detailData.region = res.data.region;
-            // this.detailData.experience = res.data.experience;
-            // this.detailData.requirement = res.data.requirement;
-            // this.detailData.type = res.data.type;
-            // this.detailData.time = res.data.time;
-            // this.detailData.salarySe = res.data.salarySe;
-            // this.detailData.industry = res.data.industry;
-            // this.detailData.introduce = res.data.introduce;
-            // this.detailData.treat = res.data.treat;
-            // this.detailData.education = res.data.education;
-            // this.detailData.size = res.data.size;
-            // this.detailData.address = res.data.address;
-          });
+      // let dataid = 0;
+      Bus.$on("myevent", (dataid) => {
+        console.log(dataid);
+        dataid = val;
+
       });
+      request
+        .post("/api/data/queryAll", {
+          code: this.dataid,
+        })
+        .then((res) => {
+          console.log(res.data);
+          this.detailData = res.data[0];
+          console.log(this.detailData);
+        });
+
     },
   },
 };
