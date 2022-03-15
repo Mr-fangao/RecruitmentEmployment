@@ -12,7 +12,7 @@
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
-          <span>城市平均薪资极差统计</span>
+          <span>职位平均薪资统计</span>
         </div>
         <div class="row1chartcontent" id="chart2"></div>
       </div>
@@ -28,7 +28,7 @@
       <div class="col-content">
         <div class="row2title">
           <div class="imgBK"></div>
-          <span>城市平均薪资年变化</span>
+          <span>热门职位平均薪资年变化</span>
         </div>
         <div class="row1chartcontent" id="chart4" ref="Chart4"></div>
       </div>
@@ -36,23 +36,20 @@
     <div class="right">
       <div class="col-content">
         <div class="row1title">
-
           <div class="imgBK"></div>
-          <span>区域平均薪资统计</span>
+          <span>区县平均薪资统计</span>
         </div>
         <div class="row1chartcontent" id="chart5"></div>
       </div>
       <div class="col-content">
         <div class="row1title">
-
           <div class="imgBK"></div>
-          <span>平均薪资区间词云</span>
+          <span>薪资区间词云</span>
         </div>
         <div class="row1chartcontent" id="chart6" ref="cloudEl"></div>
       </div>
       <div class="col-content">
         <div class="row1title">
- 
           <div class="imgBK"></div>
           <span>行业平均薪资统计</span>
         </div>
@@ -386,14 +383,13 @@ export default {
             fontSize: 12,
           },
         },
-        color:'#1BFEFE',
+        color: "#1BFEFE",
         series: [
           {
             data: [120, 200, 150, 80, 70, 110, 130],
             type: "bar",
           },
         ],
-        
       });
     },
     initChart3() {
@@ -445,7 +441,7 @@ export default {
       let myChart = this.$echarts.init(document.getElementById("chart2"));
       myChart.setOption({
         title: {
-          text: "    总评率随热词分布中,最高为肺炎,最低为症状",
+          text: "      职位平均薪资排行占比中,最高为数据库管理员,最低为助理规划师",
           textStyle: {
             color: "rgba(255, 255, 255, .8)",
             fontSize: 12,
@@ -486,11 +482,11 @@ export default {
             },
             data: [
               {
-                name: "肺炎",
+                name: "数据库管理员",
                 value: 9.06,
               },
               {
-                name: "疫情",
+                name: "前端开发工程师",
                 value: 7.74,
               },
               {
@@ -1034,7 +1030,7 @@ export default {
   z-index: 1;
   position: fixed;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 45px);
   .left {
     height: 100%;
     width: 25%;
@@ -1051,11 +1047,6 @@ export default {
     background-size: 100% 100%;
   }
   .main {
-    // #map{
-    //   width: 100%;
-    //   height: 66.6%;
-    // }
-    // height: 100%;
     height: 33.3%;
     width: 46.8%;
     position: absolute;
@@ -1069,6 +1060,9 @@ export default {
     align-items: stretch;
     background: url("../../assets/img/fq/ptbg3.png");
     background-size: 100% 100%;
+    .col-content {
+      margin-bottom: 0.2%;
+    }
   }
   .right {
     height: 100%;

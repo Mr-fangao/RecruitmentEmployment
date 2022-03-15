@@ -752,7 +752,7 @@ export default {
   z-index: 1;
   position: fixed;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 45px);
   .left {
     height: 100%;
     width: 25%;
@@ -782,6 +782,9 @@ export default {
     align-items: stretch;
     background: url("../../assets/img/fq/ptbg3.png");
     background-size: 100% 100%;
+    .col-content {
+      margin-bottom: 0.2%;
+    }
   }
   .right {
     height: 100%;
