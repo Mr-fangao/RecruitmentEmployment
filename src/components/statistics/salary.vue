@@ -360,7 +360,7 @@ export default {
         xAxis: {
           type: "category",
           splitLine: { show: false },
-          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          data: ["深圳", "广州", "成都", "南昌", "宁波", "上海", "南京"],
           axisLine: {
             lineStyle: {
               color: "#fff",
@@ -441,7 +441,7 @@ export default {
       let myChart = this.$echarts.init(document.getElementById("chart2"));
       myChart.setOption({
         title: {
-          text: "      职位平均薪资排行占比中,最高为数据库管理员,最低为助理规划师",
+          text: "      职位平均薪资占比排行中,最高为数据库管理员,最低为助理规划师",
           textStyle: {
             color: "rgba(255, 255, 255, .8)",
             fontSize: 12,
