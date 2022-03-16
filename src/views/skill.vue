@@ -45,8 +45,8 @@ export default {
   },
   methods: {
     show(value) {
-      if (value === 1) this.comp = "mate";
-      else if (value === 2) this.comp = "data";
+      if (value === 1) this.comp = "analyse";
+      else if (value === 2) this.comp = "mate";
       // else if (value === 3) this.comp = "heatmap";
     },
   },
