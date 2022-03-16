@@ -9,7 +9,7 @@
           plain
         >
           <i class="fa fa-line-chart"></i>
-          <span class="tab">匹配</span>
+          <span class="tab">分析</span>
         </el-menu-item>
         <el-menu-item
           index="2"
@@ -18,7 +18,7 @@
           plain
         >
           <i class="fa fa-map"></i>
-          <span class="tab">地图</span>
+          <span class="tab">匹配</span>
         </el-menu-item>
       </el-menu>
     </div>
@@ -31,10 +31,10 @@
 </template>
 
 <script>
+import analyse from "../components/skill/analyse.vue";
 import mate from "../components/skill/mate.vue";
-import data from "../components/skill/data.vue";
 export default {
-  components: { data, mate },
+  components: { analyse, mate },
   name: "skill",
   data() {
     return {
