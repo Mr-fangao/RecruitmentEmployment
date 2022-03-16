@@ -12,16 +12,15 @@
             <el-row :gutter="20">
               <el-col :span="8"><span>公司名称:</span></el-col>
               <el-col :span="16"
-                ><div class="detail" prop="company">
-                  <!-- {{ detailData.company }} -->
-                  {{ this.try }}
+                ><div class="detail">
+                  {{ detailData.company }}
                 </div></el-col
               >
             </el-row>
             <el-row :gutter="20">
               <el-col :span="8"><span>公司类型:</span></el-col>
               <el-col :span="16"
-                ><div class="detail" prop="type">
+                ><div class="detail">
                   {{ detailData.type }}
                 </div></el-col
               >
@@ -29,7 +28,7 @@
             <el-row :gutter="20">
               <el-col :span="8"><span>公司规模:</span></el-col>
               <el-col :span="16"
-                ><div class="detail" prop="size">
+                ><div class="detail">
                   {{ detailData.size }}
                 </div></el-col
               >
@@ -37,7 +36,7 @@
             <el-row :gutter="20">
               <el-col :span="8"><span>行业领域:</span></el-col>
               <el-col :span="16"
-                ><div class="detail" prop="industry">
+                ><div class="detail">
                   {{ detailData.industry }}
                 </div></el-col
               >
@@ -45,7 +44,7 @@
             <el-row :gutter="20">
               <el-col :span="8"><span>工作地区:</span></el-col>
               <el-col :span="16"
-                ><div class="detail" prop="region">
+                ><div class="detail">
                   {{ detailData.region }}
                 </div></el-col
               >
@@ -53,7 +52,7 @@
             <el-row :gutter="20">
               <el-col :span="8"><span>公司福利:</span></el-col>
               <el-col :span="16"
-                ><div class="detail" prop="treat">
+                ><div class="detail">
                   {{ detailData.treat }}
                 </div></el-col
               >
@@ -65,6 +64,7 @@
         <div class="title">
           <div class="imgBK"></div>
           <span>招聘要求</span>
+          <div class="revert" @click="revert"></div>
         </div>
         <div class="content">
           <div class="png"></div>
@@ -72,15 +72,15 @@
             <el-row :gutter="20">
               <el-col :span="8"><span>职位名称:</span></el-col>
               <el-col :span="16"
-                ><div class="detail" prop="profession">
-                  {{ detailData.profession }}
+                ><div class="detail">
+                  {{ detailData.position }}
                 </div></el-col
               >
             </el-row>
             <el-row :gutter="20">
               <el-col :span="8"><span>学历要求:</span></el-col>
               <el-col :span="16"
-                ><div class="detail" prop="education">
+                ><div class="detail">
                   {{ detailData.education }}
                 </div></el-col
               >
@@ -96,7 +96,7 @@
             <el-row :gutter="20">
               <el-col :span="8"><span>工作地点:</span></el-col>
               <el-col :span="16"
-                ><div class="detail" prop="address">
+                ><div class="detail">
                   {{ detailData.address }}
                 </div></el-col
               >
@@ -104,7 +104,7 @@
             <el-row :gutter="20">
               <el-col :span="8"><span>职位薪资:</span></el-col>
               <el-col :span="16"
-                ><div class="detail" prop="salarySe">
+                ><div class="detail">
                   {{ detailData.salarySe }}
                 </div></el-col
               >
@@ -112,7 +112,9 @@
             <el-row :gutter="20">
               <el-col :span="8"><span>发布时间:</span></el-col>
               <el-col :span="16">
-                <span> {{ detailData.time }}</span>
+                <div class="detail">
+                  {{ detailData.time }}
+                </div>
               </el-col>
             </el-row>
           </div>
@@ -180,6 +182,9 @@ export default {
           console.log(this.detailData);
         });
     },
+    revert(){
+      this.$router.push({ name: "query"});
+    }
   },
 };
 </script>
@@ -219,12 +224,21 @@ export default {
         background: url("../assets/img/fq/company1.jpeg") no-repeat;
         background-size: 100% 100%;
       }
+      .revert {
+        height: 40%;
+        width: 3%;
+        right: 0%;
+        margin-left: 78%;
+        background: url("../assets/img/fq/clear.png") no-repeat;
+        background-size: 100% 100%;
+      }
     }
   }
   .middle {
     // height: 30%;
     width: 100%;
     display: flex;
+    flex-direction: column;
     flex: 1;
     padding: 0% 2% 2% 2%;
     .imgBK {
@@ -234,17 +248,32 @@ export default {
     .in {
       width: 100%;
       height: 80%;
+      padding: 1%;
+      color: #fff;
+      text-align: left;
+      text-indent: 2em;
+      line-height: 18pt;
     }
   }
   .foot {
     // height: 30%;
     width: 100%;
     display: flex;
+    flex-direction: column;
     flex: 1;
     padding: 0% 2% 2% 2%;
     .imgBK {
       width: 3.2%;
       height: 40%;
+    }
+    .re {
+      width: 100%;
+      height: 80%;
+      padding: 1%;
+      color: #fff;
+      text-align: left;
+      text-indent: 2em; //文字缩进2字符
+      line-height: 18pt;
     }
   }
 }
@@ -270,7 +299,8 @@ export default {
     height: 100%;
   }
   .vocation {
-    width: 55%;
+    margin-left: 3%;
+    width: 45%;
     height: 100%;
   }
 }
@@ -278,6 +308,7 @@ export default {
   padding-bottom: 2.5%;
   .el-col {
     color: #fff;
+    text-align: left;
   }
 }
 
