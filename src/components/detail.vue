@@ -13,7 +13,8 @@
               <el-col :span="8"><span>公司名称:</span></el-col>
               <el-col :span="16"
                 ><div class="detail" prop="company">
-                  {{ detailData.company }}
+                  <!-- {{ detailData.company }} -->
+                  {{ this.try }}
                 </div></el-col
               >
             </el-row>
@@ -136,7 +137,7 @@
 </template>
 
 <script>
-  import global from '@/components/global'
+import global from "@/components/global";
 import request from "@/utils/request";
 import Bus from "../assets/js/bus.js";
 import Vue from "vue";
@@ -155,39 +156,29 @@ export default {
   data() {
     return {
       detailData: [],
-      dataid: global.dataid,
+      // dataid: global.dataid,
+      try: "",
       // detailFun: global.detailFun,
       // globalHttpUrl: global.httpUrl,
     };
   },
-  // created() {
-  //   this.getAllData();
-  // },
+  created() {
+    this.try = this.$route.params.a;
+  },
   mounted() {
     this.getAllData();
-
-    this.$nextTick(function () {
-      this.getAllData();
-    });
   },
   methods: {
     getAllData() {
-      // let dataid = 0;
-      Bus.$on("myevent", (dataid) => {
-        console.log(dataid);
-        dataid = val;
-
-      });
       request
         .post("/api/data/queryAll", {
-          code: this.dataid,
+          code: this.try,
         })
         .then((res) => {
           console.log(res.data);
           this.detailData = res.data[0];
           console.log(this.detailData);
         });
-
     },
   },
 };

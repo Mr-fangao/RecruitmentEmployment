@@ -170,8 +170,8 @@ export default {
     },
     clickData(val) {
       this.dataid = val;
-      Bus.$emit('myevent',dataid);
-      this.$router.push({ name: "detail" });
+      // Bus.$emit('myevent',dataid);
+      this.$router.push({ name: "detail", params: {a: val} });
       this.detailData = val.tableData;
     },
     clickRow(val) {
