@@ -17,7 +17,6 @@
       <el-card shadow="hover" class="tebale_card">
         <el-table
           style="width: 100%; align: center"
-          @row-click="clickRow"
           :row-style="getRowClass"
           :header-row-style="getRowClass"
           :header-cell-style="getRowClass"
@@ -110,13 +109,13 @@
 const mapboxgl = require("mapbox-gl");
 import request from "../utils/request";
 import loading from "../components/loading.vue";
-import poppage from "../components/poppage.vue";
+// import poppage from "../components/poppage.vue";
 import Bus from "../assets/js/bus.js";
 import global from "../components/global";
 
 export default {
   name: "query",
-  components: { loading, poppage },
+  components: { loading,  },
   data() {
     return {
       isLoading: true,
@@ -174,11 +173,11 @@ export default {
       this.$router.push({ name: "detail", params: {a: val} });
       this.detailData = val.tableData;
     },
-    clickRow(val) {
-      console.log(val);
-      this.porpName = val.company;
-      this.show = true;
-    },
+    // clickRow(val) {
+    //   console.log(val);
+    //   this.porpName = val.company;
+    //   this.show = true;
+    // },
     // showPop(val) {
     //   this.porpName = val.company;
     //   this.show = true;

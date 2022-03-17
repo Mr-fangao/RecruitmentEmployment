@@ -12,7 +12,8 @@
       <div class="he">
         <div class="prompt">
           <span
-            >请您输入个人技能和城市进行技能-职位匹配,注意:技能为必选项，且技能词输入不能超过三个
+            >请您输入个人技能和城市进行技能-职位匹配，
+            注意：技能为必选项，且技能词输入不能超过三个
           </span>
         </div>
         <div class="mutual">
@@ -121,9 +122,9 @@ export default {
       isShow: true,
       //示例
       labellist: [
-        { id: 1, name: "山岳" },
-        { id: 2, name: "海滨" },
-        { id: 3, name: "历史" },
+        { id: 1, name: "WebGIS" },
+        { id: 2, name: "ArcGIS" },
+        { id: 3, name: "SQLSever" },
       ],
     };
   },
@@ -197,24 +198,115 @@ export default {
     display: flex;
     flex: 1;
     flex-direction: column;
+    align-items: center;
     color: #fff;
     .prompt {
-        display: flex;
-        
-      flex: 1;
-      span{
-          padding: 5%;
-          height: 55%;
+      display: flex;
+      flex: 0.5;
+      align-items: center;
+      margin-top: 7%;
+      width: 92%;
+      background: linear-gradient(#1edaeb) left top no-repeat,
+        linear-gradient(#1edaeb) left top no-repeat,
+        linear-gradient(#1edaeb) right top no-repeat,
+        linear-gradient(#1edaeb) right top no-repeat,
+        linear-gradient(#1edaeb) left bottom no-repeat,
+        linear-gradient(#1edaeb) left bottom no-repeat,
+        linear-gradient(#1edaeb) right bottom no-repeat,
+        linear-gradient(#1edaeb) right bottom no-repeat;
+      //linear-gradient(to left, #f00, #f00) right bottom no-repeat;//四个角的边框 to left 代表颜色渐变的方向
+      background-size: 1px 20px, 20px 1px, 1px 20px, 20px 1px;
+      span {
+        padding: 5% 2%;
+        // border: 1px solid #1edaeb;
+        text-indent: 2em; //文字缩进2字符
+        line-height: 18pt;
+        text-align: left;
       }
     }
     .mutual {
       flex: 2;
       display: flex;
       flex-direction: row;
-      .labelcontent {
-        display: flex;
-        flex-direction: row;
+      width: 92%;
+      margin-top: 4%;
+      padding-top: 5%;
+      background: linear-gradient(#1edaeb) left top no-repeat,
+        linear-gradient(#1edaeb) left top no-repeat,
+        linear-gradient(#1edaeb) right top no-repeat,
+        linear-gradient(#1edaeb) right top no-repeat,
+        linear-gradient(#1edaeb) left bottom no-repeat,
+        linear-gradient(#1edaeb) left bottom no-repeat,
+        linear-gradient(#1edaeb) right bottom no-repeat,
+        linear-gradient(#1edaeb) right bottom no-repeat;
+      //linear-gradient(to left, #f00, #f00) right bottom no-repeat;//四个角的边框 to left 代表颜色渐变的方向
+      background-size: 1px 20px, 20px 1px, 1px 20px, 20px 1px;
+      .bg-specially {
+        height: 100%;
+        // width: 60%;
+        .labelcontent {
+          display: flex;
+          height: 20%;
+          width: 100%;
+          padding-top: 3%;
+          padding-bottom: 3%;
+          flex-wrap: wrap;
+          > span {
+            font-size: 12pt;
+            color: #c5d4e6;
+            // margin-left: -19%;
+          }
+          .chooselabel {
+            background: #8ae5e54a;
+            margin-left: 2%;
+            border: 1px solid #ffffff40;
+            font-size: 11pt;
+            border-radius: 5px;
+            cursor: pointer;
+            // margin: 1% 1% 1% 1% ;
+          }
+        }
       }
+      .tab {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: flex-start;
+        > span {
+          position: absolute;
+          top: 64%;
+          left: 39%;
+          color: #a7c7c7f0;
+          font-size: 10pt;
+        }
+        /deep/.el-input__inner {
+      left: 0%;
+      position: relative;
+      display: inline-block;
+      -webkit-appearance: none;
+      background: #c3e3e72b;
+      border-radius: 4px;
+      border: 1px solid #3eb7c738;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      color: rgba(220, 225, 227, 0.96);
+      font-size: inherit;
+      height: 30px;
+      line-height: 90px;
+      width: 100%;
+      padding: 0px;
+      margin-top: 2%;
+    }
+  }
+  /deep/.el-row {
+    height: 17%;
+  }
+  /deep/.el-row:nth-child(1) {
+    height: 0%;
+  }
+      
     }
   }
   .main {
@@ -233,22 +325,5 @@ export default {
 }
 
 // /deep/.el-input__inner {
-//   left: 15%;
-//   top: 51%;
-//   position: absolute;
-//   display: inline-block;
-//   -webkit-appearance: none;
-//   background: transparent;
-//   border-radius: 4px;
-//   border: 0px solid #dcdfe6;
-//   -webkit-box-sizing: border-box;
-//   box-sizing: border-box;
-//   color: rgba(220, 225, 227, 0.96);
-//   // display: inline-block;
-//   font-size: inherit;
-//   height: 44px;
-//   line-height: 36px;
-//   width: 100%;
-//   padding: 0 0 0 35px;
 // }
 </style>
