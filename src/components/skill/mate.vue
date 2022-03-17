@@ -282,31 +282,30 @@ export default {
           font-size: 10pt;
         }
         /deep/.el-input__inner {
-      left: 0%;
-      position: relative;
-      display: inline-block;
-      -webkit-appearance: none;
-      background: #c3e3e72b;
-      border-radius: 4px;
-      border: 1px solid #3eb7c738;
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-      color: rgba(220, 225, 227, 0.96);
-      font-size: inherit;
-      height: 30px;
-      line-height: 90px;
-      width: 100%;
-      padding: 0px;
-      margin-top: 2%;
-    }
-  }
-  /deep/.el-row {
-    height: 17%;
-  }
-  /deep/.el-row:nth-child(1) {
-    height: 0%;
-  }
-      
+          left: 0%;
+          position: relative;
+          display: inline-block;
+          -webkit-appearance: none;
+          background: #c3e3e72b;
+          border-radius: 4px;
+          border: 1px solid #3eb7c738;
+          -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+          color: rgba(220, 225, 227, 0.96);
+          font-size: inherit;
+          height: 30px;
+          line-height: 90px;
+          width: 100%;
+          padding: 0px;
+          margin-top: 2%;
+        }
+      }
+      /deep/.el-row {
+        height: 17%;
+      }
+      /deep/.el-row:nth-child(1) {
+        height: 0%;
+      }
     }
   }
   .main {
