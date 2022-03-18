@@ -61,6 +61,7 @@
 <script>
 import wordcloud from "../../assets/js/echarts-wordcloud-master/index";
 import echarts from "echarts";
+import request from "@/utils/request";
 export default {
   name: "salary",
   components: {
@@ -68,6 +69,7 @@ export default {
   },
   data() {
     return {
+      chart5: [],
       cloudData: [
         { value: 1800, name: "纳木措" },
         { value: 1200, name: "西藏" },
@@ -326,6 +328,9 @@ export default {
       ],
     };
   },
+  created() {
+    this.fetchData();
+  },
   mounted() {
     this.initmap();
     this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
@@ -344,6 +349,17 @@ export default {
     });
   },
   methods: {
+    fetchData() {
+      request
+      .post("/api/data/querySa",{city:"北京"}).then((res) => {
+        // console.log(res);
+        this.chart5.xdata = res.data.region;
+        this.chart5.ydata = res.data.avgsalary;
+        this.initChart5();
+        
+      });
+       
+    },
     initmap() {
       this.$mapboxgl.accessToken =
         "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
@@ -899,7 +915,7 @@ export default {
               color: "#fff",
             },
           },
-          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          data: this.chart5.xdata,
         },
         yAxis: {
           type: "value",
@@ -912,7 +928,7 @@ export default {
         },
         series: [
           {
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            data: this.chart5.ydata,
             type: "line",
             areaStyle: {
               color: "rgb(115, 215, 228)",

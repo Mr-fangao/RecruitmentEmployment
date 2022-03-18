@@ -41,6 +41,20 @@
               </div>
             </el-col>
           </el-row>
+          <el-row :gutter="20">
+            <el-col :span="8"><span>城市选择:</span></el-col>
+            <el-col :span="16">
+              <div class="grid-content bg-specially">
+                <div class="tab">
+                  <el-input v-model="input1" placeholder=" 输入内容"></el-input>
+                </div>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row :gutter="20">
+            <el-col :span="12"><el-button>开始匹配</el-button></el-col>
+            <el-col :span="12"><el-button>重置选择</el-button> </el-col>
+          </el-row>
         </div>
       </div>
       <div class="main">
@@ -49,45 +63,20 @@
           <el-table
             ref="interfaceTable"
             :data="tableCityData"
-            @row-click="clickData"
-            height="211px"
-            style="padding: 2.5%; margin-left: 3%"
             stripe
             highlight-current-row
             class="“customer-table”"
           >
             <el-table-column
-              prop="hotrank"
-              label="排名"
-              width="40"
+              prop="company"
+              label="公司名称"
               :show-overflow-tooltip="true"
             >
             </el-table-column>
             <el-table-column
-              prop="city"
-              label="城市"
-              width="60"
-              :show-overflow-tooltip="true"
-            >
-            </el-table-column>
-            <el-table-column
-              prop="sccount"
-              label="景点数目"
-              width="60"
-              :show-overflow-tooltip="true"
-            >
-            </el-table-column>
-            <el-table-column
-              prop="comcount"
-              label="热度"
-              width="50"
-              :show-overflow-tooltip="true"
-            >
-            </el-table-column>
-            <el-table-column
-              prop="scscore"
-              label="分数"
-              width="50"
+              prop="position"
+              label="职位名称"
+              width="150"
               :show-overflow-tooltip="true"
             >
             </el-table-column>
@@ -125,6 +114,13 @@ export default {
         { id: 1, name: "WebGIS" },
         { id: 2, name: "ArcGIS" },
         { id: 3, name: "SQLSever" },
+      ],
+      input: "",
+      input1: "",
+      tableCityData: [
+        { company: "111111", position: "WebGIS" },
+        { company: "111111", position: "WebGIS" },
+        { company: "111111", position: "WebGIS" },
       ],
     };
   },
@@ -227,7 +223,7 @@ export default {
     .mutual {
       flex: 2;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       width: 92%;
       margin-top: 4%;
       padding-top: 5%;
@@ -241,18 +237,21 @@ export default {
         linear-gradient(#1edaeb) right bottom no-repeat;
       //linear-gradient(to left, #f00, #f00) right bottom no-repeat;//四个角的边框 to left 代表颜色渐变的方向
       background-size: 1px 20px, 20px 1px, 1px 20px, 20px 1px;
+      .grid-content {
+        border-radius: 4px;
+        min-height: 36px;
+      }
       .bg-specially {
         height: 100%;
         // width: 60%;
         .labelcontent {
           display: flex;
-          height: 20%;
           width: 100%;
-          padding-top: 3%;
-          padding-bottom: 3%;
+          padding: 2% 0%;
+          line-height: 25px;
           flex-wrap: wrap;
           > span {
-            font-size: 12pt;
+            font-size: 10pt;
             color: #c5d4e6;
             // margin-left: -19%;
           }
@@ -260,7 +259,7 @@ export default {
             background: #8ae5e54a;
             margin-left: 2%;
             border: 1px solid #ffffff40;
-            font-size: 11pt;
+            font-size: 10pt;
             border-radius: 5px;
             cursor: pointer;
             // margin: 1% 1% 1% 1% ;
@@ -281,6 +280,9 @@ export default {
           color: #a7c7c7f0;
           font-size: 10pt;
         }
+        /deep/.el-input {
+          line-height: 30px;
+        }
         /deep/.el-input__inner {
           left: 0%;
           position: relative;
@@ -294,17 +296,11 @@ export default {
           color: rgba(220, 225, 227, 0.96);
           font-size: inherit;
           height: 30px;
-          line-height: 90px;
+          // line-height: 90px;
           width: 100%;
           padding: 0px;
-          margin-top: 2%;
+          // margin-top: 2%;
         }
-      }
-      /deep/.el-row {
-        height: 17%;
-      }
-      /deep/.el-row:nth-child(1) {
-        height: 0%;
       }
     }
   }
@@ -315,6 +311,7 @@ export default {
     .title {
       width: 100%;
       height: 10%;
+      color: #fff;
     }
     .table {
       width: 100%;
@@ -322,7 +319,98 @@ export default {
     }
   }
 }
-
-// /deep/.el-input__inner {
+/deep/.el-row {
+  width: 100%;
+  color: #fff;
+  font-size: 12pt;
+  text-align: center;
+  flex-direction: row;
+  // margin-left: 0% !important;
+  // margin-right: 0% !important;
+  // margin-bottom: 0px;
+  margin-bottom: 2%;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+/deep/.el-col {
+  border-radius: 4px;
+  padding-left: 0% !important;
+  padding-right: 0% !important;
+}
+/deep/.el-button {
+  // background: rgba(11, 176, 241, 0.493);
+  background: url("../../assets/img/fq/wggl_tab.png");
+  background-size: 100% 100%;
+  border: none;
+  color: #ffffff;
+  // padding: 12px 20px;
+  font-size: 14px;
+  border-radius: 5px;
+}
+/deep/.el-button:focus,
+.el-button:hover {
+  color: #1edaeb;
+}
+/deep/.el-table .el-table__header-wrapper tr th {
+  background-image: linear-gradient(
+    -180deg,
+    #bdd9e017 1%,
+    #9fdae5bb 100%
+  ) !important;
+  background: transparent;
+  // color: rgb(255, 255, 255);
+  border-bottom: 1px solid #1faacd;
+}
+/deep/.el-table,
+.el-table__expanded-cell {
+  background-color: #3f5c6d2c;
+}
+/deep/.el-table td.el-table__cell,
+/deep/.el-table th.el-table__cell.is-leaf {
+  border: transparent !important;
+}
+/deep/ .el-table .cell {
+  text-align: center;
+}
+/deep/.el-table::before {
+  background-color: transparent !important;
+}
+/deep/.el-table tbody tr:hover > td {
+  background-color: #09e8f02c !important;
+}
+/deep/.el-table tr {
+  background-color: #3f5c6d2c;
+  color: #fff;
+}
+/deep/.el-table--striped
+  .el-table__body
+  tr.el-table__row--striped
+  td.el-table__cell {
+  background: transparent;
+}
+//头高、行高
+/deep/.el-table__header tr,
+.el-table__header th {
+  height: 30px;
+  padding: 0;
+}
+/deep/.el-table__body tr,
+.el-table__body td {
+  height: 35px;
+  padding: 0;
+}
+/deep/.el-table .el-table__cell {
+  padding: 0;
+}
+/deep/.el-table th.el-table__cell > .cell {
+  padding: 0;
+  text-align: center;
+}
+// /deep/.el-table .el-table__body tr.current-row > td {
+//   background-color: #fafafa !important;
+// }
+// /deep/.el-table .el-table__body tr:hover > td {
+//   background-color: #dfdfdf !important;
 // }
 </style>

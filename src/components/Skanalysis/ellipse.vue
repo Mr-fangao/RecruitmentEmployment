@@ -242,8 +242,8 @@ export default {
 /deep/.el-button:focus,
 .el-button:hover {
   color: #409eff;
-  border-color: #c6e2ff;
-  background-color: #ecf5ff;
+  // border-color: #c6e2ff;
+  // background-color: #ecf5ff;
 }
 /deep/.el-range-editor--small .el-range__close-icon,
 .el-range-editor--small .el-range__icon {
