@@ -218,8 +218,8 @@ export default {
   background: transparent;
   .control {
     position: absolute;
-    left: 69%;
-    top: 49%;
+    left: 60%;
+    top: 8%;
     width: 14%;
     height: 38%;
     // #button1 {
@@ -245,7 +245,7 @@ export default {
 .el-button:hover {
   color: #75f8ed;
   border-color: #c6e2ff;
-  background-color: #ecf5ff;
+  // background-color: #ecf5ff;
 }
 .mapboxgl-popup {
   max-width: 200px;

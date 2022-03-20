@@ -332,6 +332,7 @@ export default {
     this.fetchData();
   },
   mounted() {
+    this.fetchData();
     this.initmap();
     this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
     this.initChart1();
@@ -350,15 +351,13 @@ export default {
   },
   methods: {
     fetchData() {
-      request
-      .post("/api/data/querySa",{city:"北京"}).then((res) => {
+      request.post("/api/data/querySa", { city: "北京" }).then((res) => {
         // console.log(res);
-        this.chart5.xdata = res.data.region;
-        this.chart5.ydata = res.data.avgsalary;
-        this.initChart5();
-        
+        for(var i=0;i<8;i++){
+        this.chart5[i].xdata = res.data[i].region;
+        this.chart5[i].ydata = res.data[i].avgsalary;
+        }
       });
-       
     },
     initmap() {
       this.$mapboxgl.accessToken =

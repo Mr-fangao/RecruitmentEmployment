@@ -13,7 +13,7 @@
         <div class="prompt">
           <span
             >请您输入个人技能和城市进行技能-职位匹配，
-            注意：技能为必选项，且技能词输入不能超过三个
+            注意：技能为必选项，且技能词输入不能超过三个。
           </span>
         </div>
         <div class="mutual">
@@ -76,7 +76,6 @@
             <el-table-column
               prop="position"
               label="职位名称"
-              width="150"
               :show-overflow-tooltip="true"
             >
             </el-table-column>
@@ -118,9 +117,9 @@ export default {
       input: "",
       input1: "",
       tableCityData: [
-        { company: "111111", position: "WebGIS" },
-        { company: "111111", position: "WebGIS" },
-        { company: "111111", position: "WebGIS" },
+        { company: "北京易伟航科技有限公司", position: "GIS软件工程师" },
+        { company: "杭州中房信息科技有限公司", position: "高级GIS开发工程师" },
+        { company: "上海耀斑信息科技有限公司", position: "高级GIS开发工程师" },
       ],
     };
   },
@@ -227,16 +226,16 @@ export default {
       width: 92%;
       margin-top: 4%;
       padding-top: 5%;
-      background: linear-gradient(#1edaeb) left top no-repeat,
-        linear-gradient(#1edaeb) left top no-repeat,
-        linear-gradient(#1edaeb) right top no-repeat,
-        linear-gradient(#1edaeb) right top no-repeat,
-        linear-gradient(#1edaeb) left bottom no-repeat,
-        linear-gradient(#1edaeb) left bottom no-repeat,
-        linear-gradient(#1edaeb) right bottom no-repeat,
-        linear-gradient(#1edaeb) right bottom no-repeat;
-      //linear-gradient(to left, #f00, #f00) right bottom no-repeat;//四个角的边框 to left 代表颜色渐变的方向
-      background-size: 1px 20px, 20px 1px, 1px 20px, 20px 1px;
+      // background: linear-gradient(#1edaeb) left top no-repeat,
+      //   linear-gradient(#1edaeb) left top no-repeat,
+      //   linear-gradient(#1edaeb) right top no-repeat,
+      //   linear-gradient(#1edaeb) right top no-repeat,
+      //   linear-gradient(#1edaeb) left bottom no-repeat,
+      //   linear-gradient(#1edaeb) left bottom no-repeat,
+      //   linear-gradient(#1edaeb) right bottom no-repeat,
+      //   linear-gradient(#1edaeb) right bottom no-repeat;
+      // //linear-gradient(to left, #f00, #f00) right bottom no-repeat;//四个角的边框 to left 代表颜色渐变的方向
+      // background-size: 1px 20px, 20px 1px, 1px 20px, 20px 1px;
       .grid-content {
         border-radius: 4px;
         min-height: 36px;
@@ -308,10 +307,13 @@ export default {
     display: flex;
     flex: 1;
     flex-direction: column;
+    border-top: 1px solid #1edaeb;
     .title {
+      margin-top: 3%;
       width: 100%;
       height: 10%;
       color: #fff;
+      font-size: 13pt;
     }
     .table {
       width: 100%;
