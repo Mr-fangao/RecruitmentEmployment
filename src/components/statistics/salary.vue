@@ -28,7 +28,7 @@
       <div class="col-content">
         <div class="row2title">
           <div class="imgBK"></div>
-          <span>热门职位平均薪资年变化</span>
+          <span>热门职位平均薪资变化</span>
         </div>
         <div class="row1chartcontent" id="chart4" ref="Chart4"></div>
       </div>
@@ -69,7 +69,10 @@ export default {
   },
   data() {
     return {
-      chart5: [],
+      chart5: {
+        xdata: [],
+        ydata: [],
+      },
       cloudData: [
         { value: 1800, name: "纳木措" },
         { value: 1200, name: "西藏" },
@@ -341,7 +344,7 @@ export default {
     this.initChart4();
     let myChart4 = this.$echarts.init(this.$refs.Chart4);
     myChart4.setOption(this.option4);
-    this.initChart5();
+
     this.initChart7();
     this.$nextTick(() => {
       window.addEventListener("resize", () => {
@@ -353,10 +356,12 @@ export default {
     fetchData() {
       request.post("/api/data/querySa", { city: "北京" }).then((res) => {
         // console.log(res);
-        for(var i=0;i<8;i++){
-        this.chart5[i].xdata = res.data[i].region;
-        this.chart5[i].ydata = res.data[i].avgsalary;
+        for (var i = 0; i < res.data.length; i++) {
+          this.chart5.xdata[i] = res.data[i].region;
+          this.chart5.ydata[i] = res.data[i].avgsalary;
+          console.log(this.chart5.xdata[i]);
         }
+        this.initChart5();
       });
     },
     initmap() {

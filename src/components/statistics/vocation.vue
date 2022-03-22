@@ -29,7 +29,7 @@
       <div class="col-content">
         <div class="row2title">
           <div class="imgBK"></div>
-          <span>城市热门职位年变化</span>
+          <span>城市热门职位月变化</span>
         </div>
         <div class="row1chartcontent" id="chart4" ref="Chart4"></div>
       </div>

@@ -29,7 +29,7 @@
       </div>
       <div class="pt pt4">
         <div class="hd">
-          <span>热门技能年变化图</span>
+          <span>热门技能月变化图</span>
         </div>
         <div
           id="chart5"

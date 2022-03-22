@@ -107,7 +107,7 @@ export default {
 }
 .content {
   height: 90%;
-  width: 20%;
+  width: 23%;
   position: absolute;
   z-index: 100;
   top: 2%;
@@ -119,7 +119,7 @@ export default {
   .right {
     height: 100%;
     width: 100%;
-    background: url("../../assets/img/fq/bg-5.png");
+    background: url("../../assets/img/fq/ptbg1.png") no-repeat;
     background-size: 100% 100%;
     display: flex;
     flex-direction: column;

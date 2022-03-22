@@ -409,10 +409,5 @@ export default {
   padding: 0;
   text-align: center;
 }
-// /deep/.el-table .el-table__body tr.current-row > td {
-//   background-color: #fafafa !important;
-// }
-// /deep/.el-table .el-table__body tr:hover > td {
-//   background-color: #dfdfdf !important;
-// }
+
 </style>
