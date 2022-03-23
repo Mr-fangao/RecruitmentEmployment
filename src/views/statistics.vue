@@ -38,15 +38,6 @@
           <i class="el-icon-menu"></i>
           <span class="tab" slot="title">职位</span>
         </el-menu-item>
-        <!-- <el-menu-item
-          index="5"
-          @click="show(5)"
-          :class="index === 5 ? 'active' : ''"
-          plain
-        >
-          <i class="el-icon-menu"></i>
-          <span class="tab" slot="title">时序</span>
-        </el-menu-item> -->
       </el-menu>
     </div>
     <div class="content">
@@ -54,6 +45,7 @@
         <component :is="comp" v-show="isShow"></component>
       </keep-alive>
     </div>
+    <selectRegion />
   </div>
 </template>
 
@@ -62,14 +54,17 @@ import salary from "../components/statistics/salary.vue";
 import education from "../components/statistics/education.vue";
 import experience from "../components/statistics/experience.vue";
 import vocation from "../components/statistics/vocation.vue";
+import SelectRegion from "../components/selectRegion.vue";
 export default {
-  components: { salary, education, experience, vocation},
+  components: { salary, education, experience, vocation, SelectRegion},
   name: "statistics",
   data() {
     return {
       index: 1,
       comp: "salary",
       isShow: true,
+      show: false,
+      cityname: "城市选择",
     };
   },
   methods: {
@@ -78,6 +73,9 @@ export default {
       else if (value === 2) this.comp = "education";
       else if (value === 3) this.comp = "experience";
       else if (value === 4) this.comp = "vocation";
+    },
+    getCity() {
+      this.show = true;
     },
   },
 };
@@ -150,5 +148,31 @@ export default {
   z-index: 1;
   height: 100%;
   width: 100%;
+}
+.citychoose {
+  z-index: 9999;
+  position: absolute;
+  height: 6%;
+  width: 9%;
+  top: 1%;
+  left: 20.5%;
+  background: url("../assets/img/fq/city.png") no-repeat;
+  opacity: 0.7;
+  background-size: 100% 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  .iconcontent {
+    flex: 2;
+    color: rgb(92, 235, 216);
+    text-align: right;
+  }
+  .cityname {
+    flex: 6;
+    color: #fafafa;
+    // text-align: left;
+  }
 }
 </style>
