@@ -181,7 +181,6 @@ export default {
   width: 25%;
   margin-right: 0.2%;
   right: 0;
-  display: flex;
   background: url("../../assets/img/fq/ptbg1.png") no-repeat;
   background-position: 100% 10%;
   background-size: 100% 100%;
