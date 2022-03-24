@@ -33,10 +33,10 @@
               <div class="tab">
                 <el-date-picker
                   v-model="value1"
-                  type="daterange"
+                  type="monthrange"
                   range-separator="至"
-                  start-placeholder="开始日期"
-                  end-placeholder="结束日期"
+                  start-placeholder="开始月份"
+                  end-placeholder="结束月份"
                 >
                 </el-date-picker>
               </div>
@@ -108,7 +108,7 @@ export default {
           label: "省级",
         },
         {
-          value: "选项1",
+          value: "选项2",
           label: "市级",
         },
       ],
@@ -717,6 +717,10 @@ export default {
 .el-select-dropdown__item {
   color: #fff;
 }
+.el-date-editor .el-range-separator {
+  width: 10%;
+  color: #fff;
+}
 </style>
 <style lang="less" scoped>
 // @import "../../assets/css/time.less";
@@ -857,13 +861,6 @@ export default {
         border-radius: 4px;
         border: 1px solid #3eb7c738;
         color: #fff;
-      }
-      .el-date-editor .el-range-separator {
-        width: 10%;
-        color: #fff;
-      }
-      .el-date-editor .el-range__close-icon {
-        width: 5px;
       }
     }
   }

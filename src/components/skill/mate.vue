@@ -185,6 +185,8 @@ export default {
   background: url("../../assets/img/fq/ptbg1.png") no-repeat;
   background-position: 100% 10%;
   background-size: 100% 100%;
+  background-color: #04111d94;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
