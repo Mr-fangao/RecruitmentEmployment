@@ -46,43 +46,52 @@
         </div>
       </div>
       <div class="part">
-        <!-- <span>标准差椭圆分析</span>
-        <span>标准差椭圆分析</span> -->
-        <!-- <el-menu>
-        <el-menu-item
-          style="padding: 1%"
-          index="1"
-          @click="showmap(1)"
-          :class="index === 1 ? 'active' : ''"
-          plain
-        >
-          <span class="tab" slot="title">聚合图</span>
-        </el-menu-item>
-        <el-menu-item
-          index="2"
-          @click="showmap(2)"
-          :class="index === 2 ? 'active' : ''"
-          plain
-        >
-          <span class="tab" slot="title">分级图</span>
-        </el-menu-item>
-        <el-menu-item
-          index="3"
-          @click="showmap(3)"
-          :class="index === 3 ? 'active' : ''"
-          plain
-        >
-          <span class="tab" slot="title">热力图</span>
-        </el-menu-item>
-        <el-menu-item
-          index="4"
-          @click="showmap(4)"
-          :class="index === 4 ? 'active' : ''"
-          plain
-        >
-          <span class="tab" slot="title">时序图</span>
-        </el-menu-item>
-      </el-menu> -->
+        <el-menu>
+          <el-row>
+            <el-col :span="12">
+              <el-menu-item
+                style="padding: 1%"
+                index="1"
+                @click="showmap(1)"
+                :class="index === 1 ? 'active' : ''"
+                plain
+              >
+                <span class="tab" slot="title">标准差椭圆分析</span>
+              </el-menu-item></el-col
+            >
+            <el-col :span="12">
+              <el-menu-item
+                index="2"
+                @click="showmap(2)"
+                :class="index === 2 ? 'active' : ''"
+                plain
+              >
+                <span class="tab" slot="title">分级图</span>
+              </el-menu-item>
+            </el-col></el-row
+          ><el-row>
+            <el-col :span="12">
+              <el-menu-item
+                index="3"
+                @click="showmap(3)"
+                :class="index === 3 ? 'active' : ''"
+                plain
+              >
+                <span class="tab" slot="title">热力图</span>
+              </el-menu-item></el-col
+            >
+            <el-col :span="12">
+              <el-menu-item
+                index="4"
+                @click="showmap(4)"
+                :class="index === 4 ? 'active' : ''"
+                plain
+              >
+                <span class="tab" slot="title">时序图</span>
+              </el-menu-item>
+            </el-col></el-row
+          >
+        </el-menu>
       </div>
     </div>
   </div>
@@ -334,8 +343,18 @@ export default {
   bottom: 9%;
   width: 100%;
   height: 50%;
-  > span {
-    color: #fff;
+  .el-menu {
+    background-color: transparent;
+    .el-menu-item:focus,
+    .el-menu-item:hover {
+      background-color: transparent;
+      .tab {
+        color: #1edaeb;
+      }
+    }
+    .tab {
+      color: #fff;
+    }
   }
 }
 /deep/.el-row {
