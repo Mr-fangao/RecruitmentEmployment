@@ -4,7 +4,7 @@
       <el-menu>
         <el-menu-item
           index="1"
-          @click="show(1)"
+          @click="tabshow(1)"
           :class="index === 1 ? 'active' : ''"
           plain
         >
@@ -13,7 +13,7 @@
         </el-menu-item>
         <el-menu-item
           index="2"
-          @click="show(2)"
+          @click="tabshow(2)"
           :class="index === 2 ? 'active' : ''"
           plain
         >
@@ -22,7 +22,7 @@
         </el-menu-item>
         <el-menu-item
           index="3"
-          @click="show(3)"
+          @click="tabshow(3)"
           :class="index === 3 ? 'active' : ''"
           plain
         >
@@ -31,7 +31,7 @@
         </el-menu-item>
         <el-menu-item
           index="4"
-          @click="show(4)"
+          @click="tabshow(4)"
           :class="index === 4 ? 'active' : ''"
           plain
         >
@@ -68,7 +68,7 @@ export default {
     };
   },
   methods: {
-    show(value) {
+    tabshow(value) {
       if (value === 1) this.comp = "salary";
       else if (value === 2) this.comp = "education";
       else if (value === 3) this.comp = "experience";

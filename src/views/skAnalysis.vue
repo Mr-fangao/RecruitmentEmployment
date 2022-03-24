@@ -1,11 +1,6 @@
 <template>
   <div id="feelings">
     <div id="map" />
-    <div class="content">
-      <keep-alive>
-        <component :is="comp" v-show="isShow"></component>
-      </keep-alive>
-    </div>
     <div class="main">
       <div class="right">
         <div class="mutual">
@@ -14,12 +9,12 @@
             <el-col :span="16">
               <div class="grid-content bg-specially">
                 <div class="tab">
-                  <el-select v-model="value1" clearable placeholder="请选择">
+                  <el-select v-model="value" clearable placeholder="请选择">
                     <el-option
                       v-for="item in options"
-                      :key="item.value1"
+                      :key="item.value"
                       :label="item.label"
-                      :value1="item.value1"
+                      :value="item.value"
                     >
                     </el-option>
                   </el-select>
@@ -33,7 +28,7 @@
               <div class="grid-content bg-specially">
                 <div class="tab">
                   <el-date-picker
-                    v-model="value2"
+                    v-model="value1"
                     type="monthrange"
                     range-separator="至"
                     start-placeholder="开始月份"
@@ -45,42 +40,76 @@
             </el-col>
           </el-row>
           <el-row :gutter="20">
-            <el-col :span="12"><el-button>一键爬取</el-button></el-col>
-            <el-col :span="12"><el-button>开始分析</el-button> </el-col>
+            <el-col :span="12"><el-button>开始分析</el-button></el-col>
+            <el-col :span="12"><el-button>重置选择</el-button> </el-col>
           </el-row>
         </div>
       </div>
-      <div class="bottompart"></div>
+      <div class="part">
+        <!-- <span>标准差椭圆分析</span>
+        <span>标准差椭圆分析</span> -->
+        <!-- <el-menu>
+        <el-menu-item
+          style="padding: 1%"
+          index="1"
+          @click="showmap(1)"
+          :class="index === 1 ? 'active' : ''"
+          plain
+        >
+          <span class="tab" slot="title">聚合图</span>
+        </el-menu-item>
+        <el-menu-item
+          index="2"
+          @click="showmap(2)"
+          :class="index === 2 ? 'active' : ''"
+          plain
+        >
+          <span class="tab" slot="title">分级图</span>
+        </el-menu-item>
+        <el-menu-item
+          index="3"
+          @click="showmap(3)"
+          :class="index === 3 ? 'active' : ''"
+          plain
+        >
+          <span class="tab" slot="title">热力图</span>
+        </el-menu-item>
+        <el-menu-item
+          index="4"
+          @click="showmap(4)"
+          :class="index === 4 ? 'active' : ''"
+          plain
+        >
+          <span class="tab" slot="title">时序图</span>
+        </el-menu-item>
+      </el-menu> -->
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-// import deviationellipse from "../components/Skanalysis/ellipse.vue";
-// import feelmonitor from "../components/Skanalysis/feelmonitor.vue";
 export default {
-  // components: { feelmonitor, deviationellipse },
   name: "skAnalysis",
   data() {
     return {
-      isShow: true,
-      // DateValue: new Date(),
-      value1: "",
-      value2: "",
       options: [
         {
-          value1: "选项1",
+          value: "选项1",
           label: "省份",
         },
         {
-          value1: "选项2",
+          value: "选项2",
           label: "城市",
         },
       ],
+      value: "",
+      value1: "",
     };
   },
   mounted() {
     this.initmap();
+    this.showmap(1);
   },
   methods: {
     initmap() {
@@ -93,6 +122,17 @@ export default {
         zoom: 3.5,
       });
     },
+    // showmap(value) {
+    //   console.log(value);
+    //   this.activeClass = value;
+    //   if (value === 1) this.comp = "pointgather";
+    //   else if (value === 2) this.comp = "gradedcolormap";
+    //   else if (value === 3) this.comp = "heatmap";
+    //   else if (value === 4) this.comp = "timemap";
+    //   else if (value === 5) this.comp = "multimap";
+    //   else if (value === 6) this.comp = "locmap";
+    //   //   else if (value === 3) this.comp = "density";
+    // },
   },
 };
 </script>
@@ -155,13 +195,13 @@ export default {
   height: 100%;
   z-index: 0;
 }
-.content {
-  position: absolute;
-  top: 0;
-  z-index: 9999;
-  height: 100%;
-  width: 100%;
-}
+// .content {
+//   position: absolute;
+//   top: 0;
+//   z-index: 9999;
+//   height: 100%;
+//   width: 100%;
+// }
 .main {
   height: 92%;
   width: 23%;
@@ -169,21 +209,20 @@ export default {
   z-index: 100;
   top: 1%;
   right: 0.2%;
-  z-index: 100;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #04111d94;
-  border-radius: 20px;
   background: url("../assets/img/fq/ptbg1.png") no-repeat;
   background-size: 100% 100%;
+  background-color: #04111d94;
+  border-radius: 20px;
   .right {
     height: 30%;
     width: 94%;
     margin-top: 4%;
     display: flex;
     flex-direction: column;
-     align-items: center;
+    align-items: center;
     flex-wrap: nowrap;
     justify-content: flex-start;
     .mutual {
@@ -278,12 +317,25 @@ export default {
         }
       }
     }
-    .bottompart {
-      position: absolute;
-      bottom: 9%;
-      width: 100%;
-      height: 50%;
+    /deep/.el-button {
+      // background: rgba(11, 176, 241, 0.493);
+      background: url("../assets/img/fq/wggl_tab.png");
+      background-size: 100% 100%;
+      border: none;
+      color: #ffffff;
+      // padding: 12px 20px;
+      font-size: 14px;
+      border-radius: 5px;
     }
+  }
+}
+.part {
+  position: absolute;
+  bottom: 9%;
+  width: 100%;
+  height: 50%;
+  > span {
+    color: #fff;
   }
 }
 /deep/.el-row {
@@ -305,16 +357,16 @@ export default {
   padding-left: 0% !important;
   padding-right: 0% !important;
 }
-/deep/.el-button {
-  // background: rgba(11, 176, 241, 0.493);
-  background: url("../assets/img/fq/wggl_tab.png");
-  background-size: 100% 100%;
-  border: none;
-  color: #ffffff;
-  // padding: 12px 20px;
-  font-size: 14px;
-  border-radius: 5px;
-}
+// /deep/.el-button {
+//   // background: rgba(11, 176, 241, 0.493);
+//   background: url("../assets/img/fq/wggl_tab.png");
+//   background-size: 100% 100%;
+//   border: none;
+//   color: #ffffff;
+//   // padding: 12px 20px;
+//   font-size: 14px;
+//   border-radius: 5px;
+// }
 /deep/.el-button:focus,
 .el-button:hover {
   color: #1edaeb;
