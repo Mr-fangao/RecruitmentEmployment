@@ -4,7 +4,7 @@
       <div class="hd">
         <span>热门职位技能匹配关系图</span>
       </div>
-      <div class="Chart1" id="chart1"></div>
+      <div class="Chart1" id="chart1" ref="chartdata"></div>
     </div>
     <div class="right">
       <div class="mutual">
@@ -69,8 +69,10 @@
         </el-row>
 
         <el-row :gutter="20">
-          <el-col :span="12"><el-button>开始分析</el-button></el-col>
-          <el-col :span="12"><el-button>重置选择</el-button> </el-col>
+          <el-col :span="12"
+            ><el-button @click="skanalysis()">开始分析</el-button></el-col
+          >
+          <el-col :span="12"><el-button  @click="clear()">重置选择</el-button> </el-col>
         </el-row>
       </div>
       <div class="main">
@@ -113,22 +115,21 @@ export default {
         },
       ],
       labellist: [
-        { id: 1, name: "web前端工程师" },
-        { id: 2, name: "GIS开发工程师" },
+        { id: 1, name: "GIS开发工程师" },
+        { id: 2, name: "web前端工程师" },
         { id: 3, name: "数据库开发工程师" },
       ],
       input: "",
-      input1: "",
       value1: "",
       value: "",
       cloudData: [
+        { value: 2000, name: "JavaScript" },
         { value: 1800, name: "VUE" },
-        { value: 1200, name: "JavaScript" },
-        { value: 1000, name: "ArcGIS" },
-        { value: 900, name: "SQL" },
-        { value: 700, name: "CSS" },
-        { value: 680, name: "Python" },
-        { value: 650, name: "MySQL" },
+        { value: 1200, name: "ArcGIS" },
+        { value: 1000, name: "SQL" },
+        { value: 900, name: "CSS" },
+        { value: 880, name: "Python" },
+        { value: 750, name: "MySQL" },
         { value: 630, name: "WebGIS" },
         { value: 610, name: "ArcGIS Server" },
         { value: 600, name: "C++" },
@@ -155,25 +156,41 @@ export default {
         { value: 25, name: "Oracle" },
         { value: 13, name: "CASS" },
       ],
+      giscloudData: [
+        { value: 1800, name: "ArcGIS" },
+        { value: 1200, name: "JavaScript" },
+        { value: 1000, name: "SuperMap" },
+        { value: 900, name: "WebGIS" },
+        { value: 700, name: "CSS" },
+        { value: 680, name: "C++" },
+        { value: 650, name: "MySQL" },
+        { value: 630, name: "SQL" },
+        { value: 610, name: "ArcGIS Server" },
+        { value: 600, name: "Python" },
+        { value: 543, name: "C#" },
+        { value: 523, name: "Mapbox" },
+        { value: 510, name: "三维GIS" },
+        { value: 500, name: "ArcGIS Engine" },
+        { value: 500, name: "GIS软件" },
+        { value: 490, name: "Html" },
+        { value: 490, name: "GeoServer" },
+        { value: 490, name: "C#.NET" },
+        { value: 430, name: "Oracle" },
+        { value: 430, name: "二次开发" },
+        { value: 380, name: "JQuery" },
+        { value: 380, name: "百度API" },
+        { value: 340, name: "postgresql" },
+        { value: 280, name: "GIS API开发" },
+        { value: 260, name: "Spark" },
+        { value: 200, name: "TOMCAT" },
+        { value: 200, name: "MongoDB" },
+        { value: 100, name: "Spring MVC" },
+        { value: 50, name: "GIS开源库" },
+        { value: 40, name: "VS Code" },
+        { value: 25, name: "OpenLayers" },
+        { value: 13, name: "Linux" },
+      ],
       option3: {
-        // title: {
-        //   x: "150", // 水平安放位置，默认为左对齐，可选为：
-        //   // 'center' ¦ 'left' ¦ 'right'
-        //   // ¦ {number}（x坐标，单位px）
-        //   y: "top",
-        //   //textAlign: null
-        //   backgroundColor: "rgba(0,0,0,0)",
-        //   borderColor: "#ccc", // 标题边框颜色
-        //   borderWidth: 0, // 标题边框线宽，单位px，默认为0（无边框）
-        //   padding: 5, // 标题内边距，单位px，默认各方向内边距为5，
-        //   itemGap: 10, // 主副标题纵向间隔，单位px，默认为10，
-        //   textStyle: {
-        //     fontSize: 18,
-        //     fontWeight: "bolder",
-        //     color: "#ff6666", // 主标题文字颜色
-        //   },
-        //   text: "全省大中修资金统计",
-        // },
         color: [
           "#ff7f50",
           "#87cefa",
@@ -195,7 +212,7 @@ export default {
           textStyle: {
             color: "#1e90ff", // 图例文字颜色
           },
-          data: ["vue", "webgis", "JavaScript", "ArcGIS"],
+          data: ["vue", "WebGIS", "JavaScript", "ArcGIS"],
         },
         calculable: true,
         xAxis: {
@@ -235,7 +252,7 @@ export default {
           },
           {
             type: "line",
-            name: "webgis",
+            name: "WebGIS",
             data: [],
           },
           {
@@ -252,29 +269,36 @@ export default {
       },
       plan_table: [
         {
-          xxx: "1",
-          d: "200",
-          z: "300",
-          y: "400",
-          sum: "500",
+          vue: "94",
+          JavaScript: "156",
+          1: "300",
+          2: "400",
+          3: "500",
         },
         {
-          xxx: "2",
-          d: "100",
+          vue: "548",
+          JavaScript: "934",
           z: "400",
           y: "50",
           sum: "500",
         },
         {
-          xxx: "3",
-          d: "150",
+          vue: "313",
+          JavaScript: "502",
           z: "410",
           y: "250",
           sum: "500",
         },
         {
-          xxx: "4",
-          d: "200",
+          vue: "829",
+          JavaScript: "1274",
+          z: "450",
+          y: "350",
+          sum: "500",
+        },
+        {
+          vue: "900",
+          JavaScript: "1420",
           z: "450",
           y: "350",
           sum: "500",
@@ -288,6 +312,7 @@ export default {
     let myChart3 = this.$echarts.init(this.$refs.Chart3);
     myChart3.setOption(this.option3);
     this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
+    // this.chartdataInti(this.$refs.chartdata, this.allchartdata);
   },
   methods: {
     getRowClass({ row, column, rowIndex, columnIndex }) {
@@ -299,10 +324,10 @@ export default {
     },
     initChart3() {
       for (var i = 0; i < this.plan_table.length; i++) {
-        this.option3.xAxis.data.push(this.plan_table[i].xxx);
-        //大修金额总计
-        this.option3.series[0].data.push(this.plan_table[i].d);
-        //中修金额
+        this.option3.xAxis.data.push(this.plan_table[i].vue);
+        //vue总计
+        this.option3.series[0].data.push(this.plan_table[i].JavaScript);
+        //JavaScript
         this.option3.series[1].data.push(this.plan_table[i].z);
         //预防性养护金额合计
         this.option3.series[2].data.push(this.plan_table[i].y);
@@ -671,6 +696,217 @@ export default {
         ],
       };
       myChart.setOption(option);
+    },
+    showct11() {
+      let myChart = echarts.init(document.getElementById("chart1"));
+      var baseName = "GIS开发工程师";
+      var option;
+      // var chartData = {
+      //   GIS开发工程师: [
+      //     "算法研究",
+      //     "JavaScript",
+      //     "前端框架",
+      //     "数据库技术",
+      //     "HTML/CSS(3)/JS",
+      //     "QT",
+      //     "PHP",
+      //     "jsp",
+      //     "Android",
+      //     "SQL",
+      //     "ArcGIS",
+      //     "ArcMap",
+      //     "JavaEE",
+      //     "CASS",
+      //     "AutoCAD",
+      //     "二次开发",
+      //     "OpenLayers",
+      //     "地图前端",
+      //     "ENVI",
+      //     "遥感技术",
+      //     "QGIS",
+      //     ".net/C#",
+      //     "PostGIS",
+      //     "Cesium",
+      //     "Oracle",
+      //     "MySQL",
+      //     "MapGIS",
+      //     "软件开发能力",
+      //     "技术方案",
+      //     "Spring框架技术",
+      //     "ArcGIS Server",
+      //     "GeoServer",
+      //     "mapbox",
+      //     "Leaflet",
+      //     "GIS软件",
+      //   ],
+      // };
+      var chartData = {
+        WebGIS: [],
+        ArcGIS: [],
+        算法研究: [],
+        JavaScript: [],
+        前端框架: [],
+        数据库技术: [],
+        "HTML/CSS(3)/JS": [],
+        QT: [],
+        PHP: [],
+        jsp: [],
+        Android: [],
+        SQL: [],
+        SuperMap: [],
+        ArcMap: [],
+        JavaEE: [],
+        CASS: [],
+        AutoCAD: [],
+        二次开发: [],
+        OpenLayers: [],
+        地图前端: [],
+        ENVI: [],
+        遥感技术: [],
+        QGIS: [],
+        ".net/C#": [],
+        PostGIS: [],
+        Cesium: [],
+        Oracle: [],
+        MySQL: [],
+        MapGIS: [],
+        软件开发能力: [],
+        百度API: [],
+        Spring框架技术: [],
+        "ArcGIS Server": [],
+        GeoServer: [],
+        mapbox: [],
+        Leaflet: [],
+        GIS软件: [],
+        'ArcGIS Engine': [],
+        PostgreSQL: [],
+      };
+      var datas = [
+        {
+          name: baseName || "",
+          draggable: true,
+        },
+      ];
+      var lines = [];
+      var categoryIdx = 0;
+      var keyIndex = 0;
+      var dataIndex = 0;
+      $.each(chartData, function (key, values) {
+        keyIndex = dataIndex;
+        datas.push({
+          name: key,
+          category: categoryIdx,
+          draggable: true,
+        });
+        keyIndex++;
+        dataIndex++;
+        lines.push({
+          source: 0,
+          target: keyIndex,
+          value: "",
+        });
+        $(values).each(function (idx, val) {
+          datas.push({
+            name: val,
+            category: categoryIdx,
+            draggable: true,
+          });
+          dataIndex++;
+          lines.push({
+            source: keyIndex,
+            target: dataIndex,
+            value: "",
+          });
+        });
+        categoryIdx++;
+      });
+      var option = {
+        tooltip: {},
+        animationDurationUpdate: 2500,
+        label: { normal: { show: true, textStyle: { fontSize: 12 } } },
+        series: [
+          {
+            type: "graph",
+            layout: "force",
+            symbolSize: 35,
+            legendHoverLink: true,
+            focusNodeAdjacency: true,
+            roam: true,
+            label: {
+              normal: {
+                show: true,
+                position: "inside",
+                textStyle: { fontSize: 12 },
+              },
+            },
+            legend: { tooltip: { show: true } },
+            force: { repulsion: 65 },
+            edgeSymbolSize: [4, 50],
+            edgeLabel: {
+              normal: {
+                show: true,
+                textStyle: { fontSize: 10 },
+                formatter: "{c}",
+              },
+            },
+            categories: [
+              { value: 10, itemStyle: { normal: { color: "#0087cb" } } },
+              { itemStyle: { normal: { color: "#0055ff" } } },
+              { itemStyle: { normal: { color: "#74af96" } } },
+              { itemStyle: { normal: { color: "#ff55ff" } } },
+              { itemStyle: { normal: { color: "#e26691" } } },
+              { itemStyle: { normal: { color: "#004e66" } } },
+              { itemStyle: { normal: { color: "#587498" } } },
+              { itemStyle: { normal: { color: "#3DC7BE" } } },
+              { itemStyle: { normal: { color: "#ffaa7f" } } },
+              { itemStyle: { normal: { color: "#80bd9e" } } },
+              { itemStyle: { normal: { color: "#0055ff" } } },
+              { itemStyle: { normal: { color: "#74af96" } } },
+              { itemStyle: { normal: { color: "#ff55ff" } } },
+              { itemStyle: { normal: { color: "#e26691" } } },
+              { itemStyle: { normal: { color: "#004e66" } } },
+              { itemStyle: { normal: { color: "#587498" } } },
+              { itemStyle: { normal: { color: "#3DC7BE" } } },
+              { itemStyle: { normal: { color: "#ffaa7f" } } },
+              { itemStyle: { normal: { color: "#80bd9e" } } },
+              { itemStyle: { normal: { color: "#0055ff" } } },
+              { itemStyle: { normal: { color: "#74af96" } } },
+              { itemStyle: { normal: { color: "#ff55ff" } } },
+              { itemStyle: { normal: { color: "#e26691" } } },
+              { itemStyle: { normal: { color: "#004e66" } } },
+              { itemStyle: { normal: { color: "#587498" } } },
+              { itemStyle: { normal: { color: "#3DC7BE" } } },
+              { itemStyle: { normal: { color: "#ffaa7f" } } },
+              { itemStyle: { normal: { color: "#80bd9e" } } },
+              { itemStyle: { normal: { color: "#004e60" } } },
+              { itemStyle: { normal: { color: "#587490" } } },
+              { itemStyle: { normal: { color: "#3DC7B0" } } },
+              { itemStyle: { normal: { color: "#ffaa70" } } },
+              { itemStyle: { normal: { color: "#80bd90" } } },
+            ],
+            data: datas,
+            links: lines,
+            lineStyle: { normal: { opacity: 0.9, width: 1, curveness: 0 } },
+          },
+        ],
+      };
+      myChart.setOption(option);
+    },
+    skanalysis() {
+      if (this.input == "GIS开发工程师、") {
+        this.showct11();
+        this.wordCloudInti(this.$refs.cloudEl, this.giscloudData);
+      } else {
+        this.showct1();
+        this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
+      }
+    },
+    clear() {
+      this.input ="";
+      this.value ="";
+      this.value1 ="";
+        this.showct1();
+        this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
     },
   },
 };

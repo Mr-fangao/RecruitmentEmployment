@@ -56,7 +56,8 @@
                 :class="index === 1 ? 'active' : ''"
                 plain
               >
-                <span class="tab" slot="title">标准差椭圆分析</span>
+                <i class="fa fa-plane"></i
+                ><span class="tab" slot="title">标准差椭圆分析</span>
               </el-menu-item></el-col
             >
             <el-col :span="12">
@@ -66,7 +67,8 @@
                 :class="index === 2 ? 'active' : ''"
                 plain
               >
-                <span class="tab" slot="title">分级图</span>
+                <i class="fa fa-globe"></i
+                ><span class="tab" slot="title">分级图</span>
               </el-menu-item>
             </el-col></el-row
           ><el-row>
@@ -77,7 +79,8 @@
                 :class="index === 3 ? 'active' : ''"
                 plain
               >
-                <span class="tab" slot="title">热力图</span>
+                <i class="fa fa-thermometer-3"></i
+                ><span class="tab" slot="title">热力图</span>
               </el-menu-item></el-col
             >
             <el-col :span="12">
@@ -87,11 +90,15 @@
                 :class="index === 4 ? 'active' : ''"
                 plain
               >
-                <span class="tab" slot="title">时序图</span>
+                <i class="fa fa-plane"></i
+                ><span class="tab" slot="title">时序图</span>
               </el-menu-item>
             </el-col></el-row
           >
         </el-menu>
+      </div>
+      <div class="bottom">
+        <span>当前地图： </span>
       </div>
     </div>
   </div>
@@ -147,7 +154,7 @@ export default {
 </script>
 <style>
 .el-picker-panel {
-  background: #0d1f30;
+  background: #0a1c2cce;
   border: 1px solid #4a8faabd;
   font-size: 8pt;
   text-align: center;
@@ -158,21 +165,21 @@ export default {
 .el-date-range-picker__content.is-left {
   border-right: 1px solid #909399da;
 }
-.el-date-table td.next-month,
-.el-date-table td.prev-month {
+.el-month-table td.next-year,
+.el-month-table td.prev-year {
   color: #909399;
 }
-.el-date-table th {
+.el-month-table th {
   color: #fff;
 }
 .el-date-range-picker__header {
   color: #fff;
 }
-.el-date-table td.in-range div,
-.el-date-table td.in-range div:hover,
-.el-date-table.is-week-mode .el-date-table__row.current div,
-.el-date-table.is-week-mode .el-date-table__row:hover div {
-  background-color: #4a8faabd;
+.el-month-table td.in-range div,
+.el-month-table td.in-range div:hover,
+.el-month-table.is-week-mode .el-month-table__row.current div,
+.el-month-table.is-week-mode .el-month-table__row:hover div {
+  background-color: #3eb7c738;
 }
 .el-select-dropdown__item.hover,
 .el-select-dropdown__item:hover {
@@ -190,6 +197,9 @@ export default {
 .el-date-editor .el-range-separator {
   width: 10%;
   color: #fff;
+}
+.el-month-table td.end-date .cell, .el-month-table td.start-date .cell{
+  background-color: #112b42;
 }
 </style>
 <style lang="less" scoped>
@@ -337,26 +347,54 @@ export default {
       border-radius: 5px;
     }
   }
-}
-.part {
-  position: absolute;
-  bottom: 9%;
-  width: 100%;
-  height: 50%;
-  .el-menu {
-    background-color: transparent;
-    .el-menu-item:focus,
-    .el-menu-item:hover {
+  .part {
+    width: 100%;
+    height: 20%;
+    .el-menu {
       background-color: transparent;
-      .tab {
+      .el-menu-item.is-active {
         color: #1edaeb;
       }
+      .fa {
+        font-size: 14pt;
+        padding-right: 5px;
+      }
+      .el-menu-item:focus,
+      .el-menu-item:hover {
+        background-color: transparent;
+        .tab {
+          color: #1edaeb;
+        }
+      }
+      .tab {
+        color: #fff;
+        font-size: 12pt;
+      }
     }
-    .tab {
+  }
+  .bottom {
+    width: 94%;
+    height: 20%;
+    background: linear-gradient(#1edaeb) left top no-repeat,
+      linear-gradient(#1edaeb) left top no-repeat,
+      linear-gradient(#1edaeb) right top no-repeat,
+      linear-gradient(#1edaeb) right top no-repeat,
+      linear-gradient(#1edaeb) left bottom no-repeat,
+      linear-gradient(#1edaeb) left bottom no-repeat,
+      linear-gradient(#1edaeb) right bottom no-repeat,
+      linear-gradient(#1edaeb) right bottom no-repeat;
+    //linear-gradient(to left, #f00, #f00) right bottom no-repeat;//四个角的边框 to left 代表颜色渐变的方向
+    background-size: 1px 20px, 20px 1px, 1px 20px, 20px 1px;
+    span {
+      padding: 5% 2%;
+      text-indent: 2em; //文字缩进2字符
+      line-height: 18pt;
+      text-align: left;
       color: #fff;
     }
   }
 }
+
 /deep/.el-row {
   width: 100%;
   color: #fff;

@@ -28,7 +28,7 @@
       <div class="col-content">
         <div class="row2title">
           <div class="imgBK"></div>
-          <span>热门职位平均薪资变化</span>
+          <span>热门职位平均薪资月变化</span>
         </div>
         <div class="row1chartcontent" id="chart4" ref="Chart4"></div>
       </div>
@@ -73,6 +73,7 @@ export default {
         xdata: [],
         ydata: [],
       },
+      chart3: [ {value: '', name:""} ],
       cloudData: [
         { value: 1800, name: "纳木措" },
         { value: 1200, name: "西藏" },
@@ -340,7 +341,7 @@ export default {
     this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
     this.initChart1();
     this.initChart2();
-    this.initChart3();
+    this.typeData();
     this.initChart4();
     let myChart4 = this.$echarts.init(this.$refs.Chart4);
     myChart4.setOption(this.option4);
@@ -359,9 +360,21 @@ export default {
         for (var i = 0; i < res.data.length; i++) {
           this.chart5.xdata[i] = res.data[i].region;
           this.chart5.ydata[i] = res.data[i].avgsalary;
-          console.log(this.chart5.xdata[i]);
+          // console.log(this.chart5.xdata[i]);
         }
         this.initChart5();
+      });
+    },
+    typeData() {
+      request.post("/api/data/typeSa", { city: "上海" }).then((res) => {
+        // console.log(res);
+        for (var i = 0; i < res.data.length; i++) {
+          // this.chart3[i] = res.data[i];
+          this.chart3[i].value = res.data[i].salary;
+          // this.chart3[i].value= res.data[i].salary;
+          console.log(this.chart3[i].value);
+        }
+        this.initChart3();
       });
     },
     initmap() {
@@ -445,14 +458,15 @@ export default {
                 show: true,
               },
             },
-            data: [
-              { value: 40, name: "rose 1" },
-              { value: 33, name: "rose 2" },
-              { value: 28, name: "rose 3" },
-              { value: 22, name: "rose 4" },
-              { value: 20, name: "rose 5" },
-              { value: 15, name: "rose 6" },
-            ],
+            data: [this.chart3.name,this.chart3.salary],
+            // [
+            // { value: 40, name: "rose 1" },
+            // { value: 33, name: "rose 2" },
+            // { value: 28, name: "rose 3" },
+            // { value: 22, name: "rose 4" },
+            // { value: 20, name: "rose 5" },
+            // { value: 15, name: "rose 6" },
+            // ],
           },
         ],
       });
