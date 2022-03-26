@@ -73,7 +73,6 @@ export default {
         xdata: [],
         ydata: [],
       },
-      chart3: [ {value: '', name:""} ],
       cloudData: [
         { value: 1800, name: "纳木措" },
         { value: 1200, name: "西藏" },
@@ -367,13 +366,8 @@ export default {
     },
     typeData() {
       request.post("/api/data/typeSa", { city: "上海" }).then((res) => {
-        // console.log(res);
-        for (var i = 0; i < res.data.length; i++) {
-          // this.chart3[i] = res.data[i];
-          this.chart3[i].value = res.data[i].salary;
-          // this.chart3[i].value= res.data[i].salary;
-          console.log(this.chart3[i].value);
-        }
+        this.chart3 = res.data;
+        // console.log(this.chart3);
         this.initChart3();
       });
     },
@@ -427,6 +421,11 @@ export default {
     },
     initChart3() {
       var myChart = echarts.init(document.getElementById("chart3"));
+      let arr = [];
+      this.chart3.forEach((element)=>{
+        arr.push({value: element.salary,
+        name:element.name,})
+      })
       myChart.setOption({
         tooltip: {
           trigger: "item",
@@ -435,7 +434,10 @@ export default {
         legend: {
           left: "right",
           top: "top",
-          // data: ["rose1", "rose2", "rose3", "rose4", "rose5", "rose6"],
+          textStyle: {
+            color: "#fff",
+            fontSize: 12,
+          },
         },
         toolbox: {
           show: false,
@@ -445,7 +447,7 @@ export default {
             name: "Radius Mode",
             type: "pie",
             radius: [20, 80],
-            center: ["50%", "50%"],
+            center: ["50%", "57%"],
             roseType: "radius",
             itemStyle: {
               borderRadius: 5,
@@ -458,15 +460,7 @@ export default {
                 show: true,
               },
             },
-            data: [this.chart3.name,this.chart3.salary],
-            // [
-            // { value: 40, name: "rose 1" },
-            // { value: 33, name: "rose 2" },
-            // { value: 28, name: "rose 3" },
-            // { value: 22, name: "rose 4" },
-            // { value: 20, name: "rose 5" },
-            // { value: 15, name: "rose 6" },
-            // ],
+            data: arr,
           },
         ],
       });
@@ -1018,17 +1012,23 @@ export default {
         legend: {
           top: "5%",
           left: "center",
+          textStyle: {
+            color: "#fff",
+            fontSize: 12,
+          },
         },
         series: [
           {
             name: "Access From",
             type: "pie",
             radius: ["40%", "70%"],
+            center: ["50%", "60%"],
             avoidLabelOverlap: false,
             itemStyle: {
               borderRadius: 10,
               borderColor: "#fff",
-              borderWidth: 2,
+              borderWidth: 1,
+              
             },
             label: {
               show: false,
