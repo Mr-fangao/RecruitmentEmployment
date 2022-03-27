@@ -5,34 +5,6 @@
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
-          <span>爬取招聘数据总览</span>
-        </div>
-        <div class="countdata">
-          <div class="datasource">
-            <div class="leftpt">数据源:</div>
-            <div class="rightpt">
-              <el-checkbox v-model="checked">前程无忧</el-checkbox>
-            </div>
-          </div>
-          <div class="count">
-            <div class="total">
-              <div class="title">信息数</div>
-              <div class="d"><span>111</span></div>
-            </div>
-            <div class="company">
-              <div class="title">公司数</div>
-              <div class="d"><span>111</span></div>
-            </div>
-            <div class="position">
-              <div class="title">职位数</div>
-              <div class="d"><span>111</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-content">
-        <div class="row1title">
-          <div class="imgBK"></div>
           <span>城市平均薪资统计</span>
         </div>
         <div class="row1chartcontent" id="chart1"></div>
@@ -43,6 +15,13 @@
           <span>职位平均薪资统计</span>
         </div>
         <div class="row1chartcontent" id="chart2"></div>
+      </div>
+      <div class="col-content">
+        <div class="row1title">
+          <div class="imgBK"></div>
+          <span>公司类型平均薪资统计</span>
+        </div>
+        <div class="row1chartcontent" id="chart3"></div>
       </div>
     </div>
     <div class="main">
@@ -58,9 +37,9 @@
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
-          <span>公司类型平均薪资统计</span>
+          <span>区县平均薪资统计</span>
         </div>
-        <div class="row1chartcontent" id="chart3"></div>
+        <div class="row1chartcontent" id="chart5"></div>
       </div>
       <div class="col-content">
         <div class="row1title">
@@ -90,7 +69,10 @@ export default {
   },
   data() {
     return {
-      checked: true,
+      chart5: {
+        xdata: [],
+        ydata: [],
+      },
       cloudData: [
         { value: 1800, name: "纳木措" },
         { value: 1200, name: "西藏" },
@@ -125,7 +107,122 @@ export default {
         { value: 25, name: "限速" },
         { value: 13, name: "距离" },
       ],
+      // option: {
+      //   tooltip: {
+      //     trigger: "axis",
+      //     formatter: (params) => {
+      //       return (
+      //         params[0].seriesName +
+      //         ": " +
+      //         params[0].data +
+      //         "<br>" +
+      //         params[1].seriesName +
+      //         ": " +
+      //         params[1].data +
+      //         "%"
+      //       );
+      //     },
+      //   },
+      //   legend: {
+      //     data: ["城市形象", "全国平均水平"],
+      //   },
+      //   xAxis: [
+      //     {
+      //       type: "category",
+      //       data: [
+      //         "交通",
+      //         "住宿",
+      //         "地理位置",
+      //         "旅行体验",
+      //         "景区环境",
+      //         "景区设施",
+      //         "服务",
+      //         "饮食",
+      //       ],
+      //     },
+      //   ],
+      //   yAxis: [
+      //     {
+      //       splitLine: { show: false },
+      //       type: "value",
+      //       name: "数量",
+      //       interval: 50,
+      //       axisLabel: {
+      //         formatter: "{value} ",
+      //       },
+      //     },
+      //   ],
+      //   series: [
+      //     {
+      //       name: "城市形象",
+      //       type: "bar",
+      //       /*设置柱状图颜色*/
+      //       itemStyle: {
+      //         normal: {
+      //           color: function (params) {
+      //             // build a color map as your need.
+      //             var colorList = [
+      //               "#fe4f4f",
+      //               "#fead33",
+      //               "#feca2b",
+      //               "#fef728",
+      //               "#c5ee4a",
+      //               "#87ee4a",
+      //               "#46eda9",
+      //               "#47e4ed",
+      //               "#4bbbee",
+      //               "#7646d8",
+      //               "#924ae2",
+      //               "#C6E579",
+      //               "#F4E001",
+      //               "#F0805A",
+      //               "#26C0C0",
+      //             ];
+      //             return colorList[params.dataIndex];
+      //           },
+      //           /*信息显示方式*/
+      //           label: {
+      //             show: true,
+      //             position: "top",
+      //             formatter: "{b}\n{c}",
+      //           },
+      //         },
+      //       },
+      //       data: [0.28, 0.278, 0.478, 0.637, 0.669, 0.369, 0.547, 0.372],
+      //     },
+      //     {
+      //       name: "全国平均水平",
+      //       yAxisIndex: 0, //这里要设置哪个y轴，默认是最左边的是0，然后1，2顺序来。
+      //       type: "line",
+      //       itemStyle: {
+      //         /*设置折线颜色*/
+      //         normal: {
+      //           // color:'#c4cddc'
+      //         },
+      //       },
+      //       data: [0.193, 0.178, 0.512, 0.683, 0.721, 0.358, 0.432, 0.498],
+      //     },
+      //   ],
+      // },
       option4: {
+        // title: {
+        //   x: "150", // 水平安放位置，默认为左对齐，可选为：
+        //   // 'center' ¦ 'left' ¦ 'right'
+        //   // ¦ {number}（x坐标，单位px）
+        //   y: "top",
+        //   //textAlign: null
+        //   backgroundColor: "rgba(0,0,0,0)",
+        //   borderColor: "#ccc", // 标题边框颜色
+        //   borderWidth: 0, // 标题边框线宽，单位px，默认为0（无边框）
+        //   padding: 5, // 标题内边距，单位px，默认各方向内边距为5，
+        //   itemGap: 10, // 主副标题纵向间隔，单位px，默认为10，
+        //   textStyle: {
+        //     fontSize: 18,
+        //     fontWeight: "bolder",
+        //     color: "#ff6666", // 主标题文字颜色
+        //   },
+        //   text: "全省大中修资金统计",
+        // },
         color: [
           "#ff7f50",
           "#87cefa",
@@ -234,7 +331,11 @@ export default {
       ],
     };
   },
+  created() {
+    this.fetchData();
+  },
   mounted() {
+    this.fetchData();
     this.initmap();
     this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
     this.initChart1();
@@ -252,6 +353,17 @@ export default {
     });
   },
   methods: {
+    fetchData() {
+      request.post("/api/data/querySa", { city: "北京" }).then((res) => {
+        // console.log(res);
+        for (var i = 0; i < res.data.length; i++) {
+          this.chart5.xdata[i] = res.data[i].region;
+          this.chart5.ydata[i] = res.data[i].avgsalary;
+          // console.log(this.chart5.xdata[i]);
+        }
+        this.initChart5();
+      });
+    },
     typeData() {
       request.post("/api/data/typeSa", { city: "上海" }).then((res) => {
         this.chart3 = res.data;
@@ -310,9 +422,10 @@ export default {
     initChart3() {
       var myChart = echarts.init(document.getElementById("chart3"));
       let arr = [];
-      this.chart3.forEach((element) => {
-        arr.push({ value: element.salary, name: element.name });
-      });
+      this.chart3.forEach((element)=>{
+        arr.push({value: element.salary,
+        name:element.name,})
+      })
       myChart.setOption({
         tooltip: {
           trigger: "item",
@@ -796,6 +909,52 @@ export default {
         this.option4.yAxis[0].max = Math.ceil(this.plan_table[0].sum) + 500;
       }
     },
+    // initChart5() {
+    //   this.myChart5 = this.$echarts.init(document.getElementById("chart5"));
+    //   // 指定图表的配置项和数据
+    //   let option = this.option;
+    //   // 使用刚指定的配置项和数据显示图表。
+    //   this.myChart5.setOption(option);
+    // },
+    initChart5() {
+      var myChart = echarts.init(document.getElementById("chart5"));
+      myChart.setOption({
+        xAxis: {
+          type: "category",
+          boundaryGap: false,
+          axisLine: {
+            lineStyle: {
+              color: "#fff",
+            },
+          },
+          data: this.chart5.xdata,
+        },
+        yAxis: {
+          type: "value",
+          splitLine: { show: false },
+          axisLine: {
+            lineStyle: {
+              color: "#fff",
+            },
+          },
+        },
+        series: [
+          {
+            data: this.chart5.ydata,
+            type: "line",
+            areaStyle: {
+              color: "rgb(115, 215, 228)",
+            },
+            lineStyle: {
+              color: "rgb(115, 215, 228)",
+            },
+          },
+        ],
+      });
+    },
+    // handleResize() {
+    //   this.myChart5 && this.myChart5.resize();
+    // },
     wordCloudInti(wrapEl, data) {
       let myChart = echarts.init(wrapEl);
       var option = {
@@ -869,6 +1028,7 @@ export default {
               borderRadius: 10,
               borderColor: "#fff",
               borderWidth: 1,
+              
             },
             label: {
               show: false,
@@ -919,117 +1079,6 @@ export default {
     align-items: stretch;
     background: url("../../assets/img/fq/ptbg3.png");
     background-size: 100% 100%;
-    .countdata {
-      height: 85%;
-      width: 100%;
-      float: left;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      .datasource {
-        height: 13%;
-        width: 90%;
-        display: flex;
-        .leftpt {
-          margin-right: 2%;
-          color: #fff;
-        }
-      }
-      .count {
-        height: 65%;
-        width: 90%;
-        margin: 1% 0%;
-        display: flex;
-        float: left;
-        .total {
-          height: 100%;
-          width: 30%;
-          margin-right: 5%;
-          display: flex;
-          flex-direction: column;
-          background: linear-gradient(#1edaeb) left top no-repeat,
-            linear-gradient(#1edaeb) left top no-repeat,
-            linear-gradient(#1edaeb) right top no-repeat,
-            linear-gradient(#1edaeb) right top no-repeat,
-            linear-gradient(#1edaeb) left bottom no-repeat,
-            linear-gradient(#1edaeb) left bottom no-repeat,
-            linear-gradient(#1edaeb) right bottom no-repeat,
-            linear-gradient(#1edaeb) right bottom no-repeat;
-          background-size: 1px 10px, 10px 1px, 1px 10px, 10px 1px;
-          align-items: center;
-          .title {
-            color: #44c5db;
-          }
-          span {
-            color: #44c5db;
-          }
-        }
-        .company {
-          height: 100%;
-          width: 30%;
-          margin-right: 5%;
-          display: flex;
-          flex-direction: column;
-          background: linear-gradient(#1edaeb) left top no-repeat,
-            linear-gradient(#1edaeb) left top no-repeat,
-            linear-gradient(#1edaeb) right top no-repeat,
-            linear-gradient(#1edaeb) right top no-repeat,
-            linear-gradient(#1edaeb) left bottom no-repeat,
-            linear-gradient(#1edaeb) left bottom no-repeat,
-            linear-gradient(#1edaeb) right bottom no-repeat,
-            linear-gradient(#1edaeb) right bottom no-repeat;
-          background-size: 1px 10px, 10px 1px, 1px 10px, 10px 1px;
-          align-items: center;
-          .title {
-            color: #61ccbe;
-          }
-          span {
-            color: #61ccbe;
-          }
-        }
-        .position {
-          height: 100%;
-          width: 30%;
-          display: flex;
-          flex-direction: column;
-          background: linear-gradient(#1edaeb) left top no-repeat,
-            linear-gradient(#1edaeb) left top no-repeat,
-            linear-gradient(#1edaeb) right top no-repeat,
-            linear-gradient(#1edaeb) right top no-repeat,
-            linear-gradient(#1edaeb) left bottom no-repeat,
-            linear-gradient(#1edaeb) left bottom no-repeat,
-            linear-gradient(#1edaeb) right bottom no-repeat,
-            linear-gradient(#1edaeb) right bottom no-repeat;
-          background-size: 1px 10px, 10px 1px, 1px 10px, 10px 1px;
-          align-items: center;
-          .title {
-            color: #4c8de2;
-          }
-          span {
-            color: #4c8de2;
-          }
-        }
-        .title {
-          height: 15%;
-          width: 90%;
-          margin: 5% 0%;
-          align-items: center;
-          font-size: 12pt;
-        }
-        .d {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 75%;
-          width: 85%;
-          background: url("../../assets/img/fq/bg6.png");
-          background-size: 100% 100%;
-          >span {
-        }
-        }
-        
-      }
-    }
   }
   .main {
     height: 33.3%;
