@@ -63,6 +63,7 @@
 <script>
 import wordcloud from "../../assets/js/echarts-wordcloud-master/index";
 import echarts from "echarts";
+import request from "@/utils/request";
 export default {
   name: "vocation",
   components: {
@@ -71,155 +72,30 @@ export default {
   data() {
     return {
       cloudData: [
-        { value: 1800, name: "纳木措" },
-        { value: 1200, name: "西藏" },
-        { value: 1000, name: "海拔" },
-        { value: 900, name: "景色" },
-        { value: 700, name: "湖水" },
-        { value: 650, name: "雪山" },
-        { value: 630, name: "值得" },
-        { value: 610, name: "没有" },
-        { value: 600, name: "地方" },
-        { value: 543, name: "风景" },
-        { value: 523, name: "景区" },
-        { value: 500, name: "感觉" },
-        { value: 500, name: "高原" },
-        { value: 490, name: "湖面" },
-        { value: 490, name: "圣湖" },
-        { value: 490, name: "小时" },
-        { value: 430, name: "湖泊" },
-        { value: 430, name: "大圣" },
-        { value: 430, name: "美丽" },
-        { value: 380, name: "景点" },
-        { value: 380, name: "牦牛" },
-        { value: 340, name: "时间" },
-        { value: 280, name: "咸水湖" },
-        { value: 260, name: "天湖" },
-        { value: 260, name: "藏民" },
-        { value: 200, name: "朋友" },
-        { value: 200, name: "蓝天白云" },
-        { value: 100, name: "开车" },
-        { value: 50, name: "神圣" },
-        { value: 40, name: "推荐" },
-        { value: 25, name: "限速" },
-        { value: 13, name: "距离" },
+        { value: 1800, name: "学习创新" },
+        { value: 1500, name: "团体合作" },
+        { value: 1200, name: "表达沟通" },
+        { value: 1100, name: "独立工作" },
+        { value: 1000, name: "执行" },
+        { value: 850, name: "成品控制" },
+        { value: 930, name: "技术教学" },
+        { value: 710, name: "观察力" },
+        { value: 700, name: "抗压" },
+        { value: 643, name: "熟悉法律法规" },
+        { value: 623, name: "善于深入思考" },
+        { value: 600, name: "积极向上" },
+        { value: 550, name: "乐于助人" },
+        { value: 500, name: "发现问题" },
+        { value: 490, name: "解决问题" },
+        { value: 490, name: "好学" },
+        { value: 430, name: "好相处" },
+        { value: 430, name: "努力" },
+        { value: 430, name: "善良" },
+        { value: 380, name: "乐观" },
+        { value: 380, name: "优秀" },
       ],
-      // option: {
-      //   tooltip: {
-      //     trigger: "axis",
-      //     formatter: (params) => {
-      //       return (
-      //         params[0].seriesName +
-      //         ": " +
-      //         params[0].data +
-      //         "<br>" +
-      //         params[1].seriesName +
-      //         ": " +
-      //         params[1].data +
-      //         "%"
-      //       );
-      //     },
-      //   },
-      //   legend: {
-      //     data: ["城市形象", "全国平均水平"],
-      //   },
-      //   xAxis: [
-      //     {
-      //       type: "category",
-      //       data: [
-      //         "交通",
-      //         "住宿",
-      //         "地理位置",
-      //         "旅行体验",
-      //         "景区环境",
-      //         "景区设施",
-      //         "服务",
-      //         "饮食",
-      //       ],
-      //     },
-      //   ],
-      //   yAxis: [
-      //     {
-      //       splitLine: { show: false },
-      //       type: "value",
-      //       name: "数量",
-      //       interval: 50,
-      //       axisLabel: {
-      //         formatter: "{value} ",
-      //       },
-      //     },
-      //   ],
-      //   series: [
-      //     {
-      //       name: "城市形象",
-      //       type: "bar",
-      //       /*设置柱状图颜色*/
-      //       itemStyle: {
-      //         normal: {
-      //           color: function (params) {
-      //             // build a color map as your need.
-      //             var colorList = [
-      //               "#fe4f4f",
-      //               "#fead33",
-      //               "#feca2b",
-      //               "#fef728",
-      //               "#c5ee4a",
-      //               "#87ee4a",
-      //               "#46eda9",
-      //               "#47e4ed",
-      //               "#4bbbee",
-      //               "#7646d8",
-      //               "#924ae2",
-      //               "#C6E579",
-      //               "#F4E001",
-      //               "#F0805A",
-      //               "#26C0C0",
-      //             ];
-      //             return colorList[params.dataIndex];
-      //           },
-      //           /*信息显示方式*/
-      //           label: {
-      //             show: true,
-      //             position: "top",
-      //             formatter: "{b}\n{c}",
-      //           },
-      //         },
-      //       },
-      //       data: [0.28, 0.278, 0.478, 0.637, 0.669, 0.369, 0.547, 0.372],
-      //     },
-      //     {
-      //       name: "全国平均水平",
-      //       yAxisIndex: 0, //这里要设置哪个y轴，默认是最左边的是0，然后1，2顺序来。
-      //       type: "line",
-      //       itemStyle: {
-      //         /*设置折线颜色*/
-      //         normal: {
-      //           // color:'#c4cddc'
-      //         },
-      //       },
-      //       data: [0.193, 0.178, 0.512, 0.683, 0.721, 0.358, 0.432, 0.498],
-      //     },
-      //   ],
-      // },
+
       option4: {
-        // title: {
-        //   x: "150", // 水平安放位置，默认为左对齐，可选为：
-        //   // 'center' ¦ 'left' ¦ 'right'
-        //   // ¦ {number}（x坐标，单位px）
-        //   y: "top",
-        //   //textAlign: null
-        //   backgroundColor: "rgba(0,0,0,0)",
-        //   borderColor: "#ccc", // 标题边框颜色
-        //   borderWidth: 0, // 标题边框线宽，单位px，默认为0（无边框）
-        //   padding: 5, // 标题内边距，单位px，默认各方向内边距为5，
-        //   itemGap: 10, // 主副标题纵向间隔，单位px，默认为10，
-        //   textStyle: {
-        //     fontSize: 18,
-        //     fontWeight: "bolder",
-        //     color: "#ff6666", // 主标题文字颜色
-        //   },
-        //   text: "全省大中修资金统计",
-        // },
         color: [
           "#ff7f50",
           "#87cefa",
@@ -268,10 +144,10 @@ export default {
           },
         ],
         grid: {
-          x: 50,
-          y: 30,
-          x2: 40,
-          y2: 60,
+          x: 40,
+          y: 40,
+          x2: 70,
+          y2: 25,
         },
         series: [
           {

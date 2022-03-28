@@ -16,6 +16,7 @@
     "echarts-gl": "^1.1.0",
     "element-theme-chalk": "^2.15.6",
     "element-ui": "^2.15.6",
+    "esri-loader": "^3.4.0",
     "font-awesome": "^4.7.0",
     "jquery": "^3.6.0",
     "less-loader": "^4.1.0",

@@ -63,6 +63,7 @@
 <script>
 import wordcloud from "../../assets/js/echarts-wordcloud-master/index";
 import echarts from "echarts";
+import request from "@/utils/request";
 export default {
   name: "experience",
   components: {
@@ -268,10 +269,10 @@ export default {
           },
         ],
         grid: {
-          x: 50,
-          y: 30,
-          x2: 40,
-          y2: 60,
+          x: 40,
+          y: 40,
+          x2: 70,
+          y2: 25,
         },
         series: [
           {

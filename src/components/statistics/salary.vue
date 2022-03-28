@@ -12,6 +12,7 @@
             <div class="leftpt">数据源:</div>
             <div class="rightpt">
               <el-checkbox v-model="checked">前程无忧</el-checkbox>
+              <el-checkbox v-model="checked">智联招聘</el-checkbox>
             </div>
           </div>
           <div class="count">
@@ -91,6 +92,7 @@ export default {
   data() {
     return {
       checked: true,
+      checked1: false,
       cloudData: [
         { value: 1800, name: "纳木措" },
         { value: 1200, name: "西藏" },
@@ -141,17 +143,22 @@ export default {
         tooltip: { trigger: "axis" },
         //图例--折线提示提示
         legend: {
-          x: "center",
-          y: "30",
+          top:"top",
           borderColor: "#6699FF", //边框颜色
           textStyle: {
             color: "#1e90ff", // 图例文字颜色
           },
-          data: ["大修金额", "中修沥青砼金额", "预防性养护金额", "金额总计"],
+          data: [
+            "前端开发工程师",
+            "GIS开发工程师",
+            "数据库工程师",
+            "后端开发工程师",
+          ],
         },
         calculable: true,
         xAxis: {
           data: [],
+          name: "单位:月份",
           axisLine: {
             lineStyle: {
               color: "#fff",
@@ -163,7 +170,7 @@ export default {
             splitLine: { show: false },
             type: "value",
             name: "单位:万元",
-            min: "0",
+            min: "10",
             max: "",
             splitNumber: 5,
             axisLine: {
@@ -176,60 +183,72 @@ export default {
         grid: {
           x: 40,
           y: 40,
-          x2: 30,
-          y2: 30,
+          x2: 70,
+          y2: 25,
         },
         series: [
           {
             type: "line",
-            name: "大修金额",
+            name: "前端开发工程师",
             data: [],
           },
           {
             type: "line",
-            name: "中修沥青砼金额",
+            name: "GIS开发工程师",
             data: [],
           },
           {
             type: "line",
-            name: "预防性养护金额",
+            name: "数据库工程师",
             data: [],
           },
           {
             type: "line",
-            name: "金额总计",
+            name: "后端开发工程师",
             data: [],
           },
         ],
       },
       plan_table: [
         {
-          xxx: "1",
-          d: "200",
-          z: "300",
-          y: "400",
-          sum: "500",
+          month: "11",
+          qd: "16.2",
+          gis: "12",
+          sjk: "13",
+          hd: "15.1",
+          
         },
         {
-          xxx: "2",
-          d: "100",
-          z: "400",
-          y: "50",
-          sum: "500",
+          month: "12",
+          qd: "16.5",
+          gis: "12.1",
+          sjk: "13.8",
+          hd: "15.7",
+          
         },
         {
-          xxx: "3",
-          d: "150",
-          z: "410",
-          y: "250",
-          sum: "500",
+          month: "1",
+          qd: "17",
+          gis: "12",
+          sjk: "13.5",
+          hd: "16",
+          
         },
         {
-          xxx: "4",
-          d: "200",
-          z: "450",
-          y: "350",
-          sum: "500",
+          month: "2",
+          qd: "17.1",
+          gis: "12.3",
+          sjk: "14.2",
+          hd: "15.1",
+          
+        },
+        {
+          month: "3",
+          qd: "17.3",
+          gis: "12.4",
+          sjk: "14.5",
+          hd: "15.3",
+          
         },
       ],
     };
@@ -243,8 +262,6 @@ export default {
     this.initChart4();
     let myChart4 = this.$echarts.init(this.$refs.Chart4);
     myChart4.setOption(this.option4);
-
-    this.initChart7();
     this.$nextTick(() => {
       window.addEventListener("resize", () => {
         this.handleResize();
@@ -253,10 +270,11 @@ export default {
   },
   methods: {
     typeData() {
-      request.post("/api/data/typeSa", { city: "上海" }).then((res) => {
-        this.chart3 = res.data;
-        // console.log(this.chart3);
+      request.get("/api/data/typeSa").then((res) => {
+        this.chart3 = res.data.company;
+        this.chart7 = res.data.industry;
         this.initChart3();
+        this.initChart7();
       });
     },
     initmap() {
@@ -318,7 +336,7 @@ export default {
       var myChart = echarts.init(document.getElementById("chart3"));
       let arr = [];
       this.chart3.forEach((element) => {
-        arr.push({ value: element.salary, name: element.name });
+        arr.push({ value: element.value, name: element.name });
       });
       myChart.setOption({
         tooltip: {
@@ -363,7 +381,7 @@ export default {
       let myChart = this.$echarts.init(document.getElementById("chart2"));
       myChart.setOption({
         title: {
-          text: "      职位平均薪资占比排行中,最高为数据库管理员,最低为助理规划师",
+          text: "      职位平均薪资占比排行中,最高为前端总监,最低为测绘专业实习生",
           textStyle: {
             color: "rgba(255, 255, 255, .8)",
             fontSize: 12,
@@ -404,384 +422,188 @@ export default {
             },
             data: [
               {
-                name: "数据库管理员",
-                value: 9.06,
+                name: "前端总监",
+                value: 80,
               },
               {
-                name: "前端开发工程师",
-                value: 7.74,
+                name: "导航算法总监",
+                value: 70.83,
               },
               {
-                name: "微博",
-                value: 7.25,
+                name: "副总经理(GIS)",
+                value: 67.5,
               },
               {
-                name: "病例",
-                value: 6.95,
+                name: "IT总监",
+                value: 60,
               },
               {
-                name: "新冠",
-                value: 6.88,
+                name: "图像处理算法开发",
+                value: 60,
               },
               {
-                name: "确诊",
-                value: 6.59,
+                name: "Java后端开发工程师",
+                value: 54,
               },
               {
-                name: "武汉",
-                value: 5.2,
+                name: "前端研发",
+                value: 50,
               },
               {
-                name: "视频",
-                value: 4.86,
+                name: "系统架构师",
+                value: 50,
               },
               {
-                name: "冠状病毒",
-                value: 4.34,
+                name: "算法工程师",
+                value: 45,
               },
               {
-                name: "口罩",
-                value: 4.28,
+                name: "数据库高级研发工程师",
+                value: 45,
               },
               {
-                name: "新型",
-                value: 3.49,
+                name: "地图前端研发工程师",
+                value: 45,
               },
               {
-                name: "患者",
-                value: 3.05,
+                name: "GIS工程师",
+                value: 40,
               },
               {
-                name: "防控",
-                value: 2.92,
+                name: "测绘专业一级专业总工",
+                value: 37.5,
               },
               {
-                name: "感染",
-                value: 2.81,
+                name: "信号处理工程师",
+                value: 33,
               },
               {
-                name: "医院",
-                value: 2.73,
+                name: "芯片前端设计工程师",
+                value: 32,
               },
               {
-                name: "新增",
-                value: 2.43,
+                name: "IC设计工程师",
+                value: 30,
               },
               {
-                name: "隔离",
-                value: 2.19,
+                name: "地图定位工程师",
+                value: 29,
               },
               {
-                name: "出院",
-                value: 2.17,
+                name: "C++开发工程师",
+                value: 27,
               },
               {
-                name: "湖北",
-                value: 2.1,
+                name: "3D前端开发工程师",
+                value: 26,
               },
               {
-                name: "病毒",
-                value: 1.79,
+                name: "GIS总监",
+                value: 25.5,
               },
               {
-                name: "累计",
-                value: 1.79,
+                name: "Linux C++开发",
+                value: 25,
               },
               {
-                name: "加油",
-                value: 1.6,
+                name: "MySQL数据库工程师",
+                value: 22,
               },
               {
-                name: "哈哈哈",
-                value: 1.53,
+                name: "Oracle Database Developer",
+                value: 21,
               },
               {
-                name: "韩国",
-                value: 1.39,
+                name: "全球EC后端工程师",
+                value: 20,
               },
               {
-                name: "医护人员",
-                value: 1.35,
+                name: "软件开发经理",
+                value: 20,
               },
               {
-                name: "治愈",
-                value: 1.3,
+                name: "运维工程师",
+                value: 20,
               },
               {
-                name: "人员",
-                value: 1.28,
+                name: "高级.NET前端开发工程师",
+                value: 20,
               },
               {
-                name: "死亡",
-                value: 1.23,
+                name: "高级GIS开发工程师",
+                value: 19.5,
               },
               {
-                name: "投票",
-                value: 1.2,
+                name: "高级python后端工程师",
+                value: 19.5,
               },
               {
-                name: "武汉市",
-                value: 1.19,
+                name: "导航算法-构图定位",
+                value: 19,
               },
               {
-                name: "工作",
-                value: 1.18,
+                name: "VUE前端架构师",
+                value: 18,
               },
               {
-                name: "科比",
-                value: 1.39,
+                name: "Web前端开发工程师",
+                value: 18,
               },
               {
-                name: "复工",
-                value: 1.17,
+                name: "自动驾驶算法工程师",
+                value: 17,
               },
               {
-                name: "密切接触者",
-                value: 1.16,
+                name: "Node.js后端工程师",
+                value: 16,
               },
               {
-                name: "抗疫",
-                value: 1.15,
+                name: "无人机飞控算法工程师",
+                value: 15,
               },
               {
-                name: "疑似病例",
-                value: 1.14,
+                name: "研发经理",
+                value: 15,
               },
               {
-                name: "中国",
-                value: 1.23,
+                name: "导航制导与控制工程师",
+                value: 15,
               },
               {
-                name: "防疫",
-                value: 1.13,
+                name: "三维gis开发工程师",
+                value: 15,
               },
               {
-                name: "治疗",
-                value: 1.12,
+                name: "地理信息平台研发工程师",
+                value: 13,
               },
               {
-                name: "检测",
-                value: 1.1,
+                name: "arcgis二次开发",
+                value: 12,
               },
               {
-                name: "目前",
-                value: 1.09,
+                name: "导航测试",
+                value: 10,
               },
               {
-                name: "物资",
-                value: 1.08,
+                name: "数据库系统管理员",
+                value: 9,
               },
               {
-                name: "医学观察",
-                value: 1.07,
+                name: "测量员/测绘员",
+                value: 8,
               },
               {
-                name: "例新冠状",
-                value: 1.06,
+                name: "UI设计师",
+                value: 7,
               },
               {
-                name: "发热",
-                value: 1.05,
+                name: "Web前端实习生",
+                value: 3.5,
               },
               {
-                name: "时间",
-                value: 1.04,
-              },
-              {
-                name: "大家",
-                value: 1.03,
-              },
-              {
-                name: "一线工作者",
-                value: 1.02,
-              },
-              {
-                name: "央视",
-                value: 1.01,
-              },
-              {
-                name: "医疗",
-                value: 1.0,
-              },
-              {
-                name: "在家",
-                value: 0.98,
-              },
-              {
-                name: "开学",
-                value: 0.96,
-              },
-              {
-                name: "放舱",
-                value: 0.95,
-              },
-              {
-                name: "救治",
-                value: 0.94,
-              },
-              {
-                name: "战役",
-                value: 0.92,
-              },
-              {
-                name: "核酸检测",
-                value: 0.91,
-              },
-              {
-                name: "卫健委",
-                value: 0.88,
-              },
-              {
-                name: "火神山",
-                value: 0.87,
-              },
-              {
-                name: "美国",
-                value: 0.86,
-              },
-              {
-                name: "消毒",
-                value: 0.85,
-              },
-              {
-                name: "乘客",
-                value: 0.84,
-              },
-              {
-                name: "留学生",
-                value: 0.83,
-              },
-              {
-                name: "英雄回归",
-                value: 0.82,
-              },
-              {
-                name: "境外输入",
-                value: 0.8,
-              },
-              {
-                name: "塞尔维亚",
-                value: 0.79,
-              },
-              {
-                name: "马云",
-                value: 0.78,
-              },
-              {
-                name: "大学生返校",
-                value: 0.76,
-              },
-              {
-                name: "高三",
-                value: 0.75,
-              },
-              {
-                name: "高考",
-                value: 0.74,
-              },
-              {
-                name: "高考延期",
-                value: 0.73,
-              },
-              {
-                name: "高三开学",
-                value: 0.72,
-              },
-              {
-                name: "初三",
-                value: 0.71,
-              },
-              {
-                name: "小学",
-                value: 0.68,
-              },
-              {
-                name: "李兰娟",
-                value: 0.65,
-              },
-              {
-                name: "钟南山",
-                value: 0.64,
-              },
-              {
-                name: "拐点",
-                value: 0.63,
-              },
-              {
-                name: "疫情",
-                value: 0.62,
-              },
-              {
-                name: "地图",
-                value: 0.61,
-              },
-              {
-                name: "舆情",
-                value: 0.6,
-              },
-              {
-                name: "脱贫",
-                value: 0.59,
-              },
-              {
-                name: "江苏",
-                value: 0.58,
-              },
-              {
-                name: "安徽",
-                value: 0.57,
-              },
-              {
-                name: "电影",
-                value: 0.56,
-              },
-              {
-                name: "隔离",
-                value: 0.55,
-              },
-              {
-                name: "意大利",
-                value: 0.54,
-              },
-              {
-                name: "塞尔维亚",
-                value: 0.53,
-              },
-              {
-                name: "英国",
-                value: 0.52,
-              },
-              {
-                name: "退税",
-                value: 0.51,
-              },
-              {
-                name: "大学生开学",
-                value: 0.5,
-              },
-              {
-                name: "英国首相",
-                value: 0.49,
-              },
-              {
-                name: "日本",
-                value: 0.48,
-              },
-              {
-                name: "韩国",
-                value: 0.47,
-              },
-              {
-                name: "西藏",
-                value: 0.46,
-              },
-              {
-                name: "南京开学",
-                value: 0.45,
-              },
-              {
-                name: "宿管阿姨",
-                value: 0.44,
+                name: "测绘专业实习生",
+                value: 3,
               },
             ],
           },
@@ -790,17 +612,17 @@ export default {
     },
     initChart4() {
       for (var i = 0; i < this.plan_table.length; i++) {
-        this.option4.xAxis.data.push(this.plan_table[i].xxx);
-        //大修金额总计
-        this.option4.series[0].data.push(this.plan_table[i].d);
-        //中修金额
-        this.option4.series[1].data.push(this.plan_table[i].z);
-        //预防性养护金额合计
-        this.option4.series[2].data.push(this.plan_table[i].y);
-        //金额总计
-        this.option4.series[3].data.push(this.plan_table[i].sum);
-        //Y轴最大值的设置：向上取整并家500
-        this.option4.yAxis[0].max = Math.ceil(this.plan_table[0].sum) + 500;
+        this.option4.xAxis.data.push(this.plan_table[i].month);
+
+        this.option4.series[0].data.push(this.plan_table[i].qd);
+
+        this.option4.series[1].data.push(this.plan_table[i].gis);
+
+        this.option4.series[2].data.push(this.plan_table[i].sjk);
+        this.option4.series[3].data.push(this.plan_table[i].hd);
+        
+
+        this.option4.yAxis[0].max = Math.ceil(this.plan_table[0].hd) + 2;
       }
     },
     wordCloudInti(wrapEl, data) {
@@ -853,6 +675,10 @@ export default {
     },
     initChart7() {
       var myChart = echarts.init(document.getElementById("chart7"));
+      let arr = [];
+      this.chart7.forEach((element) => {
+        arr.push({ value: element.value, name: element.name });
+      });
       myChart.setOption({
         tooltip: {
           trigger: "item",
@@ -891,13 +717,7 @@ export default {
             labelLine: {
               show: false,
             },
-            data: [
-              { value: 1048, name: "Search Engine" },
-              { value: 735, name: "Direct" },
-              { value: 580, name: "Email" },
-              { value: 484, name: "Union Ads" },
-              { value: 300, name: "Video Ads" },
-            ],
+            data: arr,
           },
         ],
       });
@@ -1140,6 +960,9 @@ export default {
     margin-left: 0.5%;
     margin-top: -0.3%;
   }
+}
+.el-checkbox {
+  color: #fff;
 }
 // /deep/.mapboxgl-ctrl-attrib-inner{
 //   a{
