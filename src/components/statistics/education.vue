@@ -219,7 +219,7 @@ export default {
     // this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
     this.initChart1();
     this.initChart2();
-    this.initChart3();
+    // this.initChart3();
     this.initChart4();
     let myChart4 = this.$echarts.init(this.$refs.Chart4);
     myChart4.setOption(this.option4);
@@ -245,9 +245,11 @@ export default {
     },
     typeData() {
       request.post("/api/data/education", { city: "全国" }).then((res) => {
+        this.chart3 = res.data.skill;
         this.chart5 = res.data.company;
         this.chart7 = res.data.job;
-        // console.log(this.chart7);
+        console.log(this.chart3);
+        this.initChart3();
         this.initChart5();
         this.initChart7();
       });
@@ -306,53 +308,106 @@ export default {
     },
     initChart3() {
       var myChart = echarts.init(document.getElementById("chart3"));
-      // let arr = [];
-      // this.chart3.forEach((element) => {
-      //   arr.push({ value: element.value, name: element.name });
-      // });
+      let arr = [];
+      this.chart3.forEach((element) => {
+        arr.push({ value: element.value, name: element.name });
+      });
       myChart.setOption({
-        grid: {
-          right: "4%",
-          top: "12%",
-          height: "55%",
-          width: "85%",
-        },
         legend: {
+          data: ["博士", "硕士", "本科", "专科", "高中"],
           textStyle: {
             //图例文字的样式
             color: "#fff",
             fontSize: 12,
           },
         },
-        tooltip: {},
-        dataset: {
-          dimensions: ["product", "博士", "硕士", "本科", "专科", "高中及以下"],
-          source: [
-            { product: "计算机软件", 博士: 43.3, 硕士: 85.8, 本科: 93.7 },
-            { product: "航天", 博士: 83.1, 硕士: 73.4, 本科: 55.1 },
-            { product: "互联网", 博士: 86.4, 硕士: 65.2, 本科: 82.5 },
-            { product: "机械", 博士: 72.4, 硕士: 53.9, 本科: 39.1 },
-          ],
+        grid: {
+          left: "3%",
+          top:"15%",
+          right: "4%",
+          bottom: "3%",
+          containLabel: true,
         },
-        xAxis: {
-          type: "category",
-          axisLine: {
+        xAxis: [
+          {
+            type: "category",
+            boundaryGap: false,
+            axisLine: {
             lineStyle: {
               color: "#fff",
             },
           },
-        },
-        yAxis: {
-          splitLine: { show: false },
-          axisLine: {
+            data: ["电子技术", "互联网", "计算机", "通信"],
+          },
+        ],
+        yAxis: [
+          {
+            type: "value",
+            max:"5000",
+            splitLine: { show: false },
+            axisLine: {
             lineStyle: {
               color: "#fff",
             },
           },
-        },
-        // Declare several bar series, each will be mapped
-        // to a column of dataset.source by default.
-        series: [{ type: "bar" }, { type: "bar" }, { type: "bar" }],
+          },
+        ],
+        series: [
+          {
+            name: "博士",
+            type: "line",
+            stack: "Total",
+            areaStyle: {},
+            emphasis: {
+              focus: "series",
+            },
+            data: arr[0].value,
+          },
+          {
+            name: "硕士",
+            type: "line",
+            stack: "Total",
+            areaStyle: {},
+            emphasis: {
+              focus: "series",
+            },
+            data: arr[1].value,
+          },
+          {
+            name: "本科",
+            type: "line",
+            stack: "Total",
+            areaStyle: {},
+            emphasis: {
+              focus: "series",
+            },
+            data: arr[2].value,
+          },
+          {
+            name: "专科",
+            type: "line",
+            stack: "Total",
+            areaStyle: {},
+            emphasis: {
+              focus: "series",
+            },
+            data: arr[3].value,
+          },
+          {
+            name: "高中",
+            type: "line",
+            stack: "Total",
+            label: {
+              show: true,
+              position: "top",
+            },
+            areaStyle: {},
+            emphasis: {
+              focus: "series",
+            },
+            data: arr[4].value,
+          },
+        ],
       });
     },
     initChart7() {
@@ -378,9 +433,9 @@ export default {
         },
         grid: {
           right: "5%",
-          top: "30%",
-          bottom:"10%",
-          left:"30%",
+          top: "20%",
+          bottom: "10%",
+          left: "31%",
           // containLabel: true,
         },
         xAxis: {
@@ -445,7 +500,7 @@ export default {
             data: arr[2].value,
           },
           {
-            name: "大专及以下",
+            name: "专科",
             type: "bar",
             stack: "total",
             label: {
@@ -457,7 +512,7 @@ export default {
             data: arr[3].value,
           },
           {
-            name: "无需",
+            name: "高中",
             type: "bar",
             stack: "total",
             label: {
@@ -552,11 +607,11 @@ export default {
         radar: [
           {
             indicator: [
-              { text: "博士" },
-              { text: "上海" },
-              { text: "杭州" },
-              { text: "深圳" },
-              { text: "苏州" },
+              { text: "外资" },
+              { text: "上市公司" },
+              { text: "国企" },
+              { text: "创业公司" },
+              { text: "合资" },
             ],
             center: ["50%", "60%"],
             radius: 70,
@@ -564,7 +619,7 @@ export default {
             splitNumber: 4,
             shape: "circle",
             axisName: {
-              formatter: arr.value,
+              // formatter: {[value]},
               color: "#428BD4",
             },
             splitArea: {

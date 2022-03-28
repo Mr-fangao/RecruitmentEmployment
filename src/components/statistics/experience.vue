@@ -331,16 +331,17 @@ export default {
   },
   mounted() {
     this.initmap();
+    this.typeData();
     // this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
-    this.initChart1();
+    // this.initChart1();
     this.initChart2();
-    this.initChart3();
+    // this.initChart3();
     this.initChart4();
     let myChart4 = this.$echarts.init(this.$refs.Chart4);
     myChart4.setOption(this.option4);
     this.initChart5();
     this.initChart6();
-    this.initChart7();
+    // this.initChart7();
     this.$nextTick(() => {
       window.addEventListener("resize", () => {
         this.handleResize();
@@ -356,6 +357,17 @@ export default {
         style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
         center: [105, 35],
         zoom: 3.5,
+      });
+    },
+    typeData() {
+      request.post("/api/data/experience", { city: "全国" }).then((res) => {
+        this.chart7 = res.data.skill;
+        this.chart1 = res.data.company;
+        this.chart3 = res.data.job;
+        // console.log(this.chart3);
+        this.initChart1();
+        this.initChart3();
+        this.initChart7();
       });
     },
     initChart5() {
@@ -399,10 +411,10 @@ export default {
               show: false,
             },
             data: [
-              { value: 1048, name: "博士" },
-              { value: 735, name: "硕士" },
-              { value: 580, name: "本科" },
-              { value: 484, name: "专科" },
+              { value: 1048, name: "5年以上" },
+              { value: 735, name: "3-4年" },
+              { value: 580, name: "1-2年" },
+              { value: 484, name: "应届生" },
               { value: 300, name: "无需" },
             ],
           },
@@ -410,13 +422,18 @@ export default {
       });
     },
     initChart7() {
-      var myChart = echarts.init(document.getElementById("chart7"));
+      let myChart = this.$echarts.init(document.getElementById("chart7"));
+      let arr = [];
+      this.chart7.forEach((element) => {
+        arr.push({ value: element.value, name: element.name });
+      });
       myChart.setOption({
-        grid: {
-          right: "4%",
-          top: "12%",
-          height: "55%",
-          width: "85%",
+        tooltip: {
+          trigger: "axis",
+          axisPointer: {
+            // Use axis to trigger tooltip
+            type: "shadow", // 'shadow' as default; can also be 'line' or 'shadow'
+          },
         },
         legend: {
           textStyle: {
@@ -425,18 +442,15 @@ export default {
             fontSize: 12,
           },
         },
-        tooltip: {},
-        dataset: {
-          dimensions: ["product", "博士", "硕士", "本科", "专科", "高中及以下"],
-          source: [
-            { product: "计算机", 博士: 43.3, 硕士: 85.8, 本科: 93.7 },
-            { product: "Milk Tea", 博士: 83.1, 硕士: 73.4, 本科: 55.1 },
-            { product: "Cheese Cocoa", 博士: 86.4, 硕士: 65.2, 本科: 82.5 },
-            { product: "Walnut Brownie", 博士: 72.4, 硕士: 53.9, 本科: 39.1 },
-          ],
+        grid: {
+          right: "5%",
+          top: "25%",
+          bottom: "10%",
+          left: "25%",
+          // containLabel: true,
         },
         xAxis: {
-          type: "category",
+          type: "value",
           axisLine: {
             lineStyle: {
               color: "#fff",
@@ -444,6 +458,14 @@ export default {
           },
         },
         yAxis: {
+          type: "category",
+          data: [
+            
+            "前端开发工程师",
+            "数据库工程师",
+            "后端开发工程师",
+            "GIS开发工程师",
+          ],
           splitLine: { show: false },
           axisLine: {
             lineStyle: {
@@ -451,9 +473,69 @@ export default {
             },
           },
         },
-        // Declare several bar series, each will be mapped
-        // to a column of dataset.source by default.
-        series: [{ type: "bar" }, { type: "bar" }, { type: "bar" }],
+        series: [
+          {
+            name: "5年以上",
+            type: "bar",
+            stack: "total",
+            label: {
+              show: true,
+            },
+            emphasis: {
+              focus: "series",
+            },
+            data: arr[0].value,
+          },
+          {
+            name: "3-4年",
+            type: "bar",
+            stack: "total",
+            label: {
+              show: true,
+            },
+            emphasis: {
+              focus: "series",
+            },
+            data: arr[1].value,
+          },
+          {
+            name: "1-2年",
+            type: "bar",
+            stack: "total",
+            label: {
+              show: true,
+            },
+            emphasis: {
+              focus: "series",
+            },
+            data: arr[2].value,
+          },
+          {
+            name: "应届生",
+            type: "bar",
+            stack: "total",
+            label: {
+              show: true,
+            },
+            emphasis: {
+              focus: "series",
+            },
+            data: arr[3].value,
+          },
+          {
+            name: "无需",
+            type: "bar",
+            stack: "total",
+            label: {
+              show: true,
+            },
+            emphasis: {
+              focus: "series",
+            },
+            data: arr[4].value,
+          },
+          
+        ],
       });
     },
     initChart3() {
@@ -475,7 +557,7 @@ export default {
         },
         grid: {
           right: "5%",
-          top: "14%",
+          top: "25%",
           height: "63%",
           width: "92%",
           containLabel: true,
@@ -490,7 +572,7 @@ export default {
         },
         yAxis: {
           type: "category",
-          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          data: ["前端开发工程师", "数据库工程师", "后端开发工程师", "GIS开发工程师"],
           splitLine: { show: false },
           axisLine: {
             lineStyle: {
@@ -500,7 +582,7 @@ export default {
         },
         series: [
           {
-            name: "博士",
+            name: "5年以上",
             type: "bar",
             stack: "total",
             label: {
@@ -512,7 +594,7 @@ export default {
             data: [320, 302, 301, 334, 390, 330, 320],
           },
           {
-            name: "硕士",
+            name: "3-4年",
             type: "bar",
             stack: "total",
             label: {
@@ -524,7 +606,7 @@ export default {
             data: [120, 132, 101, 134, 90, 230, 210],
           },
           {
-            name: "本科",
+            name: "1-2年",
             type: "bar",
             stack: "total",
             label: {
@@ -684,18 +766,18 @@ export default {
             data: [
               {
                 value: [100, 8, 0.4, -80, 2000],
-                name: "博士",
+                name: "5年以上",
               },
               {
                 value: [60, 5, 0.3, -100, 1500],
-                name: "硕士",
+                name: "3-4年",
                 areaStyle: {
                   // color: "rgba(255, 228, 52, 0.6)",
                 },
               },
               {
                 value: [80, 6, 0.8, -10, 1800],
-                name: "本科",
+                name: "1-2年",
                 areaStyle: {
                   // color: "rgba(255, 228, 52, 0.6)",
                 },
@@ -719,54 +801,7 @@ export default {
         ],
       });
     },
-    // wordCloudInti(wrapEl, data) {
-    //   let myChart = echarts.init(wrapEl);
-    //   var option = {
-    //     tooltip: {
-    //       show: true,
-    //     },
-    //     series: [
-    //       {
-    //         name: "热词",
-    //         type: "wordCloud",
-    //         sizeRange: [10, 35],
-    //         rotationRange: [-20, 20],
-    //         shape: "circle",
-    //         left: "center",
-    //         top: "center",
-    //         width: "100%",
-    //         height: "100%",
-    //         gridSize: 7,
-    //         textPadding: 0,
-    //         autoSize: {
-    //           enable: true,
-    //           minSize: 4,
-    //         },
-    //         textStyle: {
-    //           normal: {
-    //             color: function () {
-    //               return (
-    //                 "rgb(" +
-    //                 [
-    //                   Math.round(Math.random() * 250),
-    //                   Math.round(Math.random() * 250),
-    //                   Math.round(Math.random() * 250),
-    //                 ].join(",") +
-    //                 ")"
-    //               );
-    //             },
-    //           },
-    //           emphasis: {
-    //             shadowBlur: 10,
-    //             shadowColor: "#333",
-    //           },
-    //         },
-    //         data: data,
-    //       },
-    //     ],
-    //   };
-    //   myChart.setOption(option);
-    // },
+    
     initChart2() {
       var myChart = echarts.init(document.getElementById("chart2"));
       const city = [
@@ -795,7 +830,7 @@ export default {
         "10p",
         "11p",
       ];
-      const days = ["博士", "硕士", "本科", "大专", "高中", "无需", "无需"];
+      const days = ["5年以上", "3-4年", "1-2年", "大专", "无需"];
 
       // prettier-ignore
       const data = [[0,0,5],[0,1,1],[0,2,0],[0,3,0],[0,4,0],[0,5,0],[0,6,0],[0,7,0],[0,8,0],[0,9,0],[0,10,0],[0,11,2],[0,12,4],[0,13,1],[0,14,1],[0,15,3],[0,16,4],[0,17,6],[0,18,4],[0,19,4],[0,20,3],[0,21,3],[0,22,2],[0,23,5],[1,0,7],[1,1,0],[1,2,0],[1,3,0],[1,4,0],[1,5,0],[1,6,0],[1,7,0],[1,8,0],[1,9,0],[1,10,5],[1,11,2],[1,12,2],[1,13,6],[1,14,9],[1,15,11],[1,16,6],[1,17,7],[1,18,8],[1,19,12],[1,20,5],[1,21,5],[1,22,7],[1,23,2],[2,0,1],[2,1,1],[2,2,0],[2,3,0],[2,4,0],[2,5,0],[2,6,0],[2,7,0],[2,8,0],[2,9,0],[2,10,3],[2,11,2],[2,12,1],[2,13,9],[2,14,8],[2,15,10],[2,16,6],[2,17,5],[2,18,5],[2,19,5],[2,20,7],[2,21,4],[2,22,2],[2,23,4],[3,0,7],[3,1,3],[3,2,0],[3,3,0],[3,4,0],[3,5,0],[3,6,0],[3,7,0],[3,8,1],[3,9,0],[3,10,5],[3,11,4],[3,12,7],[3,13,14],[3,14,13],[3,15,12],[3,16,9],[3,17,5],[3,18,5],[3,19,10],[3,20,6],[3,21,4],[3,22,4],[3,23,1],[4,0,1],[4,1,3],[4,2,0],[4,3,0],[4,4,0],[4,5,1],[4,6,0],[4,7,0],[4,8,0],[4,9,2],[4,10,4],[4,11,4],[4,12,2],[4,13,4],[4,14,4],[4,15,14],[4,16,12],[4,17,1],[4,18,8],[4,19,5],[4,20,3],[4,21,7],[4,22,3],[4,23,0],[5,0,2],[5,1,1],[5,2,0],[5,3,3],[5,4,0],[5,5,0],[5,6,0],[5,7,0],[5,8,2],[5,9,0],[5,10,4],[5,11,1],[5,12,5],[5,13,10],[5,14,5],[5,15,7],[5,16,11],[5,17,6],[5,18,0],[5,19,5],[5,20,3],[5,21,4],[5,22,2],[5,23,0],[6,0,1],[6,1,0],[6,2,0],[6,3,0],[6,4,0],[6,5,0],[6,6,0],[6,7,0],[6,8,0],[6,9,0],[6,10,1],[6,11,0],[6,12,2],[6,13,1],[6,14,3],[6,15,4],[6,16,0],[6,17,0],[6,18,0],[6,19,0],[6,20,1],[6,21,2],[6,22,2],[6,23,6]]
