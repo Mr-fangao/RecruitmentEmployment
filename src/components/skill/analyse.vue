@@ -72,7 +72,9 @@
           <el-col :span="12"
             ><el-button @click="skanalysis()">开始分析</el-button></el-col
           >
-          <el-col :span="12"><el-button  @click="clear()">重置选择</el-button> </el-col>
+          <el-col :span="12"
+            ><el-button @click="clear()">重置选择</el-button>
+          </el-col>
         </el-row>
       </div>
       <div class="main">
@@ -206,8 +208,8 @@ export default {
         tooltip: { trigger: "axis" },
         //图例--折线提示提示
         legend: {
-          x: "center",
-          y: "30",
+          left: "center",
+          top: "top",
           borderColor: "#6699FF", //边框颜色
           textStyle: {
             color: "#1e90ff", // 图例文字颜色
@@ -239,10 +241,10 @@ export default {
           },
         ],
         grid: {
-          x: 40,
-          y: 40,
-          x2: 30,
-          y2: 30,
+          top: "20%",
+          left: "10%",
+          right: "5%",
+          bottom: "12%",
         },
         series: [
           {
@@ -269,39 +271,44 @@ export default {
       },
       plan_table: [
         {
+          mouth: "11",
           vue: "94",
           JavaScript: "156",
-          1: "300",
-          2: "400",
-          3: "500",
+          z: "400",
+          y: "50",
+          sum: "1000",
         },
         {
+          mouth: "12",
           vue: "548",
           JavaScript: "934",
           z: "400",
           y: "50",
-          sum: "500",
+          sum: "1000",
         },
         {
+          mouth: "1",
           vue: "313",
           JavaScript: "502",
           z: "410",
           y: "250",
-          sum: "500",
+          sum: "1000",
         },
         {
+          mouth: "2",
           vue: "829",
           JavaScript: "1274",
           z: "450",
           y: "350",
-          sum: "500",
+          sum: "1000",
         },
         {
+          mouth: "3",
           vue: "900",
           JavaScript: "1420",
           z: "450",
           y: "350",
-          sum: "500",
+          sum: "1200",
         },
       ],
     };
@@ -324,11 +331,11 @@ export default {
     },
     initChart3() {
       for (var i = 0; i < this.plan_table.length; i++) {
-        this.option3.xAxis.data.push(this.plan_table[i].vue);
+        this.option3.xAxis.data.push(this.plan_table[i].mouth);
         //vue总计
-        this.option3.series[0].data.push(this.plan_table[i].JavaScript);
+        this.option3.series[0].data.push(this.plan_table[i].vue);
         //JavaScript
-        this.option3.series[1].data.push(this.plan_table[i].z);
+        this.option3.series[1].data.push(this.plan_table[i].JavaScript);
         //预防性养护金额合计
         this.option3.series[2].data.push(this.plan_table[i].y);
         //金额总计
@@ -778,7 +785,7 @@ export default {
         mapbox: [],
         Leaflet: [],
         GIS软件: [],
-        'ArcGIS Engine': [],
+        "ArcGIS Engine": [],
         PostgreSQL: [],
       };
       var datas = [
@@ -902,11 +909,11 @@ export default {
       }
     },
     clear() {
-      this.input ="";
-      this.value ="";
-      this.value1 ="";
-        this.showct1();
-        this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
+      this.input = "";
+      this.value = "";
+      this.value1 = "";
+      this.showct1();
+      this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
     },
   },
 };

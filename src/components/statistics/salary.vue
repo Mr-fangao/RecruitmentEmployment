@@ -5,7 +5,7 @@
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
-          <span>爬取招聘数据总览</span>
+          <span>招聘数据总览</span>
         </div>
         <div class="countdata">
           <div class="datasource">
@@ -17,7 +17,7 @@
           <div class="count">
             <div class="total">
               <div class="title">信息数</div>
-              <div class="d"><span>111</span></div>
+              <div class="d"><span>11711</span></div>
             </div>
             <div class="company">
               <div class="title">公司数</div>
@@ -33,7 +33,7 @@
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
-          <span>城市平均薪资统计</span>
+          <span>热门城市平均薪资统计</span>
         </div>
         <div class="row1chartcontent" id="chart1"></div>
       </div>
@@ -272,10 +272,16 @@ export default {
     initChart1() {
       var myChart = echarts.init(document.getElementById("chart1"));
       myChart.setOption({
+        grid: {
+          top: "8%",
+          left: "12%",
+          right: "5%",
+          bottom: "15%",
+        },
         xAxis: {
           type: "category",
           splitLine: { show: false },
-          data: ["深圳", "广州", "成都", "南昌", "宁波", "上海", "南京"],
+          data: ["北京", "南京", "上海", "杭州", "成都", "深圳", "苏州"],
           axisLine: {
             lineStyle: {
               color: "#fff",
@@ -284,6 +290,7 @@ export default {
         },
         yAxis: {
           type: "value",
+          name: "千/月",
           splitLine: { show: false },
           axisLine: {
             lineStyle: {
@@ -301,7 +308,7 @@ export default {
         color: "#1BFEFE",
         series: [
           {
-            data: [120, 200, 150, 80, 70, 110, 130],
+            data: [18.5, 13.5, 17.5, 16, 13, 16.5, 14],
             type: "bar",
           },
         ],
@@ -1024,10 +1031,9 @@ export default {
           width: 85%;
           background: url("../../assets/img/fq/bg6.png");
           background-size: 100% 100%;
-          >span {
+          > span {
+          }
         }
-        }
-        
       }
     }
   }
