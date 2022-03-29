@@ -214,13 +214,6 @@ export default {
   height: 100%;
   z-index: 0;
 }
-// .content {
-//   position: absolute;
-//   top: 0;
-//   z-index: 9999;
-//   height: 100%;
-//   width: 100%;
-// }
 .main {
   height: 92%;
   width: 23%;

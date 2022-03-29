@@ -29,19 +29,11 @@
           <i class="fa fa-thermometer-0 fa-lg"></i>
           <span class="tab" slot="title">热力</span>
         </el-menu-item>
-        <el-menu-item
-          index="4"
-          @click="show(4)"
-          :class="index === 4 ? 'active' : ''"
-          plain
-        >
-          <i class="el-icon-menu"></i>
-          <span class="tab" slot="title">多要素</span>
-        </el-menu-item>
+        
         <el-menu-item
           index="5"
-          @click="show(5)"
-          :class="index === 5 ? 'active' : ''"
+          @click="show(4)"
+          :class="index === 4 ? 'active' : ''"
           plain
         >
           <i class="el-icon-menu"></i>
@@ -49,23 +41,6 @@
         </el-menu-item>
       </el-menu>
     </div>
-    <!-- <div class="select">
-      <el-button @click="show(1)" :class="index === 1 ? 'active' : ''" plain
-        >点聚合图</el-button
-      >
-      <el-button @click="show(2)" :class="index === 2 ? 'active' : ''" plain
-        >分层色彩图</el-button
-      >
-      <el-button @click="show(3)" :class="index === 3 ? 'active' : ''" plain
-        >热力图</el-button
-      >
-      <el-button @click="show(4)" :class="index === 4 ? 'active' : ''" plain
-        >时序图</el-button
-      >
-      <el-button @click="show(5)" :class="index === 5 ? 'active' : ''" plain
-        >多要素统计图</el-button
-      >
-    </div> -->
     <div class="content">
       <keep-alive>
         <component :is="comp" v-show="isShow"></component>
@@ -79,9 +54,9 @@ import gradedcolormap from "../components/thememap/gradedcolormap.vue";
 import pointgather from "../components/thememap/pointgather.vue";
 import heatmap from "../components/thememap/heatmap.vue";
 import timemap from "../components/thememap/timemap.vue";
-import multimap from "../components/thememap/multimap.vue";
+// import multimap from "../components/thememap/multimap.vue";
 export default {
-  components: { gradedcolormap, pointgather, heatmap, timemap, multimap },
+  components: { gradedcolormap, pointgather, heatmap, timemap, },
   name: "theme",
   data() {
     return {
@@ -95,9 +70,7 @@ export default {
       if (value === 1) this.comp = "pointgather";
       else if (value === 2) this.comp = "gradedcolormap";
       else if (value === 3) this.comp = "heatmap";
-      else if (value === 4) this.comp = "multimap";
-      else if (value === 5) this.comp = "timemap";
-      //   else if (value === 3) this.comp = "density";
+      else if (value === 4) this.comp = "timemap";
     },
   },
 };

@@ -30,16 +30,16 @@
                   <el-col :span="12">
                     <el-date-picker
                       v-model="json.STime"
-                      type="year"
-                      placeholder="选择开始日期"
+                      type="monthrange"
+                      placeholder="选择开始月份"
                       :picker-options="STime"
                     />
                   </el-col>
                   <el-col :span="12">
                     <el-date-picker
                       v-model="json.ETime"
-                      type="year"
-                      placeholder="选择结束日期"
+                      type="monthrange"
+                      placeholder="选择结束月份"
                       :picker-options="ETime"
                     />
                   </el-col>
@@ -307,8 +307,8 @@ export default {
     return {
       ceng: 0,
       json: {
-        STime: new Date("2018"),
-        ETime: new Date("2019"),
+        STime: new Date("2021-10-31"),
+        ETime: new Date("2022-04-06"),
         space: "",
         Type: "",
         c: 0,
@@ -317,11 +317,11 @@ export default {
         disabledDate: (time) => {
           if (this.json.ETime !== "") {
             return (
-              time.getTime() < new Date("2011-12-31") ||
+              time.getTime() < new Date("2021-01-01") ||
               time.getTime() > this.json.ETime
             );
           } else {
-            return time.getTime() < new Date("2011-12-31");
+            return time.getTime() < new Date("2021-01-01");
           }
         },
       },
@@ -329,8 +329,8 @@ export default {
         disabledDate: (time) => {
           return (
             time.getTime() < this.json.STime ||
-            time.getTime() < new Date("2011-12-31") ||
-            time.getTime() > new Date("2018-12-31")
+            time.getTime() < new Date("2021-01-01") ||
+            time.getTime() > new Date("2022-03-31")
           );
         },
       },
@@ -343,10 +343,6 @@ export default {
         {
           value: "县级",
           label: "市级",
-        },
-        {
-          value: "街道",
-          label: "县级",
         },
       ],
       Type: [

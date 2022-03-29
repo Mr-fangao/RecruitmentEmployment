@@ -1,6 +1,12 @@
 <template>
   <div id="education">
-    <div id="map" />
+    <iframe
+      src="./static/GraphEduc.html"
+      frameborder="0"
+      width="100%"
+      height="100%"
+      scrolling="auto"
+    ></iframe>
     <div class="left">
       <div class="col-content">
         <div class="row1title">
@@ -64,10 +70,12 @@
 import wordcloud from "../../assets/js/echarts-wordcloud-master/index";
 import echarts from "echarts";
 import request from "@/utils/request";
+// import mapcom from "../../educationmap.vue";
 export default {
   name: "education",
   components: {
     wordcloud,
+    
   },
   data() {
     return {
@@ -215,7 +223,7 @@ export default {
     };
   },
   mounted() {
-    this.initmap();
+    // this.initmap();
     // this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
     this.initChart1();
     this.initChart2();
@@ -233,16 +241,16 @@ export default {
     });
   },
   methods: {
-    initmap() {
-      this.$mapboxgl.accessToken =
-        "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
-      var map = new this.$mapboxgl.Map({
-        container: "map",
-        style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
-        center: [105, 35],
-        zoom: 3.5,
-      });
-    },
+    // initmap() {
+    //   this.$mapboxgl.accessToken =
+    //     "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
+    //   var map = new this.$mapboxgl.Map({
+    //     container: "map",
+    //     style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
+    //     center: [105, 35],
+    //     zoom: 3.5,
+    //   });
+    // },
     typeData() {
       request.post("/api/data/education", { city: "全国" }).then((res) => {
         this.chart3 = res.data.skill;
@@ -811,7 +819,7 @@ export default {
     // background: rgba(7, 41, 61, 0.637);
   }
 }
-#map {
+.map {
   position: relative;
   width: 100%;
   height: 100%;

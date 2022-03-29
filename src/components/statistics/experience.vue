@@ -534,7 +534,6 @@ export default {
             },
             data: arr[4].value,
           },
-          
         ],
       });
     },
