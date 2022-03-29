@@ -1,5 +1,12 @@
 <template>
   <div id="vocation">
+    <iframe
+      src="./static/cluster.html"
+      frameborder="0"
+      width="100%"
+      height="100%"
+      scrolling="auto"
+    ></iframe>
     <div id="map" />
     <div class="left">
       <div class="col-content">
@@ -205,7 +212,7 @@ export default {
     };
   },
   mounted() {
-    this.initmap();
+    // this.initmap();
     this.initChart1();
     this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
     this.initChart3();
@@ -223,14 +230,16 @@ export default {
   },
   methods: {
     initmap() {
-      this.$mapboxgl.accessToken =
-        "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
-      var map = new this.$mapboxgl.Map({
-        container: "map",
-        style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
-        center: [105, 35],
-        zoom: 3.5,
-      });
+     
+      // this.$mapboxgl.accessToken =
+      //   "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
+      // var map = new this.$mapboxgl.Map({
+      //   container: "map",
+      //   style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
+      //   center: [105, 35],
+      //   zoom: 3.5,
+      // });
+     
     },
     // initChart2() {
     //   var myChart = echarts.init(document.getElementById("chart2"));
