@@ -1,6 +1,9 @@
 <template>
   <div id="education">
-    <div id="map" />
+    <div class="iframestyleset">
+      <iframe name="iframeMap" v-bind:src="getPageUrl" id="iframeMapViewComponent" frameborder="0" width="100%" height="500px" scrolling="no" ref="iframeDom"></iframe>
+    </div>
+    
     <div class="left">
       <div class="col-content">
         <div class="row1title">
@@ -71,6 +74,7 @@ export default {
   },
   data() {
     return {
+      getPageUrl: './GraphEduc.html',
       cloudData: [
         { value: 1800, name: "纳木措" },
         { value: 1200, name: "西藏" },
@@ -214,8 +218,15 @@ export default {
       ],
     };
   },
+  created() {
+      // 初始化时为window绑定一个方法
+      window['vueDefinedMyProp'] = (receiveParams) => {
+        this.receiveParamsFromHtml(receiveParams)
+      }
+    },
   mounted() {
-    this.initmap();
+    
+    // this.initmap();
     // this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
     this.initChart1();
     this.initChart2();
@@ -233,16 +244,22 @@ export default {
     });
   },
   methods: {
-    initmap() {
-      this.$mapboxgl.accessToken =
-        "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
-      var map = new this.$mapboxgl.Map({
-        container: "map",
-        style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
-        center: [105, 35],
-        zoom: 3.5,
-      });
-    },
+    // initmap() {
+    //   this.$mapboxgl.accessToken =
+    //     "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
+    //   var map = new this.$mapboxgl.Map({
+    //     container: "map",
+    //     style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
+    //     center: [105, 35],
+    //     zoom: 3.5,
+    //   });
+    // },
+    receiveParamsFromHtml(res) {
+        console.log(res)
+      },
+      invokeHtmlMethod() {
+        window.frames['iframeMap'].lodaTable()
+      },
     typeData() {
       request.post("/api/data/education", { city: "全国" }).then((res) => {
         this.chart3 = res.data.skill;
@@ -323,7 +340,7 @@ export default {
         },
         grid: {
           left: "3%",
-          top:"15%",
+          top: "15%",
           right: "4%",
           bottom: "3%",
           containLabel: true,
@@ -333,23 +350,23 @@ export default {
             type: "category",
             boundaryGap: false,
             axisLine: {
-            lineStyle: {
-              color: "#fff",
+              lineStyle: {
+                color: "#fff",
+              },
             },
-          },
             data: ["电子技术", "互联网", "计算机", "通信"],
           },
         ],
         yAxis: [
           {
             type: "value",
-            max:"5000",
+            max: "5000",
             splitLine: { show: false },
             axisLine: {
-            lineStyle: {
-              color: "#fff",
+              lineStyle: {
+                color: "#fff",
+              },
             },
-          },
           },
         ],
         series: [
@@ -776,6 +793,8 @@ export default {
     background: url("../../assets/img/fq/ptbg3.png");
     background-size: 100% 100%;
   }
+
+  
   .main {
     height: 33.3%;
     width: 46.8%;
