@@ -58,39 +58,7 @@
             this.map.setLayoutProperty('clusters', 'visibility', 'visible');
             this.map.setLayoutProperty('cluster-count', 'visibility', 'visible');
             this.map.setLayoutProperty('unclustered-point', 'visibility', 'visible');
-            map.fitBounds([
-                [25, -8], // 边界的西南角
-                [-97,67] // 边界的东北角
-            ]);
-        });
-        document.getElementById('button1').addEventListener('click', () => {
-            this.map.setLayoutProperty('points', 'visibility', 'visible');
-            this.map.setLayoutProperty('clusters', 'visibility', 'none');
-            this.map.setLayoutProperty('cluster-count', 'visibility', 'none');
-            this.map.setLayoutProperty('unclustered-point', 'visibility', 'none');
-            //添加数据
-            map.addSource("earthquake", {
-                type: "geojson",
-                //指向GeoJSON数据。这个例子显示了所有的M1.0+地震
-                // 15年12月22日至16年1月21日。
-                data: "https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson",
-
-            });
-
-            //添加点图层
-            map.addLayer({
-                "id": "points",
-                "type": "circle",   /* symbol类型layer，一般用来绘制点*/
-                "source": "earthquake",
-                "paint": {
-                    "circle-radius": 2,
-                    "circle-color": "#080"
-                },
-            });
-        })
-
-        map.on('load', function () {
-            //从我们的GeoJSON数据中添加一个新的数据源，并设置
+             //从我们的GeoJSON数据中添加一个新的数据源，并设置
             // 'cluster'选项为true。GL-JS将向源数据添加point_count属性。
             map.addSource("earthquakes", {
                 type: "geojson",
@@ -164,8 +132,37 @@
                 },
                 //"source-layer": "button2"
             });
+            map.fitBounds([
+                [25, -8], // 边界的西南角
+                [-97,67] // 边界的东北角
+            ]);
+        });
+        document.getElementById('button1').addEventListener('click', () => {
+            this.map.setLayoutProperty('points', 'visibility', 'visible');
+            this.map.setLayoutProperty('clusters', 'visibility', 'none');
+            this.map.setLayoutProperty('cluster-count', 'visibility', 'none');
+            this.map.setLayoutProperty('unclustered-point', 'visibility', 'none');
+            //添加数据
+            map.addSource("earthquake", {
+                type: "geojson",
+                //指向GeoJSON数据。这个例子显示了所有的M1.0+地震
+                // 15年12月22日至16年1月21日。
+                data: "https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson",
+            });
 
+            //添加点图层
+            map.addLayer({
+                "id": "points",
+                "type": "circle",   /* symbol类型layer，一般用来绘制点*/
+                "source": "earthquake",
+                "paint": {
+                    "circle-radius": 2,
+                    "circle-color": "#080"
+                },
+            });
+        })
 
+       
             //检查集群单击（点击聚合图层地图级别中心点变化）
             map.on('click', 'clusters', function (e) {
                 var features = map.queryRenderedFeatures(e.point, { layers: ['clusters'] });
@@ -209,7 +206,7 @@
             });
 
 
-        });
+        
         
     </script>
 
