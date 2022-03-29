@@ -85,6 +85,7 @@ import heatMapData from "../../assets/json/heatMapData.json";
 import wordcloud from "../../assets/js/echarts-wordcloud-master/index";
 import echarts from "echarts";
 import request from "@/utils/request";
+const mapboxgl = require("mapbox-gl");
 export default {
   name: "salary",
   components: {
@@ -144,7 +145,7 @@ export default {
         tooltip: { trigger: "axis" },
         //图例--折线提示提示
         legend: {
-          top:"top",
+          top: "top",
           borderColor: "#6699FF", //边框颜色
           textStyle: {
             color: "#1e90ff", // 图例文字颜色
@@ -217,7 +218,6 @@ export default {
           gis: "12",
           sjk: "13",
           hd: "15.1",
-          
         },
         {
           month: "12",
@@ -225,7 +225,6 @@ export default {
           gis: "12.1",
           sjk: "13.8",
           hd: "15.7",
-          
         },
         {
           month: "1",
@@ -233,7 +232,6 @@ export default {
           gis: "12",
           sjk: "13.5",
           hd: "16",
-          
         },
         {
           month: "2",
@@ -241,7 +239,6 @@ export default {
           gis: "12.3",
           sjk: "14.2",
           hd: "15.1",
-          
         },
         {
           month: "3",
@@ -249,7 +246,6 @@ export default {
           gis: "12.4",
           sjk: "14.5",
           hd: "15.3",
-          
         },
       ],
     };
@@ -287,7 +283,7 @@ export default {
         center: [105, 35],
         zoom: 3.5,
       });
- map.on("load", function () {
+      map.on("load", function () {
         map.addSource("heatDataSource", {
           type: "geojson",
           // "data": "./data/heatMapData.json",
@@ -720,7 +716,6 @@ export default {
 
         this.option4.series[2].data.push(this.plan_table[i].sjk);
         this.option4.series[3].data.push(this.plan_table[i].hd);
-        
 
         this.option4.yAxis[0].max = Math.ceil(this.plan_table[0].hd) + 2;
       }

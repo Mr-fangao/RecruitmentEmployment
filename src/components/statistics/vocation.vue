@@ -230,7 +230,6 @@ export default {
   },
   methods: {
     initmap() {
-     
       // this.$mapboxgl.accessToken =
       //   "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
       // var map = new this.$mapboxgl.Map({
@@ -239,7 +238,6 @@ export default {
       //   center: [105, 35],
       //   zoom: 3.5,
       // });
-     
     },
     // initChart2() {
     //   var myChart = echarts.init(document.getElementById("chart2"));
@@ -413,10 +411,11 @@ export default {
       var myChart = echarts.init(document.getElementById("chart5"));
       myChart.setOption({
         grid: {
-          height: "75%",
-          width: "80%",
-          top: "5%",
-          right: "5%",
+          height: "60%",
+          width: "83%",
+          top: "15%",
+          right: "7%",
+          left: "10%",
         },
         xAxis: {
           type: "category",
@@ -426,10 +425,42 @@ export default {
               color: "#fff",
             },
           },
-          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          axisLabel: {
+            interval: 0,
+            formatter: function (value) {
+              debugger;
+              var ret = ""; //拼接加\n返回的类目项
+              var maxLength = 4; //每项显示文字个数
+              var valLength = value.length; //X轴类目项的文字个数
+              var rowN = Math.ceil(valLength / maxLength); //类目项需要换行的行数
+              if (rowN > 1) {
+                //如果类目项的文字大于3,
+                for (var i = 0; i < rowN; i++) {
+                  var temp = ""; //每次截取的字符串
+                  var start = i * maxLength; //开始截取的位置
+                  var end = start + maxLength; //结束截取的位置
+                  //这里也可以加一个是否是最后一行的判断，但是不加也没有影响，那就不加吧
+                  temp = value.substring(start, end) + "\n";
+                  ret += temp; //凭借最终的字符串
+                }
+                return ret;
+              } else {
+                return value;
+              }
+            },
+          },
+          data: [
+            "前端开发工程师",
+            "Web前端开发工程师",
+            "数据库工程师",
+            "GIS开发工程师",
+            "测绘工程师",
+            "后端开发工程师",
+          ],
         },
         yAxis: {
           type: "value",
+          name:"单位：个",
           splitLine: { show: false },
           axisLine: {
             lineStyle: {
@@ -437,9 +468,26 @@ export default {
             },
           },
         },
+        // dataZoom: [
+        //   {
+        //     show: true,
+        //     realtime: true,
+        //     height: 24, //这里可以设置dataZoom的尺寸
+        //     bottom: 8, //滚动体距离底部的距离
+        //     start: 0, //初始化时，滑动条宽度开始标度
+        //     end: 50, //初始化时，滑动条宽度结束标度
+        //   },
+        //   {
+        //     type: "inside", //内置滑动，随鼠标滚轮展示
+        //     realtime: true,
+        //     start: 0,
+        //     end: 50,
+        //   },
+        // ],
+
         series: [
           {
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            data: [820, 932, 901, 934, 901, 934],
             type: "line",
             areaStyle: {
               color: "rgb(115, 215, 228)",
