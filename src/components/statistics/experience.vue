@@ -1,5 +1,12 @@
 <template>
   <div id="experience">
+  <iframe
+      src="./static/GraphExper.html"
+      frameborder="0"
+      width="100%"
+      height="100%"
+      scrolling="auto"
+    ></iframe>
     <div id="map" />
     <div class="left">
       <div class="col-content">
