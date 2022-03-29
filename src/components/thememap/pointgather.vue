@@ -66,7 +66,7 @@ export default {
       map.on("load", function () {
         //从我们的GeoJSON数据中添加一个新的数据源，并设置
         // 'cluster'选项为true。GL-JS将向源数据添加point_count属性。
-        map.addSource("sensicjson", {
+        map.addSource("sensicjson1", {
           type: "geojson",
           //指向GeoJSON数据。这个例子显示了所有的M1.0+地震
           // 15年12月22日至16年1月21日。
@@ -80,7 +80,7 @@ export default {
         map.addLayer({
           id: "clusters",
           type: "circle",
-          source: "sensicjson",
+          source: "sensicjson1",
           filter: ["has", "point_count"],
           paint: {
             //使用步骤表达式(https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
@@ -114,7 +114,7 @@ export default {
         map.addLayer({
           id: "cluster-count",
           type: "symbol",
-          source: "sensicjson",
+          source: "sensicjson1",
           filter: ["has", "point_count"],
           layout: {
             "text-field": "{point_count_abbreviated}",
@@ -128,7 +128,7 @@ export default {
         map.addLayer({
           id: "unclustered-point",
           type: "circle",
-          source: "sensicjson",
+          source: "sensicjson1",
           filter: ["!", ["has", "point_count"]],
           paint: {
             "circle-color": "#11b4da",
