@@ -5,31 +5,9 @@
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
-          <span>招聘数据总览</span>
+          <span>热门职位平均薪资统计</span>
         </div>
-        <div class="countdata">
-          <div class="datasource">
-            <div class="leftpt">数据源:</div>
-            <div class="rightpt">
-              <el-checkbox v-model="checked">前程无忧</el-checkbox>
-              <el-checkbox v-model="checked">智联招聘</el-checkbox>
-            </div>
-          </div>
-          <div class="count">
-            <div class="total">
-              <div class="title">信息数</div>
-              <div class="d"><span>11711</span></div>
-            </div>
-            <div class="company">
-              <div class="title">公司数</div>
-              <div class="d"><span>111</span></div>
-            </div>
-            <div class="position">
-              <div class="title">职位数</div>
-              <div class="d"><span>111</span></div>
-            </div>
-          </div>
-        </div>
+        <div class="row1chartcontent" id="chart5"></div>
       </div>
       <div class="col-content">
         <div class="row1title">
@@ -78,6 +56,7 @@
         <div class="row1chartcontent" id="chart7"></div>
       </div>
     </div>
+    <selectRegion />
   </div>
 </template>
 <script>
@@ -86,15 +65,19 @@ import wordcloud from "../../assets/js/echarts-wordcloud-master/index";
 import echarts from "echarts";
 import request from "@/utils/request";
 const mapboxgl = require("mapbox-gl");
+import SelectRegion from "../../components/selectRegion.vue";
+import eventBum from "../../assets/js/EvebtBus";
 export default {
   name: "salary",
   components: {
-    wordcloud,
+    wordcloud,SelectRegion
   },
   data() {
     return {
-      checked: true,
-      checked1: false,
+      selectcity: {
+        name: "中国",
+        level: 0,
+      },
       cloudData: [
         { value: 1800, name: "纳木措" },
         { value: 1200, name: "西藏" },
@@ -256,6 +239,7 @@ export default {
     this.initChart1();
     this.initChart2();
     this.typeData();
+    this.initChart5();
     this.initChart4();
     let myChart4 = this.$echarts.init(this.$refs.Chart4);
     myChart4.setOption(this.option4);
@@ -267,7 +251,7 @@ export default {
   },
   methods: {
     typeData() {
-      request.get("/api/data/typeSa").then((res) => {
+      request.post("/api/data/typeSa",{ city: "全国" }).then((res) => {
         this.chart3 = res.data.company;
         this.chart7 = res.data.industry;
         this.initChart3();
@@ -381,6 +365,98 @@ export default {
       map.addControl(scale, "bottom-left");
       map.on("click", function (e) {
         console.log("点击");
+      });
+    },
+    initChart5() {
+      var myChart = echarts.init(document.getElementById("chart5"));
+      myChart.setOption({
+        grid: {
+          height: "60%",
+          width: "83%",
+          top: "15%",
+          right: "7%",
+          left: "10%",
+        },
+        xAxis: {
+          type: "category",
+          boundaryGap: false,
+          axisLine: {
+            lineStyle: {
+              color: "#fff",
+            },
+          },
+          axisLabel: {
+            interval: 0,
+            formatter: function (value) {
+              debugger;
+              var ret = ""; //拼接加\n返回的类目项
+              var maxLength = 4; //每项显示文字个数
+              var valLength = value.length; //X轴类目项的文字个数
+              var rowN = Math.ceil(valLength / maxLength); //类目项需要换行的行数
+              if (rowN > 1) {
+                //如果类目项的文字大于3,
+                for (var i = 0; i < rowN; i++) {
+                  var temp = ""; //每次截取的字符串
+                  var start = i * maxLength; //开始截取的位置
+                  var end = start + maxLength; //结束截取的位置
+                  //这里也可以加一个是否是最后一行的判断，但是不加也没有影响，那就不加吧
+                  temp = value.substring(start, end) + "\n";
+                  ret += temp; //凭借最终的字符串
+                }
+                return ret;
+              } else {
+                return value;
+              }
+            },
+          },
+          data: [
+            "前端开发工程师",
+            "Web前端开发工程师",
+            "数据库工程师",
+            "GIS开发工程师",
+            "测绘工程师",
+            "后端开发工程师",
+          ],
+        },
+        yAxis: {
+          type: "value",
+          name:"单位：个",
+          splitLine: { show: false },
+          axisLine: {
+            lineStyle: {
+              color: "#fff",
+            },
+          },
+        },
+        // dataZoom: [
+        //   {
+        //     show: true,
+        //     realtime: true,
+        //     height: 24, //这里可以设置dataZoom的尺寸
+        //     bottom: 8, //滚动体距离底部的距离
+        //     start: 0, //初始化时，滑动条宽度开始标度
+        //     end: 50, //初始化时，滑动条宽度结束标度
+        //   },
+        //   {
+        //     type: "inside", //内置滑动，随鼠标滚轮展示
+        //     realtime: true,
+        //     start: 0,
+        //     end: 50,
+        //   },
+        // ],
+
+        series: [
+          {
+            data: [820, 932, 901, 934, 901, 934],
+            type: "line",
+            areaStyle: {
+              color: "rgb(115, 215, 228)",
+            },
+            lineStyle: {
+              color: "rgb(115, 215, 228)",
+            },
+          },
+        ],
       });
     },
     initChart1() {
@@ -841,116 +917,6 @@ export default {
     align-items: stretch;
     background: url("../../assets/img/fq/ptbg3.png");
     background-size: 100% 100%;
-    .countdata {
-      height: 85%;
-      width: 100%;
-      float: left;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      .datasource {
-        height: 13%;
-        width: 90%;
-        display: flex;
-        .leftpt {
-          margin-right: 2%;
-          color: #fff;
-        }
-      }
-      .count {
-        height: 65%;
-        width: 90%;
-        margin: 1% 0%;
-        display: flex;
-        float: left;
-        .total {
-          height: 100%;
-          width: 30%;
-          margin-right: 5%;
-          display: flex;
-          flex-direction: column;
-          background: linear-gradient(#1edaeb) left top no-repeat,
-            linear-gradient(#1edaeb) left top no-repeat,
-            linear-gradient(#1edaeb) right top no-repeat,
-            linear-gradient(#1edaeb) right top no-repeat,
-            linear-gradient(#1edaeb) left bottom no-repeat,
-            linear-gradient(#1edaeb) left bottom no-repeat,
-            linear-gradient(#1edaeb) right bottom no-repeat,
-            linear-gradient(#1edaeb) right bottom no-repeat;
-          background-size: 1px 10px, 10px 1px, 1px 10px, 10px 1px;
-          align-items: center;
-          .title {
-            color: #44c5db;
-          }
-          span {
-            color: #44c5db;
-          }
-        }
-        .company {
-          height: 100%;
-          width: 30%;
-          margin-right: 5%;
-          display: flex;
-          flex-direction: column;
-          background: linear-gradient(#1edaeb) left top no-repeat,
-            linear-gradient(#1edaeb) left top no-repeat,
-            linear-gradient(#1edaeb) right top no-repeat,
-            linear-gradient(#1edaeb) right top no-repeat,
-            linear-gradient(#1edaeb) left bottom no-repeat,
-            linear-gradient(#1edaeb) left bottom no-repeat,
-            linear-gradient(#1edaeb) right bottom no-repeat,
-            linear-gradient(#1edaeb) right bottom no-repeat;
-          background-size: 1px 10px, 10px 1px, 1px 10px, 10px 1px;
-          align-items: center;
-          .title {
-            color: #61ccbe;
-          }
-          span {
-            color: #61ccbe;
-          }
-        }
-        .position {
-          height: 100%;
-          width: 30%;
-          display: flex;
-          flex-direction: column;
-          background: linear-gradient(#1edaeb) left top no-repeat,
-            linear-gradient(#1edaeb) left top no-repeat,
-            linear-gradient(#1edaeb) right top no-repeat,
-            linear-gradient(#1edaeb) right top no-repeat,
-            linear-gradient(#1edaeb) left bottom no-repeat,
-            linear-gradient(#1edaeb) left bottom no-repeat,
-            linear-gradient(#1edaeb) right bottom no-repeat,
-            linear-gradient(#1edaeb) right bottom no-repeat;
-          background-size: 1px 10px, 10px 1px, 1px 10px, 10px 1px;
-          align-items: center;
-          .title {
-            color: #4c8de2;
-          }
-          span {
-            color: #4c8de2;
-          }
-        }
-        .title {
-          height: 15%;
-          width: 90%;
-          margin: 5% 0%;
-          align-items: center;
-          font-size: 12pt;
-        }
-        .d {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 75%;
-          width: 85%;
-          background: url("../../assets/img/fq/bg6.png");
-          background-size: 100% 100%;
-          > span {
-          }
-        }
-      }
-    }
   }
   .main {
     height: 33.3%;

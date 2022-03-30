@@ -45,7 +45,7 @@
         <component :is="comp" v-show="isShow"></component>
       </keep-alive>
     </div>
-    <selectRegion />
+    <!-- <selectRegion /> -->
   </div>
 </template>
 
@@ -54,9 +54,9 @@ import salary from "../components/statistics/salary.vue";
 import education from "../components/statistics/education.vue";
 import experience from "../components/statistics/experience.vue";
 import vocation from "../components/statistics/vocation.vue";
-import SelectRegion from "../components/selectRegion.vue";
+// import SelectRegion from "../components/selectRegion.vue";
 export default {
-  components: { salary, education, experience, vocation, SelectRegion},
+  components: { salary, education, experience, vocation, },
   name: "statistics",
   data() {
     return {
@@ -149,30 +149,30 @@ export default {
   height: 100%;
   width: 100%;
 }
-.citychoose {
-  z-index: 9999;
-  position: absolute;
-  height: 6%;
-  width: 9%;
-  top: 1%;
-  left: 20.5%;
-  background: url("../assets/img/fq/city.png") no-repeat;
-  opacity: 0.7;
-  background-size: 100% 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-around;
-  align-items: center;
-  .iconcontent {
-    flex: 2;
-    color: rgb(92, 235, 216);
-    text-align: right;
-  }
-  .cityname {
-    flex: 6;
-    color: #fafafa;
-    // text-align: left;
-  }
-}
+// .citychoose {
+//   z-index: 9999;
+//   position: absolute;
+//   height: 6%;
+//   width: 9%;
+//   top: 1%;
+//   left: 20.5%;
+//   background: url("../assets/img/fq/city.png") no-repeat;
+//   opacity: 0.7;
+//   background-size: 100% 100%;
+//   display: flex;
+//   flex-direction: row;
+//   flex-wrap: nowrap;
+//   justify-content: space-around;
+//   align-items: center;
+//   .iconcontent {
+//     flex: 2;
+//     color: rgb(92, 235, 216);
+//     text-align: right;
+//   }
+//   .cityname {
+//     flex: 6;
+//     color: #fafafa;
+//     // text-align: left;
+//   }
+// }
 </style>

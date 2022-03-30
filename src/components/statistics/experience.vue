@@ -64,6 +64,7 @@
         <div class="row1chartcontent" id="chart7"></div>
       </div>
     </div>
+    <selectRegion />
   </div>
 </template>
 
@@ -71,13 +72,19 @@
 import wordcloud from "../../assets/js/echarts-wordcloud-master/index";
 import echarts from "echarts";
 import request from "@/utils/request";
+import SelectRegion from "../../components/selectRegion.vue";
+import eventBum from "../../assets/js/EvebtBus";
 export default {
   name: "experience",
   components: {
-    wordcloud,
+    wordcloud,SelectRegion
   },
   data() {
     return {
+      selectcity: {
+        name: "中国",
+        level: 0,
+      },
       cloudData: [
         { value: 1800, name: "纳木措" },
         { value: 1200, name: "西藏" },
@@ -348,6 +355,22 @@ export default {
     myChart4.setOption(this.option4);
     this.initChart5();
     this.initChart6();
+    eventBum.$on("json", (json) => {
+      this.selectcity.name = json.name;
+      this.selectcity.level = json.where;
+      // console.log(this.selectcity);
+      if (this.selectcity.name == "南京市") {
+        request.post("/api/data/experience", { city: "南京" }).then((res) => {
+        this.chart7 = res.data.skill;
+        this.chart1 = res.data.company;
+        this.chart3 = res.data.job;
+        this.initChart1();
+        this.initChart3();
+        this.initChart7();
+        // console.log(this.chart3);
+      });
+      }
+    });
     // this.initChart7();
     this.$nextTick(() => {
       window.addEventListener("resize", () => {
@@ -376,6 +399,7 @@ export default {
         this.initChart3();
         this.initChart7();
       });
+      
     },
     initChart5() {
       var myChart = echarts.init(document.getElementById("chart5"));
@@ -546,6 +570,10 @@ export default {
     },
     initChart3() {
       let myChart = this.$echarts.init(document.getElementById("chart3"));
+      let arr = [];
+      this.chart3.forEach((element) => {
+        arr.push({ value: element.value, name: element.name });
+      });
       myChart.setOption({
         tooltip: {
           trigger: "axis",
@@ -597,7 +625,7 @@ export default {
             emphasis: {
               focus: "series",
             },
-            data: [320, 302, 301, 334, 390, 330, 320],
+            data: arr[0].value,
           },
           {
             name: "3-4年",
@@ -609,7 +637,7 @@ export default {
             emphasis: {
               focus: "series",
             },
-            data: [120, 132, 101, 134, 90, 230, 210],
+            data: arr[1].value,
           },
           {
             name: "1-2年",
@@ -621,7 +649,7 @@ export default {
             emphasis: {
               focus: "series",
             },
-            data: [220, 182, 191, 234, 290, 330, 310],
+            data: arr[2].value,
           },
           {
             name: "大专及以下",
@@ -633,7 +661,7 @@ export default {
             emphasis: {
               focus: "series",
             },
-            data: [150, 212, 201, 154, 190, 330, 410],
+            data: arr[3].value,
           },
           {
             name: "无需",
@@ -645,7 +673,7 @@ export default {
             emphasis: {
               focus: "series",
             },
-            data: [820, 832, 901, 934, 1290, 1330, 1320],
+            data: arr[4].value,
           },
         ],
       });
@@ -1029,6 +1057,32 @@ export default {
     font-size: 13pt;
     margin-left: 0.5%;
     margin-top: -0.3%;
+  }
+}
+.citychoose {
+  z-index: 9999;
+  position: absolute;
+  height: 6%;
+  width: 9%;
+  top: 1%;
+  left: 20.5%;
+  background: url("../../assets/img/fq/city.png") no-repeat;
+  opacity: 0.7;
+  background-size: 100% 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  .iconcontent {
+    flex: 2;
+    color: rgb(92, 235, 216);
+    text-align: right;
+  }
+  .cityname {
+    flex: 6;
+    color: #fafafa;
+    // text-align: left;
   }
 }
 </style>
