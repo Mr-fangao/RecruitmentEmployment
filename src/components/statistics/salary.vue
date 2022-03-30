@@ -255,7 +255,6 @@ export default {
     };
   },
   mounted() {
-    this.initmap();
     this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
     this.initChart1();
     this.initChart2();
@@ -268,6 +267,7 @@ export default {
         this.handleResize();
       });
     });
+  this.initmap();
   },
   methods: {
     typeData() {
