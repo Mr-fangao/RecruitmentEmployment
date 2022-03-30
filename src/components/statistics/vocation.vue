@@ -12,16 +12,31 @@
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
-          <span>公司类型职位统计</span>
+          <span>招聘数据总览</span>
         </div>
-        <div class="row1chartcontent" id="chart1"></div>
-      </div>
-      <div class="col-content">
-        <div class="row1title">
-          <div class="imgBK"></div>
-          <span>职位综合能力词云</span>
+        <div class="countdata">
+          <div class="datasource">
+            <div class="leftpt">数据源:</div>
+            <div class="rightpt">
+              <el-checkbox v-model="checked">前程无忧</el-checkbox>
+              <el-checkbox v-model="checked">智联招聘</el-checkbox>
+            </div>
+          </div>
+          <div class="count">
+            <div class="total">
+              <div class="title">信息数</div>
+              <div class="d"><span>11711</span></div>
+            </div>
+            <div class="company">
+              <div class="title">公司数</div>
+              <div class="d"><span>111</span></div>
+            </div>
+            <div class="position">
+              <div class="title">职位数</div>
+              <div class="d"><span>111</span></div>
+            </div>
+          </div>
         </div>
-        <div class="row1chartcontent" id="chart2" ref="cloudEl"></div>
       </div>
       <div class="col-content">
         <div class="row1title">
@@ -29,6 +44,13 @@
           <span>全国热门职位统计</span>
         </div>
         <div class="row1chartcontent" id="chart3"></div>
+      </div>
+      <div class="col-content">
+        <div class="row1title">
+          <div class="imgBK"></div>
+          <span>职位综合能力词云</span>
+        </div>
+        <div class="row1chartcontent" id="chart2" ref="cloudEl"></div>
       </div>
     </div>
     <div class="main">
@@ -45,7 +67,7 @@
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
-          <span>热门职位平均薪资统计</span>
+          <span>公司类型职位统计</span>
         </div>
         <div class="row1chartcontent" id="chart5"></div>
       </div>
@@ -64,6 +86,7 @@
         <div class="row1chartcontent" id="chart7"></div>
       </div>
     </div>
+    <selectRegion />
   </div>
 </template>
 
@@ -71,13 +94,22 @@
 import wordcloud from "../../assets/js/echarts-wordcloud-master/index";
 import echarts from "echarts";
 import request from "@/utils/request";
+// const mapboxgl = require("mapbox-gl");
+import SelectRegion from "../../components/selectRegion.vue";
+import eventBum from "../../assets/js/EvebtBus";
 export default {
   name: "vocation",
   components: {
-    wordcloud,
+    wordcloud,SelectRegion
   },
   data() {
     return {
+      checked: true,
+      checked1: true,
+      selectcity: {
+        name: "中国",
+        level: 0,
+      },
       cloudData: [
         { value: 1800, name: "学习创新" },
         { value: 1500, name: "团体合作" },
@@ -213,15 +245,29 @@ export default {
   },
   mounted() {
     // this.initmap();
-    this.initChart1();
+    this.initChart5();
     this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
     this.initChart3();
     this.initChart4();
     let myChart4 = this.$echarts.init(this.$refs.Chart4);
     myChart4.setOption(this.option4);
-    this.initChart5();
+    this.initChart1();
     this.initChart6();
     this.initChart7();
+    eventBum.$on("json", (json) => {
+      this.selectcity.name = json.name;
+      this.selectcity.level = json.where;
+      // if (this.selectcity.name == "南京市") {
+      //   request.post("/api/data/experience", { city: "南京" }).then((res) => {
+      //   this.chart7 = res.data.skill;
+      //   this.chart1 = res.data.company;
+      //   this.chart3 = res.data.job;
+      //   this.initChart1();
+      //   this.initChart3();
+      //   this.initChart7();
+      // });
+      // }
+    });
     this.$nextTick(() => {
       window.addEventListener("resize", () => {
         this.handleResize();
@@ -230,7 +276,6 @@ export default {
   },
   methods: {
     initmap() {
-     
       // this.$mapboxgl.accessToken =
       //   "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
       // var map = new this.$mapboxgl.Map({
@@ -239,59 +284,7 @@ export default {
       //   center: [105, 35],
       //   zoom: 3.5,
       // });
-     
     },
-    // initChart2() {
-    //   var myChart = echarts.init(document.getElementById("chart2"));
-    //   myChart.setOption({
-    //     tooltip: {
-    //       trigger: "item",
-    //     },
-    //     legend: {
-    //       top: "2%",
-    //       left: "center",
-    //       textStyle: {
-    //         //图例文字的样式
-    //         color: "#fff",
-    //         fontSize: 12,
-    //       },
-    //     },
-    //     series: [
-    //       {
-    //         type: "pie",
-    //         center: ["50%", "55%"],
-    //         radius: ["30%", "70%"],
-    //         avoidLabelOverlap: false,
-    //         itemStyle: {
-    //           borderRadius: 10,
-    //           borderColor: "#fff",
-    //           borderWidth: 2,
-    //         },
-    //         label: {
-    //           show: false,
-    //           position: "center",
-    //         },
-    //         emphasis: {
-    //           label: {
-    //             show: true,
-    //             fontSize: "26",
-    //             fontWeight: "bold",
-    //           },
-    //         },
-    //         labelLine: {
-    //           show: false,
-    //         },
-    //         data: [
-    //           { value: 1048, name: "博士" },
-    //           { value: 735, name: "硕士" },
-    //           { value: 580, name: "本科" },
-    //           { value: 484, name: "专科" },
-    //           { value: 300, name: "无需" },
-    //         ],
-    //       },
-    //     ],
-    //   });
-    // },
     initChart7() {
       var myChart = echarts.init(document.getElementById("chart7"));
       myChart.setOption({
@@ -409,14 +402,15 @@ export default {
         this.option4.yAxis[0].max = Math.ceil(this.plan_table[0].sum) + 500;
       }
     },
-    initChart5() {
-      var myChart = echarts.init(document.getElementById("chart5"));
+    initChart1() {
+      var myChart = echarts.init(document.getElementById("chart1"));
       myChart.setOption({
         grid: {
-          height: "75%",
-          width: "80%",
-          top: "5%",
-          right: "5%",
+          height: "60%",
+          width: "83%",
+          top: "15%",
+          right: "7%",
+          left: "10%",
         },
         xAxis: {
           type: "category",
@@ -426,10 +420,42 @@ export default {
               color: "#fff",
             },
           },
-          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          axisLabel: {
+            interval: 0,
+            formatter: function (value) {
+              debugger;
+              var ret = ""; //拼接加\n返回的类目项
+              var maxLength = 4; //每项显示文字个数
+              var valLength = value.length; //X轴类目项的文字个数
+              var rowN = Math.ceil(valLength / maxLength); //类目项需要换行的行数
+              if (rowN > 1) {
+                //如果类目项的文字大于3,
+                for (var i = 0; i < rowN; i++) {
+                  var temp = ""; //每次截取的字符串
+                  var start = i * maxLength; //开始截取的位置
+                  var end = start + maxLength; //结束截取的位置
+                  //这里也可以加一个是否是最后一行的判断，但是不加也没有影响，那就不加吧
+                  temp = value.substring(start, end) + "\n";
+                  ret += temp; //凭借最终的字符串
+                }
+                return ret;
+              } else {
+                return value;
+              }
+            },
+          },
+          data: [
+            "前端开发工程师",
+            "Web前端开发工程师",
+            "数据库工程师",
+            "GIS开发工程师",
+            "测绘工程师",
+            "后端开发工程师",
+          ],
         },
         yAxis: {
           type: "value",
+          name:"单位：个",
           splitLine: { show: false },
           axisLine: {
             lineStyle: {
@@ -437,9 +463,26 @@ export default {
             },
           },
         },
+        // dataZoom: [
+        //   {
+        //     show: true,
+        //     realtime: true,
+        //     height: 24, //这里可以设置dataZoom的尺寸
+        //     bottom: 8, //滚动体距离底部的距离
+        //     start: 0, //初始化时，滑动条宽度开始标度
+        //     end: 50, //初始化时，滑动条宽度结束标度
+        //   },
+        //   {
+        //     type: "inside", //内置滑动，随鼠标滚轮展示
+        //     realtime: true,
+        //     start: 0,
+        //     end: 50,
+        //   },
+        // ],
+
         series: [
           {
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            data: [820, 932, 901, 934, 901, 934],
             type: "line",
             areaStyle: {
               color: "rgb(115, 215, 228)",
@@ -454,8 +497,8 @@ export default {
     // handleResize() {
     //   this.myChart5 && this.myChart5.resize();
     // },
-    initChart1() {
-      var myChart = echarts.init(document.getElementById("chart1"));
+    initChart5() {
+      var myChart = echarts.init(document.getElementById("chart5"));
       myChart.setOption({
         xAxis: {
           type: "category",
@@ -652,6 +695,114 @@ export default {
     align-items: stretch;
     background: url("../../assets/img/fq/ptbg3.png");
     background-size: 100% 100%;
+    .countdata {
+      height: 85%;
+      width: 100%;
+      float: left;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .datasource {
+        height: 13%;
+        width: 90%;
+        display: flex;
+        .leftpt {
+          margin-right: 2%;
+          color: #fff;
+        }
+      }
+      .count {
+        height: 65%;
+        width: 90%;
+        margin: 1% 0%;
+        display: flex;
+        float: left;
+        .total {
+          height: 100%;
+          width: 30%;
+          margin-right: 5%;
+          display: flex;
+          flex-direction: column;
+          background: linear-gradient(#1edaeb) left top no-repeat,
+            linear-gradient(#1edaeb) left top no-repeat,
+            linear-gradient(#1edaeb) right top no-repeat,
+            linear-gradient(#1edaeb) right top no-repeat,
+            linear-gradient(#1edaeb) left bottom no-repeat,
+            linear-gradient(#1edaeb) left bottom no-repeat,
+            linear-gradient(#1edaeb) right bottom no-repeat,
+            linear-gradient(#1edaeb) right bottom no-repeat;
+          background-size: 1px 10px, 10px 1px, 1px 10px, 10px 1px;
+          align-items: center;
+          .title {
+            color: #44c5db;
+          }
+          span {
+            color: #44c5db;
+          }
+        }
+        .company {
+          height: 100%;
+          width: 30%;
+          margin-right: 5%;
+          display: flex;
+          flex-direction: column;
+          background: linear-gradient(#1edaeb) left top no-repeat,
+            linear-gradient(#1edaeb) left top no-repeat,
+            linear-gradient(#1edaeb) right top no-repeat,
+            linear-gradient(#1edaeb) right top no-repeat,
+            linear-gradient(#1edaeb) left bottom no-repeat,
+            linear-gradient(#1edaeb) left bottom no-repeat,
+            linear-gradient(#1edaeb) right bottom no-repeat,
+            linear-gradient(#1edaeb) right bottom no-repeat;
+          background-size: 1px 10px, 10px 1px, 1px 10px, 10px 1px;
+          align-items: center;
+          .title {
+            color: #61ccbe;
+          }
+          span {
+            color: #61ccbe;
+          }
+        }
+        .position {
+          height: 100%;
+          width: 30%;
+          display: flex;
+          flex-direction: column;
+          background: linear-gradient(#1edaeb) left top no-repeat,
+            linear-gradient(#1edaeb) left top no-repeat,
+            linear-gradient(#1edaeb) right top no-repeat,
+            linear-gradient(#1edaeb) right top no-repeat,
+            linear-gradient(#1edaeb) left bottom no-repeat,
+            linear-gradient(#1edaeb) left bottom no-repeat,
+            linear-gradient(#1edaeb) right bottom no-repeat,
+            linear-gradient(#1edaeb) right bottom no-repeat;
+          background-size: 1px 10px, 10px 1px, 1px 10px, 10px 1px;
+          align-items: center;
+          .title {
+            color: #4c8de2;
+          }
+          span {
+            color: #4c8de2;
+          }
+        }
+        .title {
+          height: 15%;
+          width: 90%;
+          margin: 5% 0%;
+          align-items: center;
+          font-size: 12pt;
+        }
+        .d {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 75%;
+          width: 85%;
+          background: url("../../assets/img/fq/bg6.png");
+          background-size: 100% 100%;
+        }
+      }
+    }
   }
   .main {
     height: 33.3%;
