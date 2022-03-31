@@ -358,15 +358,46 @@ export default {
       myChart.setOption({
         xAxis: {
           type: "category",
-          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          data: ["前端开发工程师", "Web前端开发工程师", "数据库工程师", "GIS开发工程师", "后端开发工程师", "测绘工程师"],
           axisLine: {
             lineStyle: {
               color: "#fff",
             },
           },
+           axisLabel: {
+            interval: 0,
+            formatter: function (value) {
+              debugger;
+              var ret = ""; //拼接加\n返回的类目项
+              var maxLength = 4; //每项显示文字个数
+              var valLength = value.length; //X轴类目项的文字个数
+              var rowN = Math.ceil(valLength / maxLength); //类目项需要换行的行数
+              if (rowN > 1) {
+                //如果类目项的文字大于3,
+                for (var i = 0; i < rowN; i++) {
+                  var temp = ""; //每次截取的字符串
+                  var start = i * maxLength; //开始截取的位置
+                  var end = start + maxLength; //结束截取的位置
+                  //这里也可以加一个是否是最后一行的判断，但是不加也没有影响，那就不加吧
+                  temp = value.substring(start, end) + "\n";
+                  ret += temp; //凭借最终的字符串
+                }
+                return ret;
+              } else {
+                return value;
+              }
+            },
+          },
+        },
+        grid:{
+          top:"15%",
+          left:"15%",
+          right:"5%",
+          bottom:"22%",
         },
         yAxis: {
           type: "value",
+          name:"单位：个",
           splitLine: { show: false },
           axisLine: {
             lineStyle: {
@@ -376,7 +407,7 @@ export default {
         },
         series: [
           {
-            data: [120, 200, 150, 80, 70, 110, 130],
+            data: [1926, 1589, 552, 221, 181, 358],
             type: "bar",
             itemStyle: {
               normal: {

@@ -690,29 +690,30 @@ export default {
 .Thematicmap .find .time {
   width: 100%;
   height: 100%;
-  background: url("./public/ptbg.png") no-repeat center center;
-  background-size: 100% 100%;
+  background: linear-gradient(#1edaeb) left top no-repeat,
+    linear-gradient(#1edaeb) left top no-repeat,
+    linear-gradient(#1edaeb) right top no-repeat,
+    linear-gradient(#1edaeb) right top no-repeat,
+    linear-gradient(#1edaeb) left bottom no-repeat,
+    linear-gradient(#1edaeb) left bottom no-repeat,
+    linear-gradient(#1edaeb) right bottom no-repeat,
+    linear-gradient(#1edaeb) right bottom no-repeat;
+  background-size: 1px 10px, 10px 1px, 1px 10px, 10px 1px;
 }
 .Thematicmap .find .time .el-date-editor.el-input {
   width: 140px !important;
   margin: 10px 0px;
-  /* background: url("./public/ptbg.png") no-repeat center center;
-  background-size: 100% 100%; */
 }
 /* 空间尺度 */
 .space {
   margin: 1px 3px;
-  /* border-top: 1px solid #fff; */
   padding: 10px;
-  background: url("./public/ptbg.png") no-repeat center center;
-  background-size: 100% 100%;
+  
 }
 .Type {
   margin: 0px 3px;
   top: 0px;
   /* border-top: 1px solid #fff; */
-  background: url("./public/ptbg.png") no-repeat center center;
-  background-size: 100% 100%;
   padding: 10px;
 }
 /* 底部 */
@@ -722,19 +723,22 @@ export default {
 } */
 .Thematicmap .find .bottom {
   margin-top: 1px;
-  /* border-top: 1px solid #fff; */
-  background: url("./public/ptbg.png") no-repeat center center;
-  background-size: 100% 100%;
-  /* border-top-right-radius: 5px;
-  border-top-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px; */
-  /* background-color: rgb(40, 43, 57); */
+
   color: rgba(255, 255, 255, 0.8);
   width: 100%;
   height: 100%;
   line-height: 35px;
   user-select: none;
+  background: linear-gradient(#1edaeb) left top no-repeat,
+    linear-gradient(#1edaeb) left top no-repeat,
+    linear-gradient(#1edaeb) right top no-repeat,
+    linear-gradient(#1edaeb) right top no-repeat,
+    linear-gradient(#1edaeb) left bottom no-repeat,
+    linear-gradient(#1edaeb) left bottom no-repeat,
+    linear-gradient(#1edaeb) right bottom no-repeat,
+    linear-gradient(#1edaeb) right bottom no-repeat;
+
+  background-size: 1px 20px, 20px 1px, 1px 20px, 20px 1px;
 }
 
 .Thematicmap .find .bottom .word {

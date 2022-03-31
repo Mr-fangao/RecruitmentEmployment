@@ -63,6 +63,7 @@
         <div class="row1chartcontent" id="chart7"></div>
       </div>
     </div>
+    <selectRegion />
   </div>
 </template>
 
@@ -70,15 +71,20 @@
 import wordcloud from "../../assets/js/echarts-wordcloud-master/index";
 import echarts from "echarts";
 import request from "@/utils/request";
-// import mapcom from "../../educationmap.vue";
+import SelectRegion from "../../components/selectRegion.vue";
+import eventBum from "../../assets/js/EvebtBus";
 export default {
   name: "education",
   components: {
     wordcloud,
-    
+    SelectRegion,
   },
   data() {
     return {
+      selectcity: {
+        name: "中国",
+        level: 0,
+      },
       cloudData: [
         { value: 1800, name: "纳木措" },
         { value: 1200, name: "西藏" },
@@ -239,6 +245,20 @@ export default {
         this.handleResize();
       });
     });
+    eventBum.$on("json", (json) => {
+      this.selectcity.name = json.name;
+      this.selectcity.level = json.where;
+      // // console.log(this.selectcity);
+      // if (this.selectcity.name == "南京市") {
+      //   request.post("/api/data/experience", { city: "南京" }).then((res) => {
+      //   this.chart7 = res.data.skill;
+      //   this.chart1 = res.data.company;
+      //   this.chart3 = res.data.job;
+      //   this.initChart1();
+      //   this.initChart3();
+      //   this.initChart7();
+      //   // console.log(this.chart3);
+    });
   },
   methods: {
     // initmap() {
@@ -331,7 +351,7 @@ export default {
         },
         grid: {
           left: "3%",
-          top:"15%",
+          top: "15%",
           right: "4%",
           bottom: "3%",
           containLabel: true,
@@ -341,23 +361,23 @@ export default {
             type: "category",
             boundaryGap: false,
             axisLine: {
-            lineStyle: {
-              color: "#fff",
+              lineStyle: {
+                color: "#fff",
+              },
             },
-          },
             data: ["电子技术", "互联网", "计算机", "通信"],
           },
         ],
         yAxis: [
           {
             type: "value",
-            max:"5000",
+            max: "5000",
             splitLine: { show: false },
             axisLine: {
-            lineStyle: {
-              color: "#fff",
+              lineStyle: {
+                color: "#fff",
+              },
             },
-          },
           },
         ],
         series: [

@@ -9,7 +9,7 @@
           plain
         >
           <i class="fa fa-eercast fa-lg"></i>
-          <span class="tab" slot="title">薪资</span>
+          <span class="tab" slot="title">职位</span>
         </el-menu-item>
         <el-menu-item
           index="2"
@@ -36,7 +36,7 @@
           plain
         >
           <i class="el-icon-menu"></i>
-          <span class="tab" slot="title">职位</span>
+          <span class="tab" slot="title">薪资</span>
         </el-menu-item>
       </el-menu>
     </div>
@@ -61,7 +61,7 @@ export default {
   data() {
     return {
       index: 1,
-      comp: "salary",
+      comp: "vocation",
       isShow: true,
       show: false,
       cityname: "城市选择",
@@ -69,10 +69,10 @@ export default {
   },
   methods: {
     tabshow(value) {
-      if (value === 1) this.comp = "salary";
+      if (value === 1) this.comp = "vocation";
       else if (value === 2) this.comp = "education";
       else if (value === 3) this.comp = "experience";
-      else if (value === 4) this.comp = "vocation";
+      else if (value === 4) this.comp = "salary";
     },
     getCity() {
       this.show = true;
