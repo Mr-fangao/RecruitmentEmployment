@@ -4,7 +4,6 @@
     </div>
 </template>
 <script>
-
 export default {
   name: "multimap",
   mounted() {
@@ -18,7 +17,7 @@ export default {
         container: "map",
         style: "mapbox://styles/chenjq/ckwetfomi0j1014ph4s20wu2x",
         center: [110, 40],
-        zoom: 5,
+        zoom: 3.5,
       });
       map.on("click", function (e) {
         console.log("点击");

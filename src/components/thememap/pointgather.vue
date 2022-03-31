@@ -39,8 +39,8 @@ export default {
             var map = new this.$mapboxgl.Map({
                 container: "map",
                 style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
-                center: [110, 40],
-                zoom: 5,
+                center: [108.82, 33.17],
+                zoom: 3.5,
             });
 
             document.getElementById("button2").addEventListener("click", () => {
@@ -50,15 +50,20 @@ export default {
                 map.setLayoutProperty("unclustered-point", "visibility", "visible");
                 map.fitBounds([
                     [90, 45], // 边界的西南角
-                    [120, 30], // 边界的东北角
+                    [120, 20], // 边界的东北角
                 ]);
+                
             });
             document.getElementById("button1").addEventListener("click", () => {
                 map.setLayoutProperty("points", "visibility", "visible");
                 map.setLayoutProperty("clusters", "visibility", "none");
                 map.setLayoutProperty("cluster-count", "visibility", "none");
                 map.setLayoutProperty("unclustered-point", "visibility", "none");
-               
+                map.fitBounds([
+                    [90, 25], // 边界的西南角
+                    [130, 45], // 边界的东北角
+                ]);
+                
                 map.addLayer({
                     'id': 'points',
                     'type': 'symbol',

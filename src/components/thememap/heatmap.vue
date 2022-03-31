@@ -17,8 +17,8 @@ export default {
         var map = new this.$mapboxgl.Map({
             container: 'map',
              style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
-            center: [110, 40],
-            zoom: 5,
+            center: [108.82, 33.17],
+            zoom: 3.5,
         })
       map.on("load", function () {
        map.addSource('heatDataSource', {
