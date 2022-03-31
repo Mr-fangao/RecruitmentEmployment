@@ -81,7 +81,7 @@
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
-          <span>行业热门职位统计</span>
+          <span>行业职位统计</span>
         </div>
         <div class="row1chartcontent" id="chart7"></div>
       </div>
@@ -251,7 +251,7 @@ export default {
     this.initChart4();
     let myChart4 = this.$echarts.init(this.$refs.Chart4);
     myChart4.setOption(this.option4);
-    this.initChart1();
+    // this.initChart1();
     this.initChart6();
     this.initChart7();
     eventBum.$on("json", (json) => {
@@ -285,6 +285,17 @@ export default {
       //   zoom: 3.5,
       // });
     },
+    // typeData() {
+    //   request.post("/api/data/education", { city: "全国" }).then((res) => {
+    //     this.chart3 = res.data.skill;
+    //     this.chart5 = res.data.company;
+    //     this.chart7 = res.data.job;
+    //     console.log(this.chart3);
+    //     this.initChart3();
+    //     this.initChart5();
+    //     this.initChart7();
+    //   });
+    // },
     initChart7() {
       var myChart = echarts.init(document.getElementById("chart7"));
       myChart.setOption({
@@ -433,98 +444,98 @@ export default {
         this.option4.yAxis[0].max = Math.ceil(this.plan_table[0].sum) + 500;
       }
     },
-    initChart1() {
-      var myChart = echarts.init(document.getElementById("chart1"));
-      myChart.setOption({
-        grid: {
-          height: "60%",
-          width: "83%",
-          top: "15%",
-          right: "7%",
-          left: "10%",
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-          axisLine: {
-            lineStyle: {
-              color: "#fff",
-            },
-          },
-          axisLabel: {
-            interval: 0,
-            formatter: function (value) {
-              debugger;
-              var ret = ""; //拼接加\n返回的类目项
-              var maxLength = 4; //每项显示文字个数
-              var valLength = value.length; //X轴类目项的文字个数
-              var rowN = Math.ceil(valLength / maxLength); //类目项需要换行的行数
-              if (rowN > 1) {
-                //如果类目项的文字大于3,
-                for (var i = 0; i < rowN; i++) {
-                  var temp = ""; //每次截取的字符串
-                  var start = i * maxLength; //开始截取的位置
-                  var end = start + maxLength; //结束截取的位置
-                  //这里也可以加一个是否是最后一行的判断，但是不加也没有影响，那就不加吧
-                  temp = value.substring(start, end) + "\n";
-                  ret += temp; //凭借最终的字符串
-                }
-                return ret;
-              } else {
-                return value;
-              }
-            },
-          },
-          data: [
-            "前端开发工程师",
-            "Web前端开发工程师",
-            "数据库工程师",
-            "GIS开发工程师",
-            "测绘工程师",
-            "后端开发工程师",
-          ],
-        },
-        yAxis: {
-          type: "value",
-          name:"单位：个",
-          splitLine: { show: false },
-          axisLine: {
-            lineStyle: {
-              color: "#fff",
-            },
-          },
-        },
-        // dataZoom: [
-        //   {
-        //     show: true,
-        //     realtime: true,
-        //     height: 24, //这里可以设置dataZoom的尺寸
-        //     bottom: 8, //滚动体距离底部的距离
-        //     start: 0, //初始化时，滑动条宽度开始标度
-        //     end: 50, //初始化时，滑动条宽度结束标度
-        //   },
-        //   {
-        //     type: "inside", //内置滑动，随鼠标滚轮展示
-        //     realtime: true,
-        //     start: 0,
-        //     end: 50,
-        //   },
-        // ],
+    // initChart1() {
+    //   var myChart = echarts.init(document.getElementById("chart1"));
+    //   myChart.setOption({
+    //     grid: {
+    //       height: "60%",
+    //       width: "83%",
+    //       top: "15%",
+    //       right: "7%",
+    //       left: "10%",
+    //     },
+    //     xAxis: {
+    //       type: "category",
+    //       boundaryGap: false,
+    //       axisLine: {
+    //         lineStyle: {
+    //           color: "#fff",
+    //         },
+    //       },
+    //       axisLabel: {
+    //         interval: 0,
+    //         formatter: function (value) {
+    //           debugger;
+    //           var ret = ""; //拼接加\n返回的类目项
+    //           var maxLength = 4; //每项显示文字个数
+    //           var valLength = value.length; //X轴类目项的文字个数
+    //           var rowN = Math.ceil(valLength / maxLength); //类目项需要换行的行数
+    //           if (rowN > 1) {
+    //             //如果类目项的文字大于3,
+    //             for (var i = 0; i < rowN; i++) {
+    //               var temp = ""; //每次截取的字符串
+    //               var start = i * maxLength; //开始截取的位置
+    //               var end = start + maxLength; //结束截取的位置
+    //               //这里也可以加一个是否是最后一行的判断，但是不加也没有影响，那就不加吧
+    //               temp = value.substring(start, end) + "\n";
+    //               ret += temp; //凭借最终的字符串
+    //             }
+    //             return ret;
+    //           } else {
+    //             return value;
+    //           }
+    //         },
+    //       },
+    //       data: [
+    //         "前端开发工程师",
+    //         "Web前端开发工程师",
+    //         "数据库工程师",
+    //         "GIS开发工程师",
+    //         "测绘工程师",
+    //         "后端开发工程师",
+    //       ],
+    //     },
+    //     yAxis: {
+    //       type: "value",
+    //       name:"单位：个",
+    //       splitLine: { show: false },
+    //       axisLine: {
+    //         lineStyle: {
+    //           color: "#fff",
+    //         },
+    //       },
+    //     },
+    //     // dataZoom: [
+    //     //   {
+    //     //     show: true,
+    //     //     realtime: true,
+    //     //     height: 24, //这里可以设置dataZoom的尺寸
+    //     //     bottom: 8, //滚动体距离底部的距离
+    //     //     start: 0, //初始化时，滑动条宽度开始标度
+    //     //     end: 50, //初始化时，滑动条宽度结束标度
+    //     //   },
+    //     //   {
+    //     //     type: "inside", //内置滑动，随鼠标滚轮展示
+    //     //     realtime: true,
+    //     //     start: 0,
+    //     //     end: 50,
+    //     //   },
+    //     // ],
 
-        series: [
-          {
-            data: [820, 932, 901, 934, 901, 934],
-            type: "line",
-            areaStyle: {
-              color: "rgb(115, 215, 228)",
-            },
-            lineStyle: {
-              color: "rgb(115, 215, 228)",
-            },
-          },
-        ],
-      });
-    },
+    //     series: [
+    //       {
+    //         data: [820, 932, 901, 934, 901, 934],
+    //         type: "line",
+    //         areaStyle: {
+    //           color: "rgb(115, 215, 228)",
+    //         },
+    //         lineStyle: {
+    //           color: "rgb(115, 215, 228)",
+    //         },
+    //       },
+    //     ],
+    //   });
+    // },
     // handleResize() {
     //   this.myChart5 && this.myChart5.resize();
     // },
