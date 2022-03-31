@@ -1,30 +1,28 @@
 <template>
+
   <div class="com-timemap">
-    <div id="map"></div>
+    <iframe
+      src="./static/timemap.html"
+      frameborder="0"
+      width="100%"
+      height="100%"
+      scrolling="auto"
+    ></iframe>
+    <div id="map">
+      
+    </div>
   </div>
 </template>
 <script>
-
 export default {
   name: "timemap",
   mounted() {
-    this.initmap();
+   
   },
   methods: {
-    initmap() {
-      this.$mapboxgl.accessToken =
-        "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
-      var map = new this.$mapboxgl.Map({
-        container: "map",
-        style: "mapbox://styles/chenjq/ckwetfomi0j1014ph4s20wu2x",
-        center: [110, 40],
-        zoom: 5,
-      });
-      map.on("click", function (e) {
-        console.log("点击");
-      });
+    
+     
     },
-  },
 };
 </script>
 
