@@ -89,7 +89,7 @@
 // import Bus from "../assets/js/bus.js";
 // import request from "../utils/request";
 import loading from "../../components/loading.vue";
-import pointgather from "../../components/thememap/pointgather.vue";
+import skillpointgather from "../../components/thememap/skillpointgather.vue";
 import wordcloud from "../../assets/js/echarts-wordcloud-master/index";
 // import echarts from "echarts";
 export default {
@@ -97,7 +97,7 @@ export default {
   components: {
     loading,
     wordcloud,
-    pointgather,
+    skillpointgather,
   },
   data() {
     return {
@@ -106,7 +106,7 @@ export default {
       isLoading: false,
       //地图切换
       index: 1,
-      comp: "pointgather",
+      comp: "skillpointgather",
       isShow: true,
       //示例
       labellist: [
@@ -410,5 +410,4 @@ export default {
   padding: 0;
   text-align: center;
 }
-
 </style>

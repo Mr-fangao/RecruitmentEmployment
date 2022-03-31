@@ -29,11 +29,11 @@
             </div>
             <div class="company">
               <div class="title">公司数</div>
-              <div class="d"><span>111</span></div>
+              <div class="d"><span>9212</span></div>
             </div>
             <div class="position">
               <div class="title">职位数</div>
-              <div class="d"><span>111</span></div>
+              <div class="d"><span>10005</span></div>
             </div>
           </div>
         </div>
