@@ -155,7 +155,7 @@
             // Here we're using d3 to help us make the ajax request but you can use
             // Any request method (library or otherwise) you wish.
             d3.json(
-                './json/timemapdata.json',
+                './岗位薪资时间戳.json',
                 jsonCallback
             );
         });
@@ -168,7 +168,7 @@
             // Create a month property value based on time
             // used to filter against.
             data.features = data.features.map((d) => {
-                d.properties.month = new Date(d.properties.time).getMonth();
+                d.properties.month = new Date(d.properties.date).getMonth();
                 // d.properties.coordinates = new location(d.properties.geometry).getElementById("coordinates");
                 return d;
             });
@@ -262,7 +262,7 @@
             map.on('click', 'earthquake-circles', (e) => {
                 // Copy coordinates array.
                 const coordinates = e.features[0].geometry.coordinates.slice();
-                const place = e.features[0].properties.place;
+                const place = e.features[0].properties.name;
 
                 // Ensure that if the map is zoomed out such that multiple
                 // copies of the feature are visible, the popup appears

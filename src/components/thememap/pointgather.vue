@@ -52,7 +52,6 @@ export default {
                     [90, 45], // 边界的西南角
                     [120, 20], // 边界的东北角
                 ]);
-                
             });
             document.getElementById("button1").addEventListener("click", () => {
                 map.setLayoutProperty("points", "visibility", "visible");
