@@ -85,6 +85,10 @@ export default {
         name: "中国",
         level: 0,
       },
+      chart2: {
+        xdata: [],
+        ydata: [],
+      },
       cloudData: [
         { value: 1800, name: "纳木措" },
         { value: 1200, name: "西藏" },
@@ -231,15 +235,14 @@ export default {
   mounted() {
     // this.initmap();
     // this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
-    this.initChart1();
-    this.initChart2();
-    // this.initChart3();
+    // this.initChart1();
+    // this.initChart2();
     this.initChart4();
     let myChart4 = this.$echarts.init(this.$refs.Chart4);
     myChart4.setOption(this.option4);
-    // this.initChart5();
     this.initChart6();
     this.typeData();
+    this.eduData();
     this.$nextTick(() => {
       window.addEventListener("resize", () => {
         this.handleResize();
@@ -248,16 +251,26 @@ export default {
     eventBum.$on("json", (json) => {
       this.selectcity.name = json.name;
       this.selectcity.level = json.where;
-      // // console.log(this.selectcity);
-      // if (this.selectcity.name == "南京市") {
-      //   request.post("/api/data/experience", { city: "南京" }).then((res) => {
-      //   this.chart7 = res.data.skill;
-      //   this.chart1 = res.data.company;
-      //   this.chart3 = res.data.job;
-      //   this.initChart1();
-      //   this.initChart3();
-      //   this.initChart7();
-      //   // console.log(this.chart3);
+      if (this.selectcity.name == "南京市") {
+        request.post("/api/data/education", { city: "南京" }).then((res) => {
+          this.chart3 = res.data.skill;
+          this.chart5 = res.data.company;
+          this.chart7 = res.data.job;
+          // console.log(this.chart3);
+          this.initChart3();
+          this.initChart5();
+          this.initChart7();
+        });
+        request.post("/api/data/eduCount", { city: "南京" }).then((res) => {
+        this.chart1 = res.data.count;
+        for (var i = 0; i < res.data.salary.length; i++) {
+          this.chart2.xdata[i] = res.data.salary[i].name;
+          this.chart2.ydata[i] = res.data.salary[i].value;
+        }
+        this.initChart1();
+        this.initChart2();
+      });
+      }
     });
   },
   methods: {
@@ -276,14 +289,29 @@ export default {
         this.chart3 = res.data.skill;
         this.chart5 = res.data.company;
         this.chart7 = res.data.job;
-        console.log(this.chart3);
+        // console.log(this.chart3);
         this.initChart3();
         this.initChart5();
         this.initChart7();
       });
     },
+    eduData() {
+      request.post("/api/data/eduCount", { city: "全国" }).then((res) => {
+        this.chart1 = res.data.count;
+        for (var i = 0; i < res.data.salary.length; i++) {
+          this.chart2.xdata[i] = res.data.salary[i].name;
+          this.chart2.ydata[i] = res.data.salary[i].value;
+        }
+        this.initChart1();
+        this.initChart2();
+      });
+    },
     initChart1() {
       var myChart = echarts.init(document.getElementById("chart1"));
+      let arr = [];
+      this.chart1.forEach((element) => {
+        arr.push({ value: element.value, name: element.name });
+      });
       myChart.setOption({
         tooltip: {
           trigger: "item",
@@ -322,14 +350,7 @@ export default {
             labelLine: {
               show: false,
             },
-            data: [
-              { value: 11, name: "博士" },
-              { value: 278, name: "硕士" },
-              { value: 7753, name: "本科" },
-              { value: 5467, name: "专科" },
-              { value: 197, name: "高中" },
-              { value: 71, name: "初中及以下" },
-            ],
+            data:arr,
           },
         ],
       });
@@ -371,7 +392,7 @@ export default {
         yAxis: [
           {
             type: "value",
-            max: "5000",
+            scale: true,
             splitLine: { show: false },
             axisLine: {
               lineStyle: {
@@ -580,13 +601,12 @@ export default {
         },
         xAxis: {
           type: "category",
-          boundaryGap: false,
           axisLine: {
             lineStyle: {
               color: "#fff",
             },
           },
-          data: ["博士", "硕士", "本科", "大专", "高中", "无需"],
+          data: this.chart2.xdata,
         },
         yAxis: {
           type: "value",
@@ -599,13 +619,12 @@ export default {
         },
         series: [
           {
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
-            type: "line",
-            areaStyle: {
-              color: "rgb(115, 215, 228)",
-            },
-            lineStyle: {
-              color: "rgb(115, 215, 228)",
+            data: this.chart2.ydata,
+            type: "bar",
+            itemStyle: {
+              normal: {
+                color: "rgb(115, 215, 228)",
+              },
             },
           },
         ],

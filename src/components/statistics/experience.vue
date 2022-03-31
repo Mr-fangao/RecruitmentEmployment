@@ -1,6 +1,6 @@
 <template>
   <div id="experience">
-  <iframe
+    <iframe
       src="./static/GraphExper.html"
       frameborder="0"
       width="100%"
@@ -77,13 +77,18 @@ import eventBum from "../../assets/js/EvebtBus";
 export default {
   name: "experience",
   components: {
-    wordcloud,SelectRegion
+    wordcloud,
+    SelectRegion,
   },
   data() {
     return {
       selectcity: {
         name: "中国",
         level: 0,
+      },
+      chart5: {
+        xdata: [],
+        ydata: [],
       },
       cloudData: [
         { value: 1800, name: "纳木措" },
@@ -231,28 +236,34 @@ export default {
   mounted() {
     this.initmap();
     this.typeData();
-    // this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
-    // this.initChart1();
     this.initChart2();
     // this.initChart3();
     this.initChart4();
+    this.eduData();
     let myChart4 = this.$echarts.init(this.$refs.Chart4);
     myChart4.setOption(this.option4);
-    this.initChart5();
-    this.initChart6();
     eventBum.$on("json", (json) => {
       this.selectcity.name = json.name;
       this.selectcity.level = json.where;
       // console.log(this.selectcity);
       if (this.selectcity.name == "南京市") {
         request.post("/api/data/experience", { city: "南京" }).then((res) => {
-        this.chart7 = res.data.skill;
-        this.chart1 = res.data.company;
-        this.chart3 = res.data.job;
-        this.initChart1();
-        this.initChart3();
-        this.initChart7();
-        // console.log(this.chart3);
+          this.chart7 = res.data.skill;
+          this.chart1 = res.data.company;
+          this.chart3 = res.data.job;
+          this.initChart1();
+          this.initChart3();
+          this.initChart7();
+          // console.log(this.chart3);
+        });
+        request.post("/api/data/expCount", { city: "南京" }).then((res) => {
+        this.chart5 = res.data.salary;
+        for (var i = 0; i < res.data.count.length; i++) {
+          this.chart6.xdata[i] = res.data.count[i].name;
+          this.chart6.ydata[i] = res.data.count[i].value;
+        }
+        this.initChart5();
+        this.initChart6();
       });
       }
     });
@@ -284,10 +295,24 @@ export default {
         this.initChart3();
         this.initChart7();
       });
-      
+    },
+    eduData() {
+      request.post("/api/data/expCount", { city: "全国" }).then((res) => {
+        this.chart5 = res.data.salary;
+        for (var i = 0; i < res.data.count.length; i++) {
+          this.chart6.xdata[i] = res.data.count[i].name;
+          this.chart6.ydata[i] = res.data.count[i].value;
+        }
+        this.initChart5();
+        this.initChart6();
+      });
     },
     initChart5() {
       var myChart = echarts.init(document.getElementById("chart5"));
+      let arr = [];
+      this.chart5.forEach((element) => {
+        arr.push({ value: element.value, name: element.name });
+      });
       myChart.setOption({
         tooltip: {
           trigger: "item",
@@ -326,32 +351,20 @@ export default {
             labelLine: {
               show: false,
             },
-            data: [
-              { value: 1048, name: "5年以上" },
-              { value: 735, name: "3-4年" },
-              { value: 580, name: "1-2年" },
-              { value: 484, name: "应届生" },
-              { value: 300, name: "无需" },
-            ],
+            data: arr,
           },
         ],
       });
     },
     initChart7() {
-      let myChart = this.$echarts.init(document.getElementById("chart7"));
+      var myChart = echarts.init(document.getElementById("chart7"));
       let arr = [];
       this.chart7.forEach((element) => {
         arr.push({ value: element.value, name: element.name });
       });
       myChart.setOption({
-        tooltip: {
-          trigger: "axis",
-          axisPointer: {
-            // Use axis to trigger tooltip
-            type: "shadow", // 'shadow' as default; can also be 'line' or 'shadow'
-          },
-        },
         legend: {
+          data: ["博士", "硕士", "本科", "专科", "高中"],
           textStyle: {
             //图例文字的样式
             color: "#fff",
@@ -359,44 +372,47 @@ export default {
           },
         },
         grid: {
-          right: "5%",
-          top: "25%",
-          bottom: "10%",
-          left: "25%",
-          // containLabel: true,
+          left: "3%",
+          top: "15%",
+          right: "4%",
+          bottom: "3%",
+          containLabel: true,
         },
-        xAxis: {
-          type: "value",
-          axisLine: {
-            lineStyle: {
-              color: "#fff",
+        xAxis: [
+          {
+            type: "category",
+            boundaryGap: false,
+            axisLine: {
+              lineStyle: {
+                color: "#fff",
+              },
+            },
+            data: [
+              "前端开发工程师",
+              "数据库工程师",
+              "后端开发工程师",
+              "GIS开发工程师",
+            ],
+          },
+        ],
+        yAxis: [
+          {
+            type: "value",
+            scale: true,
+            splitLine: { show: false },
+            axisLine: {
+              lineStyle: {
+                color: "#fff",
+              },
             },
           },
-        },
-        yAxis: {
-          type: "category",
-          data: [
-            
-            "前端开发工程师",
-            "数据库工程师",
-            "后端开发工程师",
-            "GIS开发工程师",
-          ],
-          splitLine: { show: false },
-          axisLine: {
-            lineStyle: {
-              color: "#fff",
-            },
-          },
-        },
+        ],
         series: [
           {
             name: "5年以上",
-            type: "bar",
-            stack: "total",
-            label: {
-              show: true,
-            },
+            type: "line",
+            stack: "Total",
+            areaStyle: {},
             emphasis: {
               focus: "series",
             },
@@ -404,11 +420,9 @@ export default {
           },
           {
             name: "3-4年",
-            type: "bar",
-            stack: "total",
-            label: {
-              show: true,
-            },
+            type: "line",
+            stack: "Total",
+            areaStyle: {},
             emphasis: {
               focus: "series",
             },
@@ -416,11 +430,9 @@ export default {
           },
           {
             name: "1-2年",
-            type: "bar",
-            stack: "total",
-            label: {
-              show: true,
-            },
+            type: "line",
+            stack: "Total",
+            areaStyle: {},
             emphasis: {
               focus: "series",
             },
@@ -428,11 +440,9 @@ export default {
           },
           {
             name: "应届生",
-            type: "bar",
-            stack: "total",
-            label: {
-              show: true,
-            },
+            type: "line",
+            stack: "Total",
+            areaStyle: {},
             emphasis: {
               focus: "series",
             },
@@ -440,11 +450,13 @@ export default {
           },
           {
             name: "无需",
-            type: "bar",
-            stack: "total",
+            type: "line",
+            stack: "Total",
             label: {
               show: true,
+              position: "top",
             },
+            areaStyle: {},
             emphasis: {
               focus: "series",
             },
@@ -491,7 +503,12 @@ export default {
         },
         yAxis: {
           type: "category",
-          data: ["前端开发工程师", "数据库工程师", "后端开发工程师", "GIS开发工程师"],
+          data: [
+            "前端开发工程师",
+            "数据库工程师",
+            "后端开发工程师",
+            "GIS开发工程师",
+          ],
           splitLine: { show: false },
           axisLine: {
             lineStyle: {
@@ -595,7 +612,7 @@ export default {
               color: "#fff",
             },
           },
-          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          data: this.chart6.xdata,
         },
         yAxis: {
           type: "value",
@@ -608,7 +625,7 @@ export default {
         },
         series: [
           {
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            data: this.chart6.ydata,
             type: "line",
             areaStyle: {
               color: "rgb(115, 215, 228)",
@@ -720,7 +737,7 @@ export default {
         ],
       });
     },
-    
+
     initChart2() {
       var myChart = echarts.init(document.getElementById("chart2"));
       const city = [

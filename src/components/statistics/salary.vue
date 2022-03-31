@@ -238,6 +238,18 @@ export default {
     this.initChart1();
     this.initChart2();
     this.typeData();
+    eventBum.$on("json", (json) => {
+      this.selectcity.name = json.name;
+      this.selectcity.level = json.where;
+      if (this.selectcity.name == "南京市") {
+      request.post("/api/data/typeSa",{ city: "南京" }).then((res) => {
+        this.chart3 = res.data.company;
+        this.chart7 = res.data.industry;
+        this.initChart3();
+        this.initChart7();
+      });
+      }
+    });
     this.initChart5();
     this.initChart4();
     let myChart4 = this.$echarts.init(this.$refs.Chart4);
