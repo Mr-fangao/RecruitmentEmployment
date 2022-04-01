@@ -41,7 +41,7 @@
         </el-menu-item>
       </el-menu>
     </div>
-    <div class="content">
+    <div class="thecontent">
       <keep-alive>
         <component :is="comp" v-show="isShow"></component>
       </keep-alive>
@@ -138,11 +138,12 @@ export default {
     }
   }
 }
-.content {
+.thecontent {
   position: relative;
   z-index: 1;
+  left: 3%;
   height: 100%;
-  width: 100%;
+  width: 97%;
 }
 // .select {
 //   z-index: 999;

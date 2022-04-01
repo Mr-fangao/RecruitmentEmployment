@@ -19,7 +19,7 @@
             <div class="leftpt">数据源:</div>
             <div class="rightpt">
               <el-checkbox v-model="checked">前程无忧</el-checkbox>
-              <el-checkbox v-model="checked">智联招聘</el-checkbox>
+              <!-- <el-checkbox v-model="checked1">智联招聘</el-checkbox> -->
             </div>
           </div>
           <div class="count">
@@ -105,7 +105,7 @@ export default {
   data() {
     return {
       checked: true,
-      checked1: true,
+      // checked1: false,
       selectcity: {
         name: "中国",
         level: 0,
