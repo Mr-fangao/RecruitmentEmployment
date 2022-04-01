@@ -83,6 +83,15 @@
               :show-overflow-tooltip="true"
             >
             </el-table-column>
+            <el-table-column prop="detail" label="定位" width="60">
+              <template slot-scope="scope">
+                <el-button
+                  type="text"
+                  @click.native.stop="flyToLocation(scope.row.x, scope.row.y)"
+                  >定位</el-button
+                >
+              </template>
+            </el-table-column>
           </el-table>
         </div>
       </div>
@@ -96,6 +105,7 @@ import loading from "../../components/loading.vue";
 import skillpointgather from "../../components/thememap/skillpointgather.vue";
 import wordcloud from "../../assets/js/echarts-wordcloud-master/index";
 // import echarts from "echarts";
+// const mapboxgl = require("mapbox-gl");
 export default {
   name: "mate",
   components: {
@@ -138,6 +148,14 @@ export default {
     indexMethod(index) {
       return (this.currentPage - 1) * this.intPageSize + index + 1;
     },
+    flyToLocation(x, y) {
+      console.log(x, y);
+      this.map.flyTo({
+        center: [x, y], // 中心点
+        zoom: 16.5, // 缩放比例
+        pitch: 45, // 倾斜度
+      });
+    },
     getLabel(val) {
       let label = val;
       this.input = this.input + label + "、";
@@ -158,7 +176,7 @@ export default {
       }
     },
     clear() {
-       this.input = "";
+      this.input = "";
     },
     load() {
       request
@@ -263,6 +281,20 @@ export default {
       //   linear-gradient(#1edaeb) right bottom no-repeat;
       // //linear-gradient(to left, #f00, #f00) right bottom no-repeat;//四个角的边框 to left 代表颜色渐变的方向
       // background-size: 1px 20px, 20px 1px, 1px 20px, 20px 1px;
+      /deep/.el-button {
+        // background: rgba(11, 176, 241, 0.493);
+        background: url("../../assets/img/fq/wggl_tab.png");
+        background-size: 100% 100%;
+        border: none;
+        color: #ffffff;
+        // padding: 12px 20px;
+        font-size: 14px;
+        border-radius: 5px;
+      }
+      /deep/.el-button:focus,
+      .el-button:hover {
+        color: #1edaeb;
+      }
       .grid-content {
         border-radius: 4px;
         min-height: 36px;
@@ -345,6 +377,13 @@ export default {
     .table {
       width: 100%;
       height: 90%;
+      /deep/.el-button {       
+        border: none;
+        color: rgb(30, 185, 247);
+        // padding: 12px 20px;
+        font-size: 14px;
+        border-radius: 5px;
+      }
     }
   }
 }
@@ -366,20 +405,6 @@ export default {
   border-radius: 4px;
   padding-left: 0% !important;
   padding-right: 0% !important;
-}
-/deep/.el-button {
-  // background: rgba(11, 176, 241, 0.493);
-  background: url("../../assets/img/fq/wggl_tab.png");
-  background-size: 100% 100%;
-  border: none;
-  color: #ffffff;
-  // padding: 12px 20px;
-  font-size: 14px;
-  border-radius: 5px;
-}
-/deep/.el-button:focus,
-.el-button:hover {
-  color: #1edaeb;
 }
 /deep/.el-table .el-table__header-wrapper tr th {
   background-image: linear-gradient(
