@@ -110,6 +110,14 @@ export default {
         name: "中国",
         level: 0,
       },
+      chart5: {
+        xdata: [],
+        ydata: [],
+      },
+      chart7: {
+        xdata: [],
+        ydata: [],
+      },
       cloudData: [
         { value: 1800, name: "学习创新" },
         { value: 1500, name: "团体合作" },
@@ -156,7 +164,7 @@ export default {
           textStyle: {
             color: "#1e90ff", // 图例文字颜色
           },
-          data: ["大修金额", "中修沥青砼金额", "预防性养护金额", "金额总计"],
+          data: ["前端开发工程师", "GIS开发工程师", "数据库开发工程师", "后端开发工程师"],
         },
         calculable: true,
         xAxis: {
@@ -191,22 +199,22 @@ export default {
         series: [
           {
             type: "line",
-            name: "大修金额",
+            name: "前端开发工程师",
             data: [],
           },
           {
             type: "line",
-            name: "中修沥青砼金额",
+            name: "GIS开发工程师",
             data: [],
           },
           {
             type: "line",
-            name: "预防性养护金额",
+            name: "数据库开发工程师",
             data: [],
           },
           {
             type: "line",
-            name: "金额总计",
+            name: "后端开发工程师",
             data: [],
           },
         ],
@@ -245,7 +253,7 @@ export default {
   },
   mounted() {
     // this.initmap();
-    this.initChart5();
+    // this.initChart5();
     this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
     this.initChart3();
     this.initChart4();
@@ -253,20 +261,25 @@ export default {
     myChart4.setOption(this.option4);
     // this.initChart1();
     this.initChart6();
-    this.initChart7();
+    // this.initChart7();
+    this.posData();
     eventBum.$on("json", (json) => {
       this.selectcity.name = json.name;
       this.selectcity.level = json.where;
-      // if (this.selectcity.name == "南京市") {
-      //   request.post("/api/data/experience", { city: "南京" }).then((res) => {
-      //   this.chart7 = res.data.skill;
-      //   this.chart1 = res.data.company;
-      //   this.chart3 = res.data.job;
-      //   this.initChart1();
-      //   this.initChart3();
-      //   this.initChart7();
-      // });
-      // }
+      if (this.selectcity.name == "南京市") {
+      request.post("/api/data/posCount", { city: "南京" }).then((res) => {
+        for (var i = 0; i < res.data.company.length; i++) {
+          this.chart5.xdata[i] = res.data.company[i].name;
+          this.chart5.ydata[i] = res.data.company[i].value;
+        }
+        for (var i = 0; i < res.data.industry.length; i++) {
+          this.chart7.xdata[i] = res.data.industry[i].name;
+          this.chart7.ydata[i] = res.data.industry[i].value;
+        }
+        this.initChart5();
+        this.initChart7();
+      });
+      }
     });
     this.$nextTick(() => {
       window.addEventListener("resize", () => {
@@ -296,6 +309,20 @@ export default {
     //     this.initChart7();
     //   });
     // },
+    posData() {
+      request.post("/api/data/posCount", { city: "全国" }).then((res) => {
+        for (var i = 0; i < res.data.company.length; i++) {
+          this.chart5.xdata[i] = res.data.company[i].name;
+          this.chart5.ydata[i] = res.data.company[i].value;
+        }
+        for (var i = 0; i < res.data.industry.length; i++) {
+          this.chart7.xdata[i] = res.data.industry[i].name;
+          this.chart7.ydata[i] = res.data.industry[i].value;
+        }
+        this.initChart5();
+        this.initChart7();
+      });
+    },
     initChart7() {
       var myChart = echarts.init(document.getElementById("chart7"));
       myChart.setOption({
@@ -308,13 +335,14 @@ export default {
         grid: {
           left: "3%",
           right: "4%",
-          top: "5%",
+          top: "15%",
+          bottom: "5%",
           containLabel: true,
         },
         xAxis: [
           {
             type: "category",
-            data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+            data: this.chart7.xdata,
             axisTick: {
               alignWithLabel: true,
             },
@@ -328,6 +356,8 @@ export default {
         yAxis: [
           {
             type: "value",
+            name:"单位：个",
+            scale: true,
             splitLine: { show: false },
             axisLine: {
               lineStyle: {
@@ -336,12 +366,36 @@ export default {
             },
           },
         ],
+        axisLabel: {
+            interval: 0,
+            formatter: function (value) {
+              debugger;
+              var ret = ""; //拼接加\n返回的类目项
+              var maxLength = 2; //每项显示文字个数
+              var valLength = value.length; //X轴类目项的文字个数
+              var rowN = Math.ceil(valLength / maxLength); //类目项需要换行的行数
+              if (rowN > 1) {
+                //如果类目项的文字大于3,
+                for (var i = 0; i < rowN; i++) {
+                  var temp = ""; //每次截取的字符串
+                  var start = i * maxLength; //开始截取的位置
+                  var end = start + maxLength; //结束截取的位置
+                  //这里也可以加一个是否是最后一行的判断，但是不加也没有影响，那就不加吧
+                  temp = value.substring(start, end) + "\n";
+                  ret += temp; //凭借最终的字符串
+                }
+                return ret;
+              } else {
+                return value;
+              }
+            },
+          },
         series: [
           {
             name: "Direct",
             type: "bar",
             barWidth: "60%",
-            data: [10, 52, 200, 334, 390, 330, 220],
+            data: this.chart7.ydata,
             itemStyle: {
               normal: {
                 //这里是重点
@@ -409,6 +463,7 @@ export default {
         yAxis: {
           type: "value",
           name:"单位：个",
+          scale: true,
           splitLine: { show: false },
           axisLine: {
             lineStyle: {
@@ -544,15 +599,24 @@ export default {
       myChart.setOption({
         xAxis: {
           type: "category",
-          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          data: this.chart5.xdata,
           axisLine: {
             lineStyle: {
               color: "#fff",
             },
           },
         },
+         grid: {
+          left: "3%",
+          right: "4%",
+          top: "15%",
+          bottom: "10%",
+          containLabel: true,
+        },
         yAxis: {
           type: "value",
+           name:"单位：个",
+          scale: true,
           splitLine: { show: false },
           axisLine: {
             lineStyle: {
@@ -562,7 +626,7 @@ export default {
         },
         series: [
           {
-            data: [150, 230, 224, 218, 135, 147, 260],
+            data: this.chart5.ydata,
             type: "line",
             lineStyle: {
               color: "rgb(115, 215, 228)",

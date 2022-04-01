@@ -5,7 +5,7 @@
         <h1>GIS专业招聘大数据分析与制图系统</h1>
         <router-link to="/statistics" exact>招聘统计</router-link>
         <router-link to="/query" exact>职位查询</router-link>
-        <router-link to="/skAnalysis" exact>综合分析</router-link>
+        <router-link to="/ArcMap" exact>时空分析</router-link>
         <router-link to="/skill" exact>技能分析</router-link>
         <router-link to="/thememap" exact>专题地图</router-link>
       </li>
