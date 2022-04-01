@@ -108,17 +108,14 @@
         // ADD YOUR ACCESS TOKEN FROM
         // https://account.mapbox.com
         mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg';
-        const monument = [-77.0353, 38.8895];
+        const monument = [108.82, 33.17];
         const map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/light-v10',
             center: monument,
             zoom: 5
         });
-        document.getElementById('slider').addEventListener('input', (e) => {
-            const month = parseInt(e.target.value, 10);
-            filterBy(month);
-        });
+      
         const months = [
             '1月',
             '2月',
@@ -133,11 +130,14 @@
             '11月',
             '12月'
         ];
-
+        document.getElementById('slider').addEventListener('input', (e) => {
+            const month = parseInt(e.target.value, 10);
+            filterBy(month);
+        });
         function filterBy(month) {
             const filters = ['==', 'month', month];
             map.setFilter('earthquake-circles', filters);
-            map.setFilter('earthquake-labels', filters);
+            // map.setFilter('earthquake-labels', filters);
 
             // Set the label to the month
             document.getElementById('month').textContent = months[month];
@@ -182,21 +182,24 @@
                 'id': 'earthquake-circles',
                 'type': 'circle',
                 'source': 'earthquakes',
+                 
                 'paint': {
-                    'circle-color': [
+                    'circle-color': 
+                    [
                         'interpolate',
                         ['linear'],
-                        ['get', 'mag'],
+                        ['get', 'salary'],
                         6,
                         '#FCA107',
                         8,
                         '#7F3121'
                     ],
                     'circle-opacity': 0.75,
-                    'circle-radius': [
+                    'circle-radius': 
+                    [
                         'interpolate',
                         ['linear'],
-                        ['get', 'mag'],
+                        ['get', 'salary'],
                         6,
                         20,
                         8,
@@ -211,12 +214,12 @@
                 'type': 'symbol',
                 'source': 'earthquakes',
                 'layout': {
-                    'text-field': ['concat', ['to-string', ['get', 'mag']], 'm'],
+                    'text-field': ['concat', ['to-string', ['get', 'salary']], 'm'],
                     'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
                     'text-size': 12
                 },
                 'paint': {
-                    'text-color': 'rgba(0,0,0,0.5)'
+                    'text-color': '#FCA107'
                 }
             });
 

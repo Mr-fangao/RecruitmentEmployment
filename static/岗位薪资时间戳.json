@@ -141555,7 +141555,7 @@
             "properties": {
                 "name": "前端开发工程师",
                 "date": 1640793600000,
-                "salary": "17.5",
+                "salary": 17.5,
                 "longitude": 121.445,
                 "latitude": 31.2017
             }
@@ -141572,7 +141572,7 @@
             "properties": {
                 "name": "保安",
                 "date": 1638374400000,
-                "salary": "5.5",
+                "salary": 5.5,
                 "longitude": 113.797,
                 "latitude": 22.6812
             }
@@ -141589,7 +141589,7 @@
             "properties": {
                 "name": "前端开发工程师",
                 "date": 1640793600000,
-                "salary": "25",
+                "salary": 25,
                 "longitude": 114.408,
                 "latitude": 30.4479
             }
@@ -141623,7 +141623,7 @@
             "properties": {
                 "name": "运维工程师（广州移动省公司）",
                 "date": 1645804800000,
-                "salary": "7.5",
+                "salary": 7.5,
                 "longitude": 113.328,
                 "latitude": 23.1269
             }
@@ -141640,7 +141640,7 @@
             "properties": {
                 "name": "Web前端开发工程师",
                 "date": 1640793600000,
-                "salary": "17.5",
+                "salary": 17.5,
                 "longitude": 120.145,
                 "latitude": 30.1898
             }
