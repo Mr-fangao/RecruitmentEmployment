@@ -9,7 +9,7 @@
     <div class="right">
       <div class="mutual">
         <el-row :gutter="20">
-          <el-col :span="8"><span>空间尺度:</span></el-col>
+          <el-col :span="8"><span>空间范围:</span></el-col>
           <el-col :span="16">
             <div class="grid-content bg-specially">
               <div class="tab">
@@ -27,7 +27,7 @@
           </el-col>
         </el-row>
         <el-row :gutter="20">
-          <el-col :span="8"><span>时间尺度:</span></el-col>
+          <el-col :span="8"><span>时间范围:</span></el-col>
           <el-col :span="16">
             <div class="grid-content bg-specially">
               <div class="tab">
