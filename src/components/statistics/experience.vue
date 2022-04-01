@@ -554,7 +554,7 @@ export default {
             data: arr[2].value,
           },
           {
-            name: "大专及以下",
+            name: "应届生",
             type: "bar",
             stack: "total",
             label: {
@@ -642,6 +642,10 @@ export default {
     // },
     initChart1() {
       var myChart = echarts.init(document.getElementById("chart1"));
+      let arr = [];
+      this.chart1.forEach((element) => {
+        arr.push({ value: element.value, name: element.name });
+      });
       myChart.setOption({
         color: ["#67F9D8", "#FFE434", "#56A3F1", "#FF917C"],
         // title: {
@@ -699,40 +703,7 @@ export default {
                 width: 4,
               },
             },
-            data: [
-              {
-                value: [100, 8, 0.4, -80, 2000],
-                name: "5年以上",
-              },
-              {
-                value: [60, 5, 0.3, -100, 1500],
-                name: "3-4年",
-                areaStyle: {
-                  // color: "rgba(255, 228, 52, 0.6)",
-                },
-              },
-              {
-                value: [80, 6, 0.8, -10, 1800],
-                name: "1-2年",
-                areaStyle: {
-                  // color: "rgba(255, 228, 52, 0.6)",
-                },
-              },
-              {
-                value: [60, 5, 0.3, -100, 1500],
-                name: "大专及以下",
-                areaStyle: {
-                  // color: "rgba(255, 228, 52, 0.6)",
-                },
-              },
-              {
-                value: [60, 5, 0.3, -100, 1500],
-                name: "无需",
-                areaStyle: {
-                  // color: "rgba(255, 228, 52, 0.6)",
-                },
-              },
-            ],
+            data: arr,
           },
         ],
       });

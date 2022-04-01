@@ -30,16 +30,16 @@
                   <el-col :span="12">
                     <el-date-picker
                       v-model="json.STime"
-                      type="monthrange"
-                      placeholder="选择开始月份"
+                      type="date"
+                      placeholder="选择开始日期"
                       :picker-options="STime"
                     />
                   </el-col>
                   <el-col :span="12">
                     <el-date-picker
                       v-model="json.ETime"
-                      type="monthrange"
-                      placeholder="选择结束月份"
+                      type="date"
+                      placeholder="选择结束日期"
                       :picker-options="ETime"
                     />
                   </el-col>
@@ -88,9 +88,10 @@
               <el-button-group>
                 <el-button
                   style="
-                    background-color: rgb(0, 206, 209);
+                    background-color: #04111d94;
                     color: #fff;
                     top: 12px;
+                    border: 1px solid #00ced1;
                   "
                   icon="el-icon-search"
                   size="small"
@@ -100,9 +101,10 @@
                 <!-- <el-button type="primary" icon="el-icon-s-order" size="small">统计</el-button> -->
                 <el-button
                   style="
-                    background-color: rgb(0, 206, 209);
+                    background-color: #04111d94;
                     color: #fff;
                     top: 12px;
+                    border: 1px solid #00ced1;
                   "
                   icon="el-icon-refresh-left"
                   size="small"
@@ -308,7 +310,7 @@ export default {
       ceng: 0,
       json: {
         STime: new Date("2021-10-31"),
-        ETime: new Date("2022-04-06"),
+        ETime: new Date("2022-03-31"),
         space: "",
         Type: "",
         c: 0,
@@ -330,7 +332,7 @@ export default {
           return (
             time.getTime() < this.json.STime ||
             time.getTime() < new Date("2021-01-01") ||
-            time.getTime() > new Date("2022-03-31")
+            time.getTime() > new Date("2022-04-31")
           );
         },
       },
@@ -429,8 +431,8 @@ export default {
     },
     chongzhi() {
       this.json = {
-        STime: new Date("2018-01-01"),
-        ETime: new Date("2018-01-01"),
+        STime: new Date("2021-10-31"),
+        ETime: new Date("2022-03-31"),
         space: "",
         Type: "",
         c: 0,
@@ -527,6 +529,28 @@ export default {
   },
 };
 </script>
+<style>
+.el-picker-panel {
+  background: #0d1f30;
+  border: 1px solid #4a8faabd;
+  font-size: 8pt;
+  text-align: center;
+  line-height: 25px;
+  border-radius: 5px;
+  color: #fff;
+}
+.el-date-table td.next-month,
+.el-date-table td.prev-month {
+  color: #909399;
+}
+.el-input__inner {
+  justify-items: center;
+  background: #2899a871;
+  border-radius: 4px;
+  border: 1px solid #3eb7c738;
+  color: #fff;
+}
+</style>
 <style scoped>
 .map {
   z-index: 1;
@@ -687,6 +711,17 @@ export default {
   user-select: none;
 }
 /* 时间范围 */
+.Thematicmap .find .time .el-input__inner {
+  height: 28px;
+  justify-items: center;
+  background: #2899a871;
+  border-radius: 4px;
+  border: 1px solid #3eb7c738;
+  color: #fff;
+}
+.Thematicmap .find .time.el-input__icon {
+  line-height: 28px;
+}
 .Thematicmap .find .time {
   width: 100%;
   height: 100%;
@@ -708,7 +743,6 @@ export default {
 .space {
   margin: 1px 3px;
   padding: 10px;
-  
 }
 .Type {
   margin: 0px 3px;

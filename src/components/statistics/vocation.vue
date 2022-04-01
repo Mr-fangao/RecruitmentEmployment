@@ -19,12 +19,13 @@
             <div class="leftpt">数据源:</div>
             <div class="rightpt">
               <el-checkbox v-model="checked">前程无忧</el-checkbox>
-              <!-- <el-checkbox v-model="checked1">智联招聘</el-checkbox> -->
+              <el-checkbox v-model="checked1">智联招聘</el-checkbox>
+              <el-checkbox v-model="checked2">英才网</el-checkbox>
             </div>
           </div>
           <div class="count">
             <div class="total">
-              <div class="title">信息数</div>
+              <div class="title">招聘数</div>
               <div class="d"><span>11711</span></div>
             </div>
             <div class="company">
@@ -35,6 +36,27 @@
               <div class="title">职位数</div>
               <div class="d"><span>10005</span></div>
             </div>
+          </div>
+          <div v-show="timedisplay" class="time">
+            <div class="title">时间范围:</div>
+            <el-row>
+              <el-col :span="12">
+                <el-date-picker
+                  v-model="json.STime"
+                  type="date"
+                  placeholder="选择开始日期"
+                  :picker-options="STime"
+                />
+              </el-col>
+              <el-col :span="12">
+                <el-date-picker
+                  v-model="json.ETime"
+                  type="date"
+                  placeholder="选择结束日期"
+                  :picker-options="ETime"
+                />
+              </el-col>
+            </el-row>
           </div>
         </div>
       </div>
@@ -100,12 +122,43 @@ import eventBum from "../../assets/js/EvebtBus";
 export default {
   name: "vocation",
   components: {
-    wordcloud,SelectRegion
+    wordcloud,
+    SelectRegion,
   },
   data() {
     return {
+      json: {
+        STime: new Date("2021-10-31"),
+        ETime: new Date("2022-03-31"),
+        space: "",
+        Type: "",
+        c: 0,
+      },
       checked: true,
-      // checked1: false,
+      checked1: true,
+      checked2: true,
+      timedisplay: true,
+      STime: {
+        disabledDate: (time) => {
+          if (this.json.ETime !== "") {
+            return (
+              time.getTime() < new Date("2021-01-01") ||
+              time.getTime() > this.json.ETime
+            );
+          } else {
+            return time.getTime() < new Date("2021-01-01");
+          }
+        },
+      },
+      ETime: {
+        disabledDate: (time) => {
+          return (
+            time.getTime() < this.json.STime ||
+            time.getTime() < new Date("2021-01-01") ||
+            time.getTime() > new Date("2022-04-31")
+          );
+        },
+      },
       selectcity: {
         name: "中国",
         level: 0,
@@ -164,7 +217,12 @@ export default {
           textStyle: {
             color: "#1e90ff", // 图例文字颜色
           },
-          data: ["前端开发工程师", "GIS开发工程师", "数据库开发工程师", "后端开发工程师"],
+          data: [
+            "前端开发工程师",
+            "GIS开发工程师",
+            "数据库开发工程师",
+            "后端开发工程师",
+          ],
         },
         calculable: true,
         xAxis: {
@@ -267,18 +325,18 @@ export default {
       this.selectcity.name = json.name;
       this.selectcity.level = json.where;
       if (this.selectcity.name == "南京市") {
-      request.post("/api/data/posCount", { city: "南京" }).then((res) => {
-        for (var i = 0; i < res.data.company.length; i++) {
-          this.chart5.xdata[i] = res.data.company[i].name;
-          this.chart5.ydata[i] = res.data.company[i].value;
-        }
-        for (var i = 0; i < res.data.industry.length; i++) {
-          this.chart7.xdata[i] = res.data.industry[i].name;
-          this.chart7.ydata[i] = res.data.industry[i].value;
-        }
-        this.initChart5();
-        this.initChart7();
-      });
+        request.post("/api/data/posCount", { city: "南京" }).then((res) => {
+          for (var i = 0; i < res.data.company.length; i++) {
+            this.chart5.xdata[i] = res.data.company[i].name;
+            this.chart5.ydata[i] = res.data.company[i].value;
+          }
+          for (var i = 0; i < res.data.industry.length; i++) {
+            this.chart7.xdata[i] = res.data.industry[i].name;
+            this.chart7.ydata[i] = res.data.industry[i].value;
+          }
+          this.initChart5();
+          this.initChart7();
+        });
       }
     });
     this.$nextTick(() => {
@@ -356,7 +414,7 @@ export default {
         yAxis: [
           {
             type: "value",
-            name:"单位：个",
+            name: "单位：个",
             scale: true,
             splitLine: { show: false },
             axisLine: {
@@ -367,29 +425,29 @@ export default {
           },
         ],
         axisLabel: {
-            interval: 0,
-            formatter: function (value) {
-              debugger;
-              var ret = ""; //拼接加\n返回的类目项
-              var maxLength = 2; //每项显示文字个数
-              var valLength = value.length; //X轴类目项的文字个数
-              var rowN = Math.ceil(valLength / maxLength); //类目项需要换行的行数
-              if (rowN > 1) {
-                //如果类目项的文字大于3,
-                for (var i = 0; i < rowN; i++) {
-                  var temp = ""; //每次截取的字符串
-                  var start = i * maxLength; //开始截取的位置
-                  var end = start + maxLength; //结束截取的位置
-                  //这里也可以加一个是否是最后一行的判断，但是不加也没有影响，那就不加吧
-                  temp = value.substring(start, end) + "\n";
-                  ret += temp; //凭借最终的字符串
-                }
-                return ret;
-              } else {
-                return value;
+          interval: 0,
+          formatter: function (value) {
+            // debugger;
+            var ret = ""; //拼接加\n返回的类目项
+            var maxLength = 2; //每项显示文字个数
+            var valLength = value.length; //X轴类目项的文字个数
+            var rowN = Math.ceil(valLength / maxLength); //类目项需要换行的行数
+            if (rowN > 1) {
+              //如果类目项的文字大于3,
+              for (var i = 0; i < rowN; i++) {
+                var temp = ""; //每次截取的字符串
+                var start = i * maxLength; //开始截取的位置
+                var end = start + maxLength; //结束截取的位置
+                //这里也可以加一个是否是最后一行的判断，但是不加也没有影响，那就不加吧
+                temp = value.substring(start, end) + "\n";
+                ret += temp; //凭借最终的字符串
               }
-            },
+              return ret;
+            } else {
+              return value;
+            }
           },
+        },
         series: [
           {
             name: "Direct",
@@ -423,13 +481,20 @@ export default {
       myChart.setOption({
         xAxis: {
           type: "category",
-          data: ["前端开发工程师", "Web前端开发工程师", "数据库工程师", "GIS开发工程师", "后端开发工程师", "测绘工程师"],
+          data: [
+            "前端开发工程师",
+            "Web前端开发工程师",
+            "数据库工程师",
+            "GIS开发工程师",
+            "后端开发工程师",
+            "测绘工程师",
+          ],
           axisLine: {
             lineStyle: {
               color: "#fff",
             },
           },
-           axisLabel: {
+          axisLabel: {
             interval: 0,
             formatter: function (value) {
               debugger;
@@ -454,15 +519,15 @@ export default {
             },
           },
         },
-        grid:{
-          top:"15%",
-          left:"15%",
-          right:"5%",
-          bottom:"22%",
+        grid: {
+          top: "15%",
+          left: "15%",
+          right: "5%",
+          bottom: "22%",
         },
         yAxis: {
           type: "value",
-          name:"单位：个",
+          name: "单位：个",
           scale: true,
           splitLine: { show: false },
           axisLine: {
@@ -606,7 +671,7 @@ export default {
             },
           },
         },
-         grid: {
+        grid: {
           left: "3%",
           right: "4%",
           top: "15%",
@@ -615,7 +680,7 @@ export default {
         },
         yAxis: {
           type: "value",
-           name:"单位：个",
+          name: "单位：个",
           scale: true,
           splitLine: { show: false },
           axisLine: {
@@ -780,7 +845,21 @@ export default {
   },
 };
 </script>
-
+<style>
+.el-picker-panel {
+  background: #0d1f30;
+  border: 1px solid #4a8faabd;
+  font-size: 8pt;
+  text-align: center;
+  line-height: 25px;
+  border-radius: 5px;
+  color: #fff;
+}
+.el-date-table td.next-month,
+.el-date-table td.prev-month {
+  color: #909399;
+}
+</style>
 <style scoped lang="less">
 #vocation {
   z-index: 1;
@@ -810,23 +889,24 @@ export default {
       align-items: center;
       .datasource {
         height: 13%;
-        width: 90%;
+        width: 100%;
         display: flex;
         .leftpt {
-          margin-right: 2%;
+          margin-left: 2%;
           color: #fff;
+          width: 18%;
         }
       }
       .count {
-        height: 65%;
+        height: 60%;
         width: 90%;
-        margin: 1% 0%;
+        margin: 2% 0%;
         display: flex;
         float: left;
         .total {
           height: 100%;
-          width: 30%;
-          margin-right: 5%;
+          width: 27%;
+          margin-right: 8%;
           display: flex;
           flex-direction: column;
           background: linear-gradient(#1edaeb) left top no-repeat,
@@ -848,8 +928,8 @@ export default {
         }
         .company {
           height: 100%;
-          width: 30%;
-          margin-right: 5%;
+          width: 27%;
+          margin-right: 8%;
           display: flex;
           flex-direction: column;
           background: linear-gradient(#1edaeb) left top no-repeat,
@@ -871,7 +951,7 @@ export default {
         }
         .position {
           height: 100%;
-          width: 30%;
+          width: 27%;
           display: flex;
           flex-direction: column;
           background: linear-gradient(#1edaeb) left top no-repeat,
@@ -906,6 +986,35 @@ export default {
           width: 85%;
           background: url("../../assets/img/fq/bg6.png");
           background-size: 100% 100%;
+        }
+      }
+      .time {
+        height: 25%;
+        width: 100%;
+        display: flex;
+        float: left;
+        align-items: center;
+        .title {
+          margin-left: 2%;
+          color: #fff;
+          width: 20%;
+        }
+        .el-row {
+          width: 77%;
+          .el-date-editor.el-input {
+            width: 135px !important;
+          }
+          /deep/.el-input__inner {
+            height: 28px;
+            justify-items: center;
+            background: #2899a871;
+            border-radius: 4px;
+            border: 1px solid #3eb7c738;
+            color: #fff;
+          }
+          /deep/.el-input__icon{
+            line-height: 28px;
+          }
         }
       }
     }
