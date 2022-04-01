@@ -86,7 +86,7 @@ export default {
         name: "中国",
         level: 0,
       },
-      chart5: {
+      chart6: {
         xdata: [],
         ydata: [],
       },
@@ -146,7 +146,7 @@ export default {
           textStyle: {
             color: "#1e90ff", // 图例文字颜色
           },
-          data: ["大修金额", "中修沥青砼金额", "预防性养护金额", "金额总计"],
+          data: ["5年以上", "3-4年", "1-2年", "应届生"],
         },
         calculable: true,
         xAxis: {
@@ -181,22 +181,22 @@ export default {
         series: [
           {
             type: "line",
-            name: "大修金额",
+            name: "5年以上",
             data: [],
           },
           {
             type: "line",
-            name: "中修沥青砼金额",
+            name: "3-4年",
             data: [],
           },
           {
             type: "line",
-            name: "预防性养护金额",
+            name: "1-2年",
             data: [],
           },
           {
             type: "line",
-            name: "金额总计",
+            name: "应届生",
             data: [],
           },
         ],

@@ -52,8 +52,12 @@
             </el-col>
           </el-row>
           <el-row :gutter="20">
-            <el-col :span="12"><el-button>开始匹配</el-button></el-col>
-            <el-col :span="12"><el-button>重置选择</el-button> </el-col>
+            <el-col :span="12"
+              ><el-button @click="mate()">开始匹配</el-button></el-col
+            >
+            <el-col :span="12"
+              ><el-button @click="clear()">重置选择</el-button>
+            </el-col>
           </el-row>
         </div>
       </div>
@@ -87,7 +91,7 @@
 </template>
 <script>
 // import Bus from "../assets/js/bus.js";
-// import request from "../utils/request";
+import request from "../../utils/request";
 import loading from "../../components/loading.vue";
 import skillpointgather from "../../components/thememap/skillpointgather.vue";
 import wordcloud from "../../assets/js/echarts-wordcloud-master/index";
@@ -117,14 +121,14 @@ export default {
       input: "",
       input1: "",
       tableCityData: [
-        { company: "北京易伟航科技有限公司", position: "GIS软件工程师" },
-        { company: "杭州中房信息科技有限公司", position: "高级GIS开发工程师" },
-        { company: "上海耀斑信息科技有限公司", position: "高级GIS开发工程师" },
+        // { company: "北京易伟航科技有限公司", position: "GIS软件工程师" },
+        // { company: "杭州中房信息科技有限公司", position: "高级GIS开发工程师" },
+        // { company: "上海耀斑信息科技有限公司", position: "高级GIS开发工程师" },
       ],
     };
   },
   mounted() {
-    // this.initmap();
+    // this.load();
   },
   methods: {
     submit() {
@@ -147,6 +151,28 @@ export default {
         setTimeout(() => {
           this.isLoading = false;
         }, 1200);
+    },
+    mate() {
+      if (this.input == "WebGIS、") {
+        this.load();
+      }
+    },
+    clear() {
+       this.input = "";
+    },
+    load() {
+      request
+        .post("/api/data/skillPo", {
+          city: "南京",
+          skill: "WebGIS",
+        })
+        .then((res) => {
+          console.log(res);
+          this.tableCityData = res.data;
+          if (this.tableCityData != null) {
+            this.isLoading = false;
+          }
+        });
     },
   },
 };
@@ -310,9 +336,9 @@ export default {
     flex-direction: column;
     border-top: 1px solid #1edaeb;
     .title {
-      margin-top: 3%;
+      margin-top: 2%;
       width: 100%;
-      height: 10%;
+      height: 30px;
       color: #fff;
       font-size: 13pt;
     }
