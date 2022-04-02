@@ -45,7 +45,7 @@
         <component :is="comp" v-show="isShow"></component>
       </keep-alive>
     </div>
-    <!-- <selectRegion /> -->
+    <mapcom />
   </div>
 </template>
 
@@ -54,9 +54,9 @@ import salary from "../components/statistics/salary.vue";
 import education from "../components/statistics/education.vue";
 import experience from "../components/statistics/experience.vue";
 import vocation from "../components/statistics/vocation.vue";
-// import SelectRegion from "../components/selectRegion.vue";
+import mapcom from "../components/map.vue";
 export default {
-  components: { salary, education, experience, vocation, },
+  components: { salary, education, experience, vocation,mapcom },
   name: "statistics",
   data() {
     return {

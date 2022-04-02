@@ -8,7 +8,7 @@
 			"center": [116.405285, 39.904989],
 			"centroid": [116.41995, 40.18994],
 			"childrenNum": 16,
-            "confirmed": 4476,
+            "confirmed": 1060,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -276,7 +276,7 @@
 			"center": [117.190182, 39.125596],
 			"centroid": [117.347043, 39.288036],
 			"childrenNum": 16,
-            "confirmed": 4276,
+            "confirmed": 96,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -558,7 +558,7 @@
 			"name": "河北省",
 			"center": [114.502461, 38.045474],
 			"childrenNum": 11,
-            "confirmed": 3476,
+            "confirmed": 66,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -1732,7 +1732,7 @@
 			"center": [112.549248, 37.857014],
 			"centroid": [112.304436, 37.618179],
 			"childrenNum": 11,
-            "confirmed": 4276,
+            "confirmed": 26,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -2225,7 +2225,7 @@
 			"center": [111.670801, 40.818311],
 			"centroid": [114.077429, 44.331087],
 			"childrenNum": 12,
-            "confirmed": 2276,
+            "confirmed": 16,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -4161,7 +4161,7 @@
 			"center": [123.429096, 41.796767],
 			"centroid": [122.604994, 41.299712],
 			"childrenNum": 14,
-            "confirmed": 2001,
+            "confirmed": 150,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -4990,7 +4990,7 @@
 			"center": [125.3245, 43.886841],
 			"centroid": [126.171208, 43.703954],
 			"childrenNum": 9,
-            "confirmed": 2676,
+            "confirmed": 36,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -5881,7 +5881,7 @@
 			"center": [126.642464, 45.756967],
 			"centroid": [127.693027, 48.040465],
 			"childrenNum": 13,
-            "confirmed": 3276,
+            "confirmed": 37,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -7241,7 +7241,7 @@
 			"center": [121.472644, 31.231706],
 			"centroid": [121.438737, 31.072559],
 			"childrenNum": 16,
-            "confirmed": 5276,
+            "confirmed": 2172,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -7408,7 +7408,7 @@
 			"center": [118.767413, 32.041544],
 			"centroid": [119.486506, 32.983991],
 			"childrenNum": 13,
-            "confirmed": 7276,
+            "confirmed": 1597,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -7881,7 +7881,7 @@
 			"center": [120.153576, 30.287459],
 			"centroid": [120.109913, 29.181466],
 			"childrenNum": 11,
-            "confirmed": 7236,
+            "confirmed": 987,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -8738,7 +8738,7 @@
 			"center": [117.283042, 31.86119],
 			"centroid": [117.226884, 31.849254],
 			"childrenNum": 16,
-            "confirmed": 4276,
+            "confirmed": 288,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -9373,7 +9373,7 @@
 			"center": [119.306239, 26.075302],
 			"centroid": [118.006468, 26.069925],
 			"childrenNum": 9,
-            "confirmed": 5276,
+            "confirmed": 165,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -10094,7 +10094,7 @@
 			"center": [115.892151, 28.676493],
 			"centroid": [115.732975, 27.636112],
 			"childrenNum": 11,
-            "confirmed": 5276,
+            "confirmed": 152,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -10649,7 +10649,7 @@
 			"center": [117.000923, 36.675807],
 			"centroid": [118.187759, 36.376092],
 			"childrenNum": 16,
-            "confirmed": 7276,
+            "confirmed": 275,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -11376,7 +11376,7 @@
 			"center": [113.665412, 34.757975],
 			"centroid": [113.619717, 33.902648],
 			"childrenNum": 18,
-            "confirmed": 6276,
+            "confirmed": 154,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -12020,7 +12020,7 @@
 			"center": [114.298572, 30.584355],
 			"centroid": [112.271301, 30.987527],
 			"childrenNum": 17,
-            "confirmed": 5276,
+            "confirmed": 1027,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -12734,7 +12734,7 @@
 			"center": [112.982279, 28.19409],
 			"centroid": [111.711649, 27.629216],
 			"childrenNum": 14,
-            "confirmed": 5376,
+            "confirmed": 371,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -13391,7 +13391,7 @@
 			"center": [113.280637, 23.125178],
 			"centroid": [113.429919, 23.334643],
 			"childrenNum": 21,
-            "confirmed": 8276,
+            "confirmed": 3775,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -14305,7 +14305,7 @@
 			"center": [108.320004, 22.82402],
 			"centroid": [108.7944, 23.833381],
 			"childrenNum": 14,
-            "confirmed": 2876,
+            "confirmed": 70,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -15037,7 +15037,7 @@
 			"center": [110.33119, 20.031971],
 			"centroid": [109.754859, 19.189767],
 			"childrenNum": 19,
-            "confirmed": 3276,
+            "confirmed": 35,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -16438,7 +16438,7 @@
 			"center": [106.504962, 29.533155],
 			"centroid": [107.8839, 30.067297],
 			"childrenNum": 38,
-            "confirmed": 3276,
+            "confirmed": 264,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -17069,7 +17069,7 @@
 			"center": [104.065735, 30.659462],
 			"centroid": [102.693453, 30.674545],
 			"childrenNum": 21,
-            "confirmed": 4876,
+            "confirmed": 748,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -18293,7 +18293,7 @@
 			"center": [106.713478, 26.578343],
 			"centroid": [106.880455, 26.826368],
 			"childrenNum": 9,
-            "confirmed": 3476,
+            "confirmed": 45,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -18990,7 +18990,7 @@
 			"center": [102.712251, 25.040609],
 			"centroid": [101.485106, 25.008643],
 			"childrenNum": 16,
-            "confirmed": 3876,
+            "confirmed": 205,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -20068,7 +20068,7 @@
 			"center": [91.132212, 29.660361],
 			"centroid": [88.388277, 31.56375],
 			"childrenNum": 7,
-            "confirmed": 776,
+            "confirmed": 10,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -21469,7 +21469,7 @@
 			"center": [108.948024, 34.263161],
 			"centroid": [108.887114, 35.263661],
 			"childrenNum": 10,
-            "confirmed": 3276,
+            "confirmed": 310,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -22253,7 +22253,7 @@
 			"name": "甘肃省",
 			"center": [103.823557, 36.058039],
 			"childrenNum": 14,
-            "confirmed": 2276,
+            "confirmed": 26,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -23581,7 +23581,7 @@
 			"center": [101.778916, 36.623178],
 			"centroid": [96.043533, 35.726403],
 			"childrenNum": 8,
-            "confirmed": 1276,
+            "confirmed": 5,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -24720,7 +24720,7 @@
 			"center": [106.278179, 38.46637],
 			"centroid": [106.169866, 37.291332],
 			"childrenNum": 5,
-            "confirmed": 1176,
+            "confirmed": 24,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -25117,7 +25117,7 @@
 			"center": [87.617733, 43.792818],
 			"centroid": [85.294711, 41.371801],
 			"childrenNum": 24,
-            "confirmed": 1346,
+            "confirmed": 22,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -26526,7 +26526,7 @@
 			"center": [121.509062, 25.044332],
 			"centroid": [120.971485, 23.749452],
 			"childrenNum": 0,
-            "confirmed": 3476,
+            "confirmed": 0,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -26777,7 +26777,7 @@
 			"center": [114.173355, 22.320048],
 			"centroid": [114.134357, 22.377366],
 			"childrenNum": 18,
-            "confirmed": 2276,
+            "confirmed": 5,
 			"level": "province",
 			"parent": {
 				"adcode": 100000
@@ -26943,7 +26943,7 @@
 			"center": [113.54909, 22.198951],
 			"centroid": [113.566988, 22.159307],
 			"childrenNum": 8,
-            "confirmed": 1276,
+            "confirmed": 5,
 			"level": "province",
 			"parent": {
 				"adcode": 100000

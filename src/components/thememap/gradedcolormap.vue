@@ -58,11 +58,12 @@ export default {
             "fill-color": {
               property: "confirmed", // this will be your density property form you geojson
               stops: [
-                [1000, "#313695"],
-                [2000, "#4575b4"],
-                [3000, "#74add1"],
-                [4000, "#e0f3f8"],
-                [5000, "#ffffbf"],
+                [5, "#317695"],
+                [10, "#409695"],
+                [100, "#4575b4"],
+                [200, "#74add1"],
+                [500, "#e0f3f8"],
+                [1000, "#ffffbf"],
               ],
             },
             "fill-opacity": 0.7 /* 透明度 */,
