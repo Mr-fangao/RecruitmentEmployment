@@ -194,10 +194,7 @@ export default {
                         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
                     }
 
-                   new mapboxgl.Popup()
-                    .setLngLat(coordinates)
-                    .setHTML(place)
-                    .addTo(map);
+                    new mapboxgl.Popup().setLngLat(coordinates).setHTML(name).addTo(map);
                 });
                 // Change the cursor to a pointer when the mouse is over the places layer.
                 map.on("mouseenter", "unclustered-point", () => {
