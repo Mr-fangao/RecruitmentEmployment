@@ -64,7 +64,38 @@
       <div class="main">
         <div class="title"><span>职位匹配结果</span></div>
         <div class="table">
-          <el-table
+          <div class="tablehrader">
+            <ul class="uititle">
+              <li class="title">
+                <span class="company">公司名称</span>
+                <span class="position">职位名称</span>
+                <span class="location">定位</span>
+              </li>
+            </ul>
+          </div>
+          <div class="srrollcontent">
+            <vue-seamless-scroll :data="listData" :class-option="defaultOption">
+              <ul class="ul-scoll">
+                <li
+                  class="li-scoll"
+                  v-for="(item, index) in listData"
+                  :key="index"
+                >
+                  <div :title="item.company" class="gongsi">
+                    {{ item.company }}
+                  </div>
+                  <div class="zhiwei">{{ item.position }}</div>
+                  <div
+                    class="dingwei"
+                    @click.native.stop="flyToLocation(scope.row.x, scope.row.y)"
+                  >
+                    定位
+                  </div>
+                </li>
+              </ul>
+            </vue-seamless-scroll>
+          </div>
+          <!-- <el-table
             ref="interfaceTable"
             :data="tableCityData"
             stripe
@@ -92,7 +123,7 @@
                 >
               </template>
             </el-table-column>
-          </el-table>
+          </el-table> -->
         </div>
       </div>
     </div>
@@ -112,6 +143,8 @@ export default {
     loading,
     wordcloud,
     skillpointgather,
+    //组件
+    
   },
   data() {
     return {
@@ -130,11 +163,7 @@ export default {
       ],
       input: "",
       input1: "",
-      tableCityData: [
-        // { company: "北京易伟航科技有限公司", position: "GIS软件工程师" },
-        // { company: "杭州中房信息科技有限公司", position: "高级GIS开发工程师" },
-        // { company: "上海耀斑信息科技有限公司", position: "高级GIS开发工程师" },
-      ],
+      listData: [],
     };
   },
   mounted() {
@@ -186,11 +215,31 @@ export default {
         })
         .then((res) => {
           console.log(res);
-          this.tableCityData = res.data;
-          if (this.tableCityData != null) {
+          this.listData = res.data;
+          if (this.listData != null) {
             this.isLoading = false;
           }
+          // if (this.listData[0].date.length > 11) {
+          //   for (var i = 0; i < this.listData.length; i++) {
+          //     this.listData.date[i] = this.listData.date[i].slice(0, 9);
+          //   }
+          // }
+          this.$forceUpdate();
         });
+    },
+  },
+  computed: {
+    defaultOption() {
+      return {
+        step: 0.2, // 数值越大速度滚动越快
+        limitMoveNum: 2, // 开始无缝滚动的数据量 this.dataList.length
+        hoverStop: true, // 是否开启鼠标悬停stop
+        direction: 1, // 0向下 1向上 2向左 3向右
+        openWatch: true, // 开启数据实时监控刷新dom
+        singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
+        singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
+        waitTime: 1000, // 单步运动停止的时间(默认值1000ms)
+      };
     },
   },
 };
@@ -236,7 +285,7 @@ export default {
   justify-content: flex-start;
   .he {
     display: flex;
-    flex: 1;
+    height: 50%;
     flex-direction: column;
     align-items: center;
     color: #fff;
@@ -364,25 +413,101 @@ export default {
   }
   .main {
     display: flex;
-    flex: 1;
+    height: 50%;
     flex-direction: column;
     border-top: 1px solid #1edaeb;
     .title {
-      margin-top: 2%;
+      margin-top: 1%;
       width: 100%;
-      height: 30px;
+      height: 7%;
       color: #fff;
       font-size: 13pt;
     }
+    // .table {
+    //   width: 100%;
+    //   height: 90%;
+    //   /deep/.el-button {
+    //     border: none;
+    //     color: rgb(30, 185, 247);
+    //     // padding: 12px 20px;
+    //     font-size: 14px;
+    //     border-radius: 5px;
+    //   }
+    // }
     .table {
-      width: 100%;
       height: 90%;
-      /deep/.el-button {       
-        border: none;
-        color: rgb(30, 185, 247);
-        // padding: 12px 20px;
-        font-size: 14px;
-        border-radius: 5px;
+      width: 100%;
+      .tablehrader {
+        height: 8%;
+        width: 100%;
+        .uititle {
+          height: 100%;
+          background-image: linear-gradient(
+            -180deg,
+            #bdd9e017 1%,
+            #9fdae5bb 100%
+          ) !important;
+          background: transparent;
+          color: aliceblue;
+          font-size: 12pt;
+          .title {
+            height: 100%;
+            display: flex;
+            font-size: 12pt;
+            .company {
+              height: 100%;
+              width: 42%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+            .position {
+              height: 100%;
+              width: 42%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+            .location {
+              height: 100%;
+              width: 16%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+          }
+        }
+      }
+      .srrollcontent {
+        height: 87%;
+        width: 100%;
+        color: aliceblue;
+        font-size: 11pt;
+        overflow: hidden;
+        .ul-scoll {
+          .li-scoll {
+            list-style: none;
+            display: flex;
+            margin-bottom: 1.5%;
+            cursor: pointer;
+            line-height: 20px;
+            .gongsi {
+              white-space: nowrap;
+              width: 70%;
+              height: 100%;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              text-align: left;
+              text-indent: 1em;
+            }
+            .zhiwei {
+              width: 15%;
+            }
+            .dingwei {
+              width: 5%;
+            }
+          }
+        }
       }
     }
   }
@@ -416,49 +541,21 @@ export default {
   // color: rgb(255, 255, 255);
   border-bottom: 1px solid #1faacd;
 }
-/deep/.el-table,
-.el-table__expanded-cell {
-  background-color: #3f5c6d2c;
-}
-/deep/.el-table td.el-table__cell,
-/deep/.el-table th.el-table__cell.is-leaf {
-  border: transparent !important;
-}
-/deep/ .el-table .cell {
-  text-align: center;
-}
-/deep/.el-table::before {
-  background-color: transparent !important;
-}
-/deep/.el-table tbody tr:hover > td {
-  background-color: #09e8f02c !important;
-}
-/deep/.el-table tr {
-  background-color: #3f5c6d2c;
-  color: #fff;
-}
-/deep/.el-table--striped
-  .el-table__body
-  tr.el-table__row--striped
-  td.el-table__cell {
-  background: transparent;
-}
-//头高、行高
-/deep/.el-table__header tr,
-.el-table__header th {
-  height: 30px;
-  padding: 0;
-}
-/deep/.el-table__body tr,
-.el-table__body td {
-  height: 35px;
-  padding: 0;
-}
-/deep/.el-table .el-table__cell {
-  padding: 0;
-}
-/deep/.el-table th.el-table__cell > .cell {
-  padding: 0;
-  text-align: center;
-}
+// /deep/.el-table,
+// .el-table__expanded-cell {
+//   background-color: #3f5c6d2c;
+// }
+// /deep/.el-table td.el-table__cell,
+// /deep/.el-table th.el-table__cell.is-leaf {
+//   border: transparent !important;
+// }
+// /deep/ .el-table .cell {
+//   text-align: center;
+// }
+// /deep/.el-table::before {
+//   background-color: transparent !important;
+// }
+// /deep/.el-table tbody tr:hover > td {
+//   background-color: #09e8f02c !important;
+// }
 </style>
