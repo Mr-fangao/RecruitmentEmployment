@@ -27,6 +27,7 @@
 import companyimage from "../../assets/img/company.png";
 import heatMapData from "../../assets/json/heatMapData.json";
 import testjson from "../../assets/json/point.json";
+const mapboxgl = require("mapbox-gl");
 export default {
     name: "skillpointgather",
     mounted() {

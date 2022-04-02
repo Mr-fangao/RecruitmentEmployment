@@ -27,6 +27,7 @@
 import companyimage from "../../assets/img/company.png";
 import heatMapData from "../../assets/json/平均薪资热力图.json";
 import testjson from "../../assets/json/point.json";
+const mapboxgl = require("mapbox-gl");
 export default {
     name: "pointgather",
     mounted() {
