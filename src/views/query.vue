@@ -112,10 +112,10 @@ import loading from "../components/loading.vue";
 // import poppage from "../components/poppage.vue";
 import Bus from "../assets/js/bus.js";
 import global from "../components/global";
-
 export default {
   name: "query",
   components: { loading,  },
+
   data() {
     return {
       isLoading: true,
@@ -131,11 +131,9 @@ export default {
       dataid: global.dataid,
     };
   },
-  mounted() {
-    //登录绑定事件
-    window.addEventListener("keydown", this.keyDown);
-    this.initmap();
-  },
+
+  watch: {},
+
   created() {
     this.load();
     this.getHeight();
@@ -157,6 +155,13 @@ export default {
     //   ];
     // });
   },
+
+  mounted() {
+    //登录绑定事件
+    window.addEventListener("keydown", this.keyDown);
+    this.initmap();
+  },
+
   methods: {
     hideModal() {
       // 取消弹窗回调
@@ -287,13 +292,12 @@ export default {
         "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
       this.map = new mapboxgl.Map({
         container: "map",
-        style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
+        style: "mapbox://styles/chenjq/cl084urgf004014ny2nhu1xre",
         center: [105, 35],
         zoom: 3.5,
       });
     },
-  },
-  watch: {},
+  }
 };
 </script>
 
@@ -394,4 +398,3 @@ export default {
   color: #fff;
 }
 </style>
->
