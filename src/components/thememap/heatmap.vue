@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import heatMapData from "../../assets/json/heatMapData.json";
+import heatMapData from "../../assets/json/平均薪资热力图.json";
 export default {
   name: "heatmap",
   mounted() {
@@ -63,9 +63,9 @@ export default {
               ["heatmap-density"],
               0, "rgba(33,102,172,0)",
               0.3, "rgb(103,169,207)",
-              0.6, "rgb(209,229,240)",
-              0.9, "rgb(253,219,199)",
-              1, "rgb(239,138,98)",
+              0.6, "#B0C4DE",
+              0.9, "#87CEFA",
+              1,   "#00BFFF",
             ],
             //根据地图的缩放级别来设置热力图的半径
             //缩放级别在0~9之间进行线性变化的时候，热力图的半径从2~20进行线性变化

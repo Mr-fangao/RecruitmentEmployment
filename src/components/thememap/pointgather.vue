@@ -25,7 +25,7 @@
 </template>
 <script>
 import companyimage from "../../assets/img/company.png";
-import heatMapData from "../../assets/json/heatMapData.json";
+import heatMapData from "../../assets/json/平均薪资热力图.json";
 import testjson from "../../assets/json/point.json";
 export default {
     name: "pointgather",
@@ -115,11 +115,11 @@ export default {
                         // *粉红色，40px的圆圈，当点数大于等于750
                         "circle-color": [
                             "step", ["get", "point_count"],
-                            "#51bbd6",
+                            "#B0E0E6",
                             100,
-                            "#f1f075",
+                            "#87CEFA",
                             750,
-                            "#f28cb1",
+                            "#4169E1",
                         ],
                         "circle-radius": [
                             "step", ["get", "point_count"],
@@ -139,6 +139,9 @@ export default {
                     type: "symbol",
                     source: "sensicjson",
                     filter: ["has", "point_count"],
+                     'paint': {
+                    'text-color': '#000000'
+                },
                     layout: {
                         "text-field": "{point_count_abbreviated}",
                         "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],

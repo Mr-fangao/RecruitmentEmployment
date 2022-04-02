@@ -111,7 +111,7 @@
         const monument = [108.82, 33.17];
         const map = new mapboxgl.Map({
             container: 'map',
-            style: 'mapbox://styles/mapbox/light-v10',
+            style: 'mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a',
             center: monument,
             zoom: 5
         });
@@ -137,7 +137,7 @@
         function filterBy(month) {
             const filters = ['==', 'month', month];
             map.setFilter('earthquake-circles', filters);
-            // map.setFilter('earthquake-labels', filters);
+            map.setFilter('earthquake-labels', filters);
 
             // Set the label to the month
             document.getElementById('month').textContent = months[month];
@@ -189,21 +189,23 @@
                         'interpolate',
                         ['linear'],
                         ['get', 'salary'],
-                        6,
-                        '#FCA107',
                         8,
-                        '#7F3121'
+                        '#00BFFF',
+                        10,
+                        '#6495ED'
                     ],
-                    'circle-opacity': 0.75,
+                    // "circle-stroke-width": 0.5,
+                    // "circle-stroke-color": "#fff",
+                    'circle-opacity': 1,
                     'circle-radius': 
                     [
                         'interpolate',
                         ['linear'],
                         ['get', 'salary'],
-                        6,
-                        20,
                         8,
-                        40
+                        10,
+                        10,
+                        20
                     ]
                 }
             }
@@ -214,12 +216,12 @@
                 'type': 'symbol',
                 'source': 'earthquakes',
                 'layout': {
-                    'text-field': ['concat', ['to-string', ['get', 'salary']], 'm'],
+                    'text-field': ['concat', ['to-string', ['get', 'salary']], 'k'],
                     'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
                     'text-size': 12
                 },
                 'paint': {
-                    'text-color': '#FCA107'
+                    'text-color': '#FFFFFF'
                 }
             });
 
