@@ -75,18 +75,18 @@ export default {
           ]
         }
         var WH_Water = new FeatureLayer({
-          url: 'http://114.98.239.36:6080/arcgis/rest/services/BabyHome/analyst/MapServer/2',
-          title: '中国省际丢失儿童地理加权回归分析'
+          url: 'http://114.98.239.36:6080/arcgis/rest/services/ZP/zp_pro_GWR/MapServer?f=jsapi',
+          title: '中国省际招聘信息地理加权回归分析'
           // popupTemplate: popupTemplate
         })
         var WH_Water1 = new FeatureLayer({
-          url: 'http://114.98.239.36:6080/arcgis/rest/services/BabyHome/analyst/MapServer/1',
-          title: '中国市际丢失儿童地理加权回归分析'
+          url: 'http://114.98.239.36:6080/arcgis/rest/services/ZP/zp_city_GWR/MapServer?f=jsapi',
+          title: '中国市际招聘信息地理加权回归分析'
           // popupTemplate: popupTemplate
         })
         var WH_Water2 = new FeatureLayer({
           url: 'http://114.98.239.36:6080/arcgis/rest/services/BabyHome/analyst/MapServer/0',
-          title: '中国区县丢失儿童地理加权回归分析'
+          title: '中国区县招聘信息地理加权回归分析'
           // popupTemplate: popupTemplate
         })
         WH_Water1.visible = false

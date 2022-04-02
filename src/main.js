@@ -18,6 +18,8 @@ import ElementUI from 'element-ui';
 import 'element-theme-chalk';
 import 'element-ui/lib/theme-chalk/index.css';
 import 'font-awesome/css/font-awesome.min.css';
+import vueSeamlessScroll from "vue-seamless-scroll";
+Vue.use(vueSeamlessScroll);
 
 import 'jquery'
 // 引入echarts

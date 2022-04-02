@@ -75,13 +75,13 @@ export default {
           ]
         }
         var WH_Water = new FeatureLayer({
-          url: 'http://114.98.239.36:6080/arcgis/rest/services/BabyHome/analyst/MapServer/5',
-          title: '中国省际丢失儿童局部自相关分析'
+          url: 'http://114.98.239.36:6080/arcgis/rest/services/ZP/pro_jbMo/MapServer?f=jsapi',
+          title: '中国省际招聘信息局部自相关分析'
           // popupTemplate: popupTemplate
         })
         var WH_Water1 = new FeatureLayer({
-          url: 'http://114.98.239.36:6080/arcgis/rest/services/BabyHome/analyst/MapServer/4',
-          title: '中国市际丢失儿童局部自相关分析'
+          url: 'http://114.98.239.36:6080/arcgis/rest/services/ZP/city_jbMo/MapServer?f=jsapi',
+          title: '中国市际招聘信息局部自相关分析'
           // popupTemplate: popupTemplate
         })
         var WH_Water2 = new FeatureLayer({

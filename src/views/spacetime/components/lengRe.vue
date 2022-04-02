@@ -75,18 +75,18 @@ export default {
           ]
         }
         var WH_Water = new FeatureLayer({
-          url: 'http://114.98.239.36:6080/arcgis/rest/services/BabyHome/analyst/MapServer/6',
-          title: '中国省际丢失儿童冷热点分析'
+          url: 'http://114.98.239.36:6080/arcgis/rest/services/ZP/pro_hs/MapServer?f=jsapi',
+          title: '中国省际招聘信息冷热点分析'
           // popupTemplate: popupTemplate
         })
         var WH_Water1 = new FeatureLayer({
-          url: 'http://114.98.239.36:6080/arcgis/rest/services/BabyHome/analyst/MapServer/7',
-          title: '中国市际丢失儿童冷热点分析'
+          url: 'http://114.98.239.36:6080/arcgis/rest/services/ZP/city_hs/MapServer?f=jsapi',
+          title: '中国市际招聘信息冷热点分析'
           // popupTemplate: popupTemplate
         })
         var WH_Water2 = new FeatureLayer({
           url: 'http://114.98.239.36:6080/arcgis/rest/services/BabyHome/analyst/MapServer/8',
-          title: '中国区县丢失儿童冷热点分析'
+          title: '中国区县招聘信息冷热点分析'
           // popupTemplate: popupTemplate
         })
         WH_Water1.visible = false

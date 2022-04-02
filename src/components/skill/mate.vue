@@ -87,7 +87,7 @@
                   <div class="zhiwei">{{ item.position }}</div>
                   <div
                     class="dingwei"
-                    @click.native.stop="flyToLocation(scope.row.x, scope.row.y)"
+                    @click="flyToLocation(scope.row.x, scope.row.y)"
                   >
                     定位
                   </div>
@@ -219,11 +219,6 @@ export default {
           if (this.listData != null) {
             this.isLoading = false;
           }
-          // if (this.listData[0].date.length > 11) {
-          //   for (var i = 0; i < this.listData.length; i++) {
-          //     this.listData.date[i] = this.listData.date[i].slice(0, 9);
-          //   }
-          // }
           this.$forceUpdate();
         });
     },
@@ -490,10 +485,10 @@ export default {
             display: flex;
             margin-bottom: 1.5%;
             cursor: pointer;
-            line-height: 20px;
+            line-height: 25px;
             .gongsi {
               white-space: nowrap;
-              width: 70%;
+              width: 42%;
               height: 100%;
               overflow: hidden;
               text-overflow: ellipsis;
@@ -501,10 +496,13 @@ export default {
               text-indent: 1em;
             }
             .zhiwei {
-              width: 15%;
+              width: 42%;
+              overflow: hidden;
+              white-space: nowrap;
             }
             .dingwei {
-              width: 5%;
+              width: 16%;
+              overflow: hidden;
             }
           }
         }
