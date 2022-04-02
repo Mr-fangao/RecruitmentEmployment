@@ -119,7 +119,7 @@ export default {
                             100,
                             "#87CEFA",
                             750,
-                            "#4169E1",
+                            "#00BFFF",
                         ],
                         "circle-radius": [
                             "step", ["get", "point_count"],
