@@ -63,6 +63,8 @@ export default {
       index: 1,
       comp: "pointgather",
       isShow: true,
+      //地图切换
+      index: "1",
     };
   },
   methods: {

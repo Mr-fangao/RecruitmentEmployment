@@ -4,7 +4,7 @@
       <!-- 专题地图查询 -->
       <div class="maintools">
         <!-- 按钮 -->
-        <div class="option">
+        <!-- <div class="option">
           <ul>
             <li class="activation">制图条件设置</li>
           </ul>
@@ -13,7 +13,7 @@
               :icon-class="pan === 0 ? 'icon-toggle-left' : 'icon-toggle-right'"
               class="zhuang"
           /></span>
-        </div>
+        </div> -->
         <!-- 内容 -->
         <div class="content son">
           <!-- 查询功能 -->
@@ -66,7 +66,7 @@
               </div>
             </div>
             <div>
-              <div v-show="Typedisplay" class="Type" style="margin: 1px 3px">
+              <div v-show="Typedisplay" class="Type">
                 <el-row>
                   <el-col :span="8">
                     <p>椭圆大小</p>
@@ -114,7 +114,7 @@
               </el-button-group>
               <div>
                 <!-- <span style="height: 30px"></span> -->
-                <p class="word" style="margin: 30px">{{ word }}</p>
+                <p class="word" style="margin-top: 25px">{{ word }}</p>
               </div>
             </div>
           </div>
@@ -438,15 +438,15 @@ export default {
         c: 0,
       };
     },
-    dian() {
-      if (this.pan === 0) {
-        document.getElementsByClassName("maintools")[0].style.right = "0";
-        this.pan = 1;
-      } else {
-        document.getElementsByClassName("maintools")[0].style.right = "-300px";
-        this.pan = 0;
-      }
-    },
+    // dian() {
+    //   if (this.pan === 0) {
+    //     document.getElementsByClassName("maintools")[0].style.right = "0";
+    //     this.pan = 1;
+    //   } else {
+    //     document.getElementsByClassName("maintools")[0].style.right = "-300px";
+    //     this.pan = 0;
+    //   }
+    // },
     tian() {
       this.ceng = 0;
       if (this.ceng === 0) {
@@ -700,10 +700,12 @@ export default {
   /* background-color: rgb(40, 43, 57); */
   color: rgba(255, 255, 255, 0.8);
   /* border-bottom: 1px solid #fff; */
-  background: url("./public/ptbg.png") no-repeat center center;
-  background-size: 100% 100%;
+  /* background: url("./public/ptbg.png") no-repeat center center; */
+  /* background-size: 100% 100%; */
   /* border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px; */
+  margin-top: 2%;
+  font-size: 13pt;
   width: 100%;
   height: 30px;
   line-height: 30px;
@@ -724,7 +726,8 @@ export default {
 }
 .Thematicmap .find .time {
   width: 100%;
-  height: 100%;
+  height: 90%;
+  margin-bottom: 10%;
   background: linear-gradient(#1edaeb) left top no-repeat,
     linear-gradient(#1edaeb) left top no-repeat,
     linear-gradient(#1edaeb) right top no-repeat,
@@ -741,14 +744,32 @@ export default {
 }
 /* 空间尺度 */
 .space {
-  margin: 1px 3px;
+  margin-bottom: 3%;
+  margin-top: 1%;
   padding: 10px;
+  background: linear-gradient(#1edaeb) left top no-repeat,
+    linear-gradient(#1edaeb) left top no-repeat,
+    linear-gradient(#1edaeb) right top no-repeat,
+    linear-gradient(#1edaeb) right top no-repeat,
+    linear-gradient(#1edaeb) left bottom no-repeat,
+    linear-gradient(#1edaeb) left bottom no-repeat,
+    linear-gradient(#1edaeb) right bottom no-repeat,
+    linear-gradient(#1edaeb) right bottom no-repeat;
+  background-size: 1px 10px, 10px 1px, 1px 10px, 10px 1px;
 }
 .Type {
-  margin: 0px 3px;
-  top: 0px;
-  /* border-top: 1px solid #fff; */
+  margin-bottom: 3%;
+  margin-top: 1%;
   padding: 10px;
+  background: linear-gradient(#1edaeb) left top no-repeat,
+    linear-gradient(#1edaeb) left top no-repeat,
+    linear-gradient(#1edaeb) right top no-repeat,
+    linear-gradient(#1edaeb) right top no-repeat,
+    linear-gradient(#1edaeb) left bottom no-repeat,
+    linear-gradient(#1edaeb) left bottom no-repeat,
+    linear-gradient(#1edaeb) right bottom no-repeat,
+    linear-gradient(#1edaeb) right bottom no-repeat;
+  background-size: 1px 10px, 10px 1px, 1px 10px, 10px 1px;
 }
 /* 底部 */
 /* .Thematicmap .find{
@@ -772,7 +793,7 @@ export default {
     linear-gradient(#1edaeb) right bottom no-repeat,
     linear-gradient(#1edaeb) right bottom no-repeat;
 
-  background-size: 1px 20px, 20px 1px, 1px 20px, 20px 1px;
+  background-size: 1px 10px, 10px 1px, 1px 10px, 10px 1px;
 }
 
 .Thematicmap .find .bottom .word {
@@ -780,7 +801,8 @@ export default {
   height: 100%;
   color: #fff;
   top: 10%;
-  text-align: center;
+  text-align: left;
+  text-indent: 2em;
 }
 
 /* 主要工具 */
