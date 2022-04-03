@@ -270,9 +270,9 @@ export default {
       plan_table: [
         {
           mouth: "11",
-          vue: "94",
+          vue: "194",
           JavaScript: "156",
-          z: "400",
+          z: "380",
           y: "50",
           sum: "1000",
         },
@@ -280,15 +280,15 @@ export default {
           mouth: "12",
           vue: "548",
           JavaScript: "934",
-          z: "400",
-          y: "50",
+          z: "420",
+          y: "150",
           sum: "1000",
         },
         {
           mouth: "1",
           vue: "313",
           JavaScript: "502",
-          z: "410",
+          z: "400",
           y: "250",
           sum: "1000",
         },
@@ -304,9 +304,9 @@ export default {
           mouth: "3",
           vue: "900",
           JavaScript: "1420",
-          z: "450",
-          y: "350",
-          sum: "1200",
+          z: "500",
+          y: "320",
+          sum: "1000",
         },
       ],
     };
@@ -335,9 +335,9 @@ export default {
         //JavaScript
         this.option3.series[1].data.push(this.plan_table[i].JavaScript);
         //预防性养护金额合计
-        this.option3.series[2].data.push(this.plan_table[i].y);
+        this.option3.series[2].data.push(this.plan_table[i].z);
         //金额总计
-        this.option3.series[3].data.push(this.plan_table[i].sum);
+        this.option3.series[3].data.push(this.plan_table[i].y);
         //Y轴最大值的设置：向上取整并家500
         this.option3.yAxis[0].max = Math.ceil(this.plan_table[0].sum) + 500;
       }

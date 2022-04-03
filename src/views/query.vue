@@ -93,14 +93,14 @@
           </el-pagination>
         </div>
       </el-card>
-      <poppage
+      <!-- <poppage
         :show="show"
         :porpName="porpName"
         @hideModal="hideModal"
         @submit="submit"
       >
         <p>这里放弹窗的内容</p>
-      </poppage>
+      </poppage> -->
     </div>
   </div>
 </template>

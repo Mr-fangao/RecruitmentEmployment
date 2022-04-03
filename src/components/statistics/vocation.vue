@@ -26,11 +26,11 @@
           <div class="count">
             <div class="total">
               <div class="title">招聘数</div>
-              <div class="d"><span>11711</span></div>
+              <div class="d"><span>15711</span></div>
             </div>
             <div class="company">
               <div class="title">公司数</div>
-              <div class="d"><span>9212</span></div>
+              <div class="d"><span>10212</span></div>
             </div>
             <div class="position">
               <div class="title">职位数</div>
