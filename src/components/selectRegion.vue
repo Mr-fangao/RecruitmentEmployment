@@ -305,7 +305,7 @@ export default {
   top: 5px;
   right: 385px;
   border: 1px solid rgba(25, 186, 139, 0.2);
-  background-color: #0d1f2ee3;
+  background-color: #0d1f2ebb;
   color: #fff;
   font-family: KuHei;
   font-size: 14px;

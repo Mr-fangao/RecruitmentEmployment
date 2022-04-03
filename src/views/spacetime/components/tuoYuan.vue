@@ -158,7 +158,7 @@ export default {
         }
         var WH_Water = new FeatureLayer({
           url: 'http://114.98.239.36:6080/arcgis/rest/services/BabyHome/analyst/MapServer/6',
-          title: '中国丢失儿童标准椭圆差分析',
+          title: '中国招聘信息标准椭圆差分析',
           renderer: backrenderer,
           legendEnabled: false
         })
@@ -202,7 +202,7 @@ export default {
             wkid: 102100
           }
           var params = {
-            表达式: '失踪时间 >= ' + "'" + i + "'" + ' AND 失踪时间 <= ' + "'" + y + "'",
+            表达式: '招聘时间 >= ' + "'" + i + "'" + ' AND 招聘时间 <= ' + "'" + y + "'",
             椭圆大小: that.msg.Type
           }
           console.log(params)

@@ -10,19 +10,18 @@
     <div class="map-overlay" id="legend">
       <div id="state-legend" class="state-legend">
         <h4>图例</h4>
-        <div><span style="background-color: #313695"></span>25,000,000</div>
+        <h5>招聘信息发布数</h5>
+        <div><span style="background-color: #317695"></span>5个</div>
         <br />
-        <div><span style="background-color: #4575b4"></span>10,000,000</div>
+        <div><span style="background-color: #409695"></span>10个</div>
         <br />
-        <div><span style="background-color: #74add1"></span>7,500,000</div>
+        <div><span style="background-color: #4575b4"></span>100个</div>
         <br />
-        <div><span style="background-color: #ffffbf"></span>5,000,000</div>
+        <div><span style="background-color: #74add1"></span>200个</div>
         <br />
-        <div><span style="background-color: #ca8323"></span>2,500,000</div>
+        <div><span style="background-color: #e0f3f8"></span>500个</div>
         <br />
-        <div><span style="background-color: #da9c20"></span>1,000,000</div>
-        <br />
-        <div><span style="background-color: #e6b71e"></span>750,000</div>
+        <div><span style="background-color: #ffffbf"></span>1000个</div>
         <br />
       </div>
     </div>
@@ -30,6 +29,7 @@
 </template>
 <script>
 import chinajson from "../../assets/json/china.json";
+const mapboxgl = require("mapbox-gl");
 export default {
   name: "gradedcolormap",
   mounted() {
@@ -171,8 +171,8 @@ h2 {
 #features {
   background: url("../../assets/img/fq/zp.png") no-repeat;
   background-size: 100% 100%;
-  top: 2%;
-  left: 3.5%;
+  top: 0.5%;
+  left: 28%;
   height: 10%;
   width: 10%;
 }
@@ -184,10 +184,12 @@ h2 {
   background-size: 100% 100%;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   line-height: 18px;
-  height: 26%;
+  height: 28%;
   margin-bottom: 3.5%;
   margin-right: 0.5%;
-  width: 10%;
+  width: 9%;
+  right: 25%;
+  bottom: 31%;
 }
 .state-legend {
   background-color: transparent;
@@ -203,12 +205,15 @@ h2 {
   width: 100%;
 }
 .state-legend h4 {
-  margin: 0 0 0px;
   color: #73fdff;
-  margin: 8% 0;
-  font-size: 14pt;
+  margin: 7% 0;
+  font-size: 13pt;
 }
-
+.state-legend h5 {
+  color: #fff;
+  margin-bottom: 5%;
+  font-size: 10pt;
+}
 .state-legend div {
   margin-left: 20%;
   float: left;

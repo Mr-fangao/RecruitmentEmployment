@@ -1,59 +1,67 @@
 <template>
-  <div class="mapcontral">
-    <div class="selecttitle">
-      <div class="title-img"></div>
-      <div class="title-text">专题图选择</div>
+  <div class="mapcom">
+    <div class="mapcontent">
+      <keep-alive>
+        <component :is="comp" v-show="isShow"></component>
+      </keep-alive>
     </div>
-    <el-menu>
-      <el-menu-item
-        style="padding: 1%"
-        index="1"
-        @click="showmap(1)"
-        :class="index === 1 ? 'active' : ''"
-        plain
-      >
-        <el-radio v-model="mapchange" label="1">&ensp;</el-radio>
-        <div class="mapimg map1"></div>
-        <span class="tab" slot="title">聚合图</span>
-      </el-menu-item>
-      <el-menu-item
-        index="2"
-        @click="showmap(2)"
-        :class="index === 2 ? 'active' : ''"
-        plain
-      >
-        <el-radio v-model="mapchange" label="2">&ensp;</el-radio>
-        <div class="mapimg map2"></div>
-        <span class="tab" slot="title">分级图</span>
-      </el-menu-item>
-      <el-menu-item
-        index="3"
-        @click="showmap(3)"
-        :class="index === 3 ? 'active' : ''"
-        plain
-      >
-        <el-radio v-model="mapchange" label="3">&ensp;</el-radio>
-        <div class="mapimg map3"></div>
-        <span class="tab" slot="title">热力图</span>
-      </el-menu-item>
-      <el-menu-item
-        index="4"
-        @click="showmap(4)"
-        :class="index === 4 ? 'active' : ''"
-        plain
-      >
-        <el-radio v-model="mapchange" label="4">&ensp;</el-radio>
-        <div class="mapimg map4"></div>
-        <span class="tab" slot="title">时序图</span>
-      </el-menu-item>
-    </el-menu>
+    <div class="mapcontral">
+      <div class="selecttitle">
+        <!-- <div class="title-img"></div> -->
+        <div class="title-text">专题图选择</div>
+      </div>
+      <el-menu>
+        <el-menu-item
+          style="padding: 1%"
+          index="1"
+          @click="showmap(1)"
+          :class="index === 1 ? 'active' : ''"
+          plain
+        >
+          <el-radio v-model="mapchange" label="1">&ensp;</el-radio>
+          <div class="mapimg map1"></div>
+          <span class="tab" slot="title">聚合图</span>
+        </el-menu-item>
+        <el-menu-item
+          index="2"
+          @click="showmap(2)"
+          :class="index === 2 ? 'active' : ''"
+          plain
+        >
+          <el-radio v-model="mapchange" label="2">&ensp;</el-radio>
+          <div class="mapimg map2"></div>
+          <span class="tab" slot="title">分级图</span>
+        </el-menu-item>
+        <el-menu-item
+          index="3"
+          @click="showmap(3)"
+          :class="index === 3 ? 'active' : ''"
+          plain
+        >
+          <el-radio v-model="mapchange" label="3">&ensp;</el-radio>
+          <div class="mapimg map3"></div>
+          <span class="tab" slot="title">热力图</span>
+        </el-menu-item>
+        <el-menu-item
+          index="4"
+          @click="showmap(4)"
+          :class="index === 4 ? 'active' : ''"
+          plain
+        >
+          <el-radio v-model="mapchange" label="4">&ensp;</el-radio>
+          <div class="mapimg map4"></div>
+          <span class="tab" slot="title">时序图</span>
+        </el-menu-item>
+      </el-menu>
+    </div>
   </div>
 </template>
 <script>
-import gradedcolormap from "../components/thememap/gradedcolormap.vue";
-import pointgather from "../components/thememap/pointgather.vue";
-import heatmap from "../components/thememap/heatmap.vue";
-import timemap from "../components/thememap/timemap.vue";
+import gradedcolormap from "./thememap/gradedcolormap.vue";
+import pointgather from "./thememap/pointgather.vue";
+import heatmap from "./thememap/heatmap.vue";
+import timemap from "./thememap/timemap.vue";
+const mapboxgl = require("mapbox-gl");
 // import multimap from "../components/thememap/multimap.vue";
 export default {
   components: { gradedcolormap, pointgather, heatmap, timemap },
@@ -65,10 +73,14 @@ export default {
       isShow: true,
       //地图切换
       index: "1",
+      mapchange: "",
     };
   },
+  mounted() {
+    this.showmap(1);
+  },
   methods: {
-    show(value) {
+    showmap(value) {
       if (value === 1) this.comp = "pointgather";
       else if (value === 2) this.comp = "gradedcolormap";
       else if (value === 3) this.comp = "heatmap";
@@ -78,29 +90,40 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+.mapcom {
+  z-index: 1;
+}
+.mapcontent {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    bottom: 0%;
+  }
 .mapcontral {
   position: absolute;
   z-index: 1;
-  width: 52.8%;
+  width: 47%;
   height: 4%;
-  bottom: 42.3%;
-  left: 23.6%;
-  //   background: url("../assets/img/buttonbg.png") no-repeat;
-  background-size: 100% 100%;
+  bottom: 33.3%;
+  left: 28%;
+  background: linear-gradient(#1edaeb) left top no-repeat,
+    linear-gradient(#1edaeb) left top no-repeat,
+    linear-gradient(#1edaeb) right top no-repeat,
+    linear-gradient(#1edaeb) right top no-repeat,
+    linear-gradient(#1edaeb) left bottom no-repeat,
+    linear-gradient(#1edaeb) left bottom no-repeat,
+    linear-gradient(#1edaeb) right bottom no-repeat,
+    linear-gradient(#1edaeb) right bottom no-repeat;
+  //linear-gradient(to left, #f00, #f00) right bottom no-repeat;//四个角的边框 to left 代表颜色渐变的方向
+  background-size: 2px 5px, 5px 2px, 2px 5px, 5px 2px;
   .selecttitle {
     float: left;
     width: 15%;
     height: 100%;
     background-color: #12526ea9;
-    .title-img {
-      width: 23%;
-      float: left;
-      height: 100%;
-      //   background: url("../assets/img/panelIcon.png");
-      background-size: 100% 100%;
-    }
     .title-text {
-      width: 60%;
+      width: 100%;
       float: left;
       height: 100%;
       color: #dae2e2;

@@ -1,13 +1,13 @@
 <template>
   <div id="vocation">
-    <iframe
+    <!-- <iframe
       src="./static/cluster.html"
       frameborder="0"
       width="100%"
       height="100%"
       scrolling="auto"
-    ></iframe>
-    <div id="map" />
+    ></iframe> -->
+    <!-- <div id="map" /> -->
     <div class="left">
       <div class="col-content">
         <div class="row1title">
@@ -109,6 +109,7 @@
       </div>
     </div>
     <selectRegion />
+    <mapcom />
   </div>
 </template>
 
@@ -118,12 +119,14 @@ import echarts from "echarts";
 import request from "@/utils/request";
 // const mapboxgl = require("mapbox-gl");
 import SelectRegion from "../../components/selectRegion.vue";
+import mapcom from "../../components/mapcom.vue";
 import eventBum from "../../assets/js/EvebtBus";
 export default {
   name: "vocation",
   components: {
     wordcloud,
     SelectRegion,
+    mapcom,
   },
   data() {
     return {
@@ -212,7 +215,7 @@ export default {
         //图例--折线提示提示
         legend: {
           x: "center",
-          y: "30",
+          y: "top",
           borderColor: "#6699FF", //边框颜色
           textStyle: {
             color: "#1e90ff", // 图例文字颜色
@@ -237,7 +240,7 @@ export default {
           {
             splitLine: { show: false },
             type: "value",
-            name: "单位:万元",
+            name: "单位:个",
             min: "0",
             max: "",
             splitNumber: 5,
@@ -279,32 +282,44 @@ export default {
       },
       plan_table: [
         {
-          xxx: "1",
-          d: "200",
-          z: "300",
-          y: "400",
-          sum: "500",
+          mouth: "11",
+          a: "394",
+          b: "356",
+          c: "300",
+          d: "250",
+          sum: "1000",
         },
         {
-          xxx: "2",
-          d: "100",
-          z: "400",
-          y: "50",
-          sum: "500",
+          mouth: "12",
+          a: "548",
+          b: "934",
+          c: "400",
+          d: "350",
+          sum: "1000",
         },
         {
-          xxx: "3",
-          d: "150",
-          z: "410",
-          y: "250",
-          sum: "500",
+          mouth: "1",
+          a: "413",
+          b: "502",
+          c: "310",
+          d: "300",
+          sum: "1000",
         },
         {
-          xxx: "4",
-          d: "200",
-          z: "450",
-          y: "350",
-          sum: "500",
+          mouth: "2",
+          a: "829",
+          b: "1274",
+          c: "550",
+          d: "450",
+          sum: "1000",
+        },
+        {
+          mouth: "3",
+          a: "900",
+          b: "1420",
+          c: "500",
+          d: "550",
+          sum: "1000",
         },
       ],
     };
@@ -346,16 +361,16 @@ export default {
     });
   },
   methods: {
-    initmap() {
-      // this.$mapboxgl.accessToken =
-      //   "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
-      // var map = new this.$mapboxgl.Map({
-      //   container: "map",
-      //   style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
-      //   center: [105, 35],
-      //   zoom: 3.5,
-      // });
-    },
+    // initmap() {
+    // this.$mapboxgl.accessToken =
+    //   "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
+    // var map = new this.$mapboxgl.Map({
+    //   container: "map",
+    //   style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
+    //   center: [105, 35],
+    //   zoom: 3.5,
+    // });
+    // },
     // typeData() {
     //   request.post("/api/data/education", { city: "全国" }).then((res) => {
     //     this.chart3 = res.data.skill;
@@ -497,7 +512,7 @@ export default {
           axisLabel: {
             interval: 0,
             formatter: function (value) {
-              debugger;
+              // debugger;
               var ret = ""; //拼接加\n返回的类目项
               var maxLength = 4; //每项显示文字个数
               var valLength = value.length; //X轴类目项的文字个数
@@ -551,15 +566,15 @@ export default {
     },
     initChart4() {
       for (var i = 0; i < this.plan_table.length; i++) {
-        this.option4.xAxis.data.push(this.plan_table[i].xxx);
-        //大修金额总计
-        this.option4.series[0].data.push(this.plan_table[i].d);
-        //中修金额
-        this.option4.series[1].data.push(this.plan_table[i].z);
-        //预防性养护金额合计
-        this.option4.series[2].data.push(this.plan_table[i].y);
-        //金额总计
-        this.option4.series[3].data.push(this.plan_table[i].sum);
+        this.option4.xAxis.data.push(this.plan_table[i].mouth);
+
+        this.option4.series[0].data.push(this.plan_table[i].a);
+
+        this.option4.series[1].data.push(this.plan_table[i].b);
+
+        this.option4.series[2].data.push(this.plan_table[i].c);
+
+        this.option4.series[3].data.push(this.plan_table[i].d);
         //Y轴最大值的设置：向上取整并家500
         this.option4.yAxis[0].max = Math.ceil(this.plan_table[0].sum) + 500;
       }
@@ -585,7 +600,7 @@ export default {
     //       axisLabel: {
     //         interval: 0,
     //         formatter: function (value) {
-    //           debugger;
+    // debugger;
     //           var ret = ""; //拼接加\n返回的类目项
     //           var maxLength = 4; //每项显示文字个数
     //           var valLength = value.length; //X轴类目项的文字个数
@@ -750,36 +765,36 @@ export default {
     },
     initChart6() {
       var myChart = echarts.init(document.getElementById("chart6"));
-      const city = [
+  const city = [
         "北京",
-        "上海",
-        "南京",
-        "深圳",
-        "重庆",
-        "杭州",
-        "广东",
-        "成都",
-        "郑州",
-        "苏州",
-        "九江",
         "11a",
         "12p",
+        "上海",
         "1p",
         "2p",
+        "南京",
         "3p",
         "4p",
+        "深圳",
         "5p",
         "6p",
+        "重庆",
         "7p",
         "8p",
-        "9p",
-        "10p",
-        "11p",
+        "杭州",
+        "7p",
+        "8p",
+        "广东",
+        "7p",
+        "8p",
+        "郑州",
+        "7p",
+        "苏州",
       ];
-      const days = ["博士", "硕士", "本科", "大专", "高中", "无需", "无需"];
+      const days = ["前端开发", "web前端", "数据库开发", "后端开发", "测绘工程师"];
 
       // prettier-ignore
-      const data = [[0,0,5],[0,1,1],[0,2,0],[0,3,0],[0,4,0],[0,5,0],[0,6,0],[0,7,0],[0,8,0],[0,9,0],[0,10,0],[0,11,2],[0,12,4],[0,13,1],[0,14,1],[0,15,3],[0,16,4],[0,17,6],[0,18,4],[0,19,4],[0,20,3],[0,21,3],[0,22,2],[0,23,5],[1,0,7],[1,1,0],[1,2,0],[1,3,0],[1,4,0],[1,5,0],[1,6,0],[1,7,0],[1,8,0],[1,9,0],[1,10,5],[1,11,2],[1,12,2],[1,13,6],[1,14,9],[1,15,11],[1,16,6],[1,17,7],[1,18,8],[1,19,12],[1,20,5],[1,21,5],[1,22,7],[1,23,2],[2,0,1],[2,1,1],[2,2,0],[2,3,0],[2,4,0],[2,5,0],[2,6,0],[2,7,0],[2,8,0],[2,9,0],[2,10,3],[2,11,2],[2,12,1],[2,13,9],[2,14,8],[2,15,10],[2,16,6],[2,17,5],[2,18,5],[2,19,5],[2,20,7],[2,21,4],[2,22,2],[2,23,4],[3,0,7],[3,1,3],[3,2,0],[3,3,0],[3,4,0],[3,5,0],[3,6,0],[3,7,0],[3,8,1],[3,9,0],[3,10,5],[3,11,4],[3,12,7],[3,13,14],[3,14,13],[3,15,12],[3,16,9],[3,17,5],[3,18,5],[3,19,10],[3,20,6],[3,21,4],[3,22,4],[3,23,1],[4,0,1],[4,1,3],[4,2,0],[4,3,0],[4,4,0],[4,5,1],[4,6,0],[4,7,0],[4,8,0],[4,9,2],[4,10,4],[4,11,4],[4,12,2],[4,13,4],[4,14,4],[4,15,14],[4,16,12],[4,17,1],[4,18,8],[4,19,5],[4,20,3],[4,21,7],[4,22,3],[4,23,0],[5,0,2],[5,1,1],[5,2,0],[5,3,3],[5,4,0],[5,5,0],[5,6,0],[5,7,0],[5,8,2],[5,9,0],[5,10,4],[5,11,1],[5,12,5],[5,13,10],[5,14,5],[5,15,7],[5,16,11],[5,17,6],[5,18,0],[5,19,5],[5,20,3],[5,21,4],[5,22,2],[5,23,0],[6,0,1],[6,1,0],[6,2,0],[6,3,0],[6,4,0],[6,5,0],[6,6,0],[6,7,0],[6,8,0],[6,9,0],[6,10,1],[6,11,0],[6,12,2],[6,13,1],[6,14,3],[6,15,4],[6,16,0],[6,17,0],[6,18,0],[6,19,0],[6,20,1],[6,21,2],[6,22,2],[6,23,6]]
+      const data = [[0,0,112],[0,1,113],[0,2,121],[0,3,122],[0,4,120],[0,5,121],[0,6,113],[0,7,115],[0,8,121],[0,9,112],[0,10,111],[0,11,122],[0,12,112],[0,13,111],[0,14,110],[0,15,102],[0,16,111],[0,17,114],[0,18,105],[0,19,103],[0,20,100],[0,21,91],[0,22,92],[0,23,101],[1,0,117],[1,1,106],[1,2,98],[1,3,95],[1,4,98],[1,5,96],[1,6,97],[1,7,98],[1,8,95],[1,9,97],[1,10,97],[1,11,105],[1,12,96],[1,13,96],[1,14,99],[1,15,110],[1,16,96],[1,17,97],[1,18,98],[1,19,102],[1,20,95],[1,21,105],[1,22,97],[1,23,98],[2,0,81],[2,1,89],[2,2,42],[2,3,56],[2,4,58],[2,5,77],[2,6,65],[2,7,52],[2,8,56],[2,9,58],[2,10,75],[2,11,65],[2,12,44],[2,13,54],[2,14,58],[2,15,62],[2,16,65],[2,17,59],[2,18,57],[2,19,65],[2,20,71],[2,21,54],[2,22,52],[2,23,48],[3,0,57],[3,1,53],[3,2,50],[3,3,60],[3,4,50],[3,5,50],[3,6,60],[3,7,50],[3,8,51],[3,9,50],[3,10,55],[3,11,54],[3,12,57],[3,13,54],[3,14,53],[3,15,52],[3,16,59],[3,17,65],[3,18,65],[3,19,60],[3,20,56],[3,21,54],[3,22,54],[3,23,61],[4,0,22],[4,1,32],[4,2,30],[4,3,32],[4,4,41],[4,5,31],[4,6,31],[4,7,30],[4,8,41],[4,9,32],[4,10,41],[4,11,32],[4,12,32],[4,13,32],[4,14,31],[4,15,31],[4,16,41],[4,17,41],[4,18,32],[4,19,32],[4,20,32],[4,21,31],[4,22,32],[4,23,40],]
     .map(function (item) {
         return [item[1], item[0], item[2] || '-'];
     });
@@ -789,9 +804,10 @@ export default {
         },
         grid: {
           height: "60%",
-          width: "85%",
+          width: "80%",
           top: "5%",
           right: "2%",
+          left: "18%",
         },
         xAxis: {
           type: "category",
@@ -818,8 +834,8 @@ export default {
           },
         },
         visualMap: {
-          min: 0,
-          max: 30,
+          min: 30,
+          max: 120,
           calculable: true,
           orient: "horizontal",
           left: "center",
@@ -872,6 +888,7 @@ export default {
     position: absolute;
     top: 0%;
     left: 3%;
+    z-index: 3;
     float: left;
     display: flex;
     flex-direction: column;
@@ -1012,7 +1029,7 @@ export default {
             border: 1px solid #3eb7c738;
             color: #fff;
           }
-          /deep/.el-input__icon{
+          /deep/.el-input__icon {
             line-height: 28px;
           }
         }
@@ -1026,6 +1043,7 @@ export default {
     float: left;
     bottom: 0%;
     left: 28.1%;
+    z-index: 2;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -1042,6 +1060,7 @@ export default {
     width: 25%;
     bottom: 0%;
     right: 0%;
+    z-index: 2;
     position: absolute;
     float: left;
     display: flex;
@@ -1054,12 +1073,12 @@ export default {
     // background: rgba(7, 41, 61, 0.637);
   }
 }
-#map {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-}
+// #map {
+//   position: relative;
+//   width: 100%;
+//   height: 100%;
+//   z-index: 0;
+// }
 
 .col-content {
   height: 100%;

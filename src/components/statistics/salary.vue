@@ -57,6 +57,7 @@
       </div>
     </div>
     <selectRegion />
+    <mapcom />
   </div>
 </template>
 <script>
@@ -67,10 +68,13 @@ import request from "@/utils/request";
 const mapboxgl = require("mapbox-gl");
 import SelectRegion from "../../components/selectRegion.vue";
 import eventBum from "../../assets/js/EvebtBus";
+import mapcom from "../../components/mapcom.vue";
 export default {
   name: "salary",
   components: {
-    wordcloud,SelectRegion
+    wordcloud,
+    SelectRegion,
+    mapcom,
   },
   data() {
     return {
@@ -214,7 +218,7 @@ export default {
           qd: "17",
           gis: "12",
           sjk: "13.5",
-          hd: "16",
+          hd: "15",
         },
         {
           month: "2",
@@ -228,7 +232,7 @@ export default {
           qd: "17.3",
           gis: "12.4",
           sjk: "14.5",
-          hd: "15.3",
+          hd: "16",
         },
       ],
     };
@@ -242,12 +246,12 @@ export default {
       this.selectcity.name = json.name;
       this.selectcity.level = json.where;
       if (this.selectcity.name == "南京市") {
-      request.post("/api/data/typeSa",{ city: "南京" }).then((res) => {
-        this.chart3 = res.data.company;
-        this.chart7 = res.data.industry;
-        this.initChart3();
-        this.initChart7();
-      });
+        request.post("/api/data/typeSa", { city: "南京" }).then((res) => {
+          this.chart3 = res.data.company;
+          this.chart7 = res.data.industry;
+          this.initChart3();
+          this.initChart7();
+        });
       }
     });
     this.initChart5();
@@ -259,11 +263,11 @@ export default {
         this.handleResize();
       });
     });
-  this.initmap();
+    this.initmap();
   },
   methods: {
     typeData() {
-      request.post("/api/data/typeSa",{ city: "全国" }).then((res) => {
+      request.post("/api/data/typeSa", { city: "全国" }).then((res) => {
         this.chart3 = res.data.company;
         this.chart7 = res.data.industry;
         this.initChart3();
@@ -400,7 +404,7 @@ export default {
           axisLabel: {
             interval: 0,
             formatter: function (value) {
-              debugger;
+              // debugger;
               var ret = ""; //拼接加\n返回的类目项
               var maxLength = 4; //每项显示文字个数
               var valLength = value.length; //X轴类目项的文字个数
@@ -432,7 +436,7 @@ export default {
         },
         yAxis: {
           type: "value",
-          name:"单位：个",
+          name: "单位：个",
           splitLine: { show: false },
           axisLine: {
             lineStyle: {
@@ -921,6 +925,7 @@ export default {
     position: absolute;
     top: 0%;
     left: 3%;
+    z-index: 2;
     float: left;
     display: flex;
     flex-direction: column;
@@ -935,6 +940,7 @@ export default {
     width: 46.8%;
     position: absolute;
     float: left;
+    z-index: 2;
     bottom: 0%;
     left: 28.1%;
     display: flex;
@@ -952,6 +958,7 @@ export default {
     height: 100%;
     width: 25%;
     bottom: 0%;
+    z-index: 2;
     right: 0%;
     position: absolute;
     float: left;

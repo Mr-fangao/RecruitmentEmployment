@@ -42,11 +42,11 @@
         }
 
         .map-overlay {
-            font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+            font: 10px/10px 'Helvetica Neue', Arial, Helvetica, sans-serif;
             position: absolute;
-            width: 25%;
+            width: 13%;
             top: 0;
-            left: 0;
+            left: 28%;
             padding: 10px;
         }
 
@@ -97,7 +97,7 @@
 
     <div class="map-overlay top">
         <div class="map-overlay-inner">
-            <h2>2021年旅游变化情况</h2>
+            <h2>近五月薪资变化情况</h2>
             <label id="month"></label>
             <input id="slider" type="range" min="0" max="11" step="1" value="0">
         </div>
@@ -115,7 +115,7 @@
             center: monument,
             zoom: 5
         });
-      
+
         const months = [
             '1月',
             '2月',
@@ -182,31 +182,31 @@
                 'id': 'earthquake-circles',
                 'type': 'circle',
                 'source': 'earthquakes',
-                 
+
                 'paint': {
-                    'circle-color': 
-                    [
-                        'interpolate',
-                        ['linear'],
-                        ['get', 'salary'],
-                        8,
-                        '#00BFFF',
-                        10,
-                        '#6495ED'
-                    ],
+                    'circle-color':
+                        [
+                            'interpolate',
+                            ['linear'],
+                            ['get', 'salary'],
+                            8,
+                            '#00BFFF',
+                            10,
+                            '#6495ED'
+                        ],
                     // "circle-stroke-width": 0.5,
                     // "circle-stroke-color": "#fff",
                     'circle-opacity': 1,
-                    'circle-radius': 
-                    [
-                        'interpolate',
-                        ['linear'],
-                        ['get', 'salary'],
-                        8,
-                        10,
-                        10,
-                        20
-                    ]
+                    'circle-radius':
+                        [
+                            'interpolate',
+                            ['linear'],
+                            ['get', 'salary'],
+                            8,
+                            10,
+                            10,
+                            20
+                        ]
                 }
             }
             );
@@ -234,35 +234,35 @@
                 closeButton: true,
                 closeOnClick: true
             })
-                // .setLngLat(e.lngLat)
-                // .setPopup(popup) // sets a popup on this marker
-                // .addTo(map);
-            
-                // console.log(features)
-                // const popup = new mapboxgl.Popup({ offset: 25 }).setText(
-                //     'Construction on the Washington Monument began in 1848.'
-                // );
-                // create DOM element for the marker
+            // .setLngLat(e.lngLat)
+            // .setPopup(popup) // sets a popup on this marker
+            // .addTo(map);
 
-                // const properties = features[0].properties;
-                // [{
-                //     label: "标题",
-                //     value: "title",
-                // }, {
-                //     label: "网址",
-                //     value: "url",
-                // }].forEach(header => {
-                //     const p = document.createElement('p')
-                //     p.innerHTML = header.label + ":" + properties[header.value]
-                //     el.appendChild(p)
-                // })
+            // console.log(features)
+            // const popup = new mapboxgl.Popup({ offset: 25 }).setText(
+            //     'Construction on the Washington Monument began in 1848.'
+            // );
+            // create DOM element for the marker
 
-                // create the marker
-                // new mapboxgl.Marker(el)
-                //     .setLngLat(e.lngLat)
-                //     .setPopup(popup) // sets a popup on this marker
-                //     .addTo(map);
-            
+            // const properties = features[0].properties;
+            // [{
+            //     label: "标题",
+            //     value: "title",
+            // }, {
+            //     label: "网址",
+            //     value: "url",
+            // }].forEach(header => {
+            //     const p = document.createElement('p')
+            //     p.innerHTML = header.label + ":" + properties[header.value]
+            //     el.appendChild(p)
+            // })
+
+            // create the marker
+            // new mapboxgl.Marker(el)
+            //     .setLngLat(e.lngLat)
+            //     .setPopup(popup) // sets a popup on this marker
+            //     .addTo(map);
+
 
             map.on('click', 'earthquake-circles', (e) => {
                 // Copy coordinates array.

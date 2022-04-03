@@ -4,6 +4,7 @@
     </div>
 </template>
 <script>
+const mapboxgl = require("mapbox-gl");
 export default {
   name: "multimap",
   mounted() {

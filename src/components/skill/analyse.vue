@@ -13,15 +13,10 @@
           <el-col :span="16">
             <div class="grid-content bg-specially">
               <div class="tab">
-                <el-select v-model="value" clearable placeholder="请选择">
-                  <el-option
-                    v-for="item in options"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  >
-                  </el-option>
-                </el-select>
+                <el-input
+                  v-model="input1"
+                  placeholder=" 输入内容(具体省份或城市)"
+                ></el-input>
               </div>
             </div>
           </el-col>
@@ -120,8 +115,11 @@ export default {
         { id: 1, name: "GIS开发工程师" },
         { id: 2, name: "web前端工程师" },
         { id: 3, name: "数据库开发工程师" },
+        { id: 4, name: "后端开发工程师" },
+        { id: 5, name: "前端开发工程师" },
       ],
       input: "",
+      input1: "",
       value1: "",
       value: "",
       cloudData: [
@@ -910,7 +908,7 @@ export default {
     },
     clear() {
       this.input = "";
-      this.value = "";
+      this.input1 = "";
       this.value1 = "";
       this.showct1();
       this.wordCloudInti(this.$refs.cloudEl, this.cloudData);

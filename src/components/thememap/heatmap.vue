@@ -5,6 +5,7 @@
 </template>
 <script>
 import heatMapData from "../../assets/json/平均薪资热力图.json";
+const mapboxgl = require("mapbox-gl");
 export default {
   name: "heatmap",
   mounted() {

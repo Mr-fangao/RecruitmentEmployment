@@ -7,7 +7,6 @@
         <router-link to="/query" exact>职位查询</router-link>
         <router-link to="/ArcMap" exact>时空分析</router-link>
         <router-link to="/skill" exact>技能分析</router-link>
-        <router-link to="/thememap" exact>专题地图</router-link>
       </li>
     </ul>
     <img src="../assets/img/time.png" />
@@ -56,7 +55,7 @@ nav {
   padding: 0px;
 
   img {
-    margin-left: 150px;
+    margin-left: 220px;
   }
   .times {
         width: 165px;
@@ -76,13 +75,13 @@ nav {
       display: flex;
       flex-direction: row;
       align-items: center;
-      margin-left: 10px;
+      margin-left: 20px;
       margin-right: 30px;
       h1 {
         font-size: 26px;
         color: #1bcddd;
         font-family: Microsoft YaHei;
-        margin: 0px 30px 0px 10px;
+        margin: 0px 50px 0px 10px;
       }
       a {
         font-size: 18px;
@@ -91,7 +90,7 @@ nav {
         font-family: Microsoft YaHei;
         text-decoration: none; /*消除下划线*/
         border-radius: 5px;
-        margin-right: 40px;
+        margin-right: 50px;
         line-height: 32px;
       }
     }

@@ -40,12 +40,13 @@
         </el-menu-item>
       </el-menu>
     </div>
+
     <div class="content">
       <keep-alive>
         <component :is="comp" v-show="isShow"></component>
       </keep-alive>
     </div>
-    <mapcom />
+    <!-- <mapcom /> -->
   </div>
 </template>
 
@@ -54,9 +55,9 @@ import salary from "../components/statistics/salary.vue";
 import education from "../components/statistics/education.vue";
 import experience from "../components/statistics/experience.vue";
 import vocation from "../components/statistics/vocation.vue";
-import mapcom from "../components/map.vue";
+// import mapcom from "../components/mapcom.vue";
 export default {
-  components: { salary, education, experience, vocation,mapcom },
+  components: { salary, education, experience, vocation,},
   name: "statistics",
   data() {
     return {
