@@ -26,7 +26,7 @@ export default new Router({
     {
       path: "/ArcMap",
       name: "ArcMap",
-      component: () => import("@/views/spacetime/index"),
+      component: () => import("@/views/spacetime/index1"),
       meta: {
         keepAlive: true //
       }
