@@ -1,32 +1,38 @@
 <template>
     <div class="com-pointgather">
     
+    
+    
         <div id="map"></div>
+    
+    
     
         <div class="control">
     
-            <div style="padding-top: 10px">
     
+    
+            <div style="padding-top: 10px">
                 <el-button id="button1">取消聚类</el-button>
-    
-            </div>
-    
+            </div> 
             <div style="padding-top: 10px">
-    
                 <el-button id="button2">执行聚类</el-button>
-    
+  
             </div>
+    
+    
     
         </div>
     
+    
+    
         <div class="my-class"></div>
+    
+    
     
     </div>
 </template>
 <script>
-import companyimage from "../../assets/img/company.png";
-import heatMapData from "../../assets/json/heatMapData.json";
-import testjson from "../../assets/json/point.json";
+import testjson from "../../assets/json/平均薪资热力图.json";
 const mapboxgl = require("mapbox-gl");
 export default {
     name: "skillpointgather",
@@ -43,7 +49,6 @@ export default {
                 center: [108.82, 33.17],
                 zoom: 3.5,
             });
-
             document.getElementById("button2").addEventListener("click", () => {
                 map.setLayoutProperty("points", "visibility", "none");
                 map.setLayoutProperty("clusters", "visibility", "visible");
@@ -53,182 +58,182 @@ export default {
                     [90, 45], // 边界的西南角
                     [120, 20], // 边界的东北角
                 ]);
-                
             });
             document.getElementById("button1").addEventListener("click", () => {
                 map.setLayoutProperty("points", "visibility", "visible");
                 map.setLayoutProperty("clusters", "visibility", "none");
                 map.setLayoutProperty("cluster-count", "visibility", "none");
                 map.setLayoutProperty("unclustered-point", "visibility", "none");
-                map.fitBounds([
-                    [90, 25], // 边界的西南角
-                    [130, 45], // 边界的东北角
-                ]);
-                
-                map.addLayer({
-                    'id': 'points',
-                    'type': 'symbol',
-                    'source': 'point1', // reference the data source
-                    'layout': {
-                        'icon-image': 'company', // reference the image
-                        'icon-size': 0.15
-                    }
-
-                });
-
+            map.addSource("earthquake", {
+            type: "geojson",
+            data: testjson,
+        // data.data,//将上面的换成我所需要的
+        // cluster: true,
+        // clusterMaxZoom: 14, //最大缩放到群集点
+        // clusterRadius: 50 // 每一组点的半径（=50）
+      });
+      map.addLayer({
+        id: "points",
+        type: "circle",
+        source: "earthquake",
+        paint: {
+          "circle-color": "#080",
+          "circle-radius": 3,
+      }
+      })
+   
+    });
+    map.on("load", function () {
+      // 从GeoJSON数据添加一个新的源并设置“cluster”选项为true。GL-JS将把point_count属性添加到源数据中。
+      map.addSource("earthquakes", {
+        type: "geojson",
+        data:  testjson,
+        // data.data,//将上面的换成我所需要的
+        cluster: true,
+        clusterMaxZoom: 14, //最大缩放到群集点
+        clusterRadius: 50 // 每一组点的半径（=50）
+      });
+      // 外围有数字的圆圈，加晕染
+      map.addLayer({
+        id: "clusters",
+        type: "circle",
+        source: "earthquakes",
+        filter: ["has", "point_count"],
+        paint: {
+          //*蓝色，当点数小于100时为20px圆
+          //*点计数在100到750之间时为黄色，21px圆
+          //*点计数大于或等于750时为22像素的粉红色圆圈
+          "circle-color": [
+            "step",
+            ["get", "point_count"],
+            "rgba(81, 187, 214, 0.8)",
+            100,
+            "rgba(241, 240, 117, 0.8)",
+            750,
+            "rgba(242, 140, 177, 0.8)"
+          ],
+          "circle-radius": [
+            "step",
+            ["get", "point_count"],
+            20, //蓝色，当点数小于100时为20px圆
+            100, //对应上面circle-color 数字，意思为100以内
+            21, //点计数在100到750之间时为黄色，21px圆
+            750, //对应上面circle-color 数字，意思为750以内
+            22 //点计数大于或等于750时为22像素的粉红色圆圈
+          ],
+          // 这个是外边框的颜色 circle-stroke-color这个对应了上面circle-color
+          "circle-stroke-color": [
+            "step",
+            ["get", "point_count"],
+            "rgba(81, 187, 214, 0.2)",
+            100,
+            "rgba(241, 240, 117, 0.2)",
+            750,
+            "rgba(242, 140, 177, 0.2)"
+          ],
+          // 这个是外边框晕染的范围
+          "circle-stroke-width": [
+            "step",
+            ["get", "point_count"],
+            5, //蓝色晕染长度，当点数小于100时为5px晕染
+            100, //对应上面circle-color 数字，意思为100以内
+            6, //点计数在100到750之间时为黄色，6px晕染
+            750, //对应上面circle-color 数字，意思为750以内
+            7 //点计数大于或等于750时为7px像素的粉红色晕染
+          ]
+        }
+      });
+      //聚合图圆圈中的数字
+      map.addLayer({
+        id: "cluster-count",
+        type: "symbol",
+        source: "earthquakes",
+        filter: ["has", "point_count"],
+        layout: {
+          "text-field": "{point_count_abbreviated}",
+          "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+          "text-size": 12
+        },
+        // 添加这个就可以改变圆圈内字样式，这里我改变了他的颜色
+        paint: {
+          "text-color": "#000000",//字体文本色号16进制颜色码
+          "text-opacity": 1//不透明度最高为1
+        }
+      });
+      // 聚合图中没有数字的显示小圆点
+      map.addLayer({
+        id: "unclustered-point",
+        type: "circle",
+        source: "earthquakes",
+        filter: ["!", ["has", "point_count"]],
+        paint: {
+          "circle-color": "#F0E68C",
+          "circle-radius": 6,
+          // "circle-stroke-width": 1,
+          // "circle-stroke-color": "#fff"
+        }
+      });
+  
+      map.on('load', () => {
+                 jsonCallback
+        });
+        
+        function jsonCallback(err, data) {
+            if (err) {
+                throw err;
+            }
+              data.features = data.features.map((d) => {
+                d.properties.month = new Date(d.properties.time).getMonth();
+                // d.properties.coordinates = new location(d.properties.geometry).getElementById("coordinates");
+                return d;
             });
-            map.on("load", function() {
-                //从我们的GeoJSON数据中添加一个新的数据源，并设置
-                // 'cluster'选项为true。GL-JS将向源数据添加point_count属性。
-                map.addSource("sensicjson", {
-                    type: "geojson",
-                    //指向GeoJSON数据。这个例子显示了所有的M1.0+地震
-                    // 15年12月22日至16年1月21日。
-                    data: testjson,
-                    cluster: true,
-                    clusterMaxZoom: 14, // Max zoom to cluster points on
-                    clusterRadius: 50, //每个集群点的半径(默认为50)
-                });
-                //添加数据
-                map.loadImage(
-                    companyimage,
-                    (error, image) => {
-                        if (error) throw error;
+            }
+            map.on('click', 'unclustered-point', (e) => {
+                // Copy coordinates array.
+                const coordinates = e.features[0].geometry.coordinates.slice();
+                const name = e.features[0].properties.name;
 
-                        // Add the image to the map style.
-                        map.addImage('company', image);
-                        map.addSource('point1', {
-                            'type': 'geojson',
-                            'data': testjson
-                        });
-                    }
-                );
-                //添加圆形聚合图层
-                map.addLayer({
-                    id: "clusters",
-                    type: "circle",
-                    source: "sensicjson",
-                    filter: ["has", "point_count"],
-                    paint: {
-                        //使用步骤表达式(https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
-                        //用三个步骤实现三种类型的循环:
-                        // *蓝色，20px圆，点计数小于100
-                        // *黄色，30px的圆圈，点计数在100和750之间
-                        // *粉红色，40px的圆圈，当点数大于等于750
-                        "circle-color": [
-                            "step", ["get", "point_count"],
-                            "#51bbd6",
-                            100,
-                            "#f1f075",
-                            750,
-                            "#f28cb1",
-                        ],
-                        "circle-radius": [
-                            "step", ["get", "point_count"],
-                            20,
-                            100,
-                            30,
-                            750,
-                            40,
-                        ],
-                    },
-                    //"source-layer": "button2"
-                });
-
-                //添加数字图层
-                map.addLayer({
-                    id: "cluster-count",
-                    type: "symbol",
-                    source: "sensicjson",
-                    filter: ["has", "point_count"],
-                    layout: {
-                        "text-field": "{point_count_abbreviated}",
-                        "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
-                        "text-size": 12,
-                    },
-                    //"source-layer": "button2"
-                });
-
-                //添加未聚合图层
-                map.addLayer({
-                    id: "unclustered-point",
-                    type: "circle",
-                    source: "sensicjson",
-                    filter: ["!", ["has", "point_count"]],
-                    paint: {
-                        "circle-color": "#11b4da",
-                        "circle-radius": 4,
-                        "circle-stroke-width": 1,
-                        "circle-stroke-color": "#fff",
-                    },
-                    //"source-layer": "button2"
-                });
-
-                map.on("load", () => {
-                    jsonCallback;
-                });
-
-                function jsonCallback(err, data) {
-                    if (err) {
-                        throw err;
-                    }
-                    data.features = data.features.map((d) => {
-                        d.properties.month = new Date(d.properties.time).getMonth();
-                        // d.properties.coordinates = new location(d.properties.geometry).getElementById("coordinates");
-                        return d;
-                    });
-             const popup = new mapboxgl.Popup({
-                closeButton: true,
-                closeOnClick: true
-            })
+                // Ensure that if the map is zoomed out such that multiple
+                // copies of the feature are visible, the popup appears
+                // over the copy being pointed to.
+                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
                 }
 
-                map.on("click", "unclustered-point", (e) => {
-                    // Copy coordinates array.
-                    const coordinates = e.features[0].geometry.coordinates.slice();
-                    const name = e.features[0].properties.name;
+                new mapboxgl.Popup()
+                    .setLngLat(coordinates)
+                    .setHTML(name)
+                    .addTo(map);
 
-                    // Ensure that if the map is zoomed out such that multiple
-                    // copies of the feature are visible, the popup appears
-                    // over the copy being pointed to.
-                    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-                        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-                    }
-
-                    new mapboxgl.Popup().setLngLat(coordinates).setHTML(name).addTo(map);
-                });
-                // Change the cursor to a pointer when the mouse is over the places layer.
-                map.on("mouseenter", "unclustered-point", () => {
-                    map.getCanvas().style.cursor = "pointer";
-                });
-
-                // Change it back to a pointer when it leaves.
-                map.on("mouseleave", "unclustered-point", () => {
-                    map.getCanvas().style.cursor = "";
-                });
-
-                //检查集群单击（点击聚合图层地图级别中心点变化）
-                map.on("click", "clusters", function(e) {
-                    var features = map.queryRenderedFeatures(e.point, {
-                        layers: ["clusters"],
-                    });
-                    var clusterId = features[0].properties.cluster_id;
-                    map
-                        .getSource("sensicjson")
-                        .getClusterExpansionZoom(clusterId, function(err, zoom) {
-                            if (err) return;
-                            map.easeTo({
-                                center: features[0].geometry.coordinates,
-                                zoom: zoom,
-                            });
-                        });
-                });
             });
+             // Change the cursor to a pointer when the mouse is over the places layer.
+            map.on('mouseenter', 'unclustered-point', () => {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'unclustered-point', () => {
+                map.getCanvas().style.cursor = '';
+            });
+    // 单击时检查群集
+    map.on("click", "clusters", function (e) {
+      var features = map.queryRenderedFeatures(e.point, {
+        layers: ["clusters"]
+      });
+      var clusterId = features[0].properties.cluster_id;
+      map
+        .getSource("earthquakes")
+        .getClusterExpansionZoom(clusterId, function (err, zoom) {
+          if (err) return;
+          map.easeTo({
+            center: features[0].geometry.coordinates,
+            zoom: zoom
+          });
+           });
+            });
+  });
         },
     },
-    // destroyed(){
-    //   this.map.removeLayer("")
-    // }
 };
 </script>
 
@@ -280,4 +285,5 @@ export default {
 .mapboxgl-popup {
     max-width: 200px;
 }
+
 </style>
