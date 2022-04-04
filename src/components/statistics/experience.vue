@@ -248,9 +248,9 @@ export default {
   mounted() {
     this.initmap();
     this.typeData();
-    this.initChart2();
-    // this.initChart3();
-    this.initChart4();
+    this.initChart22();
+    // this.initChart23();
+    this.initChart24();
     this.eduData();
     let myChart4 = this.$echarts.init(this.$refs.Chart4);
     myChart4.setOption(this.option4);
@@ -263,9 +263,9 @@ export default {
           this.chart7 = res.data.skill;
           this.chart1 = res.data.company;
           this.chart3 = res.data.job;
-          this.initChart1();
-          this.initChart3();
-          this.initChart7();
+          this.initChart21();
+          this.initChart23();
+          this.initChart27();
           // console.log(this.chart3);
         });
         request.post("/api/data/expCount", { city: "南京" }).then((res) => {
@@ -274,12 +274,12 @@ export default {
             this.chart6.xdata[i] = res.data.count[i].name;
             this.chart6.ydata[i] = res.data.count[i].value;
           }
-          this.initChart5();
-          this.initChart6();
+          this.initChart25();
+          this.initChart26();
         });
       }
     });
-    // this.initChart7();
+    // this.initChart27();
     this.$nextTick(() => {
       window.addEventListener("resize", () => {
         this.handleResize();
@@ -303,9 +303,9 @@ export default {
         this.chart1 = res.data.company;
         this.chart3 = res.data.job;
         // console.log(this.chart3);
-        this.initChart1();
-        this.initChart3();
-        this.initChart7();
+        this.initChart21();
+        this.initChart23();
+        this.initChart27();
       });
     },
     eduData() {
@@ -315,11 +315,11 @@ export default {
           this.chart6.xdata[i] = res.data.count[i].name;
           this.chart6.ydata[i] = res.data.count[i].value;
         }
-        this.initChart5();
-        this.initChart6();
+        this.initChart25();
+        this.initChart26();
       });
     },
-    initChart5() {
+    initChart25() {
       var myChart = echarts.init(document.getElementById("chart5"));
       let arr = [];
       this.chart5.forEach((element) => {
@@ -368,7 +368,7 @@ export default {
         ],
       });
     },
-    initChart7() {
+    initChart27() {
       var myChart = echarts.init(document.getElementById("chart7"));
       let arr = [];
       this.chart7.forEach((element) => {
@@ -477,7 +477,7 @@ export default {
         ],
       });
     },
-    initChart3() {
+    initChart23() {
       let myChart = this.$echarts.init(document.getElementById("chart3"));
       let arr = [];
       this.chart3.forEach((element) => {
@@ -592,7 +592,7 @@ export default {
         ],
       });
     },
-    initChart4() {
+    initChart24() {
       for (var i = 0; i < this.plan_table.length; i++) {
         this.option4.xAxis.data.push(this.plan_table[i].mouth);
         this.option4.series[0].data.push(this.plan_table[i].a);
@@ -606,7 +606,7 @@ export default {
         this.option4.yAxis[0].max = Math.ceil(this.plan_table[0].sum) + 500;
       }
     },
-    initChart6() {
+    initChart26() {
       var myChart = echarts.init(document.getElementById("chart6"));
       myChart.setOption({
         grid: {
@@ -651,7 +651,7 @@ export default {
     // handleResize() {
     //   this.myChart5 && this.myChart5.resize();
     // },
-    initChart1() {
+    initChart21() {
       var myChart = echarts.init(document.getElementById("chart1"));
       let arr = [];
       this.chart1.forEach((element) => {
@@ -720,7 +720,7 @@ export default {
       });
     },
 
-    initChart2() {
+    initChart22() {
       var myChart = echarts.init(document.getElementById("chart2"));
       const city = [
         "北京",

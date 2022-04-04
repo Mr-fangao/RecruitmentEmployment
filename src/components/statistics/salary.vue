@@ -239,8 +239,8 @@ export default {
   },
   mounted() {
     this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
-    this.initChart1();
-    this.initChart2();
+    this.initChart31();
+    this.initChart32();
     this.typeData();
     eventBum.$on("json", (json) => {
       this.selectcity.name = json.name;
@@ -249,13 +249,13 @@ export default {
         request.post("/api/data/typeSa", { city: "南京" }).then((res) => {
           this.chart3 = res.data.company;
           this.chart7 = res.data.industry;
-          this.initChart3();
-          this.initChart7();
+          this.initChart33();
+          this.initChart37();
         });
       }
     });
-    this.initChart5();
-    this.initChart4();
+    this.initChart35();
+    this.initChart34();
     let myChart4 = this.$echarts.init(this.$refs.Chart4);
     myChart4.setOption(this.option4);
     this.$nextTick(() => {
@@ -270,8 +270,8 @@ export default {
       request.post("/api/data/typeSa", { city: "全国" }).then((res) => {
         this.chart3 = res.data.company;
         this.chart7 = res.data.industry;
-        this.initChart3();
-        this.initChart7();
+        this.initChart33();
+        this.initChart37();
       });
     },
     initmap() {
@@ -383,7 +383,7 @@ export default {
         console.log("点击");
       });
     },
-    initChart5() {
+    initChart35() {
       var myChart = echarts.init(document.getElementById("chart5"));
       myChart.setOption({
         grid: {
@@ -475,7 +475,7 @@ export default {
         ],
       });
     },
-    initChart1() {
+    initChart31() {
       var myChart = echarts.init(document.getElementById("chart1"));
       myChart.setOption({
         grid: {
@@ -520,7 +520,7 @@ export default {
         ],
       });
     },
-    initChart3() {
+    initChart33() {
       var myChart = echarts.init(document.getElementById("chart3"));
       let arr = [];
       this.chart3.forEach((element) => {
@@ -565,7 +565,7 @@ export default {
         ],
       });
     },
-    initChart2() {
+    initChart32() {
       let myChart = this.$echarts.init(document.getElementById("chart2"));
       myChart.setOption({
         title: {
@@ -798,7 +798,7 @@ export default {
         ],
       });
     },
-    initChart4() {
+    initChart34() {
       for (var i = 0; i < this.plan_table.length; i++) {
         this.option4.xAxis.data.push(this.plan_table[i].month);
 
@@ -860,7 +860,7 @@ export default {
       };
       myChart.setOption(option);
     },
-    initChart7() {
+    initChart37() {
       var myChart = echarts.init(document.getElementById("chart7"));
       let arr = [];
       this.chart7.forEach((element) => {

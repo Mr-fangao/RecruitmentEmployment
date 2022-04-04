@@ -249,10 +249,10 @@ export default {
     // this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
     // this.initChart1();
     // this.initChart2();
-    this.initChart4();
+    this.initChart14();
     let myChart4 = this.$echarts.init(this.$refs.Chart4);
     myChart4.setOption(this.option4);
-    this.initChart6();
+    this.initChart16();
     this.typeData();
     this.eduData();
     this.$nextTick(() => {
@@ -269,9 +269,9 @@ export default {
           this.chart5 = res.data.company;
           this.chart7 = res.data.job;
           // console.log(this.chart3);
-          this.initChart3();
-          this.initChart5();
-          this.initChart7();
+          this.initChart13();
+          this.initChart15();
+          this.initChart17();
         });
         request.post("/api/data/eduCount", { city: "南京" }).then((res) => {
           this.chart1 = res.data.count;
@@ -279,8 +279,8 @@ export default {
             this.chart2.xdata[i] = res.data.salary[i].name;
             this.chart2.ydata[i] = res.data.salary[i].value;
           }
-          this.initChart1();
-          this.initChart2();
+          this.initChart11();
+          this.initChart12();
         });
       }
     });
@@ -302,9 +302,9 @@ export default {
         this.chart5 = res.data.company;
         this.chart7 = res.data.job;
         // console.log(this.chart3);
-        this.initChart3();
-        this.initChart5();
-        this.initChart7();
+        this.initChart13();
+        this.initChart15();
+        this.initChart17();
       });
     },
     eduData() {
@@ -314,11 +314,11 @@ export default {
           this.chart2.xdata[i] = res.data.salary[i].name;
           this.chart2.ydata[i] = res.data.salary[i].value;
         }
-        this.initChart1();
-        this.initChart2();
+        this.initChart11();
+        this.initChart12();
       });
     },
-    initChart1() {
+    initChart11() {
       var myChart = echarts.init(document.getElementById("chart1"));
       let arr = [];
       this.chart1.forEach((element) => {
@@ -367,7 +367,7 @@ export default {
         ],
       });
     },
-    initChart3() {
+    initChart13() {
       var myChart = echarts.init(document.getElementById("chart3"));
       let arr = [];
       this.chart3.forEach((element) => {
@@ -471,7 +471,7 @@ export default {
         ],
       });
     },
-    initChart7() {
+    initChart17() {
       let myChart = this.$echarts.init(document.getElementById("chart7"));
       let arr = [];
       this.chart7.forEach((element) => {
@@ -587,7 +587,7 @@ export default {
         ],
       });
     },
-    initChart4() {
+    initChart14() {
       for (var i = 0; i < this.plan_table.length; i++) {
         this.option4.xAxis.data.push(this.plan_table[i].mouth);
         //大修金额总计
@@ -602,7 +602,7 @@ export default {
         this.option4.yAxis[0].max = Math.ceil(this.plan_table[0].sum) + 500;
       }
     },
-    initChart2() {
+    initChart12() {
       var myChart = echarts.init(document.getElementById("chart2"));
       myChart.setOption({
         grid: {
@@ -645,7 +645,7 @@ export default {
     // handleResize() {
     //   this.myChart5 && this.myChart5.resize();
     // },
-    initChart5() {
+    initChart15() {
       var myChart = echarts.init(document.getElementById("chart5"));
       let arr = [];
       this.chart5.forEach((element) => {
@@ -714,7 +714,7 @@ export default {
       });
     },
 
-    initChart6() {
+    initChart16() {
       var myChart = echarts.init(document.getElementById("chart6"));
       const city = [
         "北京",
