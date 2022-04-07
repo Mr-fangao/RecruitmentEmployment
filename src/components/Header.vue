@@ -36,11 +36,11 @@ export default {
         new Date().getMinutes() < 10
           ? "0" + new Date().getMinutes()
           : new Date().getMinutes();
-      let ss =
-        new Date().getSeconds() < 10
-          ? "0" + new Date().getSeconds()
-          : new Date().getSeconds();
-      this.time = mm + "月" + dd + "日 " + hh + ":" + mf + ":" + ss;
+      // let ss =
+      //   new Date().getSeconds() < 10
+      //     ? "0" + new Date().getSeconds()
+      //     : new Date().getSeconds();
+      this.time = mm + "月" + dd + "日 " + hh + ":" + mf ;
     },
   },
 };
@@ -55,10 +55,10 @@ nav {
   padding: 0px;
 
   img {
-    margin-left: 220px;
+    margin-left: 250px;
   }
   .times {
-        width: 165px;
+        width: 125px;
     font-size: 18px;
     float: right;
     font-family: Microsoft YaHei;

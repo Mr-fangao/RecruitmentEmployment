@@ -114,7 +114,7 @@ import Bus from "../assets/js/bus.js";
 import global from "../components/global";
 export default {
   name: "query",
-  components: { loading,  },
+  components: { loading },
 
   data() {
     return {
@@ -175,7 +175,7 @@ export default {
     clickData(val) {
       this.dataid = val;
       // Bus.$emit('myevent',dataid);
-      this.$router.push({ name: "detail", params: {a: val} });
+      this.$router.push({ name: "detail", params: { a: val } });
       this.detailData = val.tableData;
     },
     // clickRow(val) {
@@ -242,11 +242,12 @@ export default {
         .post("/api/data/queryAny", {
           search: this.search,
           pageNum: this.currentPage,
+          pageSize: this.pageSize,
         })
         .then((res) => {
-          console.log(res);
           this.tableData = res.data.jobInfos;
           this.total = res.data.total;
+          console.log(this.tableData);
         });
     },
     handleCurrentChange(val) {
@@ -297,7 +298,7 @@ export default {
         zoom: 3.5,
       });
     },
-  }
+  },
 };
 </script>
 

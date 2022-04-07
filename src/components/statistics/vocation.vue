@@ -72,7 +72,14 @@
           <div class="imgBK"></div>
           <span>职位综合能力词云</span>
         </div>
-        <div class="row1chartcontent" id="chart2" ref="cloudEl"></div>
+        <div class="row1chartcontent">
+          <word3D
+            :height="word3Dheight"
+            :width="word3Dwidth"
+            :data="wordcloudchina"
+          >
+          </word3D>
+        </div>
       </div>
     </div>
     <div class="main">
@@ -110,6 +117,7 @@
     </div>
     <selectRegion />
     <mapcom />
+    <!-- <wordcloud3D /> -->
   </div>
 </template>
 
@@ -119,6 +127,7 @@ import echarts from "echarts";
 import request from "@/utils/request";
 // const mapboxgl = require("mapbox-gl");
 import SelectRegion from "../../components/selectRegion.vue";
+import word3D from "../../components/wordcloud3D.vue";
 import mapcom from "../../components/mapcom.vue";
 import eventBum from "../../assets/js/EvebtBus";
 export default {
@@ -127,6 +136,7 @@ export default {
     wordcloud,
     SelectRegion,
     mapcom,
+    word3D,
   },
   data() {
     return {
@@ -174,7 +184,9 @@ export default {
         xdata: [],
         ydata: [],
       },
-      cloudData: [
+      word3Dheight: 200,
+      word3Dwidth: 300,
+      wordcloudchina: [
         { value: 1800, name: "学习创新" },
         { value: 1500, name: "团体合作" },
         { value: 1200, name: "表达沟通" },
@@ -327,7 +339,7 @@ export default {
   mounted() {
     // this.initmap();
     // this.initChart5();
-    this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
+    // this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
     this.initChart3();
     this.initChart4();
     let myChart4 = this.$echarts.init(this.$refs.Chart4);
@@ -765,7 +777,7 @@ export default {
     },
     initChart6() {
       var myChart = echarts.init(document.getElementById("chart6"));
-  const city = [
+      const city = [
         "北京",
         "11a",
         "12p",
@@ -791,7 +803,13 @@ export default {
         "7p",
         "苏州",
       ];
-      const days = ["前端开发", "web前端", "数据库开发", "后端开发", "测绘工程师"];
+      const days = [
+        "前端开发",
+        "web前端",
+        "数据库开发",
+        "后端开发",
+        "测绘工程师",
+      ];
 
       // prettier-ignore
       const data = [[0,0,112],[0,1,113],[0,2,121],[0,3,122],[0,4,120],[0,5,121],[0,6,113],[0,7,115],[0,8,121],[0,9,112],[0,10,111],[0,11,122],[0,12,112],[0,13,111],[0,14,110],[0,15,102],[0,16,111],[0,17,114],[0,18,105],[0,19,103],[0,20,100],[0,21,91],[0,22,92],[0,23,101],[1,0,117],[1,1,106],[1,2,98],[1,3,95],[1,4,98],[1,5,96],[1,6,97],[1,7,98],[1,8,95],[1,9,97],[1,10,97],[1,11,105],[1,12,96],[1,13,96],[1,14,99],[1,15,110],[1,16,96],[1,17,97],[1,18,98],[1,19,102],[1,20,95],[1,21,105],[1,22,97],[1,23,98],[2,0,81],[2,1,89],[2,2,42],[2,3,56],[2,4,58],[2,5,77],[2,6,65],[2,7,52],[2,8,56],[2,9,58],[2,10,75],[2,11,65],[2,12,44],[2,13,54],[2,14,58],[2,15,62],[2,16,65],[2,17,59],[2,18,57],[2,19,65],[2,20,71],[2,21,54],[2,22,52],[2,23,48],[3,0,57],[3,1,53],[3,2,50],[3,3,60],[3,4,50],[3,5,50],[3,6,60],[3,7,50],[3,8,51],[3,9,50],[3,10,55],[3,11,54],[3,12,57],[3,13,54],[3,14,53],[3,15,52],[3,16,59],[3,17,65],[3,18,65],[3,19,60],[3,20,56],[3,21,54],[3,22,54],[3,23,61],[4,0,22],[4,1,32],[4,2,30],[4,3,32],[4,4,41],[4,5,31],[4,6,31],[4,7,30],[4,8,41],[4,9,32],[4,10,41],[4,11,32],[4,12,32],[4,13,32],[4,14,31],[4,15,31],[4,16,41],[4,17,41],[4,18,32],[4,19,32],[4,20,32],[4,21,31],[4,22,32],[4,23,40],]

@@ -39,7 +39,7 @@ export default {
   data() {
     return {
       index: 1,
-      comp: "mate",
+      comp: "analyse",
       isShow: true,
     };
   },

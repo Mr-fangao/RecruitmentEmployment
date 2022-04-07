@@ -54,7 +54,7 @@
                     <p>空间尺度</p>
                   </el-col>
                   <el-col :span="16">
-                    <el-select v-model="json.space" placeholder="请选择空间尺度"
+                    <el-select v-model="json.space" placeholder="省级"
                       ><el-option
                         v-for="item in space"
                         :key="item.value"
@@ -96,7 +96,7 @@
                   icon="el-icon-search"
                   size="small"
                   @click="btnSelect"
-                  >搜索</el-button
+                  >分析</el-button
                 >
                 <!-- <el-button type="primary" icon="el-icon-s-order" size="small">统计</el-button> -->
                 <el-button

@@ -13,21 +13,21 @@
           <div class="imgBK"></div>
           <span>学历要求统计</span>
         </div>
-        <div class="row1chartcontent" id="chart1"></div>
+        <div class="row1chartcontent" id="chart11"></div>
       </div>
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
           <span>学历平均薪资统计</span>
         </div>
-        <div class="row1chartcontent" id="chart2" ref="Chart2"></div>
+        <div class="row1chartcontent" id="chart12" ref="Chart2"></div>
       </div>
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
           <span>行业学历统计</span>
         </div>
-        <div class="row1chartcontent" id="chart3"></div>
+        <div class="row1chartcontent" id="chart13"></div>
       </div>
     </div>
     <div class="main">
@@ -46,21 +46,21 @@
           <div class="imgBK"></div>
           <span>公司类型学历统计</span>
         </div>
-        <div class="row1chartcontent" id="chart5"></div>
+        <div class="row1chartcontent" id="chart15"></div>
       </div>
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
           <span>城市学历统计</span>
         </div>
-        <div class="row1chartcontent" id="chart6"></div>
+        <div class="row1chartcontent" id="chart16"></div>
       </div>
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
           <span>职位学历统计</span>
         </div>
-        <div class="row1chartcontent" id="chart7"></div>
+        <div class="row1chartcontent" id="chart17"></div>
       </div>
     </div>
     <selectRegion />
@@ -85,7 +85,7 @@ export default {
         name: "中国",
         level: 0,
       },
-      chart2: {
+      chart12: {
         xdata: [],
         ydata: [],
       },
@@ -160,7 +160,7 @@ export default {
           {
             splitLine: { show: false },
             type: "value",
-            name: "单位:万元",
+            name: "单位:个",
             min: "0",
             max: "",
             splitNumber: 5,
@@ -247,8 +247,8 @@ export default {
   mounted() {
     // this.initmap();
     // this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
-    // this.initChart1();
-    // this.initChart2();
+    // this.initChart11();
+    // this.initChart12();
     this.initChart14();
     let myChart4 = this.$echarts.init(this.$refs.Chart4);
     myChart4.setOption(this.option4);
@@ -265,10 +265,10 @@ export default {
       this.selectcity.level = json.where;
       if (this.selectcity.name == "南京市") {
         request.post("/api/data/education", { city: "南京" }).then((res) => {
-          this.chart3 = res.data.skill;
-          this.chart5 = res.data.company;
-          this.chart7 = res.data.job;
-          // console.log(this.chart3);
+          this.chart13 = res.data.skill;
+          this.chart15 = res.data.company;
+          this.chart17 = res.data.job;
+          // console.log(this.chart13);
           this.initChart13();
           this.initChart15();
           this.initChart17();
@@ -276,8 +276,8 @@ export default {
         request.post("/api/data/eduCount", { city: "南京" }).then((res) => {
           this.chart1 = res.data.count;
           for (var i = 0; i < res.data.salary.length; i++) {
-            this.chart2.xdata[i] = res.data.salary[i].name;
-            this.chart2.ydata[i] = res.data.salary[i].value;
+            this.chart12.xdata[i] = res.data.salary[i].name;
+            this.chart12.ydata[i] = res.data.salary[i].value;
           }
           this.initChart11();
           this.initChart12();
@@ -298,10 +298,10 @@ export default {
     // },
     typeData() {
       request.post("/api/data/education", { city: "全国" }).then((res) => {
-        this.chart3 = res.data.skill;
-        this.chart5 = res.data.company;
-        this.chart7 = res.data.job;
-        // console.log(this.chart3);
+        this.chart13 = res.data.skill;
+        this.chart15 = res.data.company;
+        this.chart17 = res.data.job;
+        // console.log(this.chart13);
         this.initChart13();
         this.initChart15();
         this.initChart17();
@@ -309,19 +309,19 @@ export default {
     },
     eduData() {
       request.post("/api/data/eduCount", { city: "全国" }).then((res) => {
-        this.chart1 = res.data.count;
+        this.chart11 = res.data.count;
         for (var i = 0; i < res.data.salary.length; i++) {
-          this.chart2.xdata[i] = res.data.salary[i].name;
-          this.chart2.ydata[i] = res.data.salary[i].value;
+          this.chart12.xdata[i] = res.data.salary[i].name;
+          this.chart12.ydata[i] = res.data.salary[i].value;
         }
         this.initChart11();
         this.initChart12();
       });
     },
     initChart11() {
-      var myChart = echarts.init(document.getElementById("chart1"));
+      var myChart = echarts.init(document.getElementById("chart11"));
       let arr = [];
-      this.chart1.forEach((element) => {
+      this.chart11.forEach((element) => {
         arr.push({ value: element.value, name: element.name });
       });
       myChart.setOption({
@@ -368,9 +368,9 @@ export default {
       });
     },
     initChart13() {
-      var myChart = echarts.init(document.getElementById("chart3"));
+      var myChart = echarts.init(document.getElementById("chart13"));
       let arr = [];
-      this.chart3.forEach((element) => {
+      this.chart13.forEach((element) => {
         arr.push({ value: element.value, name: element.name });
       });
       myChart.setOption({
@@ -384,7 +384,7 @@ export default {
         },
         grid: {
           left: "3%",
-          top: "15%",
+          top: "25%",
           right: "4%",
           bottom: "3%",
           containLabel: true,
@@ -404,6 +404,7 @@ export default {
         yAxis: [
           {
             type: "value",
+            name:"单位：个",
             scale: true,
             splitLine: { show: false },
             axisLine: {
@@ -472,9 +473,9 @@ export default {
       });
     },
     initChart17() {
-      let myChart = this.$echarts.init(document.getElementById("chart7"));
+      let myChart = this.$echarts.init(document.getElementById("chart17"));
       let arr = [];
-      this.chart7.forEach((element) => {
+      this.chart17.forEach((element) => {
         arr.push({ value: element.value, name: element.name });
       });
       myChart.setOption({
@@ -603,12 +604,12 @@ export default {
       }
     },
     initChart12() {
-      var myChart = echarts.init(document.getElementById("chart2"));
+      var myChart = echarts.init(document.getElementById("chart12"));
       myChart.setOption({
         grid: {
           height: "75%",
-          width: "80%",
-          top: "5%",
+          width: "85%",
+          top: "15%",
           right: "5%",
         },
         xAxis: {
@@ -618,10 +619,12 @@ export default {
               color: "#fff",
             },
           },
-          data: this.chart2.xdata,
+          data: this.chart12.xdata,
         },
         yAxis: {
           type: "value",
+          name:"单位：个",
+          scale: true,
           splitLine: { show: false },
           axisLine: {
             lineStyle: {
@@ -631,7 +634,7 @@ export default {
         },
         series: [
           {
-            data: this.chart2.ydata,
+            data: this.chart12.ydata,
             type: "bar",
             itemStyle: {
               normal: {
@@ -646,9 +649,9 @@ export default {
     //   this.myChart5 && this.myChart5.resize();
     // },
     initChart15() {
-      var myChart = echarts.init(document.getElementById("chart5"));
+      var myChart = echarts.init(document.getElementById("chart15"));
       let arr = [];
-      this.chart5.forEach((element) => {
+      this.chart15.forEach((element) => {
         arr.push({ value: element.value, name: element.name });
       });
       myChart.setOption({
@@ -715,7 +718,7 @@ export default {
     },
 
     initChart16() {
-      var myChart = echarts.init(document.getElementById("chart6"));
+      var myChart = echarts.init(document.getElementById("chart16"));
       const city = [
         "北京",
         "11a",

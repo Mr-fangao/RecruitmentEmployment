@@ -7,21 +7,21 @@
           <div class="imgBK"></div>
           <span>热门职位平均薪资统计</span>
         </div>
-        <div class="row1chartcontent" id="chart5"></div>
+        <div class="row1chartcontent" id="chart35"></div>
       </div>
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
           <span>热门城市平均薪资统计</span>
         </div>
-        <div class="row1chartcontent" id="chart1"></div>
+        <div class="row1chartcontent" id="chart31"></div>
       </div>
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
           <span>职位平均薪资统计</span>
         </div>
-        <div class="row1chartcontent" id="chart2"></div>
+        <div class="row1chartcontent" id="chart32"></div>
       </div>
     </div>
     <div class="main">
@@ -39,42 +39,52 @@
           <div class="imgBK"></div>
           <span>公司类型平均薪资统计</span>
         </div>
-        <div class="row1chartcontent" id="chart3"></div>
+        <div class="row1chartcontent" id="chart33"></div>
       </div>
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
           <span>薪资区间词云</span>
         </div>
-        <div class="row1chartcontent" id="chart6" ref="cloudEl"></div>
+        <div class="row1chartcontent" ref="cloudEl">
+          <!-- <word3D
+            :height="word3Dheight"
+            :width="word3Dwidth"
+            :data="wordcloudchina"
+          >
+          </word3D> -->
+        </div>
       </div>
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
           <span>行业平均薪资统计</span>
         </div>
-        <div class="row1chartcontent" id="chart7"></div>
+        <div class="row1chartcontent" id="chart37"></div>
       </div>
     </div>
     <selectRegion />
-    <mapcom />
+    <!-- <mapcom /> -->
   </div>
 </template>
 <script>
-import heatMapData from "../../assets/json/heatMapData.json";
+// import heatMapData from "../../assets/json/heatMapData.json";
+import heatMapData from "../../assets/json/平均薪资热力图.json";
 import wordcloud from "../../assets/js/echarts-wordcloud-master/index";
 import echarts from "echarts";
 import request from "@/utils/request";
 const mapboxgl = require("mapbox-gl");
 import SelectRegion from "../../components/selectRegion.vue";
 import eventBum from "../../assets/js/EvebtBus";
-import mapcom from "../../components/mapcom.vue";
+// import mapcom from "../../components/mapcom.vue";
+// import word3D from "../../components/wordcloud3D.vue";
 export default {
   name: "salary",
   components: {
     wordcloud,
     SelectRegion,
-    mapcom,
+    // mapcom,
+    // word3D,
   },
   data() {
     return {
@@ -82,7 +92,9 @@ export default {
         name: "中国",
         level: 0,
       },
-      cloudData: [
+      // word3Dheight: 200,
+      // word3Dwidth: 300,
+      wordcloudchina: [
         { value: 1741, name: "1-1.5万/月" },
         { value: 994, name: "1.5-2万/月" },
         { value: 786, name: "6-8千/月" },
@@ -238,7 +250,7 @@ export default {
     };
   },
   mounted() {
-    this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
+    this.wordCloudInti(this.$refs.cloudEl, this.wordcloudchina);
     this.initChart31();
     this.initChart32();
     this.typeData();
@@ -247,8 +259,8 @@ export default {
       this.selectcity.level = json.where;
       if (this.selectcity.name == "南京市") {
         request.post("/api/data/typeSa", { city: "南京" }).then((res) => {
-          this.chart3 = res.data.company;
-          this.chart7 = res.data.industry;
+          this.chart33 = res.data.company;
+          this.chart37 = res.data.industry;
           this.initChart33();
           this.initChart37();
         });
@@ -268,8 +280,8 @@ export default {
   methods: {
     typeData() {
       request.post("/api/data/typeSa", { city: "全国" }).then((res) => {
-        this.chart3 = res.data.company;
-        this.chart7 = res.data.industry;
+        this.chart33 = res.data.company;
+        this.chart37 = res.data.industry;
         this.initChart33();
         this.initChart37();
       });
@@ -384,7 +396,7 @@ export default {
       });
     },
     initChart35() {
-      var myChart = echarts.init(document.getElementById("chart5"));
+      var myChart = echarts.init(document.getElementById("chart35"));
       myChart.setOption({
         grid: {
           height: "60%",
@@ -437,6 +449,7 @@ export default {
         yAxis: {
           type: "value",
           name: "单位：个",
+          // scale: true,
           splitLine: { show: false },
           axisLine: {
             lineStyle: {
@@ -476,10 +489,10 @@ export default {
       });
     },
     initChart31() {
-      var myChart = echarts.init(document.getElementById("chart1"));
+      var myChart = echarts.init(document.getElementById("chart31"));
       myChart.setOption({
         grid: {
-          top: "8%",
+          top: "15%",
           left: "12%",
           right: "5%",
           bottom: "15%",
@@ -496,7 +509,8 @@ export default {
         },
         yAxis: {
           type: "value",
-          name: "千/月",
+          name: "单位：千/月",
+          // scale: true,
           splitLine: { show: false },
           axisLine: {
             lineStyle: {
@@ -521,9 +535,9 @@ export default {
       });
     },
     initChart33() {
-      var myChart = echarts.init(document.getElementById("chart3"));
+      var myChart = echarts.init(document.getElementById("chart33"));
       let arr = [];
-      this.chart3.forEach((element) => {
+      this.chart33.forEach((element) => {
         arr.push({ value: element.value, name: element.name });
       });
       myChart.setOption({
@@ -566,7 +580,7 @@ export default {
       });
     },
     initChart32() {
-      let myChart = this.$echarts.init(document.getElementById("chart2"));
+      let myChart = this.$echarts.init(document.getElementById("chart32"));
       myChart.setOption({
         title: {
           text: "      职位平均薪资占比排行中,最高为前端总监,最低为测绘专业实习生",
@@ -861,9 +875,9 @@ export default {
       myChart.setOption(option);
     },
     initChart37() {
-      var myChart = echarts.init(document.getElementById("chart7"));
+      var myChart = echarts.init(document.getElementById("chart37"));
       let arr = [];
-      this.chart7.forEach((element) => {
+      this.chart37.forEach((element) => {
         arr.push({ value: element.value, name: element.name });
       });
       myChart.setOption({

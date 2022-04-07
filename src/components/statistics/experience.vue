@@ -14,21 +14,21 @@
           <div class="imgBK"></div>
           <span>公司类型工作经验统计</span>
         </div>
-        <div class="row1chartcontent" id="chart1"></div>
+        <div class="row1chartcontent" id="chart21"></div>
       </div>
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
           <span>城市工作经验统计</span>
         </div>
-        <div class="row1chartcontent" id="chart2" ref="Chart2"></div>
+        <div class="row1chartcontent" id="chart22" ref="Chart2"></div>
       </div>
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
           <span>职位工作经验统计</span>
         </div>
-        <div class="row1chartcontent" id="chart3"></div>
+        <div class="row1chartcontent" id="chart23"></div>
       </div>
     </div>
     <div class="main">
@@ -47,21 +47,21 @@
           <div class="imgBK"></div>
           <span>工作经验平均薪资统计</span>
         </div>
-        <div class="row1chartcontent" id="chart5"></div>
+        <div class="row1chartcontent" id="chart25"></div>
       </div>
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
           <span>工作经验要求统计</span>
         </div>
-        <div class="row1chartcontent" id="chart6"></div>
+        <div class="row1chartcontent" id="chart26"></div>
       </div>
       <div class="col-content">
         <div class="row1title">
           <div class="imgBK"></div>
           <span>行业工作经验统计</span>
         </div>
-        <div class="row1chartcontent" id="chart7"></div>
+        <div class="row1chartcontent" id="chart27"></div>
       </div>
     </div>
     <selectRegion />
@@ -86,7 +86,7 @@ export default {
         name: "中国",
         level: 0,
       },
-      chart6: {
+      chart26: {
         xdata: [],
         ydata: [],
       },
@@ -141,7 +141,7 @@ export default {
         //图例--折线提示提示
         legend: {
           x: "center",
-          y: "30",
+          y: "top",
           borderColor: "#6699FF", //边框颜色
           textStyle: {
             color: "#1e90ff", // 图例文字颜色
@@ -173,10 +173,10 @@ export default {
           },
         ],
         grid: {
-          x: 40,
+          x: 50,
           y: 40,
-          x2: 70,
-          y2: 25,
+          x2: 40,
+          y2: 30,
         },
         series: [
           {
@@ -260,19 +260,19 @@ export default {
       // console.log(this.selectcity);
       if (this.selectcity.name == "南京市") {
         request.post("/api/data/experience", { city: "南京" }).then((res) => {
-          this.chart7 = res.data.skill;
-          this.chart1 = res.data.company;
-          this.chart3 = res.data.job;
+          this.chart27 = res.data.skill;
+          this.chart21 = res.data.company;
+          this.chart23 = res.data.job;
           this.initChart21();
           this.initChart23();
           this.initChart27();
-          // console.log(this.chart3);
+          // console.log(this.chart23);
         });
         request.post("/api/data/expCount", { city: "南京" }).then((res) => {
-          this.chart5 = res.data.salary;
+          this.chart25 = res.data.salary;
           for (var i = 0; i < res.data.count.length; i++) {
-            this.chart6.xdata[i] = res.data.count[i].name;
-            this.chart6.ydata[i] = res.data.count[i].value;
+            this.chart26.xdata[i] = res.data.count[i].name;
+            this.chart26.ydata[i] = res.data.count[i].value;
           }
           this.initChart25();
           this.initChart26();
@@ -299,10 +299,10 @@ export default {
     },
     typeData() {
       request.post("/api/data/experience", { city: "全国" }).then((res) => {
-        this.chart7 = res.data.skill;
-        this.chart1 = res.data.company;
-        this.chart3 = res.data.job;
-        // console.log(this.chart3);
+        this.chart27 = res.data.skill;
+        this.chart21 = res.data.company;
+        this.chart23 = res.data.job;
+        // console.log(this.chart23);
         this.initChart21();
         this.initChart23();
         this.initChart27();
@@ -310,19 +310,19 @@ export default {
     },
     eduData() {
       request.post("/api/data/expCount", { city: "全国" }).then((res) => {
-        this.chart5 = res.data.salary;
+        this.chart25 = res.data.salary;
         for (var i = 0; i < res.data.count.length; i++) {
-          this.chart6.xdata[i] = res.data.count[i].name;
-          this.chart6.ydata[i] = res.data.count[i].value;
+          this.chart26.xdata[i] = res.data.count[i].name;
+          this.chart26.ydata[i] = res.data.count[i].value;
         }
         this.initChart25();
         this.initChart26();
       });
     },
     initChart25() {
-      var myChart = echarts.init(document.getElementById("chart5"));
+      var myChart = echarts.init(document.getElementById("chart25"));
       let arr = [];
-      this.chart5.forEach((element) => {
+      this.chart25.forEach((element) => {
         arr.push({ value: element.value, name: element.name });
       });
       myChart.setOption({
@@ -369,9 +369,9 @@ export default {
       });
     },
     initChart27() {
-      var myChart = echarts.init(document.getElementById("chart7"));
+      var myChart = echarts.init(document.getElementById("chart27"));
       let arr = [];
-      this.chart7.forEach((element) => {
+      this.chart27.forEach((element) => {
         arr.push({ value: element.value, name: element.name });
       });
       myChart.setOption({
@@ -410,6 +410,7 @@ export default {
         yAxis: [
           {
             type: "value",
+            name:"单位：个",
             scale: true,
             splitLine: { show: false },
             axisLine: {
@@ -478,9 +479,9 @@ export default {
       });
     },
     initChart23() {
-      let myChart = this.$echarts.init(document.getElementById("chart3"));
+      let myChart = this.$echarts.init(document.getElementById("chart23"));
       let arr = [];
-      this.chart3.forEach((element) => {
+      this.chart23.forEach((element) => {
         arr.push({ value: element.value, name: element.name });
       });
       myChart.setOption({
@@ -607,12 +608,12 @@ export default {
       }
     },
     initChart26() {
-      var myChart = echarts.init(document.getElementById("chart6"));
+      var myChart = echarts.init(document.getElementById("chart26"));
       myChart.setOption({
         grid: {
           height: "75%",
           width: "80%",
-          top: "5%",
+          top: "15%",
           right: "5%",
         },
         xAxis: {
@@ -623,10 +624,12 @@ export default {
               color: "#fff",
             },
           },
-          data: this.chart6.xdata,
+          data: this.chart26.xdata,
         },
         yAxis: {
           type: "value",
+          name:"单位：个",
+          scale: true,
           splitLine: { show: false },
           axisLine: {
             lineStyle: {
@@ -636,7 +639,7 @@ export default {
         },
         series: [
           {
-            data: this.chart6.ydata,
+            data: this.chart26.ydata,
             type: "line",
             areaStyle: {
               color: "rgb(115, 215, 228)",
@@ -649,12 +652,12 @@ export default {
       });
     },
     // handleResize() {
-    //   this.myChart5 && this.myChart5.resize();
+    //   this.myChart25 && this.myChart25.resize();
     // },
     initChart21() {
-      var myChart = echarts.init(document.getElementById("chart1"));
+      var myChart = echarts.init(document.getElementById("chart21"));
       let arr = [];
-      this.chart1.forEach((element) => {
+      this.chart21.forEach((element) => {
         arr.push({ value: element.value, name: element.name });
       });
       myChart.setOption({
@@ -672,11 +675,11 @@ export default {
         radar: [
           {
             indicator: [
-              { text: "北京" },
-              { text: "上海" },
-              { text: "杭州" },
-              { text: "深圳" },
-              { text: "苏州" },
+              { text: "外资" },
+              { text: "合资" },
+              { text: "创业公司" },
+              { text: "国企" },
+              { text: "上市公司" },
             ],
             center: ["50%", "60%"],
             radius: 70,
@@ -721,7 +724,7 @@ export default {
     },
 
     initChart22() {
-      var myChart = echarts.init(document.getElementById("chart2"));
+      var myChart = echarts.init(document.getElementById("chart22"));
       const city = [
         "北京",
         "11a",
