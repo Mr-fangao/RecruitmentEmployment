@@ -389,7 +389,7 @@ export default {
   font-size: 18px;
 }
 #selectRegion .xuan {
-  background-color: #00d9ff50;
+  background-color: #17768750;
   color: #0cf3f3;
 }
 #selectRegion .eject .choice {

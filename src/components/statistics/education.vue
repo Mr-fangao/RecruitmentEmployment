@@ -71,7 +71,7 @@
 import wordcloud from "../../assets/js/echarts-wordcloud-master/index";
 import echarts from "echarts";
 import request from "@/utils/request";
-import SelectRegion from "../../components/selectRegion.vue";
+import SelectRegion from "../../components/newselectRegion.vue";
 import eventBum from "../../assets/js/EvebtBus";
 export default {
   name: "education",
@@ -83,7 +83,8 @@ export default {
     return {
       selectcity: {
         name: "中国",
-        level: 0,
+        where: 0,
+        // code:'',
       },
       chart12: {
         xdata: [],
@@ -262,7 +263,8 @@ export default {
     });
     eventBum.$on("json", (json) => {
       this.selectcity.name = json.name;
-      this.selectcity.level = json.where;
+      this.selectcity.where = json.where;
+      // this.selectcity.code = json.code;
       if (this.selectcity.name == "南京市") {
         request.post("/api/data/education", { city: "南京" }).then((res) => {
           this.chart13 = res.data.skill;

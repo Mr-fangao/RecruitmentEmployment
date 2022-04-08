@@ -1,5 +1,12 @@
 <template>
   <div id="mate">
+    <iframe
+      src="./static/mate.html"
+      frameborder="0"
+      width="100%"
+      height="100%"
+      scrolling="auto"
+    ></iframe>
     <transition name="fade">
       <loading v-if="isLoading" :state="state"></loading>
     </transition>
@@ -95,35 +102,6 @@
               </ul>
             </vue-seamless-scroll>
           </div>
-          <!-- <el-table
-            ref="interfaceTable"
-            :data="tableCityData"
-            stripe
-            highlight-current-row
-            class="“customer-table”"
-          >
-            <el-table-column
-              prop="company"
-              label="公司名称"
-              :show-overflow-tooltip="true"
-            >
-            </el-table-column>
-            <el-table-column
-              prop="position"
-              label="职位名称"
-              :show-overflow-tooltip="true"
-            >
-            </el-table-column>
-            <el-table-column prop="detail" label="定位" width="60">
-              <template slot-scope="scope">
-                <el-button
-                  type="text"
-                  @click.native.stop="flyToLocation(scope.row.x, scope.row.y)"
-                  >定位</el-button
-                >
-              </template>
-            </el-table-column>
-          </el-table> -->
         </div>
       </div>
     </div>
@@ -133,7 +111,7 @@
 // import Bus from "../assets/js/bus.js";
 import request from "../../utils/request";
 import loading from "../../components/loading.vue";
-import skillpointgather from "../../components/thememap/skillpointgather.vue";
+// import skillpointgather from "../../components/thememap/skillpointgather.vue";
 import wordcloud from "../../assets/js/echarts-wordcloud-master/index";
 // import echarts from "echarts";
 // const mapboxgl = require("mapbox-gl");
@@ -142,7 +120,7 @@ export default {
   components: {
     loading,
     wordcloud,
-    skillpointgather,
+    // skillpointgather,
     //组件
     
   },

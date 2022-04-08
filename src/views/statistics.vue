@@ -57,7 +57,7 @@ import experience from "../components/statistics/experience.vue";
 import vocation from "../components/statistics/vocation.vue";
 // import mapcom from "../components/mapcom.vue";
 export default {
-  components: { salary, education, experience, vocation,},
+  components: { salary, education, experience, vocation },
   name: "statistics",
   data() {
     return {

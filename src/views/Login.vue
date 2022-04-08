@@ -50,7 +50,7 @@
         </div>
       </div>
       <video autoplay muted loop class="fillWidth">
-        <source src="../assets/video/video1.mp4" type="video/mp4" />
+        <source src="../assets/video/video.mp4" type="video/mp4" />
       </video>
     </div>
   </div>
