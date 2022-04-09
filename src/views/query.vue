@@ -129,6 +129,7 @@ export default {
       show: false,
       porpName: "",
       dataid: global.dataid,
+      
     };
   },
 

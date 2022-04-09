@@ -5,7 +5,7 @@
       <ul>
         <li @click="stretch()"><i :class="ioc" /></li>
         <li @click="tan()"><span>{{ json.name }}</span></li>
-        <li><icon-svg icon-class="icon-chengshi" /></li>
+        <!-- <li><icon-svg icon-class="icon-chengshi" /></li> -->
       </ul>
     </div>
     <!-- 弹出框 -->

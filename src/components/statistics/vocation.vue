@@ -129,7 +129,7 @@ import request from "@/utils/request";
 import SelectRegion from "../../components/newselectRegion.vue";
 import word3D from "../../components/wordcloud3D.vue";
 import mapcom from "../../components/mapcom.vue";
-import eventBum from "../../assets/js/EvebtBus";
+import eventBum from "../../../public/js/EvebtBus";
 export default {
   name: "vocation",
   components: {
@@ -349,6 +349,7 @@ export default {
     // this.initChart7();
     this.posData();
     eventBum.$on("json", (json) => {
+      console.log(json);
       this.selectcity.name = json.name;
       this.selectcity.level = json.where;
       if (this.selectcity.name == "南京市") {

@@ -20,7 +20,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import 'font-awesome/css/font-awesome.min.css';
 import vueSeamlessScroll from "vue-seamless-scroll";
 Vue.use(vueSeamlessScroll);
-
+import store from './assets/js/store'
 import 'jquery'
 // 引入echarts
 import * as echarts from 'echarts';
@@ -33,6 +33,12 @@ Vue.prototype.$mapboxgl = mapBoxGl
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 
+// const store = new Vuex.Store({
+//   // state中存放的就是全局共享数据 
+//   state:{     
+//   count: 0 
+//   } 
+// })
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
@@ -40,5 +46,6 @@ new Vue({
   components: {
     App
   },
-  template: '<App/>'
+  template: '<App/>',
+  store
 })

@@ -73,7 +73,7 @@ import wordcloud from "../../assets/js/echarts-wordcloud-master/index";
 import echarts from "echarts";
 import request from "@/utils/request";
 import SelectRegion from "../../components/newselectRegion.vue";
-import eventBum from "../../assets/js/EvebtBus";
+import eventBum from "../../../public/js/EvebtBus";
 export default {
   name: "experience",
   components: {
