@@ -1,12 +1,16 @@
 <template>
   <div id="mate">
-    <iframe
+    <div id="map">
+      <button type="button" id="backbutton1">执行聚类</button>
+      <button type="button" id="backbutton2">取消聚类</button>
+    </div>
+    <!-- <iframe
       src="./static/mate.html"
       frameborder="0"
       width="100%"
       height="100%"
       scrolling="auto"
-    ></iframe>
+    ></iframe> -->
     <transition name="fade">
       <loading v-if="isLoading" :state="state"></loading>
     </transition>
@@ -73,10 +77,10 @@
         <div class="table">
           <el-table
             ref="interfaceTable"
+            height="450"
             :data="tableCityData"
             stripe
             highlight-current-row
-            class="“customer-table”"
             @row-click="clickData"
           >
             <el-table-column
@@ -95,56 +99,26 @@
               <template slot-scope="scope">
                 <el-button
                   type="text"
-                  @click="flyToLocation(scope.row.x, scope.row.y)"
+                  @click.stop="flyToLocation(scope.row.x, scope.row.y)"
                   >定位</el-button
                 >
               </template>
             </el-table-column>
           </el-table>
-          <!-- <div class="tablehrader">
-            <ul class="uititle">
-              <li class="title">
-                <span class="company">公司名称</span>
-                <span class="position">职位名称</span>
-                <span class="location">定位</span>
-              </li>
-            </ul>
-          </div>
-          <div class="srrollcontent">
-            <vue-seamless-scroll :data="listData" :class-option="defaultOption">
-              <ul class="ul-scoll">
-                <li
-                  class="li-scoll"
-                  v-for="(item, index) in listData"
-                  :key="index"
-                >
-                  <div :title="item.company" class="gongsi">
-                    {{ item.company }}
-                  </div>
-                  <div class="zhiwei">{{ item.position }}</div>
-                  <div
-                    class="dingwei"
-                    @click="flyToLocation(scope.row.x, scope.row.y)"
-                  >
-                    定位
-                  </div>
-                </li>
-              </ul>
-            </vue-seamless-scroll>
-          </div> -->
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import hotdata from "../../assets/json/平均薪资热力图.json";
 // import Bus from "../assets/js/bus.js";
 import request from "../../utils/request";
 import loading from "../../components/loading.vue";
 // import skillpointgather from "../../components/thememap/skillpointgather.vue";
 import wordcloud from "../../assets/js/echarts-wordcloud-master/index";
 // import echarts from "echarts";
-// const mapboxgl = require("mapbox-gl");
+const mapboxgl = require("mapbox-gl");
 export default {
   name: "mate",
   components: {
@@ -176,8 +150,56 @@ export default {
       tableCityData: [],
     };
   },
-  mounted() {},
+  mounted() {
+    this.initmap();
+  },
   methods: {
+    initmap() {
+      var that = this;
+      this.$mapboxgl.accessToken =
+        "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
+      this.map = new mapboxgl.Map({
+        container: "map",
+        style: "mapbox://styles/chenjq/cl084urgf004014ny2nhu1xre",
+        center: [105, 35],
+        zoom: 3.5,
+        Flyto: true,
+      });
+    },
+    infinitScroll() {
+      // 拿到表格挂载后的真实DOM
+      const table = this.$refs.interfaceTable;
+      // 拿到表格中承载数据的div元素
+      const divData = table.bodyWrapper;
+      divData.onmouseover = function () {
+        clearInterval(t);
+      }; //鼠标移入，停止滚动
+      divData.onmouseout = function () {
+        start();
+      }; //鼠标移出，继续滚动
+
+      // 拿到元素后，对元素进行定时增加距离顶部距离，实现滚动效果(此配置为每100毫秒移动1像素)
+      let t;
+      function start() {
+        // 数据少于表格高度停止滚动
+        if (divData.clientHeight >= divData.scrollHeight) {
+          return;
+        }
+        t = setInterval(() => {
+          // 元素自增距离顶部1像素
+          divData.scrollTop += 5;
+          // 判断元素是否滚动到底部(可视高度+距离顶部=整个高度)
+          if (
+            divData.clientHeight + divData.scrollTop ==
+            divData.scrollHeight
+          ) {
+            // 重置table距离顶部距离
+            divData.scrollTop = 0;
+          }
+        }, 100);
+      }
+      start();
+    },
     sendMessage() {
       this.iframe.postMessage({ x: this.x, y: this.y }, "*");
       // console.log(x, y);
@@ -186,24 +208,20 @@ export default {
       // 确认弹窗回调
       this.show = false;
     },
-    clickData(row, event, column) {
-      // console.log(row, event, column);
+    clickData(row) {
+     console.log(row);
+     var val =row.id;
+      this.$router.push({ name: "detail", params: { a: val } });
     },
     indexMethod(index) {
       return (this.currentPage - 1) * this.intPageSize + index + 1;
     },
     flyToLocation(x, y) {
-      // console.log(x, y);
-      this.x = x;
-      this.y = y;
-      this.iframe = this.$refs["iframe"].contentWindow;
-      window.addEventListener("message", this.sendMessage);
-      console.log(this.x, this.y);
-      // this.map.flyTo({
-      //   center: [x, y], // 中心点
-      //   zoom: 16.5, // 缩放比例
-      //   pitch: 45, // 倾斜度
-      // });
+      this.map.flyTo({
+        center: [x, y], // 中心点
+        zoom: 16.5, // 缩放比例
+        pitch: 45, // 倾斜度
+      });
     },
     getLabel(val) {
       let label = val;
@@ -239,27 +257,13 @@ export default {
           if (this.tableCityData != null) {
             this.isLoading = false;
           }
+          this.$nextTick(() => {
+            this.infinitScroll();
+          });
           this.$forceUpdate();
         });
     },
   },
-  //表格动态展示
-  
-  //传值给html
-  // initxy() {
-  //   this.iframeWin = this.$refs.iframeDom.contentWindow;
-  //   setTimeout(() => {
-  //     this.iframeWin.postMessage(
-  //       {
-  //         cmd: this.code,
-  //         x: this.x,
-  //         y: this.y,
-  //         params: {},
-  //       },
-  //       "*"
-  //     );
-  //   }, 200);
-  // },
   computed: {
     defaultOption() {
       return {
@@ -277,14 +281,13 @@ export default {
 };
 </script>
 
-<style scoped lang="less">
+<style lang="less" scoped>
 #mate {
   position: fixed;
   width: 100%;
   height: 100%;
   z-index: 1;
-  //   background: url("../assets/img/banner.png") no-repeat;
-  //   background-size: 100% 100%;
+
 }
 #map {
   position: relative;
@@ -576,21 +579,39 @@ export default {
   // color: rgb(255, 255, 255);
   border-bottom: 1px solid #1faacd;
 }
-// /deep/.el-table,
-// .el-table__expanded-cell {
-//   background-color: #3f5c6d2c;
-// }
-// /deep/.el-table td.el-table__cell,
-// /deep/.el-table th.el-table__cell.is-leaf {
-//   border: transparent !important;
-// }
-// /deep/ .el-table .cell {
-//   text-align: center;
-// }
-// /deep/.el-table::before {
-//   background-color: transparent !important;
-// }
-// /deep/.el-table tbody tr:hover > td {
-//   background-color: #09e8f02c !important;
-// }
+</style>
+<style>
+#backbutton1 {
+  z-index: 2;
+  margin-top: 8%;
+  margin-left: 68%;
+  position: fixed;
+  /* background-image: url("../static/img/wggl_tab.png");
+      background-size: 100% 100%; */
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
+  padding: 12px 20px;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+#backbutton2 {
+  position: fixed;
+  z-index: 2;
+  margin-top: 5%;
+  margin-left: 68%;
+  /* background-image: url("../static/img/wggl_tab.png");
+      background-size: 100% 100%; */
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
+  padding: 12px 20px;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+.mapboxgl-popup {
+  max-width: 200px;
+}
 </style>

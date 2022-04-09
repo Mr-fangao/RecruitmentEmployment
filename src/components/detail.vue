@@ -180,11 +180,13 @@ export default {
           console.log(res.data);
           this.detailData = res.data[0];
           console.log(this.detailData);
+          this.$forceUpdate();
         });
+        //  this.$router.push({ name: "detail", params: { a: this.try } });
     },
-    revert(){
-      this.$router.push({ name: "query"});
-    }
+    revert() {
+      this.$router.push({ name: "query" });
+    },
   },
 };
 </script>
@@ -209,20 +211,26 @@ export default {
     }
     .other {
       height: 100%;
-      flex: 1;
+      width: 50%;
       // background: url("../assets/img/fq/bg-1.png") no-repeat;
       // background-size: 100% 100%;
       .png {
+        height: 100%;
+        width: 50%;
         background: url("../assets/img/fq/company.jpg") no-repeat;
         background-size: 100% 100%;
+        overflow: hidden;
       }
     }
     .others {
       height: 100%;
-      flex: 1;
+      width: 50%;
       .png {
+        height: 100%;
+        width: 50%;
         background: url("../assets/img/fq/company1.jpeg") no-repeat;
         background-size: 100% 100%;
+        overflow: hidden;
       }
       .revert {
         height: 40%;
