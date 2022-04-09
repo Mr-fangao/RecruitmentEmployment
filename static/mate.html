@@ -73,34 +73,6 @@
         // maxBounds: bounds,
         Flyto: true
       });
-      var x;
-      window.addEventListener('message', function (messageEvent) {
-        console.log(messageEvent.data)
-        x = messageEvent.data.x;
-      });
-      var y;
-      window.addEventListener('message', function (messageEvent) {
-        console.log(messageEvent.data)
-        y = messageEvent.data.y;
-      });
-      function fly(x, y) {
-        map.Flyto({
-          center: [x, y], // 中心点
-          zoom: 16.5, // 缩放比例
-          pitch: 45, // 倾斜度
-        });
-      }
-      // window.addEventListener('message', (e) => {
-      //   // console.log(e);
-      //   var data = e.data;
-      //   this.map.Flyto({
-      //   center: [data.x, data.y], // 中心点
-      //   zoom: 16.5, // 缩放比例
-      //   pitch: 45, // 倾斜度
-      // });
-
-      // });
-
       document.getElementById("backbutton2").addEventListener("click", () => {
         this.map.setLayoutProperty('points', 'visibility', 'visible');
         this.map.setLayoutProperty('clusters', 'visibility', 'none');

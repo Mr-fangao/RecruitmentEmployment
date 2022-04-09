@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app"  :key="key">
     <div class="header" v-if="$route.meta.keepAlive">
       <pageheader></pageheader>
     </div>
@@ -15,6 +15,22 @@ export default {
   components: {
     pageheader,
   },
+  provide () {
+    return {
+      reload: this.reload
+    }
+  },
+  data () {
+    return {
+      key: 1
+    }
+  },
+  methods: {
+    reload () {
+      this.key++
+    }
+  }
+
 };
 </script>
 

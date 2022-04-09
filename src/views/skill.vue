@@ -22,7 +22,7 @@
         </el-menu-item>
       </el-menu>
     </div>
-    <div class="content">
+    <div class="sbcontent">
       <keep-alive>
         <component :is="comp" v-show="isShow"></component>
       </keep-alive>
@@ -59,7 +59,7 @@ export default {
   width: 100%;
   height: 100%;
 }
-.content {
+.sbcontent {
   position: absolute;
   top: 0;
   z-index: 9999;
