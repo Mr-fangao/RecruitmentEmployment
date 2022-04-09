@@ -211,7 +211,7 @@ export default {
     clickData(row) {
      console.log(row);
      var val =row.id;
-      this.$router.push({ name: "detail", params: { a: val } });
+     this.$router.push({ name: "detail", params: { a: row.id } });
     },
     indexMethod(index) {
       return (this.currentPage - 1) * this.intPageSize + index + 1;
@@ -580,7 +580,7 @@ export default {
   border-bottom: 1px solid #1faacd;
 }
 </style>
-<style>
+<style scoped>
 #backbutton1 {
   z-index: 2;
   margin-top: 8%;

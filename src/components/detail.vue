@@ -144,7 +144,7 @@ import request from "@/utils/request";
 import Bus from "../assets/js/bus.js";
 import Vue from "vue";
 export default {
-  // name :"detail",
+  name: "detail",
   //  props: {
   //   // show: {
   //   //   type: Boolean,
@@ -158,10 +158,7 @@ export default {
   data() {
     return {
       detailData: [],
-      // dataid: global.dataid,
       try: "",
-      // detailFun: global.detailFun,
-      // globalHttpUrl: global.httpUrl,
     };
   },
   created() {
@@ -182,7 +179,6 @@ export default {
           console.log(this.detailData);
           this.$forceUpdate();
         });
-        //  this.$router.push({ name: "detail", params: { a: this.try } });
     },
     revert() {
       this.$router.push({ name: "query" });
@@ -212,6 +208,8 @@ export default {
     .other {
       height: 100%;
       width: 50%;
+      flex-direction: row;
+      flex-wrap: nowrap;
       // background: url("../assets/img/fq/bg-1.png") no-repeat;
       // background-size: 100% 100%;
       .png {
@@ -225,6 +223,8 @@ export default {
     .others {
       height: 100%;
       width: 50%;
+      flex-direction: row;
+      flex-wrap: nowrap;
       .png {
         height: 100%;
         width: 50%;
@@ -284,43 +284,42 @@ export default {
       line-height: 18pt;
     }
   }
-}
-
-.title {
-  height: 20%;
-  width: 100%;
-  text-align: left;
-  font-size: 14pt;
-  display: flex;
-  align-items: center;
-  .imgBK {
-    background: url(../assets/img/pt/pt_title.png) no-repeat;
-    background-size: 100% 100%;
-  }
-}
-.content {
-  height: 80%;
-  width: 100%;
-  display: flex;
-  .png {
-    width: 45%;
-    height: 100%;
-  }
-  .vocation {
-    margin-left: 3%;
-    width: 45%;
-    height: 100%;
-  }
-}
-.el-row {
-  padding-bottom: 2.5%;
-  .el-col {
-    color: #fff;
+  .title {
+    height: 20%;
+    width: 100%;
     text-align: left;
+    font-size: 14pt;
+    display: flex;
+    align-items: center;
+    .imgBK {
+      background: url(../assets/img/pt/pt_title.png) no-repeat;
+      background-size: 100% 100%;
+    }
   }
-}
+  .content {
+    height: 80%;
+    width: 100%;
+    display: flex;
+    .png {
+      width: 45%;
+      height: 100%;
+    }
+    .vocation {
+      margin-left: 3%;
+      width: 45%;
+      height: 100%;
+    }
+  }
+  .el-row {
+    padding-bottom: 2.5%;
+    .el-col {
+      color: #fff;
+      text-align: left;
+    }
+  }
 
-span {
-  color: #fff;
+  span {
+    color: #fff;
+  }
 }
 </style>
