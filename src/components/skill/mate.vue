@@ -10,11 +10,11 @@
     <transition name="fade">
       <loading v-if="isLoading" :state="state"></loading>
     </transition>
-    <div class="mapcontent">
+    <!-- <div class="mapcontent">
       <keep-alive>
         <component :is="comp" v-show="isShow"></component>
       </keep-alive>
-    </div>
+    </div> -->
     <div class="right">
       <div class="he">
         <div class="prompt">
@@ -71,7 +71,37 @@
       <div class="main">
         <div class="title"><span>职位匹配结果</span></div>
         <div class="table">
-          <div class="tablehrader">
+          <el-table
+            ref="interfaceTable"
+            :data="tableCityData"
+            stripe
+            highlight-current-row
+            class="“customer-table”"
+            @row-click="clickData"
+          >
+            <el-table-column
+              prop="company"
+              label="公司名称"
+              :show-overflow-tooltip="true"
+            >
+            </el-table-column>
+            <el-table-column
+              prop="position"
+              label="职位名称"
+              :show-overflow-tooltip="true"
+            >
+            </el-table-column>
+            <el-table-column prop="detail" label="定位" width="60">
+              <template slot-scope="scope">
+                <el-button
+                  type="text"
+                  @click="flyToLocation(scope.row.x, scope.row.y)"
+                  >定位</el-button
+                >
+              </template>
+            </el-table-column>
+          </el-table>
+          <!-- <div class="tablehrader">
             <ul class="uititle">
               <li class="title">
                 <span class="company">公司名称</span>
@@ -101,7 +131,7 @@
                 </li>
               </ul>
             </vue-seamless-scroll>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -122,7 +152,6 @@ export default {
     wordcloud,
     // skillpointgather,
     //组件
-    
   },
   data() {
     return {
@@ -130,9 +159,12 @@ export default {
       state: "",
       isLoading: false,
       //地图切换
-      index: 1,
-      comp: "skillpointgather",
+      // index: 1,
+      // comp: "skillpointgather",
       isShow: true,
+      code: null,
+      x: null,
+      y: null,
       //示例
       labellist: [
         { id: 1, name: "WebGIS" },
@@ -141,27 +173,37 @@ export default {
       ],
       input: "",
       input1: "",
-      listData: [],
+      tableCityData: [],
     };
   },
-  mounted() {
-    // this.load();
-  },
+  mounted() {},
   methods: {
+    sendMessage() {
+      this.iframe.postMessage({ x: this.x, y: this.y }, "*");
+      // console.log(x, y);
+    },
     submit() {
       // 确认弹窗回调
       this.show = false;
+    },
+    clickData(row, event, column) {
+      // console.log(row, event, column);
     },
     indexMethod(index) {
       return (this.currentPage - 1) * this.intPageSize + index + 1;
     },
     flyToLocation(x, y) {
-      console.log(x, y);
-      this.map.flyTo({
-        center: [x, y], // 中心点
-        zoom: 16.5, // 缩放比例
-        pitch: 45, // 倾斜度
-      });
+      // console.log(x, y);
+      this.x = x;
+      this.y = y;
+      this.iframe = this.$refs["iframe"].contentWindow;
+      window.addEventListener("message", this.sendMessage);
+      console.log(this.x, this.y);
+      // this.map.flyTo({
+      //   center: [x, y], // 中心点
+      //   zoom: 16.5, // 缩放比例
+      //   pitch: 45, // 倾斜度
+      // });
     },
     getLabel(val) {
       let label = val;
@@ -193,14 +235,31 @@ export default {
         })
         .then((res) => {
           console.log(res);
-          this.listData = res.data;
-          if (this.listData != null) {
+          this.tableCityData = res.data;
+          if (this.tableCityData != null) {
             this.isLoading = false;
           }
           this.$forceUpdate();
         });
     },
   },
+  //表格动态展示
+  
+  //传值给html
+  // initxy() {
+  //   this.iframeWin = this.$refs.iframeDom.contentWindow;
+  //   setTimeout(() => {
+  //     this.iframeWin.postMessage(
+  //       {
+  //         cmd: this.code,
+  //         x: this.x,
+  //         y: this.y,
+  //         params: {},
+  //       },
+  //       "*"
+  //     );
+  //   }, 200);
+  // },
   computed: {
     defaultOption() {
       return {
