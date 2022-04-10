@@ -1,16 +1,16 @@
 <template>
   <div id="mate">
-    <div id="map">
+    <!-- <div id="map">
       <button type="button" id="backbutton1">执行聚类</button>
       <button type="button" id="backbutton2">取消聚类</button>
-    </div>
-    <!-- <iframe
+    </div> -->
+    <iframe
       src="./static/mate.html"
       frameborder="0"
       width="100%"
       height="100%"
       scrolling="auto"
-    ></iframe> -->
+    ></iframe>
     <transition name="fade">
       <loading v-if="isLoading" :state="state"></loading>
     </transition>
@@ -77,11 +77,12 @@
         <div class="table">
           <el-table
             ref="interfaceTable"
-            height="450"
+            height="315"
             :data="tableCityData"
             stripe
             highlight-current-row
             @row-click="clickData"
+            :cell-style="{ padding: '8px 0' }"
           >
             <el-table-column
               prop="company"
@@ -151,21 +152,21 @@ export default {
     };
   },
   mounted() {
-    this.initmap();
+    // this.initmap();
   },
   methods: {
-    initmap() {
-      var that = this;
-      this.$mapboxgl.accessToken =
-        "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
-      this.map = new mapboxgl.Map({
-        container: "map",
-        style: "mapbox://styles/chenjq/cl084urgf004014ny2nhu1xre",
-        center: [105, 35],
-        zoom: 3.5,
-        Flyto: true,
-      });
-    },
+    // initmap() {
+    //   var that = this;
+    //   this.$mapboxgl.accessToken =
+    //     "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
+    //   this.map = new mapboxgl.Map({
+    //     container: "map",
+    //     style: "mapbox://styles/chenjq/cl084urgf004014ny2nhu1xre",
+    //     center: [105, 35],
+    //     zoom: 3.5,
+    //     Flyto: true,
+    //   });
+    // },
     infinitScroll() {
       // 拿到表格挂载后的真实DOM
       const table = this.$refs.interfaceTable;
@@ -209,9 +210,9 @@ export default {
       this.show = false;
     },
     clickData(row) {
-     console.log(row);
-     var val =row.id;
-     this.$router.push({ name: "detail", params: { a: row.id } });
+      console.log(row);
+      var val = row.id;
+      this.$router.push({ name: "details", params: { a: row.id } });
     },
     indexMethod(index) {
       return (this.currentPage - 1) * this.intPageSize + index + 1;
@@ -287,7 +288,6 @@ export default {
   width: 100%;
   height: 100%;
   z-index: 1;
-
 }
 #map {
   position: relative;
@@ -569,6 +569,13 @@ export default {
   padding-left: 0% !important;
   padding-right: 0% !important;
 }
+/deep/.el-table--striped
+  .el-table__body
+  tr.el-table__row--striped
+  td.el-table__cell {
+  background-color: #3f5c6d2c;
+  color: #fff;
+}
 /deep/.el-table .el-table__header-wrapper tr th {
   background-image: linear-gradient(
     -180deg,
@@ -579,39 +586,66 @@ export default {
   // color: rgb(255, 255, 255);
   border-bottom: 1px solid #1faacd;
 }
+/deep/.el-card__body {
+  padding: 10px;
+}
+/deep/.el-overlay {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+/deep/.el-table,
+.el-table__expanded-cell {
+  background-color: #3f5c6d2c;
+}
+/deep/.el-table td.el-table__cell,
+/deep/.el-table th.el-table__cell.is-leaf {
+  border: transparent !important;
+}
+/deep/ .el-table .cell {
+  text-align: center;
+}
+/deep/.el-table::before {
+  background-color: transparent;
+}
+/deep/.el-table tbody tr:hover > td {
+  background-color: #09e8f02c !important;
+}
+/deep/.el-table tr {
+  background-color: #3f5c6d2c;
+  color: #fff;
+}
 </style>
 <style scoped>
-#backbutton1 {
+/* #backbutton1 {
   z-index: 2;
   margin-top: 8%;
   margin-left: 68%;
   position: fixed;
   /* background-image: url("../static/img/wggl_tab.png");
       background-size: 100% 100%; */
-  background-color: transparent;
+/* background-color: transparent;
   border: none;
   color: #ffffff;
   padding: 12px 20px;
   font-size: 14px;
   border-radius: 5px;
-}
+} */
 
-#backbutton2 {
+/* #backbutton2 {
   position: fixed;
   z-index: 2;
   margin-top: 5%;
   margin-left: 68%;
   /* background-image: url("../static/img/wggl_tab.png");
       background-size: 100% 100%; */
-  background-color: transparent;
+/* background-color: transparent;
   border: none;
   color: #ffffff;
   padding: 12px 20px;
   font-size: 14px;
   border-radius: 5px;
-}
+} */
 
-.mapboxgl-popup {
+/* .mapboxgl-popup {
   max-width: 200px;
-}
+} */
 </style>

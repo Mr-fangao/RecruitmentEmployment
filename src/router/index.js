@@ -143,5 +143,13 @@ export default new Router({
         keepAlive: true
       }
     },
+    {
+      path: "/details",
+      name: "details",
+      component: () => import("@/components/details"),
+      meta: {
+        keepAlive: true
+      }
+    },
   ]
 })

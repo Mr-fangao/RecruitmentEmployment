@@ -144,7 +144,7 @@ import request from "@/utils/request";
 import Bus from "../assets/js/bus.js";
 import Vue from "vue";
 export default {
-  name: "detail",
+  name: "details",
   //  props: {
   //   // show: {
   //   //   type: Boolean,
@@ -181,7 +181,8 @@ export default {
         });
     },
     revert() {
-      this.$router.push({ name: "query" });
+      this.$router.push({ name: "skill" });
+      
     },
   },
 };
