@@ -74,8 +74,8 @@ import wordcloud from "../../assets/js/echarts-wordcloud-master/index";
 import echarts from "echarts";
 import request from "@/utils/request";
 const mapboxgl = require("mapbox-gl");
-import SelectRegion from "../../components/newselectRegion.vue";
-import eventBum from "../../../public/js/EvebtBus";
+import SelectRegion from "../../components/cityselect/newselectRegion.vue";
+import eventBum from "../../components/cityselect/EvebtBus";
 // import mapcom from "../../components/mapcom.vue";
 // import word3D from "../../components/wordcloud3D.vue";
 export default {

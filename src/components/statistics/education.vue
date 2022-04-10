@@ -71,8 +71,8 @@
 import wordcloud from "../../assets/js/echarts-wordcloud-master/index";
 import echarts from "echarts";
 import request from "@/utils/request";
-import SelectRegion from "../../components/newselectRegion.vue";
-import eventBum from "../../../public/js/EvebtBus";
+import SelectRegion from "../../components/cityselect/newselectRegion.vue";
+import eventBum from "../../components/cityselect/EvebtBus";
 export default {
   name: "education",
   components: {
