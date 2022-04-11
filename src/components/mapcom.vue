@@ -73,7 +73,7 @@ export default {
       isShow: true,
       //地图切换
       index: "1",
-      mapchange: "",
+      mapchange: "1",
     };
   },
   mounted() {
