@@ -81,6 +81,7 @@ export default {
   },
   methods: {
     showmap(value) {
+      this.mapchange = value.toString();
       if (value === 1) this.comp = "pointgather";
       else if (value === 2) this.comp = "gradedcolormap";
       else if (value === 3) this.comp = "heatmap";
@@ -94,12 +95,12 @@ export default {
   z-index: 1;
 }
 .mapcontent {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    bottom: 0%;
-  }
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  bottom: 0%;
+}
 .mapcontral {
   position: absolute;
   z-index: 1;

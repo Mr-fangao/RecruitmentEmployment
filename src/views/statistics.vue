@@ -1,7 +1,7 @@
 <template>
   <div id="statistics">
     <div class="aside">
-      <el-menu>
+      <el-menu :default-active="1">
         <el-menu-item
           index="1"
           @click="tabshow(1)"
@@ -66,7 +66,11 @@ export default {
       isShow: true,
       show: false,
       cityname: "城市选择",
+      
     };
+  },
+  mounted() {
+    this.tabshow(1);
   },
   methods: {
     tabshow(value) {
