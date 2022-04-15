@@ -136,10 +136,10 @@ export default {
 
       h1 {
         font-size: 32pt;
-        background-image: -webkit-linear-gradient(bottom, rgb(0, 145, 255), #03befd, rgb(0, 225, 255));
+        // color: #1bcddd;
+        background-image: -webkit-linear-gradient(bottom, rgb(0, 166, 255), #1bcddd, rgb(2, 226, 255));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        color: #ffffff;
         font-family: Microsoft YaHei;
         font-weight: bold;
         margin-left: 10px;
@@ -153,7 +153,8 @@ export default {
       width: 28%;
       // height: 70%;
       margin-top: 3%;
-      background-color: rgba(79, 106, 135, 0.6);
+      // background-color: rgba(79, 106, 135, 0.6);
+      background-color: #274d645e;
       h2 {
         font-size: 20px;
         color: #ffffff;
@@ -183,6 +184,7 @@ export default {
         font-family: Microsoft YaHei;
         font-weight: bold;
         margin-left: 15px;
+        background-color: #3fd6fcac;
       }
     }
   }
